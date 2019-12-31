@@ -1,0 +1,6 @@
+#import './post/postSchema.graphql'
+#import './user/userSchema.graphql'
+
+type Placeholder {
+  foo: String
+}

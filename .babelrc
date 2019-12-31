@@ -1,0 +1,26 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": { "node": "current" }
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    ["babel-plugin-transform-builtin-extend", {
+      "globals": ["Error", "Array"],
+      "approximate": true
+    }],
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "generated": "./src/generated/",
+        "schema": "./src/schema/",
+        "types": "./src/types/",
+        "utils": "./src/utils/"
+      }
+    }]
+  ]
+}

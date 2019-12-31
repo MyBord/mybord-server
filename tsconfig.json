@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "paths": {
+      "generated/*": ["src/generated/*"],
+      "schema/*": ["src/schema/*"],
+      "types/*": ["src/types/*"],
+      "utils/*": ["src/utils/*"]
+    }
+  },
+  "exclude": [ "node_modules" ],
+  "include": [ "**/*.ts", "**/*.js" ]
+}
