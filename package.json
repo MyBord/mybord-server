@@ -11,7 +11,7 @@
     "build:prod": "npm-run-all remove-dist webpack:prod",
     "run:dev": "env-cmd -f dev.env nodemon dist/index",
     "heroku-postbuild": "npm-run-all build:prod",
-    "start": "env-cmd -f prod.env node dist/index"
+    "start": "node dist/index"
   },
   "authors": [
     "Jimmy Emery"
