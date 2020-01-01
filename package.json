@@ -10,7 +10,7 @@
     "build:dev": "npm-run-all remove-dist webpack:dev",
     "build:prod": "npm-run-all remove-dist webpack:prod",
     "run:dev": "env-cmd -f dev.env nodemon dist/index",
-    "heroku-postbuild": "npm-run-all build:prod",
+    "heroku-postbuild": "node dist/test.js",
     "start": "node dist/index.js"
   },
   "authors": [
