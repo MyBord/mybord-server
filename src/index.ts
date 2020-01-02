@@ -29,9 +29,7 @@ const server = new ApolloServer({
 const app = express();
 server.applyMiddleware({ app });
 
-// Declares what port our server will use. Heroku uses a randomly generated port via the node
-// env 'PORT'. If this is a dev server, we will fall back to port 4000.
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 
 // We create an http server from our apollo server.
 const httpServer = http.createServer(app);
