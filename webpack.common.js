@@ -12,6 +12,7 @@ const resolve = {
   alias: {
     generated: path.resolve(SRC_DIR, 'generated/'),
     schema: path.resolve(SRC_DIR, 'schema/'),
+    server: path.resolve(SRC_DIR, 'server/'),
     types: path.resolve(SRC_DIR, 'types/'),
     utils: path.resolve(SRC_DIR, 'utils/'),
   },

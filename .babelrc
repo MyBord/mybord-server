@@ -18,6 +18,7 @@
       "alias": {
         "generated": "./src/generated/",
         "schema": "./src/schema/",
+        "server": "./src/server/",
         "types": "./src/types/",
         "utils": "./src/utils/"
       }

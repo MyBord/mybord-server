@@ -1,32 +1,46 @@
-import http from 'http';
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { Prisma } from 'prisma-binding';
-import resolvers from 'schema/resolvers';
-import generatedSchema from 'generated/prisma.graphql';
-import schema from 'schema/schema.graphql';
+import http from 'http';
+import passport from 'passport';
+import session from 'express-session';
+import uuid from 'uuid/v4';
+import { GraphQLLocalStrategy } from 'graphql-passport';
+// import server from 'server/server';
+import server from 'server/sampleServer';
+import db from './db';
 
-// Creates new Prisma instance
-const prisma = new Prisma({
-  endpoint: process.env.PRISMA_ENDPOINT,
-  secret: process.env.PRISMA_SECRET,
-  typeDefs: 'src/generated/prisma.graphql',
+passport.serializeUser((user, done) => {
+  // @ts-ignore
+  done(null, user.id);
 });
 
-// Creates new Apollo Server
-const server = new ApolloServer({
-  context(request) {
-    return {
-      prisma,
-      request,
-    };
-  },
-  resolvers,
-  typeDefs: [generatedSchema, schema],
+passport.deserializeUser((id, done) => {
+  const users = db.getUsers();
+  const matchingUser = users.find((user) => user.id === id);
+  done(null, matchingUser);
 });
+
+passport.use(
+  new GraphQLLocalStrategy((email, password, done) => {
+    const users = db.getUsers();
+    const matchingUser = users.find((user) => email === user.email && password === user.password);
+    const error = matchingUser ? null : new Error('no matching user');
+    done(error, matchingUser);
+  }),
+);
 
 // Adds express as middleware to our server.
 const app = express();
+app.use(session({
+  // cookie: { secure: true }, // cookie must be sent via https
+  genid: (request) => uuid(), // generates a session ID
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET, // secret that is needed to sign the cookie
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 server.applyMiddleware({ app });
 
 const PORT = 4000;
