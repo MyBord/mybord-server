@@ -13,7 +13,7 @@
     "webpack:prod": "webpack --config webpack.prod.js",
     "build:dev": "npm-run-all remove-dist webpack:dev",
     "build:prod": "npm-run-all remove-dist webpack:prod",
-    "run:dev": "env-cmd -f dev.env nodemon dist/index",
+    "run:dev": "nodemon dist/index",
     "run:prod": "env-cmd -f prod.env nodemon dist/index"
   },
   "authors": [
