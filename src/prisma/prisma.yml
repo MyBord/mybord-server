@@ -1,6 +1,0 @@
-endpoint: ${env:PRISMA_ENDPOINT}
-datamodel:
-  - ../schema/comment/commentModel.graphql
-  - ../schema/post/postModel.graphql
-  - ../schema/user/userModel.graphql
-secret: ${env:PRISMA_SECRET}
