@@ -1,10 +1,8 @@
-import bcrypt from 'bcryptjs';
-import generateToken from 'utils/generateToken';
 import hashPassword from 'utils/hashPassword';
 import verifyUserAccess from 'utils/verifyUserAccess';
 
 export default {
-  createUser: async (parent, args, { prisma }, info) => {
+  createUser: async (parent, args, { passport, prisma }, info) => {
     const password = await hashPassword(args.data.password);
     const finalArgs = {
       ...args,
@@ -16,36 +14,23 @@ export default {
 
     const user = await prisma.mutation.createUser(finalArgs, info);
 
-    return {
-      ...user,
-      token: generateToken(user.id),
-    };
+    passport.login(user);
+
+    return user;
   },
   deleteUser: async (parent, args, { prisma, request }, info) => {
     verifyUserAccess({ request, userId: args.where.id });
     return prisma.mutation.deleteUser(args, info);
   },
-  loginUser: async (parent, args, { prisma }, info) => {
-    const user = await prisma.query.user({
-      where: {
-        email: args.data.email,
-      },
-    });
+  loginUser: async (parent, args, { passport }, info) => {
+    const { user } = await passport.authenticate(
+      'graphql-local',
+      args.data,
+    );
 
-    if (!user) {
-      throw new Error('Unable to login.');
-    }
+    passport.login(user);
 
-    const doesPasswordMatch = await bcrypt.compare(args.data.password, user.password);
-
-    if (!doesPasswordMatch) {
-      throw new Error('Unable to login.');
-    }
-
-    return {
-      ...user,
-      token: generateToken(user.id),
-    };
+    return user;
   },
   updateUser: async (parent, args, { prisma, request }, info) => {
     verifyUserAccess({ request, userId: args.where.id });

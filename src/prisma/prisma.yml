@@ -4,3 +4,6 @@ datamodel:
   - ../schema/post/postModel.graphql
   - ../schema/user/userModel.graphql
 secret: ${env:PRISMA_SECRET}
+generate:
+  - generator: graphql-schema
+    output: ../generated/prisma.graphql

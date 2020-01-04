@@ -1,7 +1,7 @@
 {
   "name": "myBord-server",
   "scripts": {
-    "get-schema": "graphql get-schema -p prisma",
+    "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
     "prisma-delete:test": "cd src/prisma/ && env-cmd -f ../../test.env prisma delete -f",
     "prisma-deploy:test": "cd src/prisma/ && env-cmd -f ../../test.env prisma deploy",

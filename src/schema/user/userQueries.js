@@ -2,6 +2,13 @@ import getUserId from 'utils/getUserId';
 import verifyUserAccess from 'utils/verifyUserAccess';
 
 export default {
+  currentUser: async (parent, args, { passport }, info) => {
+    console.log('-- create user response --');
+    console.log(passport.isAuthenticated());
+    console.log(passport.isUnauthenticated());
+    console.log(passport.getUser());
+    return passport.getUser();
+  },
   me: async (parent, args, { prisma, request }, info) => {
     verifyUserAccess({ request, userId: args.userId });
     const finalArgs = {

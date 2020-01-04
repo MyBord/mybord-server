@@ -2,11 +2,12 @@ import express, { Express } from 'express';
 import passport from 'passport';
 import session from 'express-session';
 import uuid from 'uuid/v4';
+import { Prisma } from 'prisma-binding';
 import initializePassport from './initializePassport';
 
-const initializeExpress = (): Express => {
+const initializeExpress = (prisma: Prisma): Express => {
   // initializes passport
-  initializePassport();
+  initializePassport(prisma);
 
   // initializes our express middleware
   const app = express();

@@ -8,5 +8,6 @@ extend type Mutation {
 }
 
 extend type Query {
+  currentUser: User!
   me(userId: ID!): User!
 }

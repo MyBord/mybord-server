@@ -1,16 +1,26 @@
+import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import { GraphQLLocalStrategy } from 'graphql-passport';
-import db from '../db';
+import { Prisma } from 'prisma-binding';
 
-const initializePassport = (): void => {
+
+const initializePassport = (prisma: Prisma): void => {
   // This allows us to access passport functionality from the GraphQL context and provides us
-  // with a strategy to use user credentials and a local database
+  // with a passport strategy to use with user credentials and our prisma database / orm.
   passport.use(
-    new GraphQLLocalStrategy((email, password, done) => {
-      const users = db.getUsers();
-      const matchingUser = users.find((user) => email === user.email && password === user.password);
-      const error = matchingUser ? null : new Error('no matching user');
-      done(error, matchingUser);
+    new GraphQLLocalStrategy(async (email, password, done) => {
+      const user = await prisma.query.user({
+        where: { email },
+      });
+
+      let doesPasswordMatch;
+      if (user) {
+        doesPasswordMatch = await bcrypt.compare(password, user.password);
+      }
+
+      const error = (!user || !doesPasswordMatch) ? 'Unable to login' : null;
+
+      done(error, user);
     }),
   );
 
@@ -20,10 +30,9 @@ const initializePassport = (): void => {
   });
 
   // We get back the matching user data from the session
-  passport.deserializeUser((id, done) => {
-    const users = db.getUsers();
-    const matchingUser = users.find((user) => user.id === id);
-    done(null, matchingUser);
+  passport.deserializeUser(async (id, done) => {
+    const user = await prisma.query.user({ where: { id } });
+    done(null, user);
   });
 };
 
