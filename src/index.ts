@@ -33,6 +33,11 @@ const server = new ApolloServer({
   context: ({ req, res }) => buildContext({ req, res, Users }),
   resolvers,
   typeDefs,
+  playground: {
+    settings: {
+      'request.credentials': 'same-origin',
+    },
+  },
 });
 
 export default server;
