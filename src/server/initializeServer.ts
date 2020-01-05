@@ -12,6 +12,11 @@ const initializeServer = (prisma: Prisma): ApolloServer => new ApolloServer({
     prisma,
     request,
   }),
+  playground: {
+    settings: {
+      'request.credentials': 'same-origin',
+    },
+  },
   resolvers,
   typeDefs: [generatedSchema, schema],
 });
