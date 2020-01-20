@@ -19,6 +19,7 @@
         "generated": "./src/generated/",
         "schema": "./src/schema/",
         "server": "./src/server/",
+        "serverError": "./src/serverError/",
         "types": "./src/types/",
         "utils": "./src/utils/"
       }

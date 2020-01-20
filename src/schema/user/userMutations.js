@@ -1,3 +1,4 @@
+import ServerError from 'serverError/serverError';
 import hashPassword from 'utils/hashPassword';
 import verifyUserAccess from 'utils/verifyUserAccess';
 
@@ -23,14 +24,18 @@ export default {
     return prisma.mutation.deleteUser(args, info);
   },
   loginUser: async (parent, args, { passport }, info) => {
-    const { user } = await passport.authenticate(
-      'graphql-local',
-      args.data,
-    );
+    try {
+      const { user } = await passport.authenticate(
+        'graphql-local',
+        args.data,
+      );
 
-    passport.login(user);
+      passport.login(user);
 
-    return user;
+      return user;
+    } catch (error) {
+      throw new ServerError({ message: 'Unable to login', status: 401 });
+    }
   },
   updateUser: async (parent, args, { prisma, request }, info) => {
     verifyUserAccess({ request, userId: args.where.id });
