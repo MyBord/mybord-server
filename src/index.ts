@@ -1,26 +1,30 @@
 import http from 'http';
-// import server from 'server/sampleServer';
-import initializeExpress from 'server/initializeExpress';
+import initializeMiddleware from 'server/initializeMiddleware';
 import initializePrisma from 'server/initializePrisma';
 import initializeServer from 'server/initializeServer';
 
 // We initialize our Prisma db instance
 const prisma = initializePrisma();
 
-// We initialize our Apollo Server
-const server = initializeServer(prisma);
+// We initialize our middleware
+const middleware = initializeMiddleware(prisma);
 
-// We initialize our express middleware
-const express = initializeExpress(prisma);
+// We initialize our Apollo Server
+const server = initializeServer(
+  middleware.expressSessionMiddleware,
+  middleware.passportMiddleware,
+  middleware.passportSessionMiddleware,
+  prisma,
+);
 
 // We apply the express middleware to our server
-server.applyMiddleware({ app: express });
+server.applyMiddleware({ app: middleware.expressMiddleware });
 
 const PORT = 4000;
 
 // We create an http server and then add subscriptions
 // https://www.apollographql.com/docs/apollo-server/data/subscriptions/#subscriptions-with-additional-middleware
-const httpServer = http.createServer(express);
+const httpServer = http.createServer(middleware.expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
 // We run our http server.
