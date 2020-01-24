@@ -18,6 +18,9 @@ const typeDefs = gql`
         login(email: String!, password: String!): AuthPayload
         logout: Boolean
     }
+    type Subscription {
+        isAuthenticated: Boolean
+    }
 `;
 
 export default typeDefs;

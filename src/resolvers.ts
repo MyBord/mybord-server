@@ -21,6 +21,9 @@ const resolvers = {
       return { user };
     },
   },
+  Subscription: {
+
+  }
 };
 
 export default resolvers;

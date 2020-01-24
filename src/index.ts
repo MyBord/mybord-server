@@ -4,10 +4,12 @@ import http from 'http';
 import passport from 'passport';
 import session from 'express-session';
 import uuid from 'uuid/v4';
-import { GraphQLLocalStrategy, buildContext } from 'graphql-passport';
+import { GraphQLLocalStrategy, buildContext, createOnConnect } from 'graphql-passport';
 import Users from './users';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
+
+// ----- SETTING UP PASSPORT -- //
 
 passport.serializeUser((user, done) => {
   // @ts-ignore
@@ -29,6 +31,19 @@ passport.use(
   }),
 );
 
+// ----- SETTING UP MIDDLEWARE ----- //
+const sessionMiddleware = session({
+  // cookie: { secure: true }, // cookie must be sent via https
+  genid: (request) => uuid(), // generates a session ID
+  resave: false,
+  saveUninitialized: false,
+  secret: 'bad secret', // secret that is needed to sign the cookie
+});
+const passportMiddleware = passport.initialize();
+const passportSessionMiddleware = passport.session();
+
+// ----- SETTING UP SERVER ----- //
+
 const server = new ApolloServer({
   context: ({ req, res }) => buildContext({ req, res, Users }),
   resolvers,
@@ -38,22 +53,24 @@ const server = new ApolloServer({
       'request.credentials': 'same-origin',
     },
   },
+  subscriptions: {
+    onConnect: createOnConnect([
+      sessionMiddleware,
+      passportMiddleware,
+      passportSessionMiddleware,
+    ]),
+  },
 });
 
-export default server;
+// ----- SETTING UP EXPRESS ----- //
 
 // Adds express as middleware to our server.
 const app = express();
-app.use(session({
-  // cookie: { secure: true }, // cookie must be sent via https
-  genid: (request) => uuid(), // generates a session ID
-  resave: false,
-  saveUninitialized: false,
-  secret: 'bad secret', // secret that is needed to sign the cookie
-}));
+app.use(sessionMiddleware);
+app.use(passportMiddleware);
+app.use(passportSessionMiddleware);
 
-app.use(passport.initialize());
-app.use(passport.session());
+// ----- STARTING SERVER ----- //
 
 server.applyMiddleware({ app });
 
