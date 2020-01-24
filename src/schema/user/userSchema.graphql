@@ -9,6 +9,6 @@ extend type Mutation {
 
 extend type Query {
   currentUser: User!
-  isCurrentUserAuthenticated: Boolean
+  isAuthenticated: Boolean
   me(userId: ID!): User!
 }

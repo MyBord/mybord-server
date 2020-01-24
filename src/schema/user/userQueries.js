@@ -3,7 +3,7 @@ import verifyUserAccess from 'utils/verifyUserAccess';
 
 export default {
   currentUser: async (parent, args, { passport }, info) => passport.getUser(),
-  isCurrentUserAuthenticated: async (parent, args, { passport }, info) => (
+  isAuthenticated: async (parent, args, { passport }, info) => (
     passport.isAuthenticated()
   ),
   me: async (parent, args, { prisma, request }, info) => {
