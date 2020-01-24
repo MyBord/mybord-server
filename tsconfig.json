@@ -3,6 +3,9 @@
     "allowJs": true,
     "baseUrl": ".",
     "esModuleInterop": true,
+    "lib": [
+      "esnext.asynciterable",
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": false,

@@ -19,7 +19,7 @@ const typeDefs = gql`
         logout: Boolean
     }
     type Subscription {
-        isAuthenticated: Boolean
+        isUserAuthenticated: Boolean
     }
 `;
 

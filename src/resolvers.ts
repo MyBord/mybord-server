@@ -22,8 +22,12 @@ const resolvers = {
     },
   },
   Subscription: {
-
-  }
+    isUserAuthenticated: {
+      subscribe(parent, args, context, info) {
+        return context.isAuthenticated();
+      },
+    },
+  },
 };
 
 export default resolvers;

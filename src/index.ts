@@ -1,3 +1,4 @@
+import { PubSub } from 'graphql-subscriptions';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import http from 'http';
@@ -8,6 +9,8 @@ import { GraphQLLocalStrategy, buildContext, createOnConnect } from 'graphql-pas
 import Users from './users';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
+
+const pubsub = new PubSub();
 
 // ----- SETTING UP PASSPORT -- //
 
