@@ -7,11 +7,8 @@ extend type Mutation {
   loginUser(data: LoginUserInput): User!
 }
 
-extend type Subscription {
-  isUserAuthenticated: Boolean
-}
-
 extend type Query {
   currentUser: User!
+  isCurrentUserAuthenticated: Boolean
   me(userId: ID!): User!
 }
