@@ -48,7 +48,10 @@ const passportSessionMiddleware = passport.session();
 // ----- SETTING UP SERVER ----- //
 
 const server = new ApolloServer({
-  context: ({ req, res }) => buildContext({ req, res, Users }),
+  context: (request) => ({
+    passport: buildContext({ req: request.req, res: request.res, Users }),
+    pubsub,
+  }),
   resolvers,
   typeDefs,
   playground: {
