@@ -13,6 +13,13 @@ const users = [
     email: 'roy@trenneman.com',
     password: 'imroy',
   },
+  {
+    id: '3',
+    firstName: 'Jim',
+    lastName: 'smith',
+    email: 'j@gmail.com',
+    password: 'abc',
+  },
 ];
 
 export default {

@@ -9,6 +9,7 @@ const typeDefs = gql`
     }
     type Query {
         currentUser: User
+        isAuthenticated: Boolean
     }
     type AuthPayload {
         user: User
@@ -17,9 +18,6 @@ const typeDefs = gql`
         signup(firstName: String!, lastName: String!, email: String!, password: String!): AuthPayload
         login(email: String!, password: String!): AuthPayload
         logout: Boolean
-    }
-    type Subscription {
-        isUserAuthenticated: Boolean
     }
 `;
 
