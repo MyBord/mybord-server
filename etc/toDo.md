@@ -9,3 +9,4 @@ add passport
 when throwing errors, add status codes
 make sure to lock down individual queries and subscriptions, mutations for prod app
 make resolvers TS
+add password validation
