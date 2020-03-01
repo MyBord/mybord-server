@@ -1,11 +1,10 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
-// import { buildContext } from 'graphql-passport';
 import resolvers from 'schema/resolvers';
 import generatedSchema from 'generated/prisma.graphql';
 import schema from 'schema/schema.graphql';
-import buildContext from './passport/buildContext';
+import buildPassportContext from './passport/buildPassportContext';
 
 // creates new apollo server
 const initializeServer = (
@@ -15,7 +14,7 @@ const initializeServer = (
   prisma: Prisma,
 ): ApolloServer => new ApolloServer({
   context: (request) => ({
-    passport: buildContext({ request: request.req, response: request.res }),
+    passport: buildPassportContext({ request: request.req, response: request.res }),
     prisma,
     request,
   }),

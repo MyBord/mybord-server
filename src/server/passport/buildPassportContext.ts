@@ -1,8 +1,10 @@
-// ToDo: credit
+// Source: https://github.com/jkettmann/graphql-passport/blob/master/src/buildContext.ts
+
 import passport from 'passport';
 import {
   AuthenticateParams,
   AuthenticateReturn,
+  BuildPassportContextParams,
   ExpressParams,
   Info,
   LoginParams,
@@ -43,18 +45,7 @@ const promisifiedLogin = ({
   request.login(user, authenticateOptions, done);
 });
 
-// todo: move to types
-export interface Context {
-  authenticate: (
-    { authenticateOptions, strategyName }: AuthenticateParams
-  ) => Promise<AuthenticateReturn>;
-  isAuthenticated: () => boolean;
-  isUnauthenticated: () => boolean;
-  login: ({ authenticateOptions, user }: LoginParams) => Promise<void>;
-  logout: () => void;
-}
-
-export default ({ request, response }: ExpressParams): Context => {
+export default ({ request, response }: ExpressParams): BuildPassportContextParams => {
   const authenticate = (
     { authenticateOptions, strategyName }: AuthenticateParams,
   ): Promise<AuthenticateReturn> => (

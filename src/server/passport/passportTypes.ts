@@ -11,6 +11,16 @@ export interface AuthenticateReturn {
   info: Info | undefined;
 }
 
+export interface BuildPassportContextParams {
+  authenticate: (
+    { authenticateOptions, strategyName }: AuthenticateParams
+  ) => Promise<AuthenticateReturn>;
+  isAuthenticated: () => boolean;
+  isUnauthenticated: () => boolean;
+  login: ({ authenticateOptions, user }: LoginParams) => Promise<void>;
+  logout: () => void;
+}
+
 export interface ExpressParams {
   request: express.Request;
   response: express.Response;
