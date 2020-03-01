@@ -16,7 +16,6 @@ export interface BuildPassportContextParams {
     { authenticateOptions, strategyName }: AuthenticateParams
   ) => Promise<AuthenticateReturn>;
   isAuthenticated: () => boolean;
-  isUnauthenticated: () => boolean;
   login: ({ authenticateOptions, user }: LoginParams) => Promise<void>;
   logout: () => void;
 }

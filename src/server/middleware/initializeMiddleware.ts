@@ -3,7 +3,7 @@ import express, { Express } from 'express';
 import session from 'express-session';
 import { Prisma } from 'prisma-binding';
 import expressSessionOptions from './expressSessionOptions';
-import initializePassport from './initializePassport';
+import initializePassport from '../passport/initializePassport';
 
 interface Middleware {
   expressMiddleware: Express;

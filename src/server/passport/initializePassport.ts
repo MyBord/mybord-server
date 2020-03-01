@@ -3,7 +3,6 @@ import passport from 'passport';
 import { GraphQLLocalStrategy } from 'graphql-passport';
 import { Prisma } from 'prisma-binding';
 
-
 const initializePassport = (prisma: Prisma): void => {
   // This allows us to access passport functionality from the GraphQL context and provides us
   // with a passport strategy to use with user credentials and our prisma database / orm.

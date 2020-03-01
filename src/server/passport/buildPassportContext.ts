@@ -59,8 +59,6 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
 
   const isAuthenticated = (): boolean => request.isAuthenticated();
 
-  const isUnauthenticated = (): boolean => request.isUnauthenticated();
-
   const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
     promisifiedLogin({ authenticateOptions, request, user })
   );
@@ -70,7 +68,6 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
   return {
     authenticate,
     isAuthenticated,
-    isUnauthenticated,
     login,
     logout,
   };
