@@ -10,7 +10,7 @@ import {
   LoginParams,
   PromisifiedAuthenticateParams,
   PromisifiedLoginParams,
-} from './passportTypes';
+} from 'types/passportTypes';
 
 const promisifiedAuthenticate = ({
   authenticateOptions,

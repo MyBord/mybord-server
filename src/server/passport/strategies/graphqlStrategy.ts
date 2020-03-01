@@ -1,3 +1,4 @@
+https://github.com/mbell8903/passport-custom/blob/master/lib/strategy.js
 /* eslint-disable no-param-reassign */
 import { Strategy as PassportStrategy } from 'passport-strategy';
 import { Request as ExpressRequest } from 'express';
@@ -50,6 +51,10 @@ type VerifyFnWRequest = <U extends {}, Request extends object = ExpressRequest>(
 
 interface GraphQLLocalStrategyOptions {
   passReqToCallback?: boolean;
+}
+
+const GraphQLStrategy = ({ options, verify }) => {
+
 }
 
 class GraphQLLocalStrategy<U extends {}, Request extends ExpressRequest = ExpressRequest> extends PassportStrategy {
