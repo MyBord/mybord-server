@@ -1,5 +1,6 @@
-https://github.com/mbell8903/passport-custom/blob/master/lib/strategy.js
+// https://github.com/mbell8903/passport-custom/blob/master/lib/strategy.js
 /* eslint-disable no-param-reassign */
+import passport, { Strategy } from 'passport';
 import { Strategy as PassportStrategy } from 'passport-strategy';
 import { Request as ExpressRequest } from 'express';
 // import { PassportContext, IVerifyOptions } from './types';

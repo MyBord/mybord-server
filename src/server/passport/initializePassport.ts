@@ -1,15 +1,12 @@
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
-import { GraphQLLocalStrategy } from 'graphql-passport';
-import GraphQLStrategy from './strategies/graphqlStrategy';
 import { Prisma } from 'prisma-binding';
+import * as passportLocal from 'passport-local';
 
 const initializePassport = (prisma: Prisma): void => {
-  // This allows us to access passport functionality from the GraphQL context and provides us
-  // with a passport strategy to use with user credentials and our prisma database / orm.
-  passport.use(
-    // new GraphQLLocalStrategy(async (email, password, done) => {
-    new GraphQLStrategy(async (email, password, done) => {
+  passport.use(new passportLocal.Strategy(
+    { username: 'email' },
+    (async (email, password, done) => {
       const user = await prisma.query.user({
         where: { email },
       });
@@ -23,10 +20,12 @@ const initializePassport = (prisma: Prisma): void => {
 
       done(error, user);
     }),
-  );
+  ));
 
   // We tell passport to save the user id's to the session
   passport.serializeUser((user: any, done) => {
+    console.log('serialize user fn; user object:');
+    console.log(user);
     done(null, user.id);
   });
 
