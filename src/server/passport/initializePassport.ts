@@ -14,11 +14,13 @@ const initializePassport = (prisma: Prisma): void => {
 
       let doesPasswordMatch;
       if (user) {
+        // @ts-ignore
         doesPasswordMatch = await bcrypt.compare(password, user.password);
       }
 
       const error = (!user || !doesPasswordMatch) ? 'Unable to login' : null;
 
+      // @ts-ignore
       done(error, user);
     }),
   );

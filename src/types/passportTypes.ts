@@ -45,3 +45,9 @@ export interface PromisifiedLoginParams {
   request: express.Request;
   user: object;
 }
+
+export type VerifyFunction = (
+  email: string,
+  password: string,
+  done: () => void
+) => void;
