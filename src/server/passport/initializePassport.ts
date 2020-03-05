@@ -1,24 +1,11 @@
-import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import { Prisma } from 'prisma-binding';
-import LocalStrategy from './strategies/localStrategy';
+import LocalStrategy from './strategies/localStrategy/localStrategy';
+import localStrategyAuthentication from './strategies/localStrategy/localStrategyAuthentication';
 
 const initializePassport = (prisma: Prisma): void => {
   passport.use(
-    new LocalStrategy(async (email, password, done) => {
-      const user = await prisma.query.user({
-        where: { email },
-      });
-
-      let doesPasswordMatch;
-      if (user) {
-        doesPasswordMatch = await bcrypt.compare(password, user.password);
-      }
-
-      const error = (!user || !doesPasswordMatch) ? new Error('Unable to login') : null;
-
-      done(error, user);
-    }),
+    new LocalStrategy((email, password, done) => localStrategyAuthentication(email, password, done, prisma))
   );
 
   // We tell passport to save the user id's to the session
