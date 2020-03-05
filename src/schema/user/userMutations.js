@@ -27,13 +27,10 @@ export default {
     try {
       const { user } = await passport.authenticate({
         authenticateOptions: args.data,
-        strategyName: 'local',
+        strategyName: 'graphql-local',
       });
-      console.log('This is the user:');
-      console.log(user);
 
       passport.login({ authenticateOptions: args.data, user });
-      console.log('passport login invoked');
 
       return user;
     } catch (error) {

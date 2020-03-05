@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import { Prisma } from 'prisma-binding';
+import { GraphQLLocalStrategy } from 'graphql-passport';
 import * as passportLocal from 'passport-local';
 
 const initializePassport = (prisma: Prisma): void => {
-  passport.use(new passportLocal.Strategy(
-    { username: 'email' },
-    (async (email, password, done) => {
+  passport.use(
+    new GraphQLLocalStrategy(async (email, password, done) => {
       const user = await prisma.query.user({
         where: { email },
       });
@@ -20,7 +20,7 @@ const initializePassport = (prisma: Prisma): void => {
 
       done(error, user);
     }),
-  ));
+  );
 
   // We tell passport to save the user id's to the session
   passport.serializeUser((user: any, done) => {
