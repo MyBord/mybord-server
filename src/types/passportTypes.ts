@@ -1,6 +1,22 @@
 import { AuthenticateOptions } from 'passport';
 import express from 'express';
 
+// ----- TYPES ----- //
+
+export type Done = (
+  error: Error,
+  user: object,
+  info?: Info,
+) => void;
+
+export type VerifyFunction = (
+  email: string,
+  password: string,
+  done: Done,
+) => void;
+
+// ----- INTERFACES ----- //
+
 export interface AuthenticateParams {
   authenticateOptions: AuthenticateOptions;
   strategyName: string;
@@ -45,9 +61,3 @@ export interface PromisifiedLoginParams {
   request: express.Request;
   user: object;
 }
-
-export type VerifyFunction = (
-  email: string,
-  password: string,
-  done: () => void
-) => void;

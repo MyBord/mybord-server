@@ -5,6 +5,7 @@ import {
   AuthenticateParams,
   AuthenticateReturn,
   BuildPassportContextParams,
+  Done,
   ExpressParams,
   Info,
   LoginParams,
@@ -19,12 +20,12 @@ const promisifiedAuthenticate = ({
   strategyName,
 }: PromisifiedAuthenticateParams): Promise<AuthenticateReturn> => (
   new Promise<AuthenticateReturn>((resolve, reject) => {
-    const done = (
-      err: Error | undefined,
+    const done: Done = (
+      error: Error | undefined,
       user: object | undefined,
       info?: Info | undefined,
     ): void => {
-      if (err) reject(err);
+      if (error) reject(error);
       else resolve({ user, info });
     };
 

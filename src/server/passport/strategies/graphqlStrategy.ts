@@ -1,27 +1,22 @@
-/* eslint-disable no-param-reassign */
-import { Strategy as PassportStrategy } from 'passport-strategy';
-import { Request as ExpressRequest } from 'express';
-import { Info, VerifyFunction } from 'types/passportTypes';
+import { Request } from 'express';
+import { Strategy } from 'passport-strategy';
+import { Done, Info, VerifyFunction } from 'types/passportTypes';
 
-
-class GraphQLLocalStrategy extends PassportStrategy {
-  public constructor(options: VerifyFunction) {
+class GraphQLLocalStrategy extends Strategy {
+  public constructor(cb: VerifyFunction) {
     super();
-    this.verify = options;
-    this.passReqToCallback = false;
+    this.verify = cb;
     this.name = 'graphql-local';
   }
 
   public verify: VerifyFunction;
 
-  public passReqToCallback: boolean | undefined;
-
   public name: string;
 
-  public authenticate(req: ExpressRequest, options: { email: string; password: string }) {
+  public authenticate(req: Request, options: { email: string; password: string }) {
     const { email, password } = options;
 
-    const done = (error: Error, user: object, info?: Info) => {
+    const done: Done = (error: Error, user: object, info?: Info) => {
       if (error) {
         // @ts-ignore
         return this.error(err);
@@ -34,7 +29,6 @@ class GraphQLLocalStrategy extends PassportStrategy {
       return this.success(user, info);
     };
 
-    // @ts-ignore - not sure how tow handle this nicely in TS
     this.verify(email, password, done);
   }
 }

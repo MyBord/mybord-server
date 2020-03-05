@@ -26,11 +26,7 @@ const initializePassport = (prisma: Prisma): void => {
   );
 
   // We tell passport to save the user id's to the session
-  passport.serializeUser((user: any, done) => {
-    console.log('serialize user fn; user object:');
-    console.log(user);
-    done(null, user.id);
-  });
+  passport.serializeUser((user: any, done) => done(null, user.id));
 
   // We get back the matching user data from the session
   passport.deserializeUser(async (id, done) => {
