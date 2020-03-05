@@ -1,26 +1,22 @@
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import { Prisma } from 'prisma-binding';
-// import { GraphQLLocalStrategy } from 'graphql-passport';
-import GraphQLLocalStrategy from './strategies/graphqlStrategy';
-import * as passportLocal from 'passport-local';
+import LocalStrategy from './strategies/localStrategy';
 
 const initializePassport = (prisma: Prisma): void => {
   passport.use(
-    new GraphQLLocalStrategy(async (email, password, done) => {
+    new LocalStrategy(async (email, password, done) => {
       const user = await prisma.query.user({
         where: { email },
       });
 
       let doesPasswordMatch;
       if (user) {
-        // @ts-ignore
         doesPasswordMatch = await bcrypt.compare(password, user.password);
       }
 
-      const error = (!user || !doesPasswordMatch) ? 'Unable to login' : null;
+      const error = (!user || !doesPasswordMatch) ? new Error('Unable to login') : null;
 
-      // @ts-ignore
       done(error, user);
     }),
   );

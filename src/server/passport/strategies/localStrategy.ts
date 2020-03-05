@@ -2,11 +2,11 @@ import { Request } from 'express';
 import { Strategy } from 'passport-strategy';
 import { Done, Info, VerifyFunction } from 'types/passportTypes';
 
-class GraphQLLocalStrategy extends Strategy {
+class LocalStrategy extends Strategy {
   public constructor(cb: VerifyFunction) {
     super();
     this.verify = cb;
-    this.name = 'graphql-local';
+    this.name = 'local';
   }
 
   public verify: VerifyFunction;
@@ -33,4 +33,4 @@ class GraphQLLocalStrategy extends Strategy {
   }
 }
 
-export default GraphQLLocalStrategy;
+export default LocalStrategy;

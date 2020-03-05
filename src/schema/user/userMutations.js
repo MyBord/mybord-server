@@ -27,7 +27,7 @@ export default {
     try {
       const { user } = await passport.authenticate({
         authenticateOptions: args.data,
-        strategyName: 'graphql-local',
+        strategyName: 'local',
       });
 
       passport.login({ authenticateOptions: args.data, user });
