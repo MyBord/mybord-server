@@ -5,6 +5,9 @@ import localStrategyAuthentication from './strategies/localStrategy/localStrateg
 
 const initializePassport = (prisma: Prisma): void => {
   passport.use(
+    // ToDo: add comments
+    // ToDo: turn into:
+    // new LocalStrategy((props) => localStrategyAuthentication({ prisma, ...props }));
     new LocalStrategy((email, password, done) => localStrategyAuthentication(email, password, done, prisma))
   );
 
