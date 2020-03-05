@@ -1,11 +1,7 @@
-// https://github.com/mbell8903/passport-custom/blob/master/lib/strategy.js
 /* eslint-disable no-param-reassign */
-import passport, { Strategy } from 'passport';
 import { Strategy as PassportStrategy } from 'passport-strategy';
 import { Request as ExpressRequest } from 'express';
-// import { PassportContext, IVerifyOptions } from './types';
 
-// @ts-ignore
 type SharedPassportContext<
   UserObjectType extends {},
   Credentials extends {},
@@ -42,7 +38,6 @@ export interface IVerifyOptions {
 }
 
 type VerifyFn = (username: unknown, password: unknown, done: () => void) => void;
-
 type VerifyFnWRequest = <U extends {}, Request extends object = ExpressRequest>(
   req: Request | PassportContext<U, Request>,
   username: unknown,
@@ -52,10 +47,6 @@ type VerifyFnWRequest = <U extends {}, Request extends object = ExpressRequest>(
 
 interface GraphQLLocalStrategyOptions {
   passReqToCallback?: boolean;
-}
-
-const GraphQLStrategy = ({ options, verify }) => {
-
 }
 
 class GraphQLLocalStrategy<U extends {}, Request extends ExpressRequest = ExpressRequest> extends PassportStrategy {

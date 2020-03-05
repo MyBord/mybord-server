@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import { Prisma } from 'prisma-binding';
-import { GraphQLLocalStrategy } from 'graphql-passport';
+// import { GraphQLLocalStrategy } from 'graphql-passport';
+import GraphQLLocalStrategy from './strategies/graphqlStrategy';
 import * as passportLocal from 'passport-local';
 
 const initializePassport = (prisma: Prisma): void => {
