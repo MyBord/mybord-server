@@ -1,7 +1,9 @@
-import passport from 'passport';
+import cors from 'cors';
 import express, { Express } from 'express';
+import passport from 'passport';
 import session from 'express-session';
 import { Prisma } from 'prisma-binding';
+import corsOptions from './corsOptions';
 import expressSessionOptions from './expressSessionOptions';
 import initializePassport from '../passport/initializePassport';
 
@@ -26,6 +28,7 @@ const initializeMiddleware = (prisma: Prisma): Middleware => {
   expressMiddleware.use(expressSessionMiddleware);
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);
+  expressMiddleware.use(cors(corsOptions));
 
   // returns our middleware
   return {
