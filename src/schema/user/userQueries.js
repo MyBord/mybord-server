@@ -22,17 +22,6 @@ export default {
     return prisma.query.user(finalArgs, info);
   },
   users: async (parent, args, { prisma, request }, info) => {
-    // NOTE: For some reason I get get a user query here but not elsewhere
-    // const userArgs = {
-    //   where: {
-    //     email: 'jimmy@gmail.com',
-    //   },
-    // };
-    //
-    // const userFoo = await prisma.query.user(userArgs, info);
-    // console.log('00000000000');
-    // console.log(userFoo);
-
     const userId = getUserId(request, false);
 
     // You shouldn't be able to run a filtered query where you ask for a particular set of

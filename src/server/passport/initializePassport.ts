@@ -5,10 +5,11 @@ import localStrategyAuthentication from './strategies/localStrategy/localStrateg
 
 const initializePassport = (prisma: Prisma): void => {
   passport.use(
-    // ToDo: add comments
-    // ToDo: turn into:
-    // new LocalStrategy((props) => localStrategyAuthentication({ prisma, ...props }));
-    new LocalStrategy((email, password, done) => localStrategyAuthentication(email, password, done, prisma))
+    // Adds local passport strategy so that users can authenticate with their local db
+    // credentials.
+    new LocalStrategy((email, password, done) => (
+      localStrategyAuthentication(email, password, done, prisma)
+    )),
   );
 
   // We tell passport to save the user id's to the session
