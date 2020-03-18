@@ -1,5 +1,6 @@
 import { PubSub } from 'graphql-subscriptions';
 import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import passport from 'passport';
@@ -70,17 +71,23 @@ const server = new ApolloServer({
 
 // ----- SETTING UP EXPRESS ----- //
 
+const PORT = 4000;
+
 // Adds express as middleware to our server.
 const app = express();
 app.use(sessionMiddleware);
 app.use(passportMiddleware);
 app.use(passportSessionMiddleware);
+app.use(cors({ origin: `http://localhost:${PORT}`, credentials: true }));
 
 // ----- STARTING SERVER ----- //
 
-server.applyMiddleware({ app });
+server.applyMiddleware({
+  app,
+  cors: false,
+  path: '/graphql',
+});
 
-const PORT = 4000;
 
 // We create an http server from our apollo server.
 const httpServer = http.createServer(app);
