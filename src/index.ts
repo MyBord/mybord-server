@@ -72,13 +72,14 @@ const server = new ApolloServer({
 // ----- SETTING UP EXPRESS ----- //
 
 const PORT = 4000;
+const APP_PORT = 8080;
 
 // Adds express as middleware to our server.
 const app = express();
+app.use(cors({ origin: `http://localhost:${APP_PORT}`, credentials: true }));
 app.use(sessionMiddleware);
 app.use(passportMiddleware);
 app.use(passportSessionMiddleware);
-app.use(cors({ origin: `http://localhost:${PORT}`, credentials: true }));
 
 // ----- STARTING SERVER ----- //
 
