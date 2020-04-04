@@ -71,7 +71,7 @@ const server = new ApolloServer({
 
 // ----- SETTING UP EXPRESS ----- //
 
-const PORT = 4000;
+const PORT = 1234;
 const APP_PORT = 8080;
 
 // Adds express as middleware to our server.
