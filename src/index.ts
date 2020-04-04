@@ -18,7 +18,11 @@ const server = initializeServer(
 );
 
 // We apply the express middleware to our server
-server.applyMiddleware({ app: middleware.expressMiddleware });
+server.applyMiddleware({
+  app: middleware.expressMiddleware,
+  cors: false,
+  path: '/graphql',
+});
 
 const PORT = 4000;
 

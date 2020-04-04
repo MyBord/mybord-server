@@ -1,3 +1,5 @@
+* make ports be env vars
+
 create new db for docker
 hide db secrets in docker file
 change secrets
