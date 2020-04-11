@@ -25,7 +25,7 @@ server.applyMiddleware({
 });
 
 // Get the PORT to run on
-const PORT = process.env.PORT;
+const PORT = 4000;
 
 // We create an http server and then add subscriptions
 // https://www.apollographql.com/docs/apollo-server/data/subscriptions/#subscriptions-with-additional-middleware
