@@ -10,6 +10,7 @@ This summarizes the general architecture behind the MyBord back-end codebase.
   * [B. src Folder](#b-src-folder)
   * [C. schema Folder](#c-schema-folder)
   * [D. server Folder](#d-server-folder)
+  * [E. passport Folder](#e-passport-folder)
 
 ## I. Summary
 
@@ -256,14 +257,17 @@ instance, and our server itself. It is outlined as follows:
 
 ```
 server/
+  |- passport/
   |- corsOptions.ts
   |- expressSessionOptions.ts
   |- initializeMiddleware.ts
-  |- initializePassport.ts
   |- initializePrisma.ts
   |- initializeServer.ts
 ```
 
+* **passport/:**
+  * Contains code for our passport authentication middleware. For more information, see our
+   [passport folder outline](#e-passport-folder)
 * **`corsOptions.ts`:**
   * Configures our cors options.
 * **`expressSessionOptions.ts`:**
@@ -285,3 +289,39 @@ server/
     * Adds prisma and passport to our context.
     * Configures our playground settings.
     * Configures our resolvers and typeDefs and resolvers from our '/schema' folder.
+    
+### E. passport folder
+
+The passport folder contains code that is used to create our passport authentication middleware.
+
+For context, as documented [here](http://www.passportjs.org/docs/):
+
+> Passport recognizes that each application has unique authentication requirements. Authentication
+> mechanisms, known as strategies, are packaged as individual modules. Applications can choose
+> which strategies to employ, without creating unnecessary dependencies. 
+
+Our passport folder is organized as follows:
+
+```
+passport/
+  |- strategies/
+     |- localStrategy/
+        |- localStrategy.ts
+        |- localStrategyAuthentication.ts
+  |- buildPassportContext.ts
+  |- initializePassport.ts
+```
+
+* **strategies:**
+  * Folder that contains the different strategies for a user to authenticate from.
+* **strategies/localStrategy/:**
+  * Folder that contains code that allows users to authenticate via their creds from the mybord
+   server / db.
+* **`strategies/localStrategy/localStrategy.ts`:**
+  * The class object used to authenticate a user to the mybord server.
+* **`strategies/localStrategy/localStrategyAuthentication.ts`:**
+  * The function that actually authenticates the user with the mybord server.
+* **`buildPassportContext.ts`:**
+  * Creates an object that can be attached to the Apollo Server context object.
+* **`initializePassport.ts`:**
+  * Initializes the passport authentication instance and strategies.

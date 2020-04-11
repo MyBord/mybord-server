@@ -25,12 +25,12 @@ export default {
   },
   loginUser: async (parent, args, { passport }, info) => {
     try {
-      const { user } = await passport.authenticate(
-        'graphql-local',
-        args.data,
-      );
+      const { user } = await passport.authenticate({
+        authenticateOptions: args.data,
+        strategyName: 'local',
+      });
 
-      passport.login(user);
+      passport.login({ authenticateOptions: args.data, user });
 
       return user;
     } catch (error) {
