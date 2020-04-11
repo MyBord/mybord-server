@@ -29,6 +29,7 @@ This document is used to outline current project management priorities.
 * make sure to lock down individual queries and subscriptions, mutations for prod app
 * add password validation
 * detail heroku build process, with prisma.io, and add to root readme.md as well
+* outline / document where domains are kept, how they are handled, etc. -- add to root readme?
 
 ### D. Low
 
