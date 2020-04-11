@@ -60,6 +60,7 @@ application folder.
   .eslintrc.js
   .gitignore
   dev.env
+  LICENSE.md
   package.json
   prod.env
   README.md
@@ -91,6 +92,8 @@ application folder.
 * **`dev.env`:**
   * a file containing node environment variables for your local instance when running
    the server in 'dev' mode.
+* **`LICENSE.md`:**
+  * Contains the software license / copyright.
 * **`package.json`:**
   * the package manager and metadata.
 * **`prod.env`:**
