@@ -85,4 +85,4 @@ In order to run the server locally, you must do the following steps:
 2. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
 2. Run `yarn prisma-deploy:dev`.
 3. Run `yarn build:dev`.
-4. Run `yarn run:dev`.
+4. In a second terminal window, run `yarn run:dev`.
