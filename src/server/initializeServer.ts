@@ -1,7 +1,7 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
-import { buildContext, createOnConnect } from 'graphql-passport';
+import { buildContext } from 'graphql-passport';
 import resolvers from 'schema/resolvers/resolvers';
 import typeDefs from 'schema/typeDefs/typeDefs';
 
@@ -23,13 +23,6 @@ const initializeServer = (
     },
   },
   resolvers,
-  subscriptions: {
-    onConnect: createOnConnect([
-      expressSessionMiddleware,
-      passportMiddleware,
-      passportSessionMiddleware,
-    ]),
-  },
   typeDefs,
 });
 

@@ -144,7 +144,14 @@ src/
 * **`.graphqlconfig`:**
   * Configures the graphql endpoint.
 * **`index.ts`:**
-  * The script that runs our server.
+  * The script that runs our server. It does the following:
+    * Initializes prisma.
+    * Initializes our middleware.
+    * Initializes our apollo server.
+    * Applies the middleware to our server.
+    * Creates an http server.
+    * Open up our http server on a certain port.
+    * Uses hot module replacement if not in PROD mode.
   
 ### C. schema folder
 
@@ -239,3 +246,39 @@ schema/
   contains both our prisma schema and our non prisma schema.
 
 ### D. server folder
+
+Our server folder contains various configuration files and scripts that allows us to initialize
+our server. Most importantly, it is in this folder where we initialize our middleware, our prisma
+instance, and our server itself. It is outlined as follows:
+
+```
+server/
+  |- corsOptions.ts
+  |- expressSessionOptions.ts
+  |- initializeMiddleware.ts
+  |- initializePassport.ts
+  |- initializePrisma.ts
+  |- initializeServer.ts
+```
+
+* **`corsOptions.ts`:**
+  * Configures our cors options.
+* **`expressSessionOptions.ts`:**
+  * Configures our express session.
+* **`initializeMiddleware.ts`:**
+  * Initializes our middleware. Included in this file we do the following:
+    * Initialize passport
+    * Initialize express
+    * Initialize the express session
+    * Configure our cors options
+    * Configure our express session options
+* **`initializePassport.ts`:**
+  * Initializes passport, which is used to authenticate our users.
+* **`initializePrisma.ts`:**
+  * Initializes our prisma orm. This function sets our prisma endpoint, secret, and points to the
+   generated prisma typeDefs that should get used.
+* **`initializeServer.ts`:**
+  * Initializes our server by creating a new Apollo Server. It does the following:
+    * Adds prisma and passport to our context.
+    * Configures our playground settings.
+    * Configures our resolvers and typeDefs and resolvers from our '/schema' folder.
