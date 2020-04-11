@@ -16,6 +16,7 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
+        "middleware": "./src/middleware/",
         "schema": "./src/schema/",
         "server": "./src/server/",
         "serverError": "./src/serverError/",

@@ -6,11 +6,13 @@ This summarizes the general architecture behind the MyBord back-end codebase.
 
 * [I. Summary](#i-summary)   
 * [II. Architecture](#ii-architecture)   
-  * [A. Root Folder](#a-root)
-  * [B. src Folder](#b-src-folder)
-  * [C. schema Folder](#c-schema-folder)
-  * [D. server Folder](#d-server-folder)
-  * [E. passport Folder](#e-passport-folder)
+  * [A. Root folder](#a-root)
+  * [B. src folder](#b-src-folder)
+  * [C. middleware folder](#c-middleware-folder)
+  * [D. passport folder](#d-passport-folder)
+  * [E. prisma folder](#e-prisma-folder)
+  * [F. schema folder](#f-schema-folder)
+  * [G. server folder](#g-server-folder)
 
 ## I. Summary
 
@@ -116,9 +118,8 @@ manner:
 
 ```
 src/
+  |- middleware/
   |- prisma/ 
-     |- docker-compose.yml
-     |- prisma.yml
   |- schema/ 
   |- server/ 
   |- serverError/ 
@@ -129,16 +130,18 @@ src/
   |- index.ts
 ```
 
-* **`prisma/docker-compose.yml`:**
-  * Configures a docker image for our prisma instace / db. [See here](https://v1.prisma.io/docs/1.1/reference/clusters/docker-aira9zama5/).
-* **`prisma/prisma.yml`:**
-  * Configures our prisma service.
+* **middleware/:**
+  * Contains configurations and files that create and initialize our middleware. For further
+   information, see the [middleware folder outline](#c-middleware-folder)
+* **prisma/:**
+  * Contains the code used to configure and initialize our prisma orm instance. Fur further
+   information, see the [prisma folder outline](#e-prisma-folder).
 * **schema/:**
   * Contains our database schema. For more information, see the
-  [schema folder outline](#c-schema-folder).
+  [schema folder outline](#f-schema-folder).
 * **server/:**
   * Contains files that configure and initialize our server. For more information, see the
-  [server folder outline](#d-server-folder).
+  [server folder outline](#g-server-folder).
 * **`serverError/serverError.ts`:**
   * Custom error object that gets thrown to the front end to communicate server errors.
 * **types/:**
@@ -156,8 +159,93 @@ src/
     * Creates an http server.
     * Open up our http server on a certain port.
     * Uses hot module replacement if not in PROD mode.
+    
+### C. middleware folder
+
+Our server folder contains various configuration files and scripts that allows us to initialize
+our server. Most importantly, it is in this folder where we initialize our middleware, our prisma
+instance, and our server itself. It is outlined as follows:
+
+```
+server/
+  |- passport/
+  |- corsOptions.ts
+  |- expressSessionOptions.ts
+  |- initializeMiddleware.ts
+```
+
+* **passport/:**
+  * Contains code for our passport authentication middleware. For more information, see our
+   [passport folder outline](#d-passport-folder)
+* **`corsOptions.ts`:**
+  * Configures our cors options.
+* **`expressSessionOptions.ts`:**
+  * Configures our express session.
+* **`initializeMiddleware.ts`:**
+  * Initializes our middleware. Included in this file we do the following:
+    * Initialize passport
+    * Initialize express
+    * Initialize the express session
+    * Configure our cors options
+    * Configure our express session options
+
+### D. passport folder
+
+The passport folder contains code that is used to create our passport authentication middleware.
+
+For context, as documented [here](http://www.passportjs.org/docs/):
+
+> Passport recognizes that each application has unique authentication requirements. Authentication
+> mechanisms, known as strategies, are packaged as individual modules. Applications can choose
+> which strategies to employ, without creating unnecessary dependencies. 
+
+Our passport folder is organized as follows:
+
+```
+passport/
+  |- strategies/
+     |- localStrategy/
+        |- localStrategy.ts
+        |- localStrategyAuthentication.ts
+  |- buildPassportContext.ts
+  |- initializePassport.ts
+```
+
+* **strategies:**
+  * Folder that contains the different strategies for a user to authenticate from.
+* **strategies/localStrategy/:**
+  * Folder that contains code that allows users to authenticate via their creds from the mybord
+   server / db.
+* **`strategies/localStrategy/localStrategy.ts`:**
+  * The class object used to authenticate a user to the mybord server.
+* **`strategies/localStrategy/localStrategyAuthentication.ts`:**
+  * The function that actually authenticates the user with the mybord server.
+* **`buildPassportContext.ts`:**
+  * Creates an object that can be attached to the Apollo Server context object.
+* **`initializePassport.ts`:**
+  * Initializes the passport authentication instance and strategies.
+
+### E. prisma folder
+
+The prisma folder contains the code used to configure and initialize our prisma orm instance. It is
+organized in the following manner:
+
+```
+prisma/
+  |- docker-compose.yml
+  |- initializePrisma.ts
+  |- prisma.yml
+```
+
+* **`docker-compose.yml`:**
+  * Configures a docker image for our prisma instace / db. [See here](https://v1.prisma.io/docs/1.1/reference/clusters/docker-aira9zama5/).
+* **`initializePrisma.ts`:**
+  * Initializes our prisma orm. This function sets our prisma endpoint, secret, and points to the
+   generated prisma typeDefs that should get used.
+* **`prisma.yml`:**
+  * Configures our prisma service.
   
-### C. schema folder
+### F. schema folder
 
 The `schema/` folder contains the schema that structures our database and server orm. It is
 structured in the following way:
@@ -249,79 +337,17 @@ schema/
   * The final file that gets used to generate the typeDefs when we initialize our server;
   contains both our prisma schema and our non prisma schema.
 
-### D. server folder
+### G. server folder
 
-Our server folder contains various configuration files and scripts that allows us to initialize
-our server. Most importantly, it is in this folder where we initialize our middleware, our prisma
-instance, and our server itself. It is outlined as follows:
+Our server folder contains the script that intializes our apollo server.
 
 ```
 server/
-  |- passport/
-  |- corsOptions.ts
-  |- expressSessionOptions.ts
-  |- initializeMiddleware.ts
-  |- initializePrisma.ts
   |- initializeServer.ts
 ```
 
-* **passport/:**
-  * Contains code for our passport authentication middleware. For more information, see our
-   [passport folder outline](#e-passport-folder)
-* **`corsOptions.ts`:**
-  * Configures our cors options.
-* **`expressSessionOptions.ts`:**
-  * Configures our express session.
-* **`initializeMiddleware.ts`:**
-  * Initializes our middleware. Included in this file we do the following:
-    * Initialize passport
-    * Initialize express
-    * Initialize the express session
-    * Configure our cors options
-    * Configure our express session options
-* **`initializePassport.ts`:**
-  * Initializes passport, which is used to authenticate our users.
-* **`initializePrisma.ts`:**
-  * Initializes our prisma orm. This function sets our prisma endpoint, secret, and points to the
-   generated prisma typeDefs that should get used.
 * **`initializeServer.ts`:**
   * Initializes our server by creating a new Apollo Server. It does the following:
     * Adds prisma and passport to our context.
     * Configures our playground settings.
     * Configures our resolvers and typeDefs and resolvers from our '/schema' folder.
-    
-### E. passport folder
-
-The passport folder contains code that is used to create our passport authentication middleware.
-
-For context, as documented [here](http://www.passportjs.org/docs/):
-
-> Passport recognizes that each application has unique authentication requirements. Authentication
-> mechanisms, known as strategies, are packaged as individual modules. Applications can choose
-> which strategies to employ, without creating unnecessary dependencies. 
-
-Our passport folder is organized as follows:
-
-```
-passport/
-  |- strategies/
-     |- localStrategy/
-        |- localStrategy.ts
-        |- localStrategyAuthentication.ts
-  |- buildPassportContext.ts
-  |- initializePassport.ts
-```
-
-* **strategies:**
-  * Folder that contains the different strategies for a user to authenticate from.
-* **strategies/localStrategy/:**
-  * Folder that contains code that allows users to authenticate via their creds from the mybord
-   server / db.
-* **`strategies/localStrategy/localStrategy.ts`:**
-  * The class object used to authenticate a user to the mybord server.
-* **`strategies/localStrategy/localStrategyAuthentication.ts`:**
-  * The function that actually authenticates the user with the mybord server.
-* **`buildPassportContext.ts`:**
-  * Creates an object that can be attached to the Apollo Server context object.
-* **`initializePassport.ts`:**
-  * Initializes the passport authentication instance and strategies.

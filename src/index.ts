@@ -1,7 +1,7 @@
 import http from 'http';
-import initializeMiddleware from 'server/initializeMiddleware';
-import initializePrisma from 'server/initializePrisma';
+import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
+import initializePrisma from './prisma/initializePrisma';
 
 // We initialize our Prisma db instance
 const prisma = initializePrisma();

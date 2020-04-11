@@ -13,6 +13,7 @@ This document is used to outline current project management priorities.
 
 ### B. High
 
+* don't initialze prisma at index.ts
 * get license
 * use custom passport scripting from other branch
 * convert schema files (mutations, queries, subscriptions) to TS

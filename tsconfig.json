@@ -11,6 +11,7 @@
     "sourceMap": true,
     "target": "esnext",
     "paths": {
+      "middleware/*": ["src/middleware/*"],
       "schema/*": ["src/schema/*"],
       "server/*": ["src/server/*"],
       "serverError/*": ["src/serverError/*"],

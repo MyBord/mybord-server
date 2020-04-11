@@ -1,9 +1,9 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
+import buildPassportContext from 'middleware/passport/buildPassportContext';
 import resolvers from 'schema/resolvers/resolvers';
 import typeDefs from 'schema/typeDefs/typeDefs';
-import buildPassportContext from './passport/buildPassportContext';
 
 // creates new apollo server
 const initializeServer = (

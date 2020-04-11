@@ -10,6 +10,7 @@ const output = {
 const resolve = {
   extensions: ['.graphql', '.js', '.ts'],
   alias: {
+    middleware: path.resolve(SRC_DIR, 'middleware/'),
     schema: path.resolve(SRC_DIR, 'schema/'),
     server: path.resolve(SRC_DIR, 'server/'),
     serverError: path.resolve(SRC_DIR, 'serverError/'),
