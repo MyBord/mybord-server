@@ -1,9 +1,9 @@
 endpoint: ${env:PRISMA_ENDPOINT}
 datamodel:
-  - ../schema/comment/commentModel.graphql
-  - ../schema/post/postModel.graphql
-  - ../schema/user/userModel.graphql
+  - ../schema/comment/commentPrismaSchema.graphql
+  - ../schema/post/postPrismaSchema.graphql
+  - ../schema/user/userPrismaSchema.graphql
 secret: ${env:PRISMA_SECRET}
 generate:
   - generator: graphql-schema
-    output: ../generated/prisma.graphql
+    output: ../schema/typeDefs/prismaSchema.graphql

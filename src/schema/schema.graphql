@@ -1,9 +1,0 @@
-#import './post/postSchema.graphql'
-#import './user/userSchema.graphql'
-
-# ----- COMMON TYPES ----- #
-
-type Response {
-  message: String
-  status: Int!
-}

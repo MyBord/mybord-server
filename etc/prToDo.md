@@ -16,6 +16,8 @@ DOCS
 
 * make ports be env vars
 
+* convert schema files (mutations, queries, subscriptions) to TS
+
 create new db for docker
 hide db secrets in docker file
 change secrets
