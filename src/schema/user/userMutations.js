@@ -30,7 +30,7 @@ export default {
         strategyName: 'local',
       });
 
-      passport.login(user);
+      passport.login({ authenticateOptions: args.data, user });
 
       return user;
     } catch (error) {
