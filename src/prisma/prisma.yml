@@ -1,7 +1,5 @@
 endpoint: ${env:PRISMA_ENDPOINT}
 datamodel:
-  - ../schema/comment/commentPrismaSchema.graphql
-  - ../schema/post/postPrismaSchema.graphql
   - ../schema/user/userPrismaSchema.graphql
 secret: ${env:PRISMA_SECRET}
 generate:

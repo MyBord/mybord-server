@@ -13,7 +13,5 @@ extend type Mutation {
 
 extend type Query {
   currentUser: User!
-  forgotPassword(data: ForgotPasswordInput): Response!
   isAuthenticated: Boolean
-  me(userId: ID!): User!
 }

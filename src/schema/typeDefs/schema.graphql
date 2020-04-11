@@ -3,7 +3,6 @@
 
 # ----- IMPORTS ----- #
 
-#import '../post/postSchema.graphql'
 #import '../user/userSchema.graphql'
 
 # ----- COMMON TYPES ----- #

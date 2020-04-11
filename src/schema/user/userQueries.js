@@ -1,47 +1,13 @@
 import getUserId from 'utils/getUserId';
-import verifyUserAccess from 'utils/verifyUserAccess';
 
 export default {
   currentUser: async (parent, args, { passport }, info) => passport.getUser(),
-  forgotPassword: async (parent, args, { prisma }, info) => {
-    return {
-      status: 200,
-    };
-  },
   isAuthenticated: async (parent, args, { passport }, info) => (
     passport.isAuthenticated()
   ),
-  me: async (parent, args, { prisma, request }, info) => {
-    verifyUserAccess({ request, userId: args.userId });
-    const finalArgs = {
-      where: {
-        ...args.where,
-        id: args.userId,
-      },
-    };
-    return prisma.query.user(finalArgs, info);
-  },
   users: async (parent, args, { prisma, request }, info) => {
-    // NOTE: For some reason I get get a user query here but not elsewhere
-    // const userArgs = {
-    //   where: {
-    //     email: 'jimmy@gmail.com',
-    //   },
-    // };
-    //
-    // const userFoo = await prisma.query.user(userArgs, info);
-    // console.log('00000000000');
-    // console.log(userFoo);
-
     const userId = getUserId(request, false);
 
-    // You shouldn't be able to run a filtered query where you ask for a particular set of
-    // restricted fields are then returned that user, if that user, with said email address,
-    // exists in the db. This essentially is can serve as a loophole to see if certain users
-    // exist given the presence of certain restricted fields. These restricted fields are:
-    // - user email address
-    // - user token
-    // - user hashed password
     const finalArgs = {
       ...args,
       where: {

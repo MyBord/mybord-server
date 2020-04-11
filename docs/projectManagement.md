@@ -13,11 +13,13 @@ This document is used to outline current project management priorities.
 
 ### B. High
 
+* trying to login a user who does not exist returns an unhandled promise
+* add pictures to docs
 * convert schema files (mutations, queries, subscriptions) to TS
-* get license
 * make ports be env vars
 * remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
+* remove unused schemas
 
 ### C. Medium
 

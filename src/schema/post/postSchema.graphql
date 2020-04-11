@@ -1,7 +1,0 @@
-extend type Query {
-  myPosts(where: PostWhereInput): [Post]!
-}
-
-extend type Subscription {
-  myPost(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-}
