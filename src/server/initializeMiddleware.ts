@@ -5,7 +5,7 @@ import session from 'express-session';
 import { Prisma } from 'prisma-binding';
 import corsOptions from './corsOptions';
 import expressSessionOptions from './expressSessionOptions';
-import initializePassport from './initializePassport';
+import initializePassport from './passport/initializePassport';
 
 interface Middleware {
   expressMiddleware: Express;
