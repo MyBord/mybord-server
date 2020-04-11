@@ -6,15 +6,20 @@ import { Prisma } from 'prisma-binding';
 import corsOptions from './corsOptions';
 import expressSessionOptions from './expressSessionOptions';
 import initializePassport from './passport/initializePassport';
+import initializePrisma from '../prisma/initializePrisma';
 
 interface Middleware {
   expressMiddleware: Express;
   expressSessionMiddleware: express.RequestHandler;
   passportMiddleware: express.Handler;
   passportSessionMiddleware: express.RequestHandler;
+  prisma: Prisma;
 }
 
-const initializeMiddleware = (prisma: Prisma): Middleware => {
+export default (): Middleware => {
+  // We initialize our Prisma db instance
+  const prisma = initializePrisma();
+
   // initializes passport
   initializePassport(prisma);
 
@@ -36,7 +41,6 @@ const initializeMiddleware = (prisma: Prisma): Middleware => {
     expressSessionMiddleware,
     passportMiddleware,
     passportSessionMiddleware,
+    prisma,
   };
 };
-
-export default initializeMiddleware;
