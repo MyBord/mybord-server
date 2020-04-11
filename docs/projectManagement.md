@@ -30,6 +30,7 @@ This document is used to outline current project management priorities.
 * add password validation
 * detail heroku build process, with prisma.io, and add to root readme.md as well
 * outline / document where domains are kept, how they are handled, etc. -- add to root readme?
+* get the `yarn run:dev` command to open up the window
 
 ### D. Low
 
