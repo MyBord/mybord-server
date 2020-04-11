@@ -17,7 +17,8 @@ This document is used to outline current project management priorities.
 * use custom passport scripting from other branch
 * convert schema files (mutations, queries, subscriptions) to TS
 * make ports be env vars
- * remove 'request' from context in `initialzeServer`
+* remove 'request' from context in `initialzeServer`
+* remove the jwt_secret env var and all uses and all outdated auth
 
 ### C. Medium
 
