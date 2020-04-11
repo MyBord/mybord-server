@@ -14,6 +14,7 @@ This document is used to outline current project management priorities.
 ### B. High
 
 * trying to login a user who does not exist returns an unhandled promise
+* fix currenet user mutation - and restrict data
 * add pictures to docs
 * convert schema files (mutations, queries, subscriptions) to TS
 * make ports be env vars

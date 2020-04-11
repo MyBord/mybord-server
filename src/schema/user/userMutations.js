@@ -1,5 +1,6 @@
 import ServerError from 'serverError/serverError';
 import hashPassword from 'utils/hashPassword';
+import restrictUserData from 'utils/restrictUserData';
 
 export default {
   createUser: async (parent, args, { passport, prisma }, info) => {
@@ -16,7 +17,7 @@ export default {
 
     passport.login({ authenticateOptions: args.data, user });
 
-    return user;
+    return restrictUserData(user);
   },
   loginUser: async (parent, args, { passport }, info) => {
     try {
@@ -27,7 +28,7 @@ export default {
 
       passport.login({ authenticateOptions: args.data, user });
 
-      return user;
+      return restrictUserData(user);
     } catch (error) {
       throw new ServerError({ message: 'Unable to login', status: 401 });
     }
