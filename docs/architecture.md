@@ -116,6 +116,8 @@ manner:
 ```
 src/
   |- prisma/ 
+     |- docker-compose.yml
+     |- prisma.yml
   |- schema/ 
   |- server/ 
   |- serverError/ 
@@ -126,9 +128,10 @@ src/
   |- index.ts
 ```
 
-* **prisma/:**
-  * Configures our prisma instance. For more information, see
-  [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/prisma.md)
+* **`prisma/docker-compose.yml`:**
+  * Configures a docker image for our prisma instace / db. [See here](https://v1.prisma.io/docs/1.1/reference/clusters/docker-aira9zama5/).
+* **`prisma/prisma.yml`:**
+  * Configures our prisma service.
 * **schema/:**
   * Contains our database schema. For more information, see the
   [schema folder outline](#c-schema-folder).
@@ -142,7 +145,7 @@ src/
 * **utils/:**
   * Folder containing utility functions used across the server codebase.
 * **`.graphqlconfig`:**
-  * Configures the graphql endpoint.
+  * Determines where the generated prisma graphql schema should be saved.
 * **`index.ts`:**
   * The script that runs our server. It does the following:
     * Initializes prisma.
