@@ -1,4 +1,4 @@
-import nonPrismaSchema from './nonPrismaSchema.graphql';
 import prismaSchema from './prismaSchema.graphql';
+import schema from './schema.graphql';
 
-export default [nonPrismaSchema, prismaSchema];
+export default [prismaSchema, schema];

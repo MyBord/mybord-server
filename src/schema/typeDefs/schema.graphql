@@ -1,0 +1,14 @@
+# Note: in order to add individual schemas to this schema, you must import them as outlined in
+# the 'IMPORT' section below; this is done with 'graphql-tag/loader' (see webpack.common.js).
+
+# ----- IMPORTS ----- #
+
+#import '../post/postSchema.graphql'
+#import '../user/userSchema.graphql'
+
+# ----- COMMON TYPES ----- #
+
+type Response {
+  message: String
+  status: Int!
+}

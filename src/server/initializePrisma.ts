@@ -4,5 +4,5 @@ import { Prisma } from 'prisma-binding';
 export default (): Prisma => new Prisma({
   endpoint: process.env.PRISMA_ENDPOINT,
   secret: process.env.PRISMA_SECRET,
-  typeDefs: 'src/generated/prisma.graphql',
+  typeDefs: 'src/schema/typeDefs/prismaSchema.graphql',
 });

@@ -1,9 +1,0 @@
-#import '../post/postNonPrismaSchema.graphql'
-#import '../user/userNonPrismaSchema.graphql'
-
-# ----- COMMON TYPES ----- #
-
-type Response {
-  message: String
-  status: Int!
-}
