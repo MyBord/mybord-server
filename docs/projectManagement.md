@@ -1,3 +1,5 @@
+<img align="right" width="306" height="282" src="https://github.com/jimmy-e/mybord-server/blob/master/etc/assets/projectManagement.jpg">
+
 # Project Management
 
 This document is used to outline current project management priorities.

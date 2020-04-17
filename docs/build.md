@@ -1,3 +1,5 @@
+<img align="right" width="280" height="230" src="https://github.com/jimmy-e/mybord-server/blob/master/etc/assets/build.jpg">
+
 # Build
 
 This summarizes the build process for the MyBord codebase as well as any other config files.
