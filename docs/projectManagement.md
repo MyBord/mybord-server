@@ -14,6 +14,7 @@ This document is used to outline current project management priorities.
 ### A. Highest
 
 * make ports be env vars
+* use env-cmdr
 
 ### B. High
 
