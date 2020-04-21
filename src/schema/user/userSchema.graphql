@@ -1,27 +1,4 @@
-# ----- TYPES ----- #
-
-type YoutubeCard {
-  channelThumbnail: String!
-  channelTitle: String!
-  duration: String!
-  likes: String!
-  publishedAt: String!
-  videoId: String!
-  videoThumbnail: String!
-  videoTitle: String!
-  views: String!
-}
-
-type Foo {
-  name: String!
-  state: String!
-}
-
 # ----- INPUTS ----- #
-
-input ForgotPasswordInput {
-  email: String!
-}
 
 input LoginUserInput {
   email: String!
@@ -38,7 +15,5 @@ extend type Mutation {
 
 extend type Query {
   currentUser: User!
-  foo: Foo!
   isAuthenticated: Boolean
-  youtubeCard: YoutubeCard!
 }

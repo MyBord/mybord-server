@@ -10,3 +10,8 @@ extend type Mutation {
   createYoutubeCard(data: YoutubeCardInput!): Card!
 }
 
+# ----- QUERY ----- #
+
+extend type Query {
+  userCards: [Card!]!
+}

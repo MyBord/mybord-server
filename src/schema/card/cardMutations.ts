@@ -4,11 +4,12 @@ export default {
   createYoutubeCard: async (parent, args, { passport, prisma }, info) => {
     const userId = passport.getUserId();
 
+    const youtubeVideoData = await youtubeApi.getYoutubeVideoData(args.data.videoId);
+
     const finalArgs = {
       ...args,
       data: {
         type: 'Youtube',
-        description: 'this is testing the api',
         user: {
           connect: {
             id: userId,
@@ -16,15 +17,12 @@ export default {
         },
         cardData: {
           create: {
-            description: 'another root test',
+            ...youtubeVideoData,
           },
         },
       },
     };
 
-    const youtubeVideoData = await youtubeApi.getYoutubeVideoData(args.data.videoId);
-    // console.log(youtubeVideoData);
-    console.log('creating card in prisma');
     return prisma.mutation.createCard(finalArgs, info);
   },
 };

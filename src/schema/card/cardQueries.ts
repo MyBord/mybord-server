@@ -1,4 +1,15 @@
 export default {
-  // ToDo: restrict cards query
-  cards: async (parent, args, { prisma }, info) => prisma.query.cards(args.data, info),
+  userCards: async (parent, args, { passport, prisma }, info) => {
+    const userId = passport.getUserId();
+
+    const finalArgs = {
+      ...args,
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    };
+    return prisma.query.cards(finalArgs, info);
+  },
 };

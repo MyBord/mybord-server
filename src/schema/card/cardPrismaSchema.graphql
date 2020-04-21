@@ -4,7 +4,15 @@ enum CardType {
 
 type CardData {
   id: ID! @id
-  description: String!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
 }
 
 type Card {

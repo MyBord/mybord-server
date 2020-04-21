@@ -17,7 +17,6 @@ type BatchPayload {
 type Card {
   id: ID!
   type: CardType!
-  description: String
   user: User!
   cardData: CardData!
   createdAt: DateTime!
@@ -33,7 +32,6 @@ type CardConnection {
 input CardCreateInput {
   id: ID
   type: CardType!
-  description: String
   user: UserCreateOneWithoutCardsInput!
   cardData: CardDataCreateOneInput!
 }
@@ -46,13 +44,20 @@ input CardCreateManyWithoutUserInput {
 input CardCreateWithoutUserInput {
   id: ID
   type: CardType!
-  description: String
   cardData: CardDataCreateOneInput!
 }
 
 type CardData {
   id: ID!
-  description: String!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
 }
 
 type CardDataConnection {
@@ -63,7 +68,15 @@ type CardDataConnection {
 
 input CardDataCreateInput {
   id: ID
-  description: String!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
 }
 
 input CardDataCreateOneInput {
@@ -79,13 +92,37 @@ type CardDataEdge {
 enum CardDataOrderByInput {
   id_ASC
   id_DESC
-  description_ASC
-  description_DESC
+  channelThumbnail_ASC
+  channelThumbnail_DESC
+  channelTitle_ASC
+  channelTitle_DESC
+  duration_ASC
+  duration_DESC
+  likes_ASC
+  likes_DESC
+  publishedAt_ASC
+  publishedAt_DESC
+  videoId_ASC
+  videoId_DESC
+  videoThumbnail_ASC
+  videoThumbnail_DESC
+  videoTitle_ASC
+  videoTitle_DESC
+  views_ASC
+  views_DESC
 }
 
 type CardDataPreviousValues {
   id: ID!
-  description: String!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
 }
 
 type CardDataSubscriptionPayload {
@@ -107,15 +144,39 @@ input CardDataSubscriptionWhereInput {
 }
 
 input CardDataUpdateDataInput {
-  description: String
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
 }
 
 input CardDataUpdateInput {
-  description: String
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
 }
 
 input CardDataUpdateManyMutationInput {
-  description: String
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
 }
 
 input CardDataUpdateOneRequiredInput {
@@ -145,20 +206,132 @@ input CardDataWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
+  channelThumbnail: String
+  channelThumbnail_not: String
+  channelThumbnail_in: [String!]
+  channelThumbnail_not_in: [String!]
+  channelThumbnail_lt: String
+  channelThumbnail_lte: String
+  channelThumbnail_gt: String
+  channelThumbnail_gte: String
+  channelThumbnail_contains: String
+  channelThumbnail_not_contains: String
+  channelThumbnail_starts_with: String
+  channelThumbnail_not_starts_with: String
+  channelThumbnail_ends_with: String
+  channelThumbnail_not_ends_with: String
+  channelTitle: String
+  channelTitle_not: String
+  channelTitle_in: [String!]
+  channelTitle_not_in: [String!]
+  channelTitle_lt: String
+  channelTitle_lte: String
+  channelTitle_gt: String
+  channelTitle_gte: String
+  channelTitle_contains: String
+  channelTitle_not_contains: String
+  channelTitle_starts_with: String
+  channelTitle_not_starts_with: String
+  channelTitle_ends_with: String
+  channelTitle_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  likes: String
+  likes_not: String
+  likes_in: [String!]
+  likes_not_in: [String!]
+  likes_lt: String
+  likes_lte: String
+  likes_gt: String
+  likes_gte: String
+  likes_contains: String
+  likes_not_contains: String
+  likes_starts_with: String
+  likes_not_starts_with: String
+  likes_ends_with: String
+  likes_not_ends_with: String
+  publishedAt: String
+  publishedAt_not: String
+  publishedAt_in: [String!]
+  publishedAt_not_in: [String!]
+  publishedAt_lt: String
+  publishedAt_lte: String
+  publishedAt_gt: String
+  publishedAt_gte: String
+  publishedAt_contains: String
+  publishedAt_not_contains: String
+  publishedAt_starts_with: String
+  publishedAt_not_starts_with: String
+  publishedAt_ends_with: String
+  publishedAt_not_ends_with: String
+  videoId: String
+  videoId_not: String
+  videoId_in: [String!]
+  videoId_not_in: [String!]
+  videoId_lt: String
+  videoId_lte: String
+  videoId_gt: String
+  videoId_gte: String
+  videoId_contains: String
+  videoId_not_contains: String
+  videoId_starts_with: String
+  videoId_not_starts_with: String
+  videoId_ends_with: String
+  videoId_not_ends_with: String
+  videoThumbnail: String
+  videoThumbnail_not: String
+  videoThumbnail_in: [String!]
+  videoThumbnail_not_in: [String!]
+  videoThumbnail_lt: String
+  videoThumbnail_lte: String
+  videoThumbnail_gt: String
+  videoThumbnail_gte: String
+  videoThumbnail_contains: String
+  videoThumbnail_not_contains: String
+  videoThumbnail_starts_with: String
+  videoThumbnail_not_starts_with: String
+  videoThumbnail_ends_with: String
+  videoThumbnail_not_ends_with: String
+  videoTitle: String
+  videoTitle_not: String
+  videoTitle_in: [String!]
+  videoTitle_not_in: [String!]
+  videoTitle_lt: String
+  videoTitle_lte: String
+  videoTitle_gt: String
+  videoTitle_gte: String
+  videoTitle_contains: String
+  videoTitle_not_contains: String
+  videoTitle_starts_with: String
+  videoTitle_not_starts_with: String
+  videoTitle_ends_with: String
+  videoTitle_not_ends_with: String
+  views: String
+  views_not: String
+  views_in: [String!]
+  views_not_in: [String!]
+  views_lt: String
+  views_lte: String
+  views_gt: String
+  views_gte: String
+  views_contains: String
+  views_not_contains: String
+  views_starts_with: String
+  views_not_starts_with: String
+  views_ends_with: String
+  views_not_ends_with: String
   AND: [CardDataWhereInput!]
   OR: [CardDataWhereInput!]
   NOT: [CardDataWhereInput!]
@@ -178,8 +351,6 @@ enum CardOrderByInput {
   id_DESC
   type_ASC
   type_DESC
-  description_ASC
-  description_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -189,7 +360,6 @@ enum CardOrderByInput {
 type CardPreviousValues {
   id: ID!
   type: CardType!
-  description: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -213,20 +383,6 @@ input CardScalarWhereInput {
   type_not: CardType
   type_in: [CardType!]
   type_not_in: [CardType!]
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -272,19 +428,16 @@ enum CardType {
 
 input CardUpdateInput {
   type: CardType
-  description: String
   user: UserUpdateOneRequiredWithoutCardsInput
   cardData: CardDataUpdateOneRequiredInput
 }
 
 input CardUpdateManyDataInput {
   type: CardType
-  description: String
 }
 
 input CardUpdateManyMutationInput {
   type: CardType
-  description: String
 }
 
 input CardUpdateManyWithoutUserInput {
@@ -306,7 +459,6 @@ input CardUpdateManyWithWhereNestedInput {
 
 input CardUpdateWithoutUserDataInput {
   type: CardType
-  description: String
   cardData: CardDataUpdateOneRequiredInput
 }
 
@@ -340,20 +492,6 @@ input CardWhereInput {
   type_not: CardType
   type_in: [CardType!]
   type_not_in: [CardType!]
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
   user: UserWhereInput
   cardData: CardDataWhereInput
   createdAt: DateTime
