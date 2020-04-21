@@ -13,15 +13,13 @@ This document is used to outline current project management priorities.
 
 ### A. Highest
 
-document gapi key env var
-* delete old api key
 * make ports be env vars
 
 ### B. High
 
+* delete old gapi key
 * trying to login a user who does not exist returns an unhandled promise
 * fix currenet user mutation - and restrict data
-* add pictures to docs
 * remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
 

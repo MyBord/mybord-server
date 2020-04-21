@@ -67,6 +67,8 @@ The following are the yarn commands for our server application:
 
 The following are the env vars needed to run our server application: 
 
+* **`GAPI_KEY`**:
+  * This is the google api key that is used to access the Youtube Data API.
 * **`JWT_SECRET`**:
   * Is used to generate a jwt secret token.
 * **`NODE_ENV`**:
