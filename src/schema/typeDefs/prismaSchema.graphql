@@ -10,6 +10,10 @@ type AggregateUser {
   count: Int!
 }
 
+type AggregateYoutubeCardData {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
@@ -49,15 +53,7 @@ input CardCreateWithoutUserInput {
 
 type CardData {
   id: ID!
-  channelThumbnail: String!
-  channelTitle: String!
-  duration: String!
-  likes: String!
-  publishedAt: String!
-  videoId: String!
-  videoThumbnail: String!
-  videoTitle: String!
-  views: String!
+  youtubeCardData: YoutubeCardData
 }
 
 type CardDataConnection {
@@ -68,15 +64,7 @@ type CardDataConnection {
 
 input CardDataCreateInput {
   id: ID
-  channelThumbnail: String!
-  channelTitle: String!
-  duration: String!
-  likes: String!
-  publishedAt: String!
-  videoId: String!
-  videoThumbnail: String!
-  videoTitle: String!
-  views: String!
+  youtubeCardData: YoutubeCardDataCreateOneInput
 }
 
 input CardDataCreateOneInput {
@@ -92,37 +80,10 @@ type CardDataEdge {
 enum CardDataOrderByInput {
   id_ASC
   id_DESC
-  channelThumbnail_ASC
-  channelThumbnail_DESC
-  channelTitle_ASC
-  channelTitle_DESC
-  duration_ASC
-  duration_DESC
-  likes_ASC
-  likes_DESC
-  publishedAt_ASC
-  publishedAt_DESC
-  videoId_ASC
-  videoId_DESC
-  videoThumbnail_ASC
-  videoThumbnail_DESC
-  videoTitle_ASC
-  videoTitle_DESC
-  views_ASC
-  views_DESC
 }
 
 type CardDataPreviousValues {
   id: ID!
-  channelThumbnail: String!
-  channelTitle: String!
-  duration: String!
-  likes: String!
-  publishedAt: String!
-  videoId: String!
-  videoThumbnail: String!
-  videoTitle: String!
-  views: String!
 }
 
 type CardDataSubscriptionPayload {
@@ -144,39 +105,11 @@ input CardDataSubscriptionWhereInput {
 }
 
 input CardDataUpdateDataInput {
-  channelThumbnail: String
-  channelTitle: String
-  duration: String
-  likes: String
-  publishedAt: String
-  videoId: String
-  videoThumbnail: String
-  videoTitle: String
-  views: String
+  youtubeCardData: YoutubeCardDataUpdateOneInput
 }
 
 input CardDataUpdateInput {
-  channelThumbnail: String
-  channelTitle: String
-  duration: String
-  likes: String
-  publishedAt: String
-  videoId: String
-  videoThumbnail: String
-  videoTitle: String
-  views: String
-}
-
-input CardDataUpdateManyMutationInput {
-  channelThumbnail: String
-  channelTitle: String
-  duration: String
-  likes: String
-  publishedAt: String
-  videoId: String
-  videoThumbnail: String
-  videoTitle: String
-  views: String
+  youtubeCardData: YoutubeCardDataUpdateOneInput
 }
 
 input CardDataUpdateOneRequiredInput {
@@ -206,132 +139,7 @@ input CardDataWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  channelThumbnail: String
-  channelThumbnail_not: String
-  channelThumbnail_in: [String!]
-  channelThumbnail_not_in: [String!]
-  channelThumbnail_lt: String
-  channelThumbnail_lte: String
-  channelThumbnail_gt: String
-  channelThumbnail_gte: String
-  channelThumbnail_contains: String
-  channelThumbnail_not_contains: String
-  channelThumbnail_starts_with: String
-  channelThumbnail_not_starts_with: String
-  channelThumbnail_ends_with: String
-  channelThumbnail_not_ends_with: String
-  channelTitle: String
-  channelTitle_not: String
-  channelTitle_in: [String!]
-  channelTitle_not_in: [String!]
-  channelTitle_lt: String
-  channelTitle_lte: String
-  channelTitle_gt: String
-  channelTitle_gte: String
-  channelTitle_contains: String
-  channelTitle_not_contains: String
-  channelTitle_starts_with: String
-  channelTitle_not_starts_with: String
-  channelTitle_ends_with: String
-  channelTitle_not_ends_with: String
-  duration: String
-  duration_not: String
-  duration_in: [String!]
-  duration_not_in: [String!]
-  duration_lt: String
-  duration_lte: String
-  duration_gt: String
-  duration_gte: String
-  duration_contains: String
-  duration_not_contains: String
-  duration_starts_with: String
-  duration_not_starts_with: String
-  duration_ends_with: String
-  duration_not_ends_with: String
-  likes: String
-  likes_not: String
-  likes_in: [String!]
-  likes_not_in: [String!]
-  likes_lt: String
-  likes_lte: String
-  likes_gt: String
-  likes_gte: String
-  likes_contains: String
-  likes_not_contains: String
-  likes_starts_with: String
-  likes_not_starts_with: String
-  likes_ends_with: String
-  likes_not_ends_with: String
-  publishedAt: String
-  publishedAt_not: String
-  publishedAt_in: [String!]
-  publishedAt_not_in: [String!]
-  publishedAt_lt: String
-  publishedAt_lte: String
-  publishedAt_gt: String
-  publishedAt_gte: String
-  publishedAt_contains: String
-  publishedAt_not_contains: String
-  publishedAt_starts_with: String
-  publishedAt_not_starts_with: String
-  publishedAt_ends_with: String
-  publishedAt_not_ends_with: String
-  videoId: String
-  videoId_not: String
-  videoId_in: [String!]
-  videoId_not_in: [String!]
-  videoId_lt: String
-  videoId_lte: String
-  videoId_gt: String
-  videoId_gte: String
-  videoId_contains: String
-  videoId_not_contains: String
-  videoId_starts_with: String
-  videoId_not_starts_with: String
-  videoId_ends_with: String
-  videoId_not_ends_with: String
-  videoThumbnail: String
-  videoThumbnail_not: String
-  videoThumbnail_in: [String!]
-  videoThumbnail_not_in: [String!]
-  videoThumbnail_lt: String
-  videoThumbnail_lte: String
-  videoThumbnail_gt: String
-  videoThumbnail_gte: String
-  videoThumbnail_contains: String
-  videoThumbnail_not_contains: String
-  videoThumbnail_starts_with: String
-  videoThumbnail_not_starts_with: String
-  videoThumbnail_ends_with: String
-  videoThumbnail_not_ends_with: String
-  videoTitle: String
-  videoTitle_not: String
-  videoTitle_in: [String!]
-  videoTitle_not_in: [String!]
-  videoTitle_lt: String
-  videoTitle_lte: String
-  videoTitle_gt: String
-  videoTitle_gte: String
-  videoTitle_contains: String
-  videoTitle_not_contains: String
-  videoTitle_starts_with: String
-  videoTitle_not_starts_with: String
-  videoTitle_ends_with: String
-  videoTitle_not_ends_with: String
-  views: String
-  views_not: String
-  views_in: [String!]
-  views_not_in: [String!]
-  views_lt: String
-  views_lte: String
-  views_gt: String
-  views_gte: String
-  views_contains: String
-  views_not_contains: String
-  views_starts_with: String
-  views_not_starts_with: String
-  views_ends_with: String
-  views_not_ends_with: String
+  youtubeCardData: YoutubeCardDataWhereInput
   AND: [CardDataWhereInput!]
   OR: [CardDataWhereInput!]
   NOT: [CardDataWhereInput!]
@@ -532,7 +340,6 @@ type Mutation {
   deleteManyCards(where: CardWhereInput): BatchPayload!
   createCardData(data: CardDataCreateInput!): CardData!
   updateCardData(data: CardDataUpdateInput!, where: CardDataWhereUniqueInput!): CardData
-  updateManyCardDatas(data: CardDataUpdateManyMutationInput!, where: CardDataWhereInput): BatchPayload!
   upsertCardData(where: CardDataWhereUniqueInput!, create: CardDataCreateInput!, update: CardDataUpdateInput!): CardData!
   deleteCardData(where: CardDataWhereUniqueInput!): CardData
   deleteManyCardDatas(where: CardDataWhereInput): BatchPayload!
@@ -542,6 +349,12 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createYoutubeCardData(data: YoutubeCardDataCreateInput!): YoutubeCardData!
+  updateYoutubeCardData(data: YoutubeCardDataUpdateInput!, where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
+  updateManyYoutubeCardDatas(data: YoutubeCardDataUpdateManyMutationInput!, where: YoutubeCardDataWhereInput): BatchPayload!
+  upsertYoutubeCardData(where: YoutubeCardDataWhereUniqueInput!, create: YoutubeCardDataCreateInput!, update: YoutubeCardDataUpdateInput!): YoutubeCardData!
+  deleteYoutubeCardData(where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
+  deleteManyYoutubeCardDatas(where: YoutubeCardDataWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -571,6 +384,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  youtubeCardData(where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
+  youtubeCardDatas(where: YoutubeCardDataWhereInput, orderBy: YoutubeCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [YoutubeCardData]!
+  youtubeCardDatasConnection(where: YoutubeCardDataWhereInput, orderBy: YoutubeCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): YoutubeCardDataConnection!
   node(id: ID!): Node
 }
 
@@ -578,6 +394,7 @@ type Subscription {
   card(where: CardSubscriptionWhereInput): CardSubscriptionPayload
   cardData(where: CardDataSubscriptionWhereInput): CardDataSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  youtubeCardData(where: YoutubeCardDataSubscriptionWhereInput): YoutubeCardDataSubscriptionPayload
 }
 
 type User {
@@ -778,4 +595,300 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
   email: String
+}
+
+type YoutubeCardData {
+  id: ID!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
+}
+
+type YoutubeCardDataConnection {
+  pageInfo: PageInfo!
+  edges: [YoutubeCardDataEdge]!
+  aggregate: AggregateYoutubeCardData!
+}
+
+input YoutubeCardDataCreateInput {
+  id: ID
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
+}
+
+input YoutubeCardDataCreateOneInput {
+  create: YoutubeCardDataCreateInput
+  connect: YoutubeCardDataWhereUniqueInput
+}
+
+type YoutubeCardDataEdge {
+  node: YoutubeCardData!
+  cursor: String!
+}
+
+enum YoutubeCardDataOrderByInput {
+  id_ASC
+  id_DESC
+  channelThumbnail_ASC
+  channelThumbnail_DESC
+  channelTitle_ASC
+  channelTitle_DESC
+  duration_ASC
+  duration_DESC
+  likes_ASC
+  likes_DESC
+  publishedAt_ASC
+  publishedAt_DESC
+  videoId_ASC
+  videoId_DESC
+  videoThumbnail_ASC
+  videoThumbnail_DESC
+  videoTitle_ASC
+  videoTitle_DESC
+  views_ASC
+  views_DESC
+}
+
+type YoutubeCardDataPreviousValues {
+  id: ID!
+  channelThumbnail: String!
+  channelTitle: String!
+  duration: String!
+  likes: String!
+  publishedAt: String!
+  videoId: String!
+  videoThumbnail: String!
+  videoTitle: String!
+  views: String!
+}
+
+type YoutubeCardDataSubscriptionPayload {
+  mutation: MutationType!
+  node: YoutubeCardData
+  updatedFields: [String!]
+  previousValues: YoutubeCardDataPreviousValues
+}
+
+input YoutubeCardDataSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: YoutubeCardDataWhereInput
+  AND: [YoutubeCardDataSubscriptionWhereInput!]
+  OR: [YoutubeCardDataSubscriptionWhereInput!]
+  NOT: [YoutubeCardDataSubscriptionWhereInput!]
+}
+
+input YoutubeCardDataUpdateDataInput {
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
+}
+
+input YoutubeCardDataUpdateInput {
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
+}
+
+input YoutubeCardDataUpdateManyMutationInput {
+  channelThumbnail: String
+  channelTitle: String
+  duration: String
+  likes: String
+  publishedAt: String
+  videoId: String
+  videoThumbnail: String
+  videoTitle: String
+  views: String
+}
+
+input YoutubeCardDataUpdateOneInput {
+  create: YoutubeCardDataCreateInput
+  update: YoutubeCardDataUpdateDataInput
+  upsert: YoutubeCardDataUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: YoutubeCardDataWhereUniqueInput
+}
+
+input YoutubeCardDataUpsertNestedInput {
+  update: YoutubeCardDataUpdateDataInput!
+  create: YoutubeCardDataCreateInput!
+}
+
+input YoutubeCardDataWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  channelThumbnail: String
+  channelThumbnail_not: String
+  channelThumbnail_in: [String!]
+  channelThumbnail_not_in: [String!]
+  channelThumbnail_lt: String
+  channelThumbnail_lte: String
+  channelThumbnail_gt: String
+  channelThumbnail_gte: String
+  channelThumbnail_contains: String
+  channelThumbnail_not_contains: String
+  channelThumbnail_starts_with: String
+  channelThumbnail_not_starts_with: String
+  channelThumbnail_ends_with: String
+  channelThumbnail_not_ends_with: String
+  channelTitle: String
+  channelTitle_not: String
+  channelTitle_in: [String!]
+  channelTitle_not_in: [String!]
+  channelTitle_lt: String
+  channelTitle_lte: String
+  channelTitle_gt: String
+  channelTitle_gte: String
+  channelTitle_contains: String
+  channelTitle_not_contains: String
+  channelTitle_starts_with: String
+  channelTitle_not_starts_with: String
+  channelTitle_ends_with: String
+  channelTitle_not_ends_with: String
+  duration: String
+  duration_not: String
+  duration_in: [String!]
+  duration_not_in: [String!]
+  duration_lt: String
+  duration_lte: String
+  duration_gt: String
+  duration_gte: String
+  duration_contains: String
+  duration_not_contains: String
+  duration_starts_with: String
+  duration_not_starts_with: String
+  duration_ends_with: String
+  duration_not_ends_with: String
+  likes: String
+  likes_not: String
+  likes_in: [String!]
+  likes_not_in: [String!]
+  likes_lt: String
+  likes_lte: String
+  likes_gt: String
+  likes_gte: String
+  likes_contains: String
+  likes_not_contains: String
+  likes_starts_with: String
+  likes_not_starts_with: String
+  likes_ends_with: String
+  likes_not_ends_with: String
+  publishedAt: String
+  publishedAt_not: String
+  publishedAt_in: [String!]
+  publishedAt_not_in: [String!]
+  publishedAt_lt: String
+  publishedAt_lte: String
+  publishedAt_gt: String
+  publishedAt_gte: String
+  publishedAt_contains: String
+  publishedAt_not_contains: String
+  publishedAt_starts_with: String
+  publishedAt_not_starts_with: String
+  publishedAt_ends_with: String
+  publishedAt_not_ends_with: String
+  videoId: String
+  videoId_not: String
+  videoId_in: [String!]
+  videoId_not_in: [String!]
+  videoId_lt: String
+  videoId_lte: String
+  videoId_gt: String
+  videoId_gte: String
+  videoId_contains: String
+  videoId_not_contains: String
+  videoId_starts_with: String
+  videoId_not_starts_with: String
+  videoId_ends_with: String
+  videoId_not_ends_with: String
+  videoThumbnail: String
+  videoThumbnail_not: String
+  videoThumbnail_in: [String!]
+  videoThumbnail_not_in: [String!]
+  videoThumbnail_lt: String
+  videoThumbnail_lte: String
+  videoThumbnail_gt: String
+  videoThumbnail_gte: String
+  videoThumbnail_contains: String
+  videoThumbnail_not_contains: String
+  videoThumbnail_starts_with: String
+  videoThumbnail_not_starts_with: String
+  videoThumbnail_ends_with: String
+  videoThumbnail_not_ends_with: String
+  videoTitle: String
+  videoTitle_not: String
+  videoTitle_in: [String!]
+  videoTitle_not_in: [String!]
+  videoTitle_lt: String
+  videoTitle_lte: String
+  videoTitle_gt: String
+  videoTitle_gte: String
+  videoTitle_contains: String
+  videoTitle_not_contains: String
+  videoTitle_starts_with: String
+  videoTitle_not_starts_with: String
+  videoTitle_ends_with: String
+  videoTitle_not_ends_with: String
+  views: String
+  views_not: String
+  views_in: [String!]
+  views_not_in: [String!]
+  views_lt: String
+  views_lte: String
+  views_gt: String
+  views_gte: String
+  views_contains: String
+  views_not_contains: String
+  views_starts_with: String
+  views_not_starts_with: String
+  views_ends_with: String
+  views_not_ends_with: String
+  AND: [YoutubeCardDataWhereInput!]
+  OR: [YoutubeCardDataWhereInput!]
+  NOT: [YoutubeCardDataWhereInput!]
+}
+
+input YoutubeCardDataWhereUniqueInput {
+  id: ID
 }

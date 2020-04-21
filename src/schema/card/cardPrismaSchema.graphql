@@ -1,8 +1,12 @@
+# ----- ENUMS ----- #
+
 enum CardType {
   Youtube
 }
 
-type CardData {
+# ----- TYPES ----- #
+
+type YoutubeCardData {
   id: ID! @id
   channelThumbnail: String!
   channelTitle: String!
@@ -14,6 +18,13 @@ type CardData {
   videoTitle: String!
   views: String!
 }
+
+type CardData {
+  id: ID! @id
+  youtubeCardData: YoutubeCardData
+}
+
+# ----- FINAL SCHEMA ----- #
 
 type Card {
   id: ID! @id

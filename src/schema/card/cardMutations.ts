@@ -17,7 +17,11 @@ export default {
         },
         cardData: {
           create: {
-            ...youtubeVideoData,
+            youtubeCardData: {
+              create: {
+                ...youtubeVideoData,
+              },
+            },
           },
         },
       },
