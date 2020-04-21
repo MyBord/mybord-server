@@ -51,12 +51,7 @@ const getYoutubeVideoData = async (videoId: string): Promise<YoutubeVideoData> =
   }
 };
 
-const videoId = 'ctYhIob_5xI';
 
-export default () => {
-  console.log('---------------');
-  console.log('---------------');
-  console.log(getYoutubeVideoData(videoId));
-  console.log('---------------');
-  console.log('---------------');
+export default {
+  getYoutubeVideoData,
 };

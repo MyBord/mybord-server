@@ -10,7 +10,6 @@ type CardData {
 type Card {
   id: ID! @id
   type: CardType!
-  description: String
   user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
   cardData: CardData!
   createdAt: DateTime! @createdAt
