@@ -60,6 +60,14 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
 
   const isAuthenticated = (): boolean => request.isAuthenticated();
 
+  const getUserId = (): string => {
+    if (isAuthenticated()) {
+      // @ts-ignore
+      return request.user.id;
+    }
+    throw Error('User is not authenticated');
+  };
+
   const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
     promisifiedLogin({ authenticateOptions, request, user })
   );
@@ -68,6 +76,7 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
 
   return {
     authenticate,
+    getUserId,
     isAuthenticated,
     login,
     logout,
