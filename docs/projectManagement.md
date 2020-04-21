@@ -13,6 +13,14 @@ This document is used to outline current project management priorities.
 
 ### A. Highest
 
+change gapi file name
+https://developers.google.com/youtube/v3/quickstart/nodejs
+https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord
+https://github.com/googleapis/google-api-nodejs-client#getting-started
+https://github.com/googleapis/google-api-nodejs-client/tree/master/samples/youtube
+document gapi key env var
+https://github.com/googleapis/google-api-nodejs-client#getting-started
+* make third party documentation / folder
 * restrict gapi key
 * document gapi key
 * delete old api key

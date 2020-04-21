@@ -1,6 +1,9 @@
 import http from 'http';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
+import gapi from 'youtubeApi/youtubeApi';
+
+gapi();
 
 // We initialize our middleware
 const {

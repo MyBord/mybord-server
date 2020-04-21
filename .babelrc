@@ -21,7 +21,8 @@
         "server": "./src/server/",
         "serverError": "./src/serverError/",
         "types": "./src/types/",
-        "utils": "./src/utils/"
+        "utils": "./src/utils/",
+        "youtubeApi": "./src/thirdParty/youtubeApi/"
       }
     }]
   ]
