@@ -1,3 +1,19 @@
+type AggregateCard {
+  count: Int!
+}
+
+type AggregateCardData {
+  count: Int!
+}
+
+type AggregateComment {
+  count: Int!
+}
+
+type AggregatePost {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -6,11 +22,522 @@ type BatchPayload {
   count: Long!
 }
 
+type Card {
+  id: ID!
+  type: CardType!
+  description: String
+  user: User!
+  fooBar: CardData!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CardConnection {
+  pageInfo: PageInfo!
+  edges: [CardEdge]!
+  aggregate: AggregateCard!
+}
+
+input CardCreateInput {
+  id: ID
+  type: CardType!
+  description: String
+  user: UserCreateOneWithoutCardsInput!
+  fooBar: CardDataCreateOneInput!
+}
+
+input CardCreateManyWithoutUserInput {
+  create: [CardCreateWithoutUserInput!]
+  connect: [CardWhereUniqueInput!]
+}
+
+input CardCreateWithoutUserInput {
+  id: ID
+  type: CardType!
+  description: String
+  fooBar: CardDataCreateOneInput!
+}
+
+type CardData {
+  id: ID!
+  description: String!
+}
+
+type CardDataConnection {
+  pageInfo: PageInfo!
+  edges: [CardDataEdge]!
+  aggregate: AggregateCardData!
+}
+
+input CardDataCreateInput {
+  id: ID
+  description: String!
+}
+
+input CardDataCreateOneInput {
+  create: CardDataCreateInput
+  connect: CardDataWhereUniqueInput
+}
+
+type CardDataEdge {
+  node: CardData!
+  cursor: String!
+}
+
+enum CardDataOrderByInput {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+}
+
+type CardDataPreviousValues {
+  id: ID!
+  description: String!
+}
+
+type CardDataSubscriptionPayload {
+  mutation: MutationType!
+  node: CardData
+  updatedFields: [String!]
+  previousValues: CardDataPreviousValues
+}
+
+input CardDataSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CardDataWhereInput
+  AND: [CardDataSubscriptionWhereInput!]
+  OR: [CardDataSubscriptionWhereInput!]
+  NOT: [CardDataSubscriptionWhereInput!]
+}
+
+input CardDataUpdateDataInput {
+  description: String
+}
+
+input CardDataUpdateInput {
+  description: String
+}
+
+input CardDataUpdateManyMutationInput {
+  description: String
+}
+
+input CardDataUpdateOneRequiredInput {
+  create: CardDataCreateInput
+  update: CardDataUpdateDataInput
+  upsert: CardDataUpsertNestedInput
+  connect: CardDataWhereUniqueInput
+}
+
+input CardDataUpsertNestedInput {
+  update: CardDataUpdateDataInput!
+  create: CardDataCreateInput!
+}
+
+input CardDataWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  AND: [CardDataWhereInput!]
+  OR: [CardDataWhereInput!]
+  NOT: [CardDataWhereInput!]
+}
+
+input CardDataWhereUniqueInput {
+  id: ID
+}
+
+type CardEdge {
+  node: Card!
+  cursor: String!
+}
+
+enum CardOrderByInput {
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type CardPreviousValues {
+  id: ID!
+  type: CardType!
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CardScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  type: CardType
+  type_not: CardType
+  type_in: [CardType!]
+  type_not_in: [CardType!]
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [CardScalarWhereInput!]
+  OR: [CardScalarWhereInput!]
+  NOT: [CardScalarWhereInput!]
+}
+
+type CardSubscriptionPayload {
+  mutation: MutationType!
+  node: Card
+  updatedFields: [String!]
+  previousValues: CardPreviousValues
+}
+
+input CardSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CardWhereInput
+  AND: [CardSubscriptionWhereInput!]
+  OR: [CardSubscriptionWhereInput!]
+  NOT: [CardSubscriptionWhereInput!]
+}
+
+enum CardType {
+  Youtube
+}
+
+input CardUpdateInput {
+  type: CardType
+  description: String
+  user: UserUpdateOneRequiredWithoutCardsInput
+  fooBar: CardDataUpdateOneRequiredInput
+}
+
+input CardUpdateManyDataInput {
+  type: CardType
+  description: String
+}
+
+input CardUpdateManyMutationInput {
+  type: CardType
+  description: String
+}
+
+input CardUpdateManyWithoutUserInput {
+  create: [CardCreateWithoutUserInput!]
+  delete: [CardWhereUniqueInput!]
+  connect: [CardWhereUniqueInput!]
+  set: [CardWhereUniqueInput!]
+  disconnect: [CardWhereUniqueInput!]
+  update: [CardUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [CardUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [CardScalarWhereInput!]
+  updateMany: [CardUpdateManyWithWhereNestedInput!]
+}
+
+input CardUpdateManyWithWhereNestedInput {
+  where: CardScalarWhereInput!
+  data: CardUpdateManyDataInput!
+}
+
+input CardUpdateWithoutUserDataInput {
+  type: CardType
+  description: String
+  fooBar: CardDataUpdateOneRequiredInput
+}
+
+input CardUpdateWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput!
+  data: CardUpdateWithoutUserDataInput!
+}
+
+input CardUpsertWithWhereUniqueWithoutUserInput {
+  where: CardWhereUniqueInput!
+  update: CardUpdateWithoutUserDataInput!
+  create: CardCreateWithoutUserInput!
+}
+
+input CardWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  type: CardType
+  type_not: CardType
+  type_in: [CardType!]
+  type_not_in: [CardType!]
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  user: UserWhereInput
+  fooBar: CardDataWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [CardWhereInput!]
+  OR: [CardWhereInput!]
+  NOT: [CardWhereInput!]
+}
+
+input CardWhereUniqueInput {
+  id: ID
+}
+
+type Comment {
+  id: ID!
+  message: String
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  id: ID
+  message: String
+}
+
+input CommentCreateOneInput {
+  create: CommentCreateInput
+  connect: CommentWhereUniqueInput
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  message_ASC
+  message_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  message: String
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateDataInput {
+  message: String
+}
+
+input CommentUpdateInput {
+  message: String
+}
+
+input CommentUpdateManyMutationInput {
+  message: String
+}
+
+input CommentUpdateOneInput {
+  create: CommentCreateInput
+  update: CommentUpdateDataInput
+  upsert: CommentUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: CommentWhereUniqueInput
+}
+
+input CommentUpsertNestedInput {
+  update: CommentUpdateDataInput!
+  create: CommentCreateInput!
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  message: String
+  message_not: String
+  message_in: [String!]
+  message_not_in: [String!]
+  message_lt: String
+  message_lte: String
+  message_gt: String
+  message_gte: String
+  message_contains: String
+  message_not_contains: String
+  message_starts_with: String
+  message_not_starts_with: String
+  message_ends_with: String
+  message_not_ends_with: String
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 scalar Long
 
 type Mutation {
+  createCard(data: CardCreateInput!): Card!
+  updateCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
+  updateManyCards(data: CardUpdateManyMutationInput!, where: CardWhereInput): BatchPayload!
+  upsertCard(where: CardWhereUniqueInput!, create: CardCreateInput!, update: CardUpdateInput!): Card!
+  deleteCard(where: CardWhereUniqueInput!): Card
+  deleteManyCards(where: CardWhereInput): BatchPayload!
+  createCardData(data: CardDataCreateInput!): CardData!
+  updateCardData(data: CardDataUpdateInput!, where: CardDataWhereUniqueInput!): CardData
+  updateManyCardDatas(data: CardDataUpdateManyMutationInput!, where: CardDataWhereInput): BatchPayload!
+  upsertCardData(where: CardDataWhereUniqueInput!, create: CardDataCreateInput!, update: CardDataUpdateInput!): CardData!
+  deleteCardData(where: CardDataWhereUniqueInput!): CardData
+  deleteManyCardDatas(where: CardDataWhereInput): BatchPayload!
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createPost(data: PostCreateInput!): Post!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
+  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
+  deletePost(where: PostWhereUniqueInput!): Post
+  deleteManyPosts(where: PostWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -36,7 +563,120 @@ type PageInfo {
   endCursor: String
 }
 
+type Post {
+  id: ID!
+  description: String
+  comment: Comment
+}
+
+type PostConnection {
+  pageInfo: PageInfo!
+  edges: [PostEdge]!
+  aggregate: AggregatePost!
+}
+
+input PostCreateInput {
+  id: ID
+  description: String
+  comment: CommentCreateOneInput
+}
+
+type PostEdge {
+  node: Post!
+  cursor: String!
+}
+
+enum PostOrderByInput {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+}
+
+type PostPreviousValues {
+  id: ID!
+  description: String
+}
+
+type PostSubscriptionPayload {
+  mutation: MutationType!
+  node: Post
+  updatedFields: [String!]
+  previousValues: PostPreviousValues
+}
+
+input PostSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PostWhereInput
+  AND: [PostSubscriptionWhereInput!]
+  OR: [PostSubscriptionWhereInput!]
+  NOT: [PostSubscriptionWhereInput!]
+}
+
+input PostUpdateInput {
+  description: String
+  comment: CommentUpdateOneInput
+}
+
+input PostUpdateManyMutationInput {
+  description: String
+}
+
+input PostWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  comment: CommentWhereInput
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+}
+
+input PostWhereUniqueInput {
+  id: ID
+}
+
 type Query {
+  card(where: CardWhereUniqueInput!): Card
+  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card]!
+  cardsConnection(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardConnection!
+  cardData(where: CardDataWhereUniqueInput!): CardData
+  cardDatas(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CardData]!
+  cardDatasConnection(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardDataConnection!
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  post(where: PostWhereUniqueInput!): Post
+  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
+  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -44,6 +684,10 @@ type Query {
 }
 
 type Subscription {
+  card(where: CardSubscriptionWhereInput): CardSubscriptionPayload
+  cardData(where: CardDataSubscriptionWhereInput): CardDataSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -52,6 +696,7 @@ type User {
   name: String
   email: String!
   password: String!
+  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -63,6 +708,19 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  name: String
+  email: String!
+  password: String!
+  cards: CardCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutCardsInput {
+  create: UserCreateWithoutCardsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCardsInput {
   id: ID
   name: String
   email: String!
@@ -120,12 +778,31 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  cards: CardUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutCardsInput {
+  create: UserCreateWithoutCardsInput
+  update: UserUpdateWithoutCardsDataInput
+  upsert: UserUpsertWithoutCardsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCardsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutCardsInput {
+  update: UserUpdateWithoutCardsDataInput!
+  create: UserCreateWithoutCardsInput!
 }
 
 input UserWhereInput {
@@ -185,6 +862,9 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  cards_every: CardWhereInput
+  cards_some: CardWhereInput
+  cards_none: CardWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

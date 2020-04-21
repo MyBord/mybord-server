@@ -3,6 +3,7 @@ type User {
   name: String
   email: String! @unique
   password: String!
+  cards: [Card!] @relation(name: "CardToUser", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

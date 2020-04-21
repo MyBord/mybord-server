@@ -1,0 +1,18 @@
+enum CardType {
+  Youtube
+}
+
+type CardData {
+  id: ID! @id
+  description: String!
+}
+
+type Card {
+  id: ID! @id
+  type: CardType!
+  description: String
+  user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
+  cardData: CardData!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
