@@ -13,8 +13,14 @@ This document is used to outline current project management priorities.
 
 ### A. Highest
 
+* restrict gapi key
+* document gapi key
+* delete old api key
+https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord
+https://developers.google.com/youtube/v3/quickstart/nodejs
 * make ports be env vars
 * use env-cmdr
+* re-architect 'cards' schema
 
 ### B. High
 

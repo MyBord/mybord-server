@@ -24,4 +24,15 @@ export default {
 
     return users.map(async (user) => restrictUserData(user));
   },
+  youtubeCard: () => ({
+    channelThumbnail: 'https://yt3.ggpht.com/a/AATXAJwdR0jPtm5wtBCIvgIwxnuqj7foX8BKykDoyA=s240-c-k-c0xffffffff-no-rj-mo',
+    channelTitle: '12Medbe Network',
+    duration: '03:30',
+    likes: '8,346',
+    publishedAt: '3y ago',
+    videoId: 'ctYhIob_5xI',
+    videoThumbnail: 'https://i.ytimg.com/vi/ctYhIob_5xI/mqdefault.jpg',
+    videoTitle: 'Whose Line: If You Know What I Mean',
+    views: '588,960',
+  }),
 };
