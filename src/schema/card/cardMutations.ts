@@ -1,10 +1,10 @@
-import youtubeApi from 'youtubeApi/youtubeApi';
+import youtube from 'youtube/youtube';
 
 export default {
   createYoutubeCard: async (parent, args, { passport, prisma }, info) => {
     const userId = passport.getUserId();
 
-    const youtubeVideoData = await youtubeApi.getYoutubeVideoData(args.data.videoId);
+    const youtubeVideoData = await youtube.getYoutubeVideoData(args.data.videoId);
 
     const finalArgs = {
       ...args,

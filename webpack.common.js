@@ -16,7 +16,7 @@ const resolve = {
     serverError: path.resolve(SRC_DIR, 'serverError/'),
     types: path.resolve(SRC_DIR, 'types/'),
     utils: path.resolve(SRC_DIR, 'utils/'),
-    youtubeApi: path.resolve(SRC_DIR, 'thirdParty/youtubeApi/'),
+    youtube: path.resolve(SRC_DIR, 'thirdParty/youtube/'),
   },
 };
 

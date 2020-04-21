@@ -22,7 +22,7 @@
         "serverError": "./src/serverError/",
         "types": "./src/types/",
         "utils": "./src/utils/",
-        "youtubeApi": "./src/thirdParty/youtubeApi/"
+        "youtube": "./src/thirdParty/youtube/"
       }
     }]
   ]

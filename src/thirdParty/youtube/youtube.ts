@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
-import { YoutubeVideoData } from 'types/youtubeApiTypes';
-import { formatDuration, formatNumber, formatPublishedAt } from './youtubeApiUtils';
+import { YoutubeVideoData } from 'types/youtubeTypes';
+import { formatDuration, formatNumber, formatPublishedAt } from './youtubeUtils';
 
 // initializes the Youtube Data API
 const youtube = google.youtube({

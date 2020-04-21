@@ -132,6 +132,7 @@ src/
   |- server/ 
   |- serverError/ 
      |- serverError.ts
+  |- thirdParty/ 
   |- types/ 
   |- utils/ 
   |- .graphqlconfig 
@@ -152,6 +153,8 @@ src/
   [server folder outline](#g-server-folder).
 * **`serverError/serverError.ts`:**
   * Custom error object that gets thrown to the front end to communicate server errors.
+* **thirdParty:**
+  * Code used to interact with third party tooling and apis.
 * **types/:**
   * Folder containing types and interfaces used across the server codebase.
 * **utils/:**
