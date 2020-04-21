@@ -154,7 +154,8 @@ src/
 * **`serverError/serverError.ts`:**
   * Custom error object that gets thrown to the front end to communicate server errors.
 * **thirdParty:**
-  * Code used to interact with third party tooling and apis.
+  * Code used to interact with third party tooling and apis. For further documentation, please see
+  the [thirdParty outline](https://github.com/jimmy-e/mybord-server/blob/master/docs/thirdParty.md).
 * **types/:**
   * Folder containing types and interfaces used across the server codebase.
 * **utils/:**
