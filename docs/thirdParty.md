@@ -1,4 +1,4 @@
-# Third Party tooling
+# Third Party Tooling
 
 This summarizes the third party tools and apis that are used in this codebase.
 

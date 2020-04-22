@@ -20,9 +20,12 @@ the following:
     * [Passport](http://www.passportjs.org/)
   * Virtualization
     * [Docker](https://www.docker.com/)
+  * Third Party APIs & Tooling  
+    * [Google's Node.js Client Api](https://github.com/googleapis/google-api-nodejs-client#google-apis-nodejs-client)
 
 Further documentation can be found below:
 
   * [Architecture](https://github.com/jimmy-e/mybord-server/tree/master/docs/architecture.md)
   * [Build Process](https://github.com/jimmy-e/mybord-server/tree/master/docs/build.md)
   * [Project Management](https://github.com/jimmy-e/mybord-server/tree/master/docs/projectManagement.md)
+  * [Third Party APIS & Tooling](https://github.com/jimmy-e/mybord-server/tree/master/docs/thirdParty.md)
