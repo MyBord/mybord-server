@@ -1,3 +1,5 @@
+<img align="right" width="245" height="225" src="https://github.com/jimmy-e/mybord-server/blob/master/etc/assets/thirdParty.png">
+
 # Third Party Tooling
 
 This summarizes the third party tools and apis that are used in this codebase.
