@@ -4,7 +4,8 @@ export default {
   isAuthenticated: async (parent, args, { passport }, info) => (
     passport.isAuthenticated()
   ),
-  users: async (parent, args, { prisma, request }, info) => {
+  logoutUser: async (parent, args, { passport }, info) => passport.logout(),
+  users: async (parent, args, { prisma }, info) => {
     const finalArgs = {
       ...args,
       where: {

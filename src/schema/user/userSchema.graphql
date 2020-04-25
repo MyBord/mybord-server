@@ -16,4 +16,5 @@ extend type Mutation {
 extend type Query {
   currentUser: User!
   isAuthenticated: Boolean
+  logoutUser: Boolean
 }
