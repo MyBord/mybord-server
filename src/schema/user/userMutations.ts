@@ -1,5 +1,6 @@
 import ServerError from 'serverError/serverError';
 import hashPassword from 'utils/hashPassword';
+import jwt from 'utils/jwt';
 import restrictUserData from 'utils/restrictUserData';
 
 export default {
@@ -15,9 +16,11 @@ export default {
 
     const user = await prisma.mutation.createUser(finalArgs, info);
 
+    const token = jwt.getToken(user.id);
+
     passport.login({ authenticateOptions: args.data, user });
 
-    return restrictUserData(user);
+    return restrictUserData({ ...user, token });
   },
   loginUser: async (parent, args, { passport }, info) => {
     try {
