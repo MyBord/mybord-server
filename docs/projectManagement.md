@@ -26,6 +26,7 @@ This document is used to outline current project management priorities.
 
 ### C. Medium
 
+* when adding youtube video card, check for duplicates
 * restrict gapi key to certain ip addresses
 * create new db for docker
 * add env vars in docker file
