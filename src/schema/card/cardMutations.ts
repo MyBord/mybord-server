@@ -6,7 +6,7 @@ export default {
     try {
       const userId = passport.getUserId();
 
-      const videoId = getYoutubeVideoId(args.data.videoId);
+      const videoId = getYoutubeVideoId(args.data.videoUrl);
 
       const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 

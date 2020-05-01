@@ -1,7 +1,7 @@
 # ----- INPUTS ----- #
 
 input YoutubeCardInput {
-  videoId: String!
+  videoUrl: String!
 }
 
 # ----- MUTATION ----- #
