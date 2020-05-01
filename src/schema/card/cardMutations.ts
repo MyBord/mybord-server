@@ -1,3 +1,4 @@
+import ServerError from 'serverError/serverError';
 import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
 
@@ -32,7 +33,7 @@ export default {
       };
       return prisma.mutation.createCard(finalArgs, info);
     } catch (error) {
-      throw Error(error);
+      throw new ServerError({ message: error.message, status: 400 });
     }
   },
 };

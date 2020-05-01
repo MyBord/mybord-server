@@ -11,7 +11,7 @@ export default (url): string => {
     if (match && match[1]) {
       return match[1];
     }
-    throw Error('cannot get youtube video, broken link');
+    throw Error('Your youtube url is not valid');
   }
-  throw Error('improper url, not youtube');
+  throw Error('You must provide a youtube url');
 };
