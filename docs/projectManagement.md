@@ -11,30 +11,36 @@ This document is used to outline current project management priorities.
 
 ## I. Priority Levels
 
-### A. Highest
+### A. Highest - MVP
 
 * make ports be env vars
 
-### B. High
+### B. High - MVP
 
 * fix user login and user gating for user cards query
 * delete old gapi key
 * trying to login a user who does not exist returns an unhandled promise
-* fix currenet user mutation - and restrict data
+* fix current user mutation - and restrict data
 * remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
+* add env vars in docker file
+* hide db secrets in docker file
+* change secrets
+* add password validation
+
+BUILD / Production Deploy:
+
+* Get domain running on mybord.io
+* Get production db running with backup
+* Make sure it is always spinning on heroku
+* detail heroku build process, with prisma.io, and add to root readme.md as well
 
 ### C. Medium
 
 * when adding youtube video card, check for duplicates
 * restrict gapi key to certain ip addresses
 * create new db for docker
-* add env vars in docker file
-* hide db secrets in docker file
-* change secrets
 * make sure to lock down individual queries and subscriptions, mutations for prod app
-* add password validation
-* detail heroku build process, with prisma.io, and add to root readme.md as well
 * outline / document where domains are kept, how they are handled, etc. -- add to root readme?
 * get the `yarn run:dev` command to open up the window
 
