@@ -13,7 +13,7 @@ const initializeServer = (
   prisma: Prisma,
 ): ApolloServer => new ApolloServer({
   context: (request) => ({
-    passport: buildPassportContext({ request: request.req, response: request.res }),
+    passport: buildPassportContext({ req: request.req, res: request.res }),
     prisma,
     request,
   }),

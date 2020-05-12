@@ -82,6 +82,8 @@
     "passport-strategy": "^1.0.0",
     "prisma": "^1.34.10",
     "prisma-binding": "^2.3.16",
-    "uuid": "^3.3.3"
+    "subscriptions-transport-ws": "^0.9.16",
+    "uuid": "^3.3.3",
+    "ws": "^7.3.0"
   }
 }
