@@ -61,6 +61,8 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
   const isAuthenticated = (): boolean => request.isAuthenticated();
 
   const getUserId = (): string => {
+    console.log('000111');
+    console.log(request.user);
     if (isAuthenticated()) {
       // @ts-ignore
       return request.user.id;
