@@ -11,8 +11,6 @@ export default {
 
       const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
-      console.log(youtubeVideoData);
-
       const finalArgs = {
         ...args,
         data: {
