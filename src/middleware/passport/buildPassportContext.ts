@@ -70,7 +70,8 @@ export interface Context<UserObjectType extends {}> {
 const buildCommonContext = <UserObjectType extends {}>(req: CommonRequest<UserObjectType>, additionalContext: {}) => ({
   isAuthenticated: () => req.isAuthenticated(),
   isUnauthenticated: () => req.isUnauthenticated(),
-  getUser: () => req.user,
+  // @ts-ignore
+  getUser: () => req.user.id,
   authenticate: (strategyName: string) => {
     throw new Error(`Authenticate (${strategyName}) not implemented for subscriptions`);
   },
