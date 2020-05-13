@@ -1,8 +1,0 @@
-endpoint: ${env:PRISMA_ENDPOINT}
-datamodel:
-  - ../schema/card/cardPrismaSchema.graphql
-  - ../schema/user/userPrismaSchema.graphql
-secret: ${env:PRISMA_SECRET}
-generate:
-  - generator: graphql-schema
-    output: ../schema/typeDefs/prismaSchema.graphql
