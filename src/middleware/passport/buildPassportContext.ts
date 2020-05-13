@@ -60,7 +60,7 @@ export interface Context<UserObjectType extends {}> {
   isUnauthenticated: () => boolean;
   getUser: () => UserObjectType;
   authenticate: (strategyName: string, options?: object) => Promise<AuthenticateReturn<UserObjectType>>;
-  login: (user: UserObjectType, options?: object) => Promise<void>;
+  login: ({ authenticateOptions, user}: { authenticateOptions: AuthenticateOptions, user: object }) => Promise<void>;
   logout: () => void;
   res?: express.Response;
   req: CommonRequest<UserObjectType>;
