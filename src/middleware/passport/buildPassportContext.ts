@@ -2,6 +2,16 @@
 import passport, { AuthenticateOptions } from 'passport';
 import express from 'express';
 import { ExecutionParams } from 'subscriptions-transport-ws';
+import {
+  AuthenticateParams,
+  BuildPassportContextParams,
+  Done,
+  ExpressParams,
+  Info,
+  LoginParams,
+  PromisifiedAuthenticateParams,
+  PromisifiedLoginParams,
+} from 'types/passportTypes';
 import { AuthenticateReturn, IVerifyOptions } from './types';
 
 const promisifiedAuthentication = <UserObjectType extends {}>(
@@ -23,17 +33,21 @@ const promisifiedAuthentication = <UserObjectType extends {}>(
   return p;
 };
 
-const promisifiedLogin = <UserObjectType extends {}>(
-  req: express.Request,
-  user: UserObjectType,
-  options?: AuthenticateOptions,
-) => new Promise<void>((resolve, reject) => {
-  const done = (err: Error | undefined) => {
+const promisifiedLogin = <UserObjectType extends {}>({
+  authenticateOptions,
+  request,
+  user,
+}: {
+  authenticateOptions: AuthenticateOptions;
+  request: express.Request;
+  user: UserObjectType;
+}) => new Promise<void>((resolve, reject) => {
+  const done = (err: Error | undefined): void => {
     if (err) reject(err);
     else resolve();
   };
 
-  req.login(user, options, done);
+  request.login(user, authenticateOptions, done);
 });
 
 interface CommonRequest<UserObjectType extends {}>
@@ -93,12 +107,16 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
     return buildCommonContext<UserObjectType>(connection.context.req, additionalContext);
   }
 
+  const login = ({ authenticateOptions, user }: { authenticateOptions: AuthenticateOptions; user: UserObjectType}): Promise<void> => (
+    promisifiedLogin<UserObjectType>({ authenticateOptions, user, request: req })
+  );
+
   // The UserObject is without the any in conflict: "'User' is not assignable to type 'UserObjectType'"
   const sharedContext = buildCommonContext<UserObjectType>(req as any, additionalContext);
   return {
     ...sharedContext,
     authenticate: (name: string, options: AuthenticateOptions) => promisifiedAuthentication(req, res, name, options),
-    login: (user: UserObjectType, options: AuthenticateOptions) => promisifiedLogin<UserObjectType>(req, user, options),
+    login,
     logout: () => req.logout(),
     res,
   };
