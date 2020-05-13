@@ -5,21 +5,20 @@ import { ExecutionParams } from 'subscriptions-transport-ws';
 import {
   AuthenticateParams,
   AuthenticatePromiseParams,
+  AuthenticateReturn,
   BuildPassportContextParams,
   Done,
   ExpressParams,
   Info,
   LoginParams,
   LoginPromiseParams,
-  PromisifiedAuthenticateParams,
-  PromisifiedLoginParams,
 } from 'types/passportTypes';
-import { AuthenticateReturn, IVerifyOptions } from './types';
+// import { AuthenticateReturn, IVerifyOptions } from './types';
 
 const authenticatePromise = ({
   authenticateOptions,
-  request,
-  response,
+  req,
+  res,
   strategyName,
 }: AuthenticatePromiseParams): Promise<AuthenticateReturn> => (
   new Promise<AuthenticateReturn>((resolve, reject) => {
@@ -33,7 +32,7 @@ const authenticatePromise = ({
     };
 
     const authenticateFunction = passport.authenticate(strategyName, authenticateOptions, done);
-    return authenticateFunction(request, response);
+    return authenticateFunction(req, res);
   }));
 
 const loginPromise = ({
@@ -67,38 +66,8 @@ export interface Context<UserObjectType extends {}> {
   req: CommonRequest<UserObjectType>;
 }
 
-const buildCommonContext = (req: express.Request) => ({
-  isAuthenticated: () => req.isAuthenticated(),
-  isUnauthenticated: () => req.isUnauthenticated(),
-  // @ts-ignore
-  getUser: () => req.user.id,
-  req,
-});
-
-export interface ContextParams {
-  req: express.Request;
-  res: express.Response;
-  connection?: ExecutionParams;
-  payload?: unknown;
-}
-
-// function buildContext(contextParams: RegularContextParams): Context;
-// function buildContext(contextParams: SubscriptionContextParams): SubscriptionContext;
-const buildContext = <UserObjectType extends {}, R extends ContextParams = ContextParams>(
-  contextParams: R,
-): Context<UserObjectType> => {
-  const {
-    req, // set for queries and mutations
-    res, // set for queries and mutations
-    connection, // set for subscriptions
-    payload, // set for subscriptions
-    ...additionalContext
-  } = contextParams;
-
-  if (connection) {
-    return buildCommonContext(connection.context.req);
-  }
-
+// do export default
+const buildContext = ({ req, res }: ExpressParams): BuildPassportContextParams => {
   const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
     loginPromise({ authenticateOptions, user, request: req })
   );
@@ -106,17 +75,19 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
   const authenticate = ({ authenticateOptions, strategyName }: AuthenticateParams): Promise<AuthenticateReturn> => (
     authenticatePromise({
       authenticateOptions,
-      request: req,
-      response: res,
+      req,
+      res,
       strategyName,
     })
   );
 
-  // The UserObject is without the any in conflict: "'User' is not assignable to type 'UserObjectType'"
-  const sharedContext = buildCommonContext(req);
   // @ts-ignore
   return {
-    ...sharedContext,
+    isAuthenticated: () => req.isAuthenticated(),
+    // @ts-ignore
+    getUser: () => req.user.id,
+    // @ts-ignore
+    req,
     authenticate,
     login,
     logout: () => req.logout(),

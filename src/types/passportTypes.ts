@@ -43,8 +43,8 @@ export interface BuildPassportContextParams {
 }
 
 export interface ExpressParams {
-  request: express.Request;
-  response: express.Response;
+  req: express.Request;
+  res: express.Response;
 }
 
 export interface Info {
