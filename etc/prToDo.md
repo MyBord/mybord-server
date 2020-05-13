@@ -2,3 +2,5 @@
 Make sure to remove all notes before merging (except for this one, of course).
 ----------------------------------------------------------------------------------------------------
 change get user to get user id
+
+change params req and res to request an response

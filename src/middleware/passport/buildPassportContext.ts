@@ -67,22 +67,12 @@ export interface Context<UserObjectType extends {}> {
   req: CommonRequest<UserObjectType>;
 }
 
-const buildCommonContext = <UserObjectType extends {}>(req: CommonRequest<UserObjectType>, additionalContext: {}) => ({
+const buildCommonContext = (req: express.Request) => ({
   isAuthenticated: () => req.isAuthenticated(),
   isUnauthenticated: () => req.isUnauthenticated(),
   // @ts-ignore
   getUser: () => req.user.id,
-  authenticate: (strategyName: string) => {
-    throw new Error(`Authenticate (${strategyName}) not implemented for subscriptions`);
-  },
-  login: () => {
-    throw new Error('Not implemented for subscriptions');
-  },
-  logout: () => {
-    throw new Error('Not implemented for subscriptions');
-  },
   req,
-  ...additionalContext,
 });
 
 export interface ContextParams {
@@ -106,7 +96,7 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
   } = contextParams;
 
   if (connection) {
-    return buildCommonContext<UserObjectType>(connection.context.req, additionalContext);
+    return buildCommonContext(connection.context.req);
   }
 
   const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
@@ -123,7 +113,8 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
   );
 
   // The UserObject is without the any in conflict: "'User' is not assignable to type 'UserObjectType'"
-  const sharedContext = buildCommonContext<UserObjectType>(req as any, additionalContext);
+  const sharedContext = buildCommonContext(req);
+  // @ts-ignore
   return {
     ...sharedContext,
     authenticate,
