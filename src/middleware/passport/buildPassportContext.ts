@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
-import passport, { AuthenticateOptions } from 'passport';
-import express from 'express';
-import { ExecutionParams } from 'subscriptions-transport-ws';
+import passport from 'passport';
 import {
   AuthenticateParams,
   AuthenticatePromiseParams,
@@ -13,7 +11,6 @@ import {
   LoginParams,
   LoginPromiseParams,
 } from 'types/passportTypes';
-// import { AuthenticateReturn, IVerifyOptions } from './types';
 
 const authenticatePromise = ({
   authenticateOptions,
@@ -48,31 +45,11 @@ const loginPromise = ({
   request.login(user, authenticateOptions, done);
 });
 
-interface CommonRequest<UserObjectType extends {}>
-  extends Pick<Context<UserObjectType>, 'isAuthenticated' | 'isUnauthenticated'> {
-  user?: UserObjectType;
-}
-
-export interface Context<UserObjectType extends {}> {
-  isAuthenticated: () => boolean;
-  isUnauthenticated: () => boolean;
-  getUser: () => UserObjectType;
-  authenticate: (
-    { authenticateOptions, strategyName }: AuthenticateParams
-  ) => Promise<AuthenticateReturn>;
-  login: ({ authenticateOptions, user }: { authenticateOptions: AuthenticateOptions; user: object }) => Promise<void>;
-  logout: () => void;
-  res?: express.Response;
-  req: CommonRequest<UserObjectType>;
-}
-
-// do export default
-const buildContext = ({ req, res }: ExpressParams): BuildPassportContextParams => {
-  const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
-    loginPromise({ authenticateOptions, user, request: req })
-  );
-
-  const authenticate = ({ authenticateOptions, strategyName }: AuthenticateParams): Promise<AuthenticateReturn> => (
+export default ({ req, res }: ExpressParams): BuildPassportContextParams => {
+  const authenticateFn = ({
+    authenticateOptions,
+    strategyName,
+  }: AuthenticateParams): Promise<AuthenticateReturn> => (
     authenticatePromise({
       authenticateOptions,
       req,
@@ -81,18 +58,17 @@ const buildContext = ({ req, res }: ExpressParams): BuildPassportContextParams =
     })
   );
 
-  // @ts-ignore
+  const loginFn = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
+    loginPromise({ authenticateOptions, user, request: req })
+  );
+
   return {
+    authenticate: authenticateFn,
+    getUserId: () => req.user.id,
     isAuthenticated: () => req.isAuthenticated(),
-    // @ts-ignore
-    getUser: () => req.user.id,
-    // @ts-ignore
-    req,
-    authenticate,
-    login,
+    login: loginFn,
     logout: () => req.logout(),
+    req,
     res,
   };
 };
-
-export default buildContext;

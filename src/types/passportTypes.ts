@@ -32,7 +32,7 @@ export interface AuthenticateReturn {
   info: Info | undefined;
 }
 
-export interface BuildPassportContextParams {
+export interface BuildPassportContextParams extends ExpressParams {
   authenticate: (
     { authenticateOptions, strategyName }: AuthenticateParams
   ) => Promise<AuthenticateReturn>;
@@ -43,7 +43,7 @@ export interface BuildPassportContextParams {
 }
 
 export interface ExpressParams {
-  req: express.Request;
+  req: Request;
   res: express.Response;
 }
 
@@ -59,6 +59,12 @@ export interface LoginParams {
 
 export interface LoginPromiseParams {
   authenticateOptions: AuthenticateOptions;
-  request: express.Request;
+  request: Request;
   user: object;
+}
+
+interface Request extends express.Request {
+  user: {
+    id: string;
+  };
 }
