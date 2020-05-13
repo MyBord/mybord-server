@@ -8,7 +8,6 @@ const {
   expressSessionMiddleware,
   passportMiddleware,
   passportSessionMiddleware,
-  prisma,
 } = initializeMiddleware();
 
 // We initialize our Apollo Server
@@ -16,7 +15,6 @@ const server = initializeServer(
   expressSessionMiddleware,
   passportMiddleware,
   passportSessionMiddleware,
-  prisma,
 );
 
 // We apply the express middleware to our server

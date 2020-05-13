@@ -1,20 +1,16 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { Prisma } from 'prisma-binding';
-import buildPassportContext from 'middleware/passport/buildPassportContext';
-import resolvers from 'schema/resolvers/resolvers';
-import typeDefs from 'schema/typeDefs/typeDefs';
+import { buildContext } from 'graphql-passport';
+import resolvers from '../resolvers';
+import typeDefs from '../typeDefs';
 
-// creates new apollo server
 const initializeServer = (
   expressSessionMiddleware: express.RequestHandler,
   passportMiddleware: express.Handler,
   passportSessionMiddleware: express.RequestHandler,
-  prisma: Prisma,
 ): ApolloServer => new ApolloServer({
   context: (request) => ({
-    passport: buildPassportContext({ request: request.req, response: request.res }),
-    prisma,
+    passport: buildContext({ req: request.req, res: request.res }),
     request,
   }),
   playground: {
