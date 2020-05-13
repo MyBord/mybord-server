@@ -14,6 +14,26 @@ import {
 } from 'types/passportTypes';
 import { AuthenticateReturn, IVerifyOptions } from './types';
 
+const promisifiedAuthenticate = ({
+  authenticateOptions,
+  request,
+  response,
+  strategyName,
+}: PromisifiedAuthenticateParams): Promise<AuthenticateReturn> => (
+  new Promise<AuthenticateReturn>((resolve, reject) => {
+    const done: Done = (
+      error: Error | undefined,
+      user: object | undefined,
+      info?: Info | undefined,
+    ): void => {
+      if (error) reject(error);
+      else resolve({ user, info });
+    };
+
+    const authenticateFunction = passport.authenticate(strategyName, authenticateOptions, done);
+    return authenticateFunction(request, response);
+  }));
+
 const promisifiedAuthentication = <UserObjectType extends {}>(
   req: express.Request,
   res: express.Response,
@@ -59,8 +79,10 @@ export interface Context<UserObjectType extends {}> {
   isAuthenticated: () => boolean;
   isUnauthenticated: () => boolean;
   getUser: () => UserObjectType;
-  authenticate: (strategyName: string, options?: object) => Promise<AuthenticateReturn<UserObjectType>>;
-  login: ({ authenticateOptions, user}: { authenticateOptions: AuthenticateOptions, user: object }) => Promise<void>;
+  authenticate: (
+    { authenticateOptions, strategyName }: AuthenticateParams
+  ) => Promise<AuthenticateReturn>;
+  login: ({ authenticateOptions, user }: { authenticateOptions: AuthenticateOptions; user: object }) => Promise<void>;
   logout: () => void;
   res?: express.Response;
   req: CommonRequest<UserObjectType>;
@@ -111,11 +133,20 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
     promisifiedLogin<UserObjectType>({ authenticateOptions, user, request: req })
   );
 
+  const authenticate = ({ authenticateOptions, strategyName }: AuthenticateParams): Promise<AuthenticateReturn> => (
+    promisifiedAuthenticate({
+      authenticateOptions,
+      request: req,
+      response: res,
+      strategyName,
+    })
+  );
+
   // The UserObject is without the any in conflict: "'User' is not assignable to type 'UserObjectType'"
   const sharedContext = buildCommonContext<UserObjectType>(req as any, additionalContext);
   return {
     ...sharedContext,
-    authenticate: (name: string, options: AuthenticateOptions) => promisifiedAuthentication(req, res, name, options),
+    authenticate,
     login,
     logout: () => req.logout(),
     res,
