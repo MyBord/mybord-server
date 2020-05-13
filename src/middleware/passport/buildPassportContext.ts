@@ -4,22 +4,24 @@ import express from 'express';
 import { ExecutionParams } from 'subscriptions-transport-ws';
 import {
   AuthenticateParams,
+  AuthenticatePromiseParams,
   BuildPassportContextParams,
   Done,
   ExpressParams,
   Info,
   LoginParams,
+  LoginPromiseParams,
   PromisifiedAuthenticateParams,
   PromisifiedLoginParams,
 } from 'types/passportTypes';
 import { AuthenticateReturn, IVerifyOptions } from './types';
 
-const promisifiedAuthenticate = ({
+const authenticatePromise = ({
   authenticateOptions,
   request,
   response,
   strategyName,
-}: PromisifiedAuthenticateParams): Promise<AuthenticateReturn> => (
+}: AuthenticatePromiseParams): Promise<AuthenticateReturn> => (
   new Promise<AuthenticateReturn>((resolve, reject) => {
     const done: Done = (
       error: Error | undefined,
@@ -34,34 +36,11 @@ const promisifiedAuthenticate = ({
     return authenticateFunction(request, response);
   }));
 
-const promisifiedAuthentication = <UserObjectType extends {}>(
-  req: express.Request,
-  res: express.Response,
-  name: string,
-  options: AuthenticateOptions,
-) => {
-  const p = new Promise<AuthenticateReturn<UserObjectType>>((resolve, reject) => {
-    const done = (err: Error | undefined, user: UserObjectType | undefined, info?: IVerifyOptions | undefined) => {
-      if (err) reject(err);
-      else resolve({ user, info });
-    };
-
-    const authFn = passport.authenticate(name, options, done);
-    return authFn(req, res);
-  });
-
-  return p;
-};
-
-const promisifiedLogin = <UserObjectType extends {}>({
+const loginPromise = ({
   authenticateOptions,
   request,
   user,
-}: {
-  authenticateOptions: AuthenticateOptions;
-  request: express.Request;
-  user: UserObjectType;
-}) => new Promise<void>((resolve, reject) => {
+}: LoginPromiseParams) => new Promise<void>((resolve, reject) => {
   const done = (err: Error | undefined): void => {
     if (err) reject(err);
     else resolve();
@@ -129,12 +108,12 @@ const buildContext = <UserObjectType extends {}, R extends ContextParams = Conte
     return buildCommonContext<UserObjectType>(connection.context.req, additionalContext);
   }
 
-  const login = ({ authenticateOptions, user }: { authenticateOptions: AuthenticateOptions; user: UserObjectType}): Promise<void> => (
-    promisifiedLogin<UserObjectType>({ authenticateOptions, user, request: req })
+  const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
+    loginPromise({ authenticateOptions, user, request: req })
   );
 
   const authenticate = ({ authenticateOptions, strategyName }: AuthenticateParams): Promise<AuthenticateReturn> => (
-    promisifiedAuthenticate({
+    authenticatePromise({
       authenticateOptions,
       request: req,
       response: res,

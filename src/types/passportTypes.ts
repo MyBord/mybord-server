@@ -22,6 +22,11 @@ export interface AuthenticateParams {
   strategyName: string;
 }
 
+export interface AuthenticatePromiseParams extends ExpressParams {
+  authenticateOptions: AuthenticateOptions;
+  strategyName: string;
+}
+
 export interface AuthenticateReturn {
   user: object | undefined;
   info: Info | undefined;
@@ -52,12 +57,7 @@ export interface LoginParams {
   user: object;
 }
 
-export interface PromisifiedAuthenticateParams extends ExpressParams {
-  authenticateOptions: AuthenticateOptions;
-  strategyName: string;
-}
-
-export interface PromisifiedLoginParams {
+export interface LoginPromiseParams {
   authenticateOptions: AuthenticateOptions;
   request: express.Request;
   user: object;
