@@ -4,20 +4,24 @@ import restrictUserData from 'utils/restrictUserData';
 
 export default {
   createUser: async (parent, args, { passport, prisma }, info) => {
-    const password = await hashPassword(args.data.password);
-    const finalArgs = {
-      ...args,
-      data: {
-        ...args.data,
-        password,
-      },
-    };
+    try {
+      const password = await hashPassword(args.data.password);
+      const finalArgs = {
+        ...args,
+        data: {
+          ...args.data,
+          password,
+        },
+      };
 
-    const user = await prisma.mutation.createUser(finalArgs, info);
+      const user = await prisma.mutation.createUser(finalArgs, info);
 
-    passport.login({ authenticateOptions: args.data, user });
+      passport.login({ authenticateOptions: args.data, user });
 
-    return restrictUserData(user);
+      return restrictUserData(user);
+    } catch (error) {
+      throw new ServerError({ message: error.message, status: 400 });
+    }
   },
   loginUser: async (parent, args, { passport }, info) => {
     try {
