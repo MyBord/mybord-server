@@ -17,6 +17,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* make sure cannot register duplicate user
 * fix user login and user gating for user cards query
 * delete old gapi key
 * trying to login a user who does not exist returns an unhandled promise
