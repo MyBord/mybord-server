@@ -2,7 +2,7 @@ export default (password): void => {
   const passwordArray = password.split('');
 
   const specialCharacters = ['!', '@', '#', '$', '&', '*', '-'];
-  const isUpperCase = (string) => /^[A-Z]*$/.test(string);
+  const isUpperCase = (string): boolean => /^[A-Z]*$/.test(string);
 
   const hasNumber = /\d/.test(password);
   const hasSpecialCharacters = passwordArray.some((i) => specialCharacters.includes(i));
