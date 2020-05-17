@@ -17,6 +17,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* don't throw password validation message
 * make sure cannot register duplicate user
 * fix user login and user gating for user cards query
 * delete old gapi key
