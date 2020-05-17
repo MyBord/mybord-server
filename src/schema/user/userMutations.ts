@@ -20,7 +20,9 @@ export default {
 
       return restrictUserData(user);
     } catch (error) {
-      throw new ServerError({ message: error.message, status: 400 });
+      if (error.message === 'password is weak') {
+        throw new ServerError({ message: error.message, status: 400 });
+      }
     }
   },
   loginUser: async (parent, args, { passport }, info) => {
