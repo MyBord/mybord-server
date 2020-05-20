@@ -20,6 +20,9 @@ export default {
 
       return restrictUserData(user);
     } catch (error) {
+      if (error.message.includes('unique constraint')) {
+        throw new ServerError({ message: 'duplicate user', status: 400 });
+      }
       if (error.message === 'password is weak') {
         throw new ServerError({ message: error.message, status: 400 });
       }
