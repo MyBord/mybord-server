@@ -13,19 +13,16 @@ class LocalStrategy extends Strategy {
 
   public name: string;
 
-  public authenticate(req: Request, options: { email: string; password: string }) {
+  public authenticate(req: Request, options: { email: string; password: string }): void {
     const { email, password } = options;
 
     const done: Done = (error: Error, user: object, info?: Info) => {
       if (error) {
-        // @ts-ignore
-        return this.error(err);
+        return this.error(error);
       }
       if (!user) {
-        // @ts-ignore
         return this.fail(info, 401);
       }
-      // @ts-ignore
       return this.success(user, info);
     };
 
