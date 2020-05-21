@@ -1,6 +1,6 @@
 export default {
   userCards: {
-    subscribe(parent, args, { pubsub }, info) {
+    subscribe: (parent, args, { pubsub }, info) => {
       let count = 0;
 
       setInterval(() => {
