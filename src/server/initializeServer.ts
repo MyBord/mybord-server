@@ -1,6 +1,7 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
+import { PubSub } from 'graphql-subscriptions';
 import buildPassportContext from 'middleware/passport/buildPassportContext';
 import resolvers from 'schema/resolvers/resolvers';
 import typeDefs from 'schema/typeDefs/typeDefs';
@@ -11,19 +12,23 @@ const initializeServer = (
   passportMiddleware: express.Handler,
   passportSessionMiddleware: express.RequestHandler,
   prisma: Prisma,
-): ApolloServer => new ApolloServer({
-  context: (request) => ({
-    passport: buildPassportContext({ request: request.req, response: request.res }),
-    prisma,
-    request,
-  }),
-  playground: {
-    settings: {
-      'request.credentials': 'same-origin',
+): ApolloServer => {
+  const pubsub = new PubSub();
+  return new ApolloServer({
+    context: (request) => ({
+      passport: buildPassportContext({ request: request.req, response: request.res }),
+      prisma,
+      pubsub,
+      request,
+    }),
+    playground: {
+      settings: {
+        'request.credentials': 'same-origin',
+      },
     },
-  },
-  resolvers,
-  typeDefs,
-});
+    resolvers,
+    typeDefs,
+  });
+};
 
 export default initializeServer;
