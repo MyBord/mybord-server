@@ -31,7 +31,7 @@ export default {
       };
 
       const card = await prisma.mutation.createCard(finalArgs, info);
-
+      pubsub.publish('userCard', { userCard: card });
       return card;
     } catch (error) {
       throw new ServerError({ message: error.message, status: 400 });

@@ -12,20 +12,23 @@ const initializeServer = (
   passportMiddleware: express.Handler,
   passportSessionMiddleware: express.RequestHandler,
   prisma: Prisma,
-): ApolloServer => new ApolloServer({
-  context: (request) => ({
-    passport: buildPassportContext({ request: request.req, response: request.res }),
-    prisma,
-    pubsub: new PubSub(),
-    request,
-  }),
-  playground: {
-    settings: {
-      'request.credentials': 'same-origin',
+): ApolloServer => {
+  const pubsub = new PubSub();
+  return new ApolloServer({
+    context: (request) => ({
+      passport: buildPassportContext({ request: request.req, response: request.res }),
+      prisma,
+      pubsub,
+      request,
+    }),
+    playground: {
+      settings: {
+        'request.credentials': 'same-origin',
+      },
     },
-  },
-  resolvers,
-  typeDefs,
-});
+    resolvers,
+    typeDefs,
+  });
+};
 
 export default initializeServer;

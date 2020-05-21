@@ -14,6 +14,7 @@ extend type Mutation {
 
 extend type Subscription {
   count: Int!
+  userCard: Card!
 }
 
 # ----- QUERY ----- #

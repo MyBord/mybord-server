@@ -24,6 +24,7 @@ This document is used to outline current project management priorities.
 * add env vars in docker file
 * hide db secrets in docker file
 * change secrets
+* card type, e.g. 'Youtube', should not be capitized
 
 BUILD / Production Deploy:
 
