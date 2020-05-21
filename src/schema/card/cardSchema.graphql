@@ -10,6 +10,12 @@ extend type Mutation {
   createYoutubeCard(data: YoutubeCardInput!): Card!
 }
 
+# ----- SUBSCRIPTION ----- #
+
+extend type Subscription {
+  userCards: Int!
+}
+
 # ----- QUERY ----- #
 
 extend type Query {
