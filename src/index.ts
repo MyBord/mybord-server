@@ -6,6 +6,7 @@ import session from 'express-session';
 import uuid from 'uuid/v4';
 import { ApolloServer } from 'apollo-server-express';
 import { GraphQLLocalStrategy, buildContext } from 'graphql-passport';
+import { PubSub } from 'graphql-subscriptions';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 import users from './users';
@@ -56,6 +57,7 @@ expressMiddleware.use(passportSessionMiddleware);
 const server = new ApolloServer({
   context: (request) => ({
     passport: buildContext({ req: request.req, res: request.res }),
+    pubsub: new PubSub(),
     request,
   }),
   playground: {
