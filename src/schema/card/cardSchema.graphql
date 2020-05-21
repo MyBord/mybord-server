@@ -13,7 +13,6 @@ extend type Mutation {
 # ----- SUBSCRIPTION ----- #
 
 extend type Subscription {
-  count: Int!
   userCard: Card!
 }
 
