@@ -41,7 +41,7 @@ const expressSessionMiddleware = session({
   genid: (request) => uuid(), // generates a session ID
   resave: false,
   saveUninitialized: false,
-  secret: process.env.SESSION_SECRET, // secret that is needed to sign the cookie
+  secret: 'MYSECRET', // secret that is needed to sign the cookie
 });
 const passportMiddleware = passport.initialize();
 const passportSessionMiddleware = passport.session();
