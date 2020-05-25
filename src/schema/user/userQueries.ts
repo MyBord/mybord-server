@@ -1,6 +1,7 @@
 import restrictUserData from 'utils/restrictUserData';
 
 export default {
+  currentUser: (parent, args, { passport }) => passport.getUserId(),
   isAuthenticated: async (parent, args, { passport }, info) => (
     passport.isAuthenticated()
   ),
