@@ -1,5 +1,6 @@
 export default {
   userCards: async (parent, args, { passport, prisma }, info) => {
+    console.log('fooooooooooooo');
     const userId = passport.getUserId();
 
     const finalArgs = {
