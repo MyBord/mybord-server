@@ -17,6 +17,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* remove current user query
 * fix user gating for user cards query
 * delete old gapi key
 * remove 'request' from context in `initialzeServer`

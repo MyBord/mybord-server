@@ -65,7 +65,7 @@ export default ({ request, response }: ExpressParams): BuildPassportContextParam
       // @ts-ignore
       return request.user.id;
     }
-    throw Error('User is not authenticated');
+    throw Error('Passport Context getUserId error: User is not authenticated');
   };
 
   const login = ({ authenticateOptions, user }: LoginParams): Promise<void> => (
