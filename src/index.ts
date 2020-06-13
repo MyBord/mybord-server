@@ -4,6 +4,11 @@ import uuid from 'uuid/v4';
 import LocalStrategy from 'middleware/passport/strategies/localStrategy/localStrategy';
 import localStrategyAuthentication from 'middleware/passport/strategies/localStrategy/localStrategyAuthentication';
 import initializeServer from 'server/initializeServer';
+import { ApolloServer } from 'apollo-server-express';
+import { PubSub } from 'graphql-subscriptions';
+import buildPassportContext from 'middleware/passport/buildPassportContext';
+import resolvers from 'schema/resolvers/resolvers';
+import typeDefs from 'schema/typeDefs/typeDefs';
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
@@ -56,12 +61,22 @@ expressMiddleware.use(passportSessionMiddleware);
 
 // ----- SETTING UP SERVER ----- //
 
-const server = initializeServer(
-  expressSessionMiddleware,
-  passportMiddleware,
-  passportSessionMiddleware,
-  prisma,
-);
+const pubsub = new PubSub();
+const server = new ApolloServer({
+  context: (request) => ({
+    passport: buildPassportContext({ request: request.req, response: request.res }),
+    prisma,
+    pubsub,
+    request,
+  }),
+  playground: {
+    settings: {
+      'request.credentials': 'same-origin',
+    },
+  },
+  resolvers,
+  typeDefs,
+});
 
 server.applyMiddleware({
   app: expressMiddleware,
