@@ -1,18 +1,21 @@
+import cors from 'cors';
+import express from 'express';
 import http from 'http';
 import passport from 'passport';
+import session from 'express-session';
 import uuid from 'uuid/v4';
-import LocalStrategy from 'middleware/passport/strategies/localStrategy/localStrategy';
-import localStrategyAuthentication from 'middleware/passport/strategies/localStrategy/localStrategyAuthentication';
-import initializeServer from 'server/initializeServer';
 import { ApolloServer } from 'apollo-server-express';
+import { GraphQLLocalStrategy, buildContext } from 'graphql-passport';
 import { PubSub } from 'graphql-subscriptions';
 import buildPassportContext from 'middleware/passport/buildPassportContext';
-import resolvers from 'schema/resolvers/resolvers';
-import typeDefs from 'schema/typeDefs/typeDefs';
-import express from 'express';
-import session from 'express-session';
-import cors from 'cors';
+// import resolvers from 'schema/resolvers/resolvers';
+// import typeDefs from 'schema/typeDefs/typeDefs';
+import LocalStrategy from 'middleware/passport/strategies/localStrategy/localStrategy';
+import localStrategyAuthentication from 'middleware/passport/strategies/localStrategy/localStrategyAuthentication';
 import initializePrisma from './prisma/initializePrisma';
+import users from './users';
+import typeDefs from './typeDefs';
+import resolvers from './resolvers';
 
 // ----- PORTS ----- //
 
@@ -26,16 +29,19 @@ const prisma = initializePrisma();
 // ----- SETTING UP PASSPORT ----- //
 
 passport.use(
-  new LocalStrategy((email, password, done) => (
-    localStrategyAuthentication(email, password, done, prisma)
-  )),
+  new GraphQLLocalStrategy((email, password, done) => {
+    const matchingUser = users.find((user) => email === user.email && password === user.password);
+    const error = matchingUser ? null : new Error('no matching user');
+    done(error, matchingUser);
+  }),
 );
 
-passport.serializeUser((user: any, done) => done(null, user.id));
+// @ts-ignore
+passport.serializeUser((user, done) => done(null, user.id));
 
-passport.deserializeUser(async (id, done) => {
-  const user = await prisma.query.user({ where: { id } });
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  const matchingUser = users.find((user) => user.id === id);
+  done(null, matchingUser);
 });
 
 // ----- SETTING UP EXPRESS MIDDLEWARE ----- //
@@ -64,7 +70,7 @@ expressMiddleware.use(passportSessionMiddleware);
 const pubsub = new PubSub();
 const server = new ApolloServer({
   context: (request) => ({
-    passport: buildPassportContext({ request: request.req, response: request.res }),
+    passport: buildContext({ req: request.req, res: request.res }),
     prisma,
     pubsub,
     request,
@@ -87,13 +93,11 @@ server.applyMiddleware({
 const httpServer = http.createServer(expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
-// We run our http server.
 httpServer.listen(PORT, () => {
   console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
   console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
 });
 
-// Using webpack's hot module replacement, if needed.
 if (process.env.NODE_ENV !== 'PROD' && module.hot) {
   module.hot.accept();
   module.hot.dispose(() => server.stop());
