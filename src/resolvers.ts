@@ -1,7 +1,15 @@
 const resolvers = {
   Query: {
     currentUser: (parent, args, context) => context.passport.getUser(),
-    isAuthenticated: (parent, args, context) => context.passport.isAuthenticated(),
+    isAuthenticated: (parent, args, context) => {
+      console.log('invoked');
+      try {
+        return context.passport.isAuthenticated();
+      } catch (e) {
+        console.log('000');
+        console.log(e);
+      }
+    },
   },
   Mutation: {
     login: async (parent, { email, password }, context) => {
