@@ -1,17 +1,17 @@
 import http from 'http';
-import initializeMiddleware from 'middleware/initializeMiddleware';
+import passport from 'passport';
+import uuid from 'uuid/v4';
+import LocalStrategy from 'middleware/passport/strategies/localStrategy/localStrategy';
+import localStrategyAuthentication from 'middleware/passport/strategies/localStrategy/localStrategyAuthentication';
 import initializeServer from 'server/initializeServer';
-import initializePassport from 'middleware/passport/initializePassport';
 import express from 'express';
 import session from 'express-session';
-import expressSessionOptions from 'middleware/expressSessionOptions';
-import passport from 'passport';
 import cors from 'cors';
-import corsOptions from 'middleware/corsOptions';
 import initializePrisma from './prisma/initializePrisma';
 
 // ----- PORTS ----- //
 
+const APP_PORT = 8080;
 const PORT = 4000;
 
 // ----- SETTING UP PRISMA ----- //
@@ -20,24 +20,42 @@ const prisma = initializePrisma();
 
 // ----- SETTING UP PASSPORT ----- //
 
-initializePassport(prisma);
+passport.use(
+  new LocalStrategy((email, password, done) => (
+    localStrategyAuthentication(email, password, done, prisma)
+  )),
+);
+
+passport.serializeUser((user: any, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  const user = await prisma.query.user({ where: { id } });
+  done(null, user);
+});
 
 // ----- SETTING UP EXPRESS MIDDLEWARE ----- //
 
 const expressMiddleware = express();
-const expressSessionMiddleware = session(expressSessionOptions);
+const expressSessionMiddleware = session({
+  // cookie: { secure: true }, // cookie must be sent via https
+  genid: (request) => uuid(), // generates a session ID
+  resave: false,
+  saveUninitialized: false,
+  secret: 'MYSECRET', // secret that is needed to sign the cookie
+});
 const passportMiddleware = passport.initialize();
 const passportSessionMiddleware = passport.session();
 
-// implements our middleware into express
-expressMiddleware.use(cors(corsOptions));
+expressMiddleware.use(cors({
+  credentials: true,
+  origin: `http://localhost:${APP_PORT}`,
+}));
 expressMiddleware.use(expressSessionMiddleware);
 expressMiddleware.use(passportMiddleware);
 expressMiddleware.use(passportSessionMiddleware);
 
 // ----- SETTING UP SERVER ----- //
 
-// We initialize our Apollo Server
 const server = initializeServer(
   expressSessionMiddleware,
   passportMiddleware,
@@ -45,7 +63,6 @@ const server = initializeServer(
   prisma,
 );
 
-// We apply the express middleware to our server
 server.applyMiddleware({
   app: expressMiddleware,
   cors: false,
