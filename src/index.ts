@@ -6,25 +6,14 @@ import session from 'express-session';
 import uuid from 'uuid/v4';
 import { ApolloServer } from 'apollo-server-express';
 import { GraphQLLocalStrategy, buildContext } from 'graphql-passport';
-import { PubSub } from 'graphql-subscriptions';
-import buildPassportContext from 'middleware/passport/buildPassportContext';
-// import resolvers from 'schema/resolvers/resolvers';
-// import typeDefs from 'schema/typeDefs/typeDefs';
-import LocalStrategy from 'middleware/passport/strategies/localStrategy/localStrategy';
-import localStrategyAuthentication from 'middleware/passport/strategies/localStrategy/localStrategyAuthentication';
-import initializePrisma from './prisma/initializePrisma';
-import users from './users';
-import typeDefs from './typeDefs';
 import resolvers from './resolvers';
+import typeDefs from './typeDefs';
+import users from './users';
 
 // ----- PORTS ----- //
 
 const APP_PORT = 8080;
 const PORT = 4000;
-
-// ----- SETTING UP PRISMA ----- //
-
-const prisma = initializePrisma();
 
 // ----- SETTING UP PASSPORT ----- //
 
@@ -67,12 +56,9 @@ expressMiddleware.use(passportSessionMiddleware);
 
 // ----- SETTING UP SERVER ----- //
 
-const pubsub = new PubSub();
 const server = new ApolloServer({
   context: (request) => ({
     passport: buildContext({ req: request.req, res: request.res }),
-    prisma,
-    pubsub,
     request,
   }),
   playground: {
