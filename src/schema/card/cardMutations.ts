@@ -1,4 +1,4 @@
-import ServerError from 'serverError/serverError';
+import ServerError from 'server/serverError';
 import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
 

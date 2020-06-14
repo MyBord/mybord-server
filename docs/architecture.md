@@ -130,8 +130,6 @@ src/
   |- prisma/ 
   |- schema/ 
   |- server/ 
-  |- serverError/ 
-     |- serverError.ts
   |- thirdParty/ 
   |- types/ 
   |- utils/ 
@@ -151,8 +149,6 @@ src/
 * **server/:**
   * Contains files that configure and initialize our server. For more information, see the
   [server folder outline](#g-server-folder).
-* **`serverError/serverError.ts`:**
-  * Custom error object that gets thrown to the front end to communicate server errors.
 * **thirdParty:**
   * Code used to interact with third party tooling and apis. For further documentation, please see
   the [thirdParty outline](https://github.com/jimmy-e/mybord-server/blob/master/docs/thirdParty.md).
@@ -356,6 +352,7 @@ Our server folder contains the script that intializes our apollo server.
 ```
 server/
   |- initializeServer.ts
+  |- serverError.ts
 ```
 
 * **`initializeServer.ts`:**
@@ -363,3 +360,5 @@ server/
     * Adds prisma and passport to our context.
     * Configures our playground settings.
     * Configures our resolvers and typeDefs and resolvers from our '/schema' folder.
+* **`serverError/serverError.ts`:**
+  * Custom error object that gets thrown to the front end to communicate server errors.

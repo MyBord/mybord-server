@@ -1,4 +1,4 @@
-import ServerError from 'serverError/serverError';
+import ServerError from 'server/serverError';
 import hashPassword from 'utils/hashPassword';
 import restrictUserData from 'utils/restrictUserData';
 
