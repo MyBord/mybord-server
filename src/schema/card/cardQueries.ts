@@ -1,14 +1,14 @@
 export default {
   userCards: async (parent, args, { passport, prisma }, info) => {
-    // const userId = passport.getUserId();
+    const userId = passport.getUserId();
 
     const finalArgs = {
       ...args,
-      // where: {
-      //   user: {
-      //     id: userId,
-      //   },
-      // },
+      where: {
+        user: {
+          id: userId,
+        },
+      },
     };
     return prisma.query.cards(finalArgs, info);
   },
