@@ -1,5 +1,9 @@
 # ----- INPUTS ----- #
 
+input DeleteCardInput {
+  cardId: String!
+}
+
 input YoutubeCardInput {
   videoUrl: String!
 }
@@ -8,6 +12,7 @@ input YoutubeCardInput {
 
 extend type Mutation {
   createYoutubeCard(data: YoutubeCardInput!): Card!
+  deleteUserCard(data: DeleteCardInput): Card!
 }
 
 # ----- SUBSCRIPTION ----- #
