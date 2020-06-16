@@ -18,6 +18,7 @@ extend type Mutation {
 # ----- SUBSCRIPTION ----- #
 
 extend type Subscription {
+  deletedUserCard: Card!
   userCard: Card!
 }
 

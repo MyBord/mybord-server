@@ -59,7 +59,7 @@ export default {
       };
 
       const card = await prisma.mutation.deleteCard(finalArgs, info);
-      // pubsub.publish('userCard', { userCard: card });
+      pubsub.publish('deletedUserCard', { deletedUserCard: card });
       return card;
     }
 
