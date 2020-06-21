@@ -23,7 +23,7 @@ export default {
           },
           isFavorite: false,
           isToDo: false,
-          type: 'youtube',
+          type: 'Youtube',
           user: {
             connect: {
               id: userId,
