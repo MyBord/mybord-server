@@ -56,7 +56,7 @@ export default {
     if (userCardsIds.includes(cardId)) {
       const finalArgs = {
         where: {
-          id: args.data.cardId,
+          id: cardId,
         },
       };
 
@@ -69,5 +69,37 @@ export default {
       message: 'The user does not have access to delete this card',
       status: 403,
     });
+  },
+  toggleFavoriteUserCard: async (parent, args, { passport, prisma }) => {
+    const userId = passport.getUserId();
+    const { cardId } = args.data;
+
+    const queryArgs = {
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    };
+    const userCards = await prisma.query.cards(queryArgs, '{ id isFavorite }');
+    const userCardsIds = userCards.map((userCard) => userCard.id);
+    console.log(userCards);
+
+    // if (userCardsIds.includes(cardId)) {
+    //   const finalArgs = {
+    //     data: {},
+    //     where: {
+    //       id: cardId,
+    //     },
+    //   };
+    //
+    //   const card = await prisma.mutation.updateCard(finalArgs, info);
+    //   return card;
+    // }
+    //
+    // throw new ServerError({
+    //   message: 'The user does not have access to delete this card',
+    //   status: 403,
+    // });
   },
 };
