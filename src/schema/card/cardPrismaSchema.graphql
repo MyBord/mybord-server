@@ -28,9 +28,9 @@ type CardData {
 
 type Card {
   id: ID! @id
-  type: CardType!
-  user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
-  cardData: CardData!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  cardData: CardData!
+  type: CardType!
+  user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
 }

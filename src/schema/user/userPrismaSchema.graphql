@@ -2,11 +2,11 @@
 
 type User {
   id: ID! @id
-  name: String
-  email: String! @unique
-  password: String!
-  cards: [Card!] @relation(name: "CardToUser", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  cards: [Card!] @relation(name: "CardToUser", onDelete: CASCADE)
+  email: String! @unique
+  name: String
+  password: String!
 }
 
