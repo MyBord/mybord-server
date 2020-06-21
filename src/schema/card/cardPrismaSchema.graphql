@@ -31,6 +31,8 @@ type Card {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   cardData: CardData!
+  isFavorite: Boolean!
+  isToDo: Boolean!
   type: CardType!
   user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
 }

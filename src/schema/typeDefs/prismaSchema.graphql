@@ -20,11 +20,13 @@ type BatchPayload {
 
 type Card {
   id: ID!
-  type: CardType!
-  user: User!
-  cardData: CardData!
   createdAt: DateTime!
   updatedAt: DateTime!
+  cardData: CardData!
+  isFavorite: Boolean!
+  isToDo: Boolean!
+  type: CardType!
+  user: User!
 }
 
 type CardConnection {
@@ -35,9 +37,11 @@ type CardConnection {
 
 input CardCreateInput {
   id: ID
+  cardData: CardDataCreateOneInput!
+  isFavorite: Boolean!
+  isToDo: Boolean!
   type: CardType!
   user: UserCreateOneWithoutCardsInput!
-  cardData: CardDataCreateOneInput!
 }
 
 input CardCreateManyWithoutUserInput {
@@ -47,8 +51,10 @@ input CardCreateManyWithoutUserInput {
 
 input CardCreateWithoutUserInput {
   id: ID
-  type: CardType!
   cardData: CardDataCreateOneInput!
+  isFavorite: Boolean!
+  isToDo: Boolean!
+  type: CardType!
 }
 
 type CardData {
@@ -157,19 +163,25 @@ type CardEdge {
 enum CardOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  isFavorite_ASC
+  isFavorite_DESC
+  isToDo_ASC
+  isToDo_DESC
+  type_ASC
+  type_DESC
 }
 
 type CardPreviousValues {
   id: ID!
-  type: CardType!
   createdAt: DateTime!
   updatedAt: DateTime!
+  isFavorite: Boolean!
+  isToDo: Boolean!
+  type: CardType!
 }
 
 input CardScalarWhereInput {
@@ -187,10 +199,6 @@ input CardScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  type: CardType
-  type_not: CardType
-  type_in: [CardType!]
-  type_not_in: [CardType!]
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -207,6 +215,14 @@ input CardScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  isFavorite: Boolean
+  isFavorite_not: Boolean
+  isToDo: Boolean
+  isToDo_not: Boolean
+  type: CardType
+  type_not: CardType
+  type_in: [CardType!]
+  type_not_in: [CardType!]
   AND: [CardScalarWhereInput!]
   OR: [CardScalarWhereInput!]
   NOT: [CardScalarWhereInput!]
@@ -235,16 +251,22 @@ enum CardType {
 }
 
 input CardUpdateInput {
+  cardData: CardDataUpdateOneRequiredInput
+  isFavorite: Boolean
+  isToDo: Boolean
   type: CardType
   user: UserUpdateOneRequiredWithoutCardsInput
-  cardData: CardDataUpdateOneRequiredInput
 }
 
 input CardUpdateManyDataInput {
+  isFavorite: Boolean
+  isToDo: Boolean
   type: CardType
 }
 
 input CardUpdateManyMutationInput {
+  isFavorite: Boolean
+  isToDo: Boolean
   type: CardType
 }
 
@@ -266,8 +288,10 @@ input CardUpdateManyWithWhereNestedInput {
 }
 
 input CardUpdateWithoutUserDataInput {
-  type: CardType
   cardData: CardDataUpdateOneRequiredInput
+  isFavorite: Boolean
+  isToDo: Boolean
+  type: CardType
 }
 
 input CardUpdateWithWhereUniqueWithoutUserInput {
@@ -296,12 +320,6 @@ input CardWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  type: CardType
-  type_not: CardType
-  type_in: [CardType!]
-  type_not_in: [CardType!]
-  user: UserWhereInput
-  cardData: CardDataWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -318,6 +336,16 @@ input CardWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  cardData: CardDataWhereInput
+  isFavorite: Boolean
+  isFavorite_not: Boolean
+  isToDo: Boolean
+  isToDo_not: Boolean
+  type: CardType
+  type_not: CardType
+  type_in: [CardType!]
+  type_not_in: [CardType!]
+  user: UserWhereInput
   AND: [CardWhereInput!]
   OR: [CardWhereInput!]
   NOT: [CardWhereInput!]
@@ -399,12 +427,12 @@ type Subscription {
 
 type User {
   id: ID!
-  name: String
-  email: String!
-  password: String!
-  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
   createdAt: DateTime!
   updatedAt: DateTime!
+  cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
+  email: String!
+  name: String
+  password: String!
 }
 
 type UserConnection {
@@ -415,10 +443,10 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  name: String
-  email: String!
-  password: String!
   cards: CardCreateManyWithoutUserInput
+  email: String!
+  name: String
+  password: String!
 }
 
 input UserCreateOneWithoutCardsInput {
@@ -428,8 +456,8 @@ input UserCreateOneWithoutCardsInput {
 
 input UserCreateWithoutCardsInput {
   id: ID
-  name: String
   email: String!
+  name: String
   password: String!
 }
 
@@ -441,25 +469,25 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  email_ASC
+  email_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  name: String
-  email: String!
-  password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  email: String!
+  name: String
+  password: String!
 }
 
 type UserSubscriptionPayload {
@@ -481,15 +509,15 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  name: String
-  email: String
-  password: String
   cards: CardUpdateManyWithoutUserInput
+  email: String
+  name: String
+  password: String
 }
 
 input UserUpdateManyMutationInput {
-  name: String
   email: String
+  name: String
   password: String
 }
 
@@ -501,8 +529,8 @@ input UserUpdateOneRequiredWithoutCardsInput {
 }
 
 input UserUpdateWithoutCardsDataInput {
-  name: String
   email: String
+  name: String
   password: String
 }
 
@@ -526,51 +554,6 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
-  cards_every: CardWhereInput
-  cards_some: CardWhereInput
-  cards_none: CardWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -587,6 +570,51 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  cards_every: CardWhereInput
+  cards_some: CardWhereInput
+  cards_none: CardWhereInput
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

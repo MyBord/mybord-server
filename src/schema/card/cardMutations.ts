@@ -12,12 +12,6 @@ export default {
       const finalArgs = {
         ...args,
         data: {
-          type: 'Youtube',
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
           cardData: {
             create: {
               youtubeCardData: {
@@ -25,6 +19,14 @@ export default {
                   ...youtubeVideoData,
                 },
               },
+            },
+          },
+          isFavorite: false,
+          isToDo: false,
+          type: 'Youtube',
+          user: {
+            connect: {
+              id: userId,
             },
           },
         },
