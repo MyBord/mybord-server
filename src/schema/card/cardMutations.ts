@@ -45,24 +45,26 @@ export default {
 
     const queryArgs = {
       where: {
+        id: cardId,
         user: {
           id: userId,
         },
       },
     };
-    const userCards = await prisma.query.cards(queryArgs, info);
-    const userCardsIds = userCards.map((userCard) => userCard.id);
 
-    if (userCardsIds.includes(cardId)) {
-      const finalArgs = {
-        where: {
-          id: args.data.cardId,
-        },
-      };
+    const deleteArgs = {
+      where: {
+        id: cardId,
+      },
+    };
 
-      const card = await prisma.mutation.deleteCard(finalArgs, info);
-      pubsub.publish('deletedUserCard', { deletedUserCard: card });
-      return card;
+    // Make sure that the card that is trying to be deleted belongs to the user
+    const userCard = await prisma.query.cards(queryArgs, info);
+
+    if (userCard.length > 0) {
+      const deletedCard = await prisma.mutation.deleteCard(deleteArgs, info);
+      pubsub.publish('deletedUserCard', { deletedUserCard: deletedCard });
+      return deletedCard;
     }
 
     throw new ServerError({
