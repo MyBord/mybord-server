@@ -45,24 +45,26 @@ export default {
 
     const queryArgs = {
       where: {
+        id: cardId,
         user: {
           id: userId,
         },
       },
     };
-    const userCards = await prisma.query.cards(queryArgs, info);
-    const userCardsIds = userCards.map((userCard) => userCard.id);
 
-    if (userCardsIds.includes(cardId)) {
-      const finalArgs = {
-        where: {
-          id: cardId,
-        },
-      };
+    const deleteArgs = {
+      where: {
+        id: cardId,
+      },
+    };
 
-      const card = await prisma.mutation.deleteCard(finalArgs, info);
-      pubsub.publish('deletedUserCard', { deletedUserCard: card });
-      return card;
+    // Make sure that the card that is trying to be deleted belongs to the user
+    const userCard = await prisma.query.cards(queryArgs, info);
+
+    if (userCard.length > 0) {
+      const deletedCard = await prisma.mutation.deleteCard(deleteArgs, info);
+      pubsub.publish('deletedUserCard', { deletedUserCard: deletedCard });
+      return deletedCard;
     }
 
     throw new ServerError({
@@ -70,36 +72,39 @@ export default {
       status: 403,
     });
   },
-  toggleFavoriteUserCard: async (parent, args, { passport, prisma }) => {
+  toggleFavoriteUserCard: async (parent, args, { passport, prisma }, info) => {
     const userId = passport.getUserId();
     const { cardId } = args.data;
 
     const queryArgs = {
       where: {
+        id: cardId,
         user: {
           id: userId,
         },
       },
     };
-    const userCards = await prisma.query.cards(queryArgs, '{ id isFavorite }');
-    const userCardsIds = userCards.map((userCard) => userCard.id);
-    console.log(userCards);
 
-    // if (userCardsIds.includes(cardId)) {
-    //   const finalArgs = {
-    //     data: {},
-    //     where: {
-    //       id: cardId,
-    //     },
-    //   };
-    //
-    //   const card = await prisma.mutation.updateCard(finalArgs, info);
-    //   return card;
-    // }
-    //
-    // throw new ServerError({
-    //   message: 'The user does not have access to delete this card',
-    //   status: 403,
-    // });
+    // Make sure that the card that is trying to be deleted belongs to the user
+    const userCard = await prisma.query.cards(queryArgs, '{ id isFavorite }');
+
+    if (userCard.length > 0) {
+      const updateArgs = {
+        data: {
+          isFavorite: !userCard[0].isFavorite,
+        },
+        where: {
+          id: cardId,
+        },
+      };
+
+      const updatedCard = await prisma.mutation.updateCard(updateArgs, info);
+      return updatedCard;
+    }
+
+    throw new ServerError({
+      message: 'The user does not have access to delete this card',
+      status: 403,
+    });
   },
 };
