@@ -14,6 +14,7 @@ extend type Mutation {
   createYoutubeCard(data: YoutubeCardInput!): Card!
   deleteUserCard(data: CardIdInput): Card!
   toggleFavoriteUserCard(data: CardIdInput): Card!
+  toggleToDoUserCard(data: CardIdInput): Card!
 }
 
 # ----- SUBSCRIPTION ----- #
