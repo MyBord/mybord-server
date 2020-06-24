@@ -1,3 +1,5 @@
+import { CardQueryArgs } from 'types/argTypes';
+
 export default {
   userCards: async (parent, args, { passport, prisma }, info) => {
     const userId = passport.getUserId();
@@ -10,6 +12,29 @@ export default {
         },
       },
     };
+    return prisma.query.cards(finalArgs, info);
+  },
+  userCardsWithFilters: async (parent, args, { passport, prisma }, info) => {
+    const userId = passport.getUserId();
+
+    const finalArgs: CardQueryArgs = {
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    };
+
+    const { isFavorite, isToDo } = args.data;
+
+    if (isFavorite) {
+      finalArgs.where.isFavorite = isFavorite;
+    }
+
+    if (isToDo) {
+      finalArgs.where.isToDo = isToDo;
+    }
+
     return prisma.query.cards(finalArgs, info);
   },
 };

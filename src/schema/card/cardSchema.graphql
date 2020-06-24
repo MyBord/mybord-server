@@ -1,5 +1,10 @@
 # ----- INPUTS ----- #
 
+input CardFilterInput {
+  isFavorite: Boolean
+  isToDo: Boolean
+}
+
 input CardIdInput {
   cardId: String!
 }
@@ -28,4 +33,5 @@ extend type Subscription {
 
 extend type Query {
   userCards: [Card!]!
+  userCardsWithFilters(data: CardFilterInput): [Card!]!
 }
