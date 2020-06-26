@@ -27,6 +27,7 @@ extend type Mutation {
 extend type Subscription {
   deletedUserCard: Card!
   userCard: Card!
+  userCards: [Card!]!
 }
 
 # ----- QUERY ----- #

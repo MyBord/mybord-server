@@ -14,7 +14,7 @@ export default {
     };
     return prisma.query.cards(finalArgs, info);
   },
-  userCardsWithFilters: async (parent, args, { passport, prisma }, info) => {
+  userCardsWithFilters: async (parent, args, { passport, prisma, pubsub }, info) => {
     const userId = passport.getUserId();
 
     const finalArgs: CardQueryArgs = {
@@ -35,6 +35,8 @@ export default {
       finalArgs.where.isToDo = isToDo;
     }
 
-    return prisma.query.cards(finalArgs, info);
+    const userCards = prisma.query.cards(finalArgs, info);
+    pubsub.publish('userCards', { userCards });
+    return userCards;
   },
 };
