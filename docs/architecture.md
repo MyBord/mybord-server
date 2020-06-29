@@ -276,17 +276,22 @@ schema/
   |- comment/ 
   |- post/ 
   |- user/ 
-     |- userPrismaSchema.graphql
+     |- userInfo.ts
      |- userMutations.ts
+     |- userPrismaSchema.graphql
      |- userQueries.ts
      |- userSchema.graqphql
      |- userSubscriptions.ts
 ```
 
-* **`userPrismaSchema.graphql`:**
-  * Outlines the relational model for each individual schema for our prisma ORM.
+* **`userInfo.ts`:**
+  * This contains common strings that are used to replace the `info` portions of a prisma query or
+    mutation. This is especially helpful to assure that subscriptions return consistent data
+    structures.
 * **`userMutations.ts`:**
   * Contains non prisma ORM mutations for our individual schema.
+* **`userPrismaSchema.graphql`:**
+  * Outlines the relational model for each individual schema for our prisma ORM.
 * **`userQueries.ts`:**
   * Contains non prisma ORM queries for our individual schema.
 * **`userSchema.ts`:**

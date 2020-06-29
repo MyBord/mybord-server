@@ -1,0 +1,21 @@
+export default `
+{
+  id
+  isFavorite
+  isToDo
+  type
+  cardData{
+    youtubeCardData{
+      channelThumbnail
+      channelTitle
+      duration
+      likes
+      publishedAt
+      videoId
+      videoThumbnail
+      videoTitle
+      views
+    }
+  }
+}
+`;

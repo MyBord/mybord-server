@@ -1,9 +1,10 @@
 import ServerError from 'server/serverError';
 import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
+import cardInfo from './cardInfo';
 
 export default {
-  createYoutubeCard: async (parent, args, { passport, prisma, pubsub }, info) => {
+  createYoutubeCard: async (parent, args, { passport, prisma, pubsub }) => {
     try {
       const userId = passport.getUserId();
       const videoId = getYoutubeVideoId(args.data.videoUrl);
@@ -32,14 +33,14 @@ export default {
         },
       };
 
-      const card = await prisma.mutation.createCard(finalArgs, info);
+      const card = await prisma.mutation.createCard(finalArgs, cardInfo);
       pubsub.publish('userCard', { userCard: card });
       return card;
     } catch (error) {
       throw new ServerError({ message: error.message, status: 400 });
     }
   },
-  deleteUserCard: async (parent, args, { passport, prisma, pubsub }, info) => {
+  deleteUserCard: async (parent, args, { passport, prisma, pubsub }) => {
     const userId = passport.getUserId();
     const { cardId } = args.data;
 
@@ -59,10 +60,10 @@ export default {
     };
 
     // Make sure that the card that is trying to be deleted belongs to the user
-    const userCard = await prisma.query.cards(queryArgs, info);
+    const userCard = await prisma.query.cards(queryArgs, '{ id }');
 
     if (userCard.length > 0) {
-      const deletedCard = await prisma.mutation.deleteCard(deleteArgs, info);
+      const deletedCard = await prisma.mutation.deleteCard(deleteArgs, cardInfo);
       pubsub.publish('deletedUserCard', { deletedUserCard: deletedCard });
       return deletedCard;
     }
@@ -72,7 +73,7 @@ export default {
       status: 403,
     });
   },
-  toggleFavoriteUserCard: async (parent, args, { passport, prisma }, info) => {
+  toggleFavoriteUserCard: async (parent, args, { passport, prisma }) => {
     const userId = passport.getUserId();
     const { cardId } = args.data;
 
@@ -98,7 +99,7 @@ export default {
         },
       };
 
-      const updatedCard = await prisma.mutation.updateCard(updateArgs, info);
+      const updatedCard = await prisma.mutation.updateCard(updateArgs, cardInfo);
       return updatedCard;
     }
 
@@ -107,7 +108,7 @@ export default {
       status: 403,
     });
   },
-  toggleToDoUserCard: async (parent, args, { passport, prisma }, info) => {
+  toggleToDoUserCard: async (parent, args, { passport, prisma }) => {
     const userId = passport.getUserId();
     const { cardId } = args.data;
 
@@ -133,7 +134,7 @@ export default {
         },
       };
 
-      const updatedCard = await prisma.mutation.updateCard(updateArgs, info);
+      const updatedCard = await prisma.mutation.updateCard(updateArgs, cardInfo);
       return updatedCard;
     }
 
