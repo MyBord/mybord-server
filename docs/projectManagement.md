@@ -15,14 +15,14 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* delete old gapi key
 * remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
 * add env vars in docker file
 * hide db secrets in docker file
 * change secrets
-* card type, e.g. 'Youtube', should not be capitized
-* prevent duplicate cards
+* Google API
+  * rest gapi key?
+  * restrict gapi key to certain ip addresses?
 
 BUILD / Production Deploy:
 
@@ -33,8 +33,8 @@ BUILD / Production Deploy:
 
 ### C. Medium
 
+* prevent duplicate cards
 * when adding youtube video card, check for duplicates
-* restrict gapi key to certain ip addresses
 * create new db for docker
 * make sure to lock down individual queries and subscriptions, mutations for prod app
 * outline / document where domains are kept, how they are handled, etc. -- add to root readme?
