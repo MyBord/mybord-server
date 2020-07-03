@@ -27,6 +27,9 @@ We use the 'Heroku Postgres' addon for our database.
 Prisma Cloud is the service we use to manage our heroku prisma instance. We can find this service
 at https://app.prisma.io/
 
+Prisma Cloud is also where we go to create our server that gets linked to heroku as well as our
+database that gets linked to heroku.
+
 ### A. Deploying to Prisma
 
 In order to deploy to Prisma, you must do the following:
