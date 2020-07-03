@@ -25,6 +25,11 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
 1. [Deploy to Prisma](#a-deploying-to-prisma)
 2. If you haven't already, run the command `heroku login` to authenticate your credentials with
 heroku.
+3. If you haven't already, create the heroku app by running the command `heroku create` and then
+rename that app to the name `mybord-server` by running the command
+`heroku apps:rename mybord-server --app <old-app-name>`.
+* Make sure that under the 'settings' tab, our heroku app has all the same config / env vars as
+our prod.env file.
 
 ## II. Prisma Cloud
 
