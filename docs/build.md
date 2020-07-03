@@ -68,6 +68,8 @@ The following are the yarn commands for our server application:
 
 The following are the env vars needed to run our server application: 
 
+* **`APP_PORT`**:
+  * This is the port that our client application can connect to.
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API.
 * **`NODE_ENV`**:

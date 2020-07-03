@@ -18,9 +18,13 @@ Heroku is used to:
 * Host our docker container
 * Host our node js application
 
-### A. Database
+### A. Deploying to Heroku
 
-We use the 'Heroku Postgres' addon for our database.
+In order to deploy our node.js application to Heroku, make sure you do the following:
+
+1. [Deploy to Prisma](#a-deploying-to-prisma)
+2. If you haven't already, run the command `heroku login` to authenticate your credentials with
+heroku.
 
 ## II. Prisma Cloud
 
