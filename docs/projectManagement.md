@@ -15,9 +15,6 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* add subscription for deleting card
-* remove current user query
-* fix user gating for user cards query
 * delete old gapi key
 * remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
