@@ -77,6 +77,7 @@ The following are the env vars needed to run our server application:
   * The exposed port that the server will run on.
 * **`PRISMA_ENDPOINT`**:
   * The endpoint that our prisma instance should run on.
+  * **NOTE: this env var should not be included in the prod.env file**
 * **`PRISMA_SECRET`**:
   * The secret that authenticates our prisma instance.
 * **`SESSION_SECRET`**:

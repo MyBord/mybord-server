@@ -32,3 +32,6 @@ In order to deploy to Prisma, you must do the following:
 
 1. If you haven't done so already, run the command `prisma login` to authenticate your
 credentials with the prisma cloud service.
+2. Run the command `yarn prisma-deploy:prod`.
+  2a. If you haven't set up the service before, make sure you do the following:
+    * If you haven't already, select the `mybord` server to deploy to. Then, create
