@@ -30,6 +30,13 @@ We use the 'Heroku Postgres' addon for our database.
 
 Prisma Cloud is the service we use to manage our heroku prisma instance.
 
+### A. Deploying to Prisma
+
+In order to deploy to Prisma, you must do the following:
+
+1. If you haven't done so already, run the command `prisma login` to authenticate your
+credentials with the prisma cloud service.
+
 ## III. Babel
 
 Babel is a javascript compiler. Its configs can be found at
