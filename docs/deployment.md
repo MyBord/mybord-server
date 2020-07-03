@@ -37,7 +37,7 @@ credentials with the prisma cloud service.
   *  If you haven't set up the service before, make sure you do the following:
       * You shouldn't have the `PRISMA_ENDPOINT` env var in your prod.env file
       * Select the `mybord` server to deploy to
-      * Create the name for the service; you should call it `mybord-prisma-service`
+      * Create the name for the service; you should call it `mybord-server-prisma-service`
       * Choose the name for your the stage; you should choose `prod`
       * Copy the endpoint added to the prisma.yml file and add it to the prod.env file under the
        env var `PRISMA_ENDPOINT`
