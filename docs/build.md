@@ -63,6 +63,9 @@ The following are the yarn commands for our server application:
   * Runs the dev server.
 * **`run:prod`:**
   * Runs the prod server.
+* **`start`:**
+  * This is the command that creates our production application; it builds our production node.js
+    server / application and then runs it.
     
 ## IV. Env Vars
 
