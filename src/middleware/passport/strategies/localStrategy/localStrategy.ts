@@ -18,11 +18,14 @@ class LocalStrategy extends Strategy {
 
     const done: Done = (error: Error, user: object, info?: Info) => {
       if (error) {
+        // @ts-ignore
         return this.error(error);
       }
       if (!user) {
+        // @ts-ignore
         return this.fail(info, 401);
       }
+      // @ts-ignore
       return this.success(user, info);
     };
 
