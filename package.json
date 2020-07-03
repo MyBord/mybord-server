@@ -1,6 +1,7 @@
 {
   "name": "myBord-server",
   "scripts": {
+    "push-heroku": "git push heroku master",
     "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
     "prisma-delete:test": "cd src/prisma/ && env-cmd -f ../../test.env prisma delete -f",
@@ -14,7 +15,7 @@
     "build:dev": "npm-run-all remove-dist webpack:dev",
     "build:prod": "npm-run-all remove-dist webpack:prod",
     "run:dev": "env-cmd -f dev.env nodemon dist/index",
-    "run:prod": "env-cmd -f prod.env node dist/index",
+    "run:prod": "node dist/index",
     "start": "npm-run-all build:prod run:prod"
   },
   "authors": [

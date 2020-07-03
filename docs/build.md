@@ -35,6 +35,8 @@ By principle, MyBord-Server is set to follow
 
 The following are the yarn commands for our server application:
 
+* **`push-heroku`:**
+  * This pushes our node.js application to our heroku app / instance.
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
@@ -63,6 +65,8 @@ The following are the yarn commands for our server application:
   * Runs the dev server.
 * **`run:prod`:**
   * Runs the prod server.
+  * NOTE: this command *does not* include using the prod.env file because the production env vars
+    get injected via heroku when we run `yarn start`.
 * **`start`:**
   * This is the command that creates our production application; it builds our production node.js
     server / application and then runs it.
