@@ -6,13 +6,31 @@ This summarizes the build process for the MyBord codebase as well as any other c
 
 ## Table of Contents:
 
-* [I. Babel](#i-babel)
-* [II. ESLint](#ii-eslint)
-* [III. Yarn Commands](#iii-yarn-commands)
-* [IV. Env Vars](#iv-env-vars)
-* [V. Running Locally](#v-running-locally)
+* [I. Heroku](#i-heroku)
+* [II. Prisma Cloud](#ii-prisma-cloud)
+* [III. Babel](#iii-babel)
+* [IV. ESLint](#iv-eslint)
+* [V. Yarn Commands](#v-yarn-commands)
+* [VI. Env Vars](#vi-env-vars)
+* [VII. Running Locally](#vii-running-locally)
 
-## I. Babel
+## I. Heroku
+
+Heroku is used to:
+
+* Host our database
+* Host our docker container
+* Host our node js application
+
+### A. Database
+
+We use the 'Heroku Postgres' addon for our database.
+
+## II. Prisma Cloud
+
+Prisma Cloud is the service we use to manage our heroku prisma instance.
+
+## III. Babel
 
 Babel is a javascript compiler. Its configs can be found at
 [.babelrc](https://github.com/jimmy-e/mybord/blob/master/.babelrc).
@@ -20,7 +38,7 @@ Babel is a javascript compiler. Its configs can be found at
 * [Documentation](https://babeljs.io/docs/en/)
 * [Source Code](https://github.com/babel/babel)
 
-## II. Eslint
+## IV. Eslint
 
 Eslint is used to lint our javascript and TypeScript code. It's config file in the root 
 directory, [`.eslintrc.js`](https://github.com/jimmy-e/mybord/blob/master/.eslintrc.js),
@@ -30,7 +48,7 @@ By principle, MyBord-Server is set to follow
 [AirBnB's Javascript Style Guide](https://github.com/airbnb/javascript) and
 [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint).
 
-## III. Yarn Commands
+## V. Yarn Commands
 
 The following are the yarn commands for our server application:
 
@@ -63,7 +81,7 @@ The following are the yarn commands for our server application:
 * **`run:prod`:**
   * Runs the prod server.
     
-## IV. Env Vars
+## VI. Env Vars
 
 The following are the env vars needed to run our server application: 
 
@@ -81,7 +99,7 @@ The following are the env vars needed to run our server application:
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   
-## V. Running Locally
+## VII. Running Locally
 
 In order to run the server locally, you must do the following steps:
 
