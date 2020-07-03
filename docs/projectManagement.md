@@ -13,8 +13,6 @@ This document is used to outline current project management priorities.
 
 ### A. Highest - MVP
 
-* make ports be env vars
-
 ### B. High - MVP
 
 * add subscription for deleting card

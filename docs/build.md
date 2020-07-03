@@ -74,6 +74,8 @@ The following are the env vars needed to run our server application:
 * **`NODE_ENV`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
   or 'TESTING'
+* **`PORT`**:
+  * The exposed port that the server will run on.
 * **`PRISMA_ENDPOINT`**:
   * The endpoint that our prisma instance should run on.
 * **`PRISMA_SECRET`**:
