@@ -24,7 +24,8 @@ We use the 'Heroku Postgres' addon for our database.
 
 ## II. Prisma Cloud
 
-Prisma Cloud is the service we use to manage our heroku prisma instance.
+Prisma Cloud is the service we use to manage our heroku prisma instance. We can find this service
+at https://app.prisma.io/
 
 ### A. Deploying to Prisma
 
@@ -33,5 +34,10 @@ In order to deploy to Prisma, you must do the following:
 1. If you haven't done so already, run the command `prisma login` to authenticate your
 credentials with the prisma cloud service.
 2. Run the command `yarn prisma-deploy:prod`.
-  2a. If you haven't set up the service before, make sure you do the following:
-    * If you haven't already, select the `mybord` server to deploy to. Then, create
+  *  If you haven't set up the service before, make sure you do the following:
+      * You shouldn't have the `PRISMA_ENDPOINT` env var in your prod.env file
+      * Select the `mybord` server to deploy to
+      * Create the name for the service; you should call it `mybord-prisma-service`
+      * Choose the name for your the stage; you should choose `prod`
+      * Copy the endpoint added to the prisma.yml file and add it to the prod.env file under the
+       env var `PRISMA_ENDPOINT`
