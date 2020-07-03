@@ -28,7 +28,7 @@ export default {
       }
     }
   },
-  loginUser: async (parent, args, { passport }, info) => {
+  loginUser: async (parent, args, { passport }) => {
     try {
       const { user } = await passport.authenticate({
         authenticateOptions: args.data,

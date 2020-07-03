@@ -19,7 +19,6 @@ const initializeServer = (
       passport: buildPassportContext({ request: request.req, response: request.res }),
       prisma,
       pubsub,
-      request,
     }),
     playground: {
       settings: {

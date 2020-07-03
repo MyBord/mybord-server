@@ -15,7 +15,6 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* remove 'request' from context in `initialzeServer`
 * remove the jwt_secret env var and all uses and all outdated auth
 * add env vars in docker file
 * hide db secrets in docker file

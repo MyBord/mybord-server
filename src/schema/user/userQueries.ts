@@ -1,10 +1,10 @@
 import restrictUserData from 'utils/restrictUserData';
 
 export default {
-  isAuthenticated: async (parent, args, { passport }, info) => (
+  isAuthenticated: async (parent, args, { passport }) => (
     passport.isAuthenticated()
   ),
-  logoutUser: async (parent, args, { passport }, info) => passport.logout(),
+  logoutUser: async (parent, args, { passport }) => passport.logout(),
   users: async (parent, args, { prisma }, info) => {
     const finalArgs = {
       ...args,
