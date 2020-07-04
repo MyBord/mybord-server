@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* internal server error for new user trying to login but doesn't exist?
 * add env vars in docker file
 * hide db secrets in docker file
 * have session be remembered by user
