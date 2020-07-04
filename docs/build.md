@@ -9,9 +9,10 @@ deploying to our production instance, please see the [deployment doc](https://gi
 
 * [I. Babel](#i-babel)
 * [II. ESLint](#ii-eslint)
-* [III. Yarn Commands](#iii-yarn-commands)
-* [IV. Env Vars](#iv-env-vars)
-* [V. Running Locally](#v-running-locally)
+* [III. Docker](#iii-docker)
+* [IV. Yarn Commands](#iv-yarn-commands)
+* [V. Env Vars](#v-env-vars)
+* [VI. Running Locally](#vi-running-locally)
 
 ## I. Babel
 
@@ -31,7 +32,25 @@ By principle, MyBord-Server is set to follow
 [AirBnB's Javascript Style Guide](https://github.com/airbnb/javascript) and
 [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint).
 
-## III. Yarn Commands
+## III. Docker
+
+We use docker for our virtualized containers.
+
+The file, `/src/prisma/docker-compose.yml` is used by prisma to start up the configured docker
+container that holds the image for our prisma instance and database.
+
+### A. Docker Commands
+
+* In order to create a docker image locally, cd into the `/src/prisma/` folder and run the command
+`docker-compose up -d`.
+* If you want to delete a local docker image & container, run the following commands:
+  * List the docker containers: `docker ps`
+  * Stop the relevant docker container: `docker stop <CONTAINER ID>`
+  * Delete the relevant docker container: `docker rm <CONTAINER ID>`
+  * List the running docker images: `docker images`
+  * Delete the relevant docker image: `docker rmi <IMAGE ID>`
+
+## IV. Yarn Commands
 
 The following are the yarn commands for our server application:
 
@@ -71,7 +90,7 @@ The following are the yarn commands for our server application:
   * This is the command that creates our production application; it builds our production node.js
     server / application and then runs it.
     
-## IV. Env Vars
+## V. Env Vars
 
 The following are the env vars needed to run our server application: 
 
@@ -93,12 +112,16 @@ The following are the env vars needed to run our server application:
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   
-## V. Running Locally
+## VI. Running Locally
 
-In order to run the server locally, you must do the following steps:
+Before running the server locally, you must do the following:
 
-1. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
-2. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
-2. Run `yarn prisma-deploy:dev`.
-3. Run `yarn build:dev`.
-4. In a second terminal window, run `yarn run:dev`.
+1. Download docker community edition.
+2. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
+3. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
+
+Once you are ready to run the server locally, you must do the following steps:
+
+1. Run `yarn prisma-deploy:dev`.
+2. Run `yarn build:dev`.
+3. In a second terminal window, run `yarn run:dev`.
