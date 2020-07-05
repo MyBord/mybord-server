@@ -102,12 +102,8 @@ The following are the yarn commands for our server application:
 
 The following are the env vars needed to run our server application. Note that `DOCKER_DB_HOST`,
 `DOCKER_DB_NAME`, `DOCKER_DB_PASSWORD`, `DOCKER_DB_PORT`, and `DOCKER_DB_USER` are database
-credentials that come from the relevant Heroku database information.
+credentials that come from the [relevant Heroku database information](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#b-instances).
 
-* **`EXTERNAL_PORT`**:
-  * This is the external port that our client application can connect to.
-* **`GAPI_KEY`**:
-  * This is the google api key that is used to access the Youtube Data API.
 * **`DOCKER_DB_HOST`**:
   * This is the host name of the relevant heroku database instance.
 * **`DOCKER_DB_NAME`**:
@@ -118,6 +114,11 @@ credentials that come from the relevant Heroku database information.
   * This is the database port of the relevant heroku database instance.
 * **`DOCKER_DB_USER`**:
   * This is the database user id of the relevant heroku database instance.
+* **`EXTERNAL_PORT`**:
+  * This is the external port that our client application can connect to.
+* **`GAPI_KEY`**:
+  * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
+    found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
 * **`NODE_ENV`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
   or 'TESTING'
