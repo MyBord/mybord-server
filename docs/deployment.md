@@ -32,6 +32,24 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
     our prod.env file.
 3. Run the yarn command `yarn push-heroku`.
 
+### B. Instances
+
+In addition to hosting our production instance, heroku also holds our development and testing
+instance.
+
+Each instance is created by creating a new app in heroku. We have the following instances:
+
+* `mybord-server-testing`: Our testing instance
+* `mybord-server-dev-<developer_first_name>`: The testing instance for each developer (e.g.
+`mybord-server-dev-jimmy`, or if multiple are needed per developer, `mybord-server-dev-jimmy-1`,
+`mybord-server-dev-jimmy-2`, etc).
+
+Each instance needs the Heroku Postgres addon.
+
+You can click on this Heroku Postgres addon for the relevant instance to open the datastore
+dashboard. If you then go to the 'settings' tab and click on 'view credentials', you can see the
+credentials needed to populate the dev.env and test.env files.
+
 ## II. Prisma Cloud
 
 Prisma Cloud is the service we use to manage our heroku prisma instance. We can find this service
