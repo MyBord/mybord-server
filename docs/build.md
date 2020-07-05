@@ -137,11 +137,12 @@ credentials that come from the [relevant Heroku database information](https://gi
 
 Before running the server locally, you must do the following:
 
-1. Download docker community edition.
-2. Make sure you have the docker container running by going to the folder `/src/prisma/` and running
-the command `docker-compose up -d`.
-3. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
-4. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
+1. Make sure you have created a development instance on Heroku with a postgres addon and named it
+appropriately (e.g. `mybord-server-dev-jimmy`).
+2. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
+3. Download docker community edition.
+4. Build the docker container by running the command `yarn compose-docker:dev`.
+5. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
 
 Once you are ready to run the server locally, you must do the following steps:
 
