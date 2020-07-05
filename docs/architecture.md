@@ -246,7 +246,7 @@ prisma/
 ```
 
 * **`docker-compose.yml`:**
-  * Configures a docker image for our prisma instace / db. [See here](https://v1.prisma.io/docs/1.1/reference/clusters/docker-aira9zama5/).
+  * Configures a docker image for our prisma instance / db. [See here](https://v1.prisma.io/docs/1.1/reference/clusters/docker-aira9zama5/).
 * **`initializePrisma.ts`:**
   * Initializes our prisma orm. This function sets our prisma endpoint, secret, and points to the
    generated prisma typeDefs that should get used.

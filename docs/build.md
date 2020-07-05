@@ -41,19 +41,27 @@ container that holds the image for our prisma instance and database.
 
 ### A. Docker Commands
 
-* In order to create a docker image locally, cd into the `/src/prisma/` folder and run the command
-`docker-compose up -d`.
+* In order to create a docker image locally, make sure you have all of the necessary env vars in
+the `dev.env` file and access to your own development database via heroku and then run the command
+`yarn compose-docker:dev`.
 * If you want to delete a local docker image & container, run the following commands:
   * List the docker containers: `docker ps`
   * Stop the relevant docker container: `docker stop <CONTAINER ID>`
   * Delete the relevant docker container: `docker rm <CONTAINER ID>`
   * List the running docker images: `docker images`
   * Delete the relevant docker image: `docker rmi <IMAGE ID>`
+  
+### B. References  
+
+* [Docker CLI Reference](https://docs.docker.com/compose/reference/overview/)
 
 ## IV. Yarn Commands
 
 The following are the yarn commands for our server application:
 
+* **`compose-docker:dev`:**
+  * This composes a local docker image / container based upon the development database instance
+   from heroku.
 * **`push-heroku`:**
   * This pushes our node.js application to our heroku app / instance.
 * **`get-schema`:**
@@ -94,21 +102,31 @@ The following are the yarn commands for our server application:
 
 The following are the env vars needed to run our server application: 
 
-* **`APP_PORT`**:
-  * This is the port that our client application can connect to.
+* **`EXTERNAL_PORT`**:
+  * This is the external port that our client application can connect to.
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API.
+* **`DOCKER_DB_HOST`**:
+  * This is the host name of the relevant heroku database instance.
+* **`DOCKER_DB_NAME`**:
+  * This is the database name of the relevant heroku database instance.
+* **`DOCKER_DB_PASSWORD`**:
+  * This is the database password of the relevant heroku database instance.
+* **`DOCKER_DB_PORT`**:
+  * This is the database port of the relevant heroku database instance.
+* **`DOCKER_DB_USER`**:
+  * This is the database user id of the relevant heroku database instance.
 * **`NODE_ENV`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
   or 'TESTING'
-* **`PORT`**:
-  * The exposed port that the server will run on.
 * **`PRISMA_ENDPOINT`**:
   * The endpoint that our prisma instance should run on.
   * NOTE: for the prod.env file, you can find the necessary http endpoint in our prisma cloud app
    at https://app.prisma.io (the http endpoint is everything before the `?`).
 * **`PRISMA_SECRET`**:
   * The secret that authenticates our prisma instance.
+* **`SERVER_PORT`**:
+  * The exposed port that the server will run on.
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   
@@ -117,8 +135,10 @@ The following are the env vars needed to run our server application:
 Before running the server locally, you must do the following:
 
 1. Download docker community edition.
-2. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
-3. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
+2. Make sure you have the docker container running by going to the folder `/src/prisma/` and running
+the command `docker-compose up -d`.
+3. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
+4. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
 
 Once you are ready to run the server locally, you must do the following steps:
 

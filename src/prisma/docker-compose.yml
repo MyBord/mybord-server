@@ -13,11 +13,11 @@ services:
         databases:
           default:
             connector: postgres
-            host: $DB_HOST
-            database: $DB_NAME
-            user: $DB_USER
-            password: $DB_PASSWORD
+            host: ${DOCKER_DB_HOST}
+            database: ${DOCKER_DB_NAME}
+            user: ${DOCKER_DB_USER}
+            password: ${DOCKER_DB_PASSWORD}
             ssl: true
             rawAccess: true
-            port: '5432'
+            port: ${DOCKER_DB_PORT}
             migrations: true
