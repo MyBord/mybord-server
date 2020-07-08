@@ -5,7 +5,7 @@ export default {
   userCard: {
     subscribe: (parent, args, { pubsub }, info) => pubsub.asyncIterator('userCard'),
   },
-  userCards: {
-    subscribe: (parent, args, { pubsub }, info) => pubsub.asyncIterator('userCards'),
+  filteredUserCards: {
+    subscribe: (parent, args, { pubsub }, info) => pubsub.asyncIterator('filteredUserCards'),
   },
 };
