@@ -35,8 +35,8 @@ export default {
       finalArgs.where.isToDo = isToDo;
     }
 
-    const userCards = prisma.query.cards(finalArgs, info);
-    pubsub.publish('userCards', { userCards });
-    return userCards;
+    const filteredUserCards = prisma.query.cards(finalArgs, info);
+    pubsub.publish('filteredUserCards', { filteredUserCards });
+    return filteredUserCards;
   },
 };
