@@ -1,4 +1,4 @@
-import { CardQueryArgs } from 'types/argTypes';
+import { CardQueryArgs, Filters } from './cardTypes';
 
 export default {
   userCards: async (parent, args, { passport, prisma }, info) => {
@@ -27,16 +27,19 @@ export default {
 
     const { isFavorite, isToDo } = args.data;
 
+    const filters: Filters = {};
     if (isFavorite) {
       finalArgs.where.isFavorite = isFavorite;
+      filters.isFavorite = isFavorite;
     }
 
     if (isToDo) {
       finalArgs.where.isToDo = isToDo;
+      filters.isToDo = isToDo;
     }
 
-    const filteredUserCards = prisma.query.cards(finalArgs, info);
-    pubsub.publish('filteredUserCards', { filteredUserCards });
-    return filteredUserCards;
+    const userCards = prisma.query.cards(finalArgs, info);
+    pubsub.publish('filteredUserCards', { filteredUserCards: { filters, userCards } });
+    return userCards;
   },
 };

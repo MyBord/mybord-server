@@ -282,6 +282,7 @@ schema/
      |- userQueries.ts
      |- userSchema.graqphql
      |- userSubscriptions.ts
+     |- userTypes.ts
 ```
 
 * **`userInfo.ts`:**
@@ -298,6 +299,8 @@ schema/
   * Contains non prisma ORM type definitions for our individual schema.
 * **`userSubscriptions.ts`:**
   * Contains non prisma ORM subscriptions for our individual schema.
+* **`userTypes.ts`:**
+  * Relevant types and interfaces to the user schema.
 
 #### ii. Resolvers
 

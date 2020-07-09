@@ -1,3 +1,15 @@
+# ----- TYPES ----- #
+
+type Filters {
+  isFavorite: Boolean
+  isToDo: Boolean
+}
+
+type FilteredUserCardsType {
+  filters: Filters!
+  userCards: [Card!]!
+}
+
 # ----- INPUTS ----- #
 
 input CardFilterInput {
@@ -26,7 +38,7 @@ extend type Mutation {
 
 extend type Subscription {
   deletedUserCard: Card!
-  filteredUserCards: [Card!]!
+  filteredUserCards: FilteredUserCardsType!
   userCard: Card!
 }
 

@@ -7,3 +7,8 @@ export interface CardQueryArgs {
     };
   };
 }
+
+export interface Filters {
+  isFavorite?: boolean;
+  isToDo?: boolean;
+}
