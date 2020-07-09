@@ -1,13 +1,13 @@
 # ----- TYPES ----- #
 
-input CardFilterType {
+type Filters {
   isFavorite: Boolean
   isToDo: Boolean
 }
 
 type FilteredUserCardsType {
+  filters: Filters!
   userCards: [Card!]!
-  filters: CardFilterType!
 }
 
 # ----- INPUTS ----- #
