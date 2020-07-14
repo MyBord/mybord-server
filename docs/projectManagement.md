@@ -23,7 +23,7 @@ This document is used to outline current project management priorities.
 * have session be remembered by user
 * change secrets
 * Google API
-  * rest gapi key?
+  * reset gapi key?
   * restrict gapi key to certain ip addresses?
 
 BUILD / Production Deploy:
