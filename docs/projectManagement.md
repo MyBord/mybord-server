@@ -35,6 +35,8 @@ BUILD / Production Deploy:
 
 ### C. Medium
 
+* upgrade to prisma 2
+  * https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1
 * prevent duplicate cards
 * when adding youtube video card, check for duplicates
 * create new db for docker
