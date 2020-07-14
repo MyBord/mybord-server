@@ -7,10 +7,24 @@ other related build matters, please see the [build doc](https://github.com/jimmy
 
 ## Table of Contents:
 
-* [I. Heroku](#i-heroku)
-* [II. Prisma Cloud](#ii-prisma-cloud)
+* [I. Summary](#i-summary)
+* [II. Heroku](#ii-heroku)
+* [III. Prisma Cloud](#iii-prisma-cloud)
 
-## I. Heroku
+## I. Summary
+
+We use two services for deployment:
+  * Heroku:
+    * Hosts our production database
+    * Hosts our Prisma docker container
+    * Hosts our Node.js application
+  * Prisma Cloud:
+    * Makes it easy to manage those Heroku prisma instances
+    
+In order to deploy our back end production application, we need to do the following:    
+1. [Create a prisma service](#a-creating-prisma-services)
+
+## II. Heroku
 
 Heroku is used to:
 
@@ -22,7 +36,7 @@ Heroku is used to:
 
 In order to deploy our node.js application to Heroku, make sure you do the following:
 
-1. [Deploy to Prisma](#a-deploying-to-prisma)
+1. [Deploy to Prisma](#b-deploying-to-prisma)
 2. If you haven't already:
   * run the command `heroku login` to authenticate your credentials with heroku.
   * create the heroku app by running the command `heroku create` and then rename that app to the
@@ -34,8 +48,8 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
 
 ### B. Instances
 
-In addition to hosting our production instance, heroku also holds our development and testing
-instance.
+In addition to hosting our production instance, heroku also hosts our development and testing
+instances.
 
 Each instance is created by creating a new app in heroku. We have the following instances:
 
@@ -44,21 +58,29 @@ Each instance is created by creating a new app in heroku. We have the following 
 `mybord-server-dev-jimmy`, or if multiple are needed per developer, `mybord-server-dev-jimmy-1`,
 `mybord-server-dev-jimmy-2`, etc).
 
-Each instance needs the Heroku Postgres addon.
+Each instance will need the Heroku Postgres addon. Once you create this addon, you can then go to
+the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
+and there you can see the database credentials needed to populate the dev.env and test.env files.
 
-You can click on this Heroku Postgres addon for the relevant instance to open the datastore
-dashboard. If you then go to the 'settings' tab and click on 'view credentials', you can see the
-credentials needed to populate the dev.env and test.env files.
+## III. Prisma Cloud
 
-## II. Prisma Cloud
+Prisma Cloud is the service we use to manage our heroku prisma instances. We can find this service
+at `https://app.prisma.io/`. Prisma Cloud is also where we go to create our server and database
+that gets linked to heroku.
 
-Prisma Cloud is the service we use to manage our heroku prisma instance. We can find this service
-at https://app.prisma.io/
+### A. Creating Prisma Services
 
-Prisma Cloud is also where we go to create our server that gets linked to heroku as well as our
-database that gets linked to heroku.
+In order to create our necessary prisma services, we need to:
+1. Create a prisma account
+2. Create a new prisma server. The server name should be `mybord-prisma`.
+3. Set up a database that is connected to Heroku and connect it to your existing Heroku account.
+4. Set up a PostgreSQL database.
+5. Set up a server connected to Heroku.
+6. Once the server is set up and running, view the server details and click on the database and
+the button 'view on heroku'. From there, you can get the database credentials from heroku for
+our production prisma service.
 
-### A. Deploying to Prisma
+### B. Deploying to Prisma
 
 In order to deploy to Prisma, you must do the following:
 
