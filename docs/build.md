@@ -121,8 +121,8 @@ credentials that come from the [relevant Heroku database information](https://gi
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
 * **`NODE_ENV`**:
-  * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
-  or 'TESTING'
+  * Declares what environment the server application is running in; can either be 'development',
+  'production', or 'testing'.
 * **`PORT`**:
   * The exposed port that the server will run on.
   * NOTE: This env var **must** be named `PORT` because Heroku uses this env var to declare what
