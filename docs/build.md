@@ -132,8 +132,6 @@ credentials that come from the [relevant Heroku database information](https://gi
   * The endpoint that our prisma instance should run on.
   * NOTE: for the prod.env file, you can find the necessary http endpoint in our prisma cloud app
    at https://app.prisma.io (the http endpoint is everything before the `?`).
-* **`PRISMA_PORT`**:
-  * The port that our prisma instance is connected to via our docker container.
 * **`PRISMA_SECRET`**:
   * The secret that authenticates our prisma instance.
 * **`SESSION_SECRET`**:
