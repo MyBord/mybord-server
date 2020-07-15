@@ -122,6 +122,11 @@ credentials that come from the [relevant Heroku database information](https://gi
 * **`NODE_ENV`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
   or 'TESTING'
+* **`PORT`**:
+  * The exposed port that the server will run on.
+  * NOTE: This env var **must** be named `PORT` because Heroku uses this env var to declare what
+   port the node.js application must run on when the application is deployed to Heroku. Because
+   of this, *this prod.env file should not include this env var*.
 * **`PRISMA_ENDPOINT`**:
   * The endpoint that our prisma instance should run on.
   * NOTE: for the prod.env file, you can find the necessary http endpoint in our prisma cloud app
@@ -130,8 +135,6 @@ credentials that come from the [relevant Heroku database information](https://gi
   * The port that our prisma instance is connected to via our docker container.
 * **`PRISMA_SECRET`**:
   * The secret that authenticates our prisma instance.
-* **`SERVER_PORT`**:
-  * The exposed port that the server will run on.
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   

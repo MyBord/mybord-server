@@ -32,9 +32,9 @@ const httpServer = http.createServer(expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
 // We run our http server.
-httpServer.listen(process.env.SERVER_PORT, () => {
-  console.log(`Server ready at http://localhost:${process.env.SERVER_PORT}${server.graphqlPath}`);
-  console.log(`Subscriptions ready at ws://localhost:${process.env.SERVER_PORT}${server.subscriptionsPath}`);
+httpServer.listen(process.env.PORT, () => {
+  console.log(`Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`);
+  console.log(`Subscriptions ready at ws://localhost:${process.env.PORT}${server.subscriptionsPath}`);
 });
 
 // Using webpack's hot module replacement, if needed.
