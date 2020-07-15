@@ -25,6 +25,7 @@ This document is used to outline current project management priorities.
 * Google API
   * reset gapi key?
   * restrict gapi key to certain ip addresses?
+* lock down playground from heroku url  
 
 BUILD / Production Deploy:
 
