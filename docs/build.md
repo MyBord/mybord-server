@@ -96,7 +96,8 @@ The following are the yarn commands for our server application:
     get injected via heroku when we run `yarn start`.
 * **`start`:**
   * This is the command that creates our production application; it builds our production node.js
-    server / application and then runs it.
+    server / application and then runs it. We use the `start` command because when we deploy our
+    node.js application to heroku, it looks at our `package.json` file and runs the `start` command.
     
 ## V. Env Vars
 
