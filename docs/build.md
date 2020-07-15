@@ -137,6 +137,23 @@ credentials that come from the [relevant Heroku database information](https://gi
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   
+Below is an example of a `dev.env` file:
+
+```
+DOCKER_DB_HOST=ec2-1234.compute-1.amazonaws.com
+DOCKER_DB_NAME=db1234
+DOCKER_DB_PASSWORD=abcd1234
+DOCKER_DB_PORT=9876
+DOCKER_DB_USER=jklmno
+EXTERNAL_PORT=8080
+GAPI_KEY=defgh34567
+NODE_ENV=DEV
+PORT=4000
+PRISMA_ENDPOINT=http://localhost:4466/default/default
+PRISMA_SECRET=thisIsAPrismaSecret
+SESSION_SECRET=thisisASessionSecret
+```
+  
 ## VI. Running Locally
 
 Before running the server locally, you must do the following:
