@@ -89,6 +89,10 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
    `heroku apps:rename mybord-server-prod --app <old-app-name>`.
   * Make sure that under the 'settings' tab, our heroku app has all the same config / env vars as
     our prod.env file.
+  * Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.
+  This allows us to increase our javascript application memory allocation and avoiding a
+  javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
+  and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
 2. Run the yarn command `yarn push-heroku`.
 
 ### B. Managing our instances
