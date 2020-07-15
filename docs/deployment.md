@@ -94,6 +94,7 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
   javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
   and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
 2. Run the yarn command `yarn push-heroku`.
+3. To view the production instance, go to `https://mybord-server-prod.herokuapp.com/graphql`.
 
 ### B. Managing our instances
 
