@@ -15,24 +15,20 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* make a note of what the testing and dev env var files should be
 * internal server error for new user trying to login but doesn't exist?
-* add env vars in docker file
-* hide db secrets in docker file
 * have session be remembered by user
 * change secrets
 * Google API
   * reset gapi key?
   * restrict gapi key to certain ip addresses?
 * lock down playground from heroku url  
+
+Production Deployment:
+
 * prevent url from heroku from modifying DB
-
-BUILD / Production Deploy:
-
-* Get domain running on mybord.io
+* Get domain running on mybord.io ?
 * Get production db running with backup
 * Make sure it is always spinning on heroku
-* detail heroku build process, with prisma.io, and add to root readme.md as well
 
 ### C. Medium
 
