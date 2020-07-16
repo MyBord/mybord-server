@@ -32,6 +32,7 @@ Production Deployment:
 
 ### C. Medium
 
+* gitignore dist folder
 * upgrade to prisma 2
   * https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1
 * prevent duplicate cards

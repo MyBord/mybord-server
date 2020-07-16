@@ -101,6 +101,18 @@ The following are the yarn commands for our server application:
     
 ## V. Env Vars
 
+When running locally, at the root of folder, you will need to create three separate env var files:
+
+* **`dev.env`:**
+  * a file containing node environment variables for your local instance when running
+   the server in 'DEV' mode.
+* **`prod.env`:**
+  * a file containing node environment variables for your local instance when running
+   the server in 'PROD' mode.
+* **`test.env`:**
+  * a file containing node environment variables for your local instance when running
+   the server in 'TEST' mode.
+
 The following are the env vars needed to run our server application. Note that `DOCKER_DB_HOST`,
 `DOCKER_DB_NAME`, `DOCKER_DB_PASSWORD`, `DOCKER_DB_PORT`, and `DOCKER_DB_USER` are database
 credentials that come from the [relevant Heroku database information](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#b-instances).

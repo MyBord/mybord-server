@@ -96,16 +96,19 @@ application folder.
   * configuration list of git ignores.
 * **`dev.env`:**
   * a file containing node environment variables for your local instance when running
-   the server in 'dev' mode.
+   the server in 'DEV' mode.
 * **`LICENSE.md`:**
   * Contains the software license / copyright.
 * **`package.json`:**
   * the package manager and metadata.
 * **`prod.env`:**
   * a file containing node environment variables for your local instance when running
-   the server in 'prod' mode.
+   the server in 'PROD' mode.
 * **`README.md`:**
   * the root readme document.
+* **`test.env`:**
+  * a file containing node environment variables for your local instance when running
+   the server in 'TEST' mode.
 * **`tsconfig.json`:**
   * Specifies how TypeScript should be compiled.
 * **`typings.d.ts`:**
