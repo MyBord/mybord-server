@@ -117,10 +117,18 @@ and there you can see the database credentials needed to populate the dev.env an
 * **Deploying from a branch besides master:**
   * If you want to deploy code to Heroku from a non-master branch of your local repository
   (for example, `testbranch`), use the following syntax to ensure it is pushed to the remote’s master
-  branch: `git branch heroku testbranch:master`.
+  branch: `git push heroku testbranch:master`.
 * **Adding heroku git repository:**
   * To add an existing heroku git repository, run this command: `heroku git:remote -a yourapp`.
 * **Tip of current heroku branch is behind:**
   * If, when trying to push to heroku, the attempt was rejected because 'the tip of your current
    branch is behind', then you can just use the `-ff` flag to fast forward:
    `git push heroku master -ff`.
+* **Redeploying to heroku:**
+  * If you want to redeploy to heroku but have not made any changes to your branch, run the
+   following commands:
+   ```
+   git commit --allow-empty -m "redeploying to heroku"
+   git push heroku master
+   ```
+
