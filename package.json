@@ -5,8 +5,8 @@
     "webpack:prod": "webpack --config webpack.prod.js",
     "build:dev": "npm-run-all remove-dist webpack:dev",
     "build:prod": "npm-run-all remove-dist webpack:prod",
-    "run:dev": "env-cmd -f dev.env nodemon dist/index",
-    "run:prod": "node dist/index",
+    "run:dev": "NODE_ENV=DEV PORT=4000 nodemon dist/index",
+    "run:prod": "NODE_ENV=PROD node dist/index",
     "start": "npm-run-all build:prod run:prod"
   },
   "license": "UNLICENSED",

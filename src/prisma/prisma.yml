@@ -1,8 +1,0 @@
-endpoint: http://localhost:4466
-datamodel:
-  - ../schema/card/cardPrismaSchema.graphql
-  - ../schema/user/userPrismaSchema.graphql
-secret: sample_prisma_secret
-generate:
-  - generator: graphql-schema
-    output: ../schema/typeDefs/prismaSchema.graphql

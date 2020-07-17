@@ -80,11 +80,9 @@ server.applyMiddleware({
 const httpServer = http.createServer(expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
-const PORT = 4000;
-
-httpServer.listen(PORT, () => {
-  console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-  console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+httpServer.listen(process.env.PORT, () => {
+  console.log(`Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`);
+  console.log(`Subscriptions ready at ws://localhost:${process.env.PORT}${server.subscriptionsPath}`);
 });
 
 if (process.env.NODE_ENV !== 'PROD' && module.hot) {
