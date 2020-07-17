@@ -1,23 +1,50 @@
+import cors from 'cors';
+import express from 'express';
 import http from 'http';
-import initializeMiddleware from 'middleware/initializeMiddleware';
+import passport from 'passport';
+import session from 'express-session';
+import uuid from 'uuid/v4';
+import initializePassport from 'middleware/passport/initializePassport';
 import initializeServer from 'server/initializeServer';
+import initializePrisma from './prisma/initializePrisma';
 
-// We initialize our middleware
-const {
-  expressMiddleware,
-  expressSessionMiddleware,
-  passportMiddleware,
-  passportSessionMiddleware,
-  prisma,
-} = initializeMiddleware();
+// ----- INITIALIZE PRISMA ----- //
 
-// We add some html pages to our node server (helpful for debugging and making sure our
-// deployments are up to date and accurate)
+const prisma = initializePrisma();
+
+// ----- INITIALIZE PASSPORT ----- //
+
+initializePassport(prisma);
+const passportMiddleware = passport.initialize();
+const passportSessionMiddleware = passport.session();
+
+// ----- INITIALIZE EXPRESS ----- //
+
+const expressMiddleware = express();
+const expressSessionMiddleware = session({
+  genid: (request) => uuid(),
+  resave: false,
+  saveUninitialized: false,
+  secret: 'thisIsMySecret',
+});
+
+expressMiddleware.use(cors({
+  credentials: true,
+  origin: 'http://localhost:8080',
+}));
+
+expressMiddleware.use(expressSessionMiddleware);
+expressMiddleware.use(passportMiddleware);
+expressMiddleware.use(passportSessionMiddleware);
+
+// ----- ADD AN INDEX PAGE ----- //
+
 expressMiddleware.get('/', (req, res) => {
   res.sendFile('src/pages/index.html', { root: '.' });
 });
 
-// We initialize our Apollo Server
+// ----- INITIALIZE OUR SERVER ----- //
+
 const server = initializeServer(
   expressSessionMiddleware,
   passportMiddleware,
