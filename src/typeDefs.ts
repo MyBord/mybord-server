@@ -7,14 +7,15 @@ const typeDefs = gql`
     lastName: String
     email: String
   }
+  input LoginUserInput {
+    email: String!
+    password: String!
+  }
   type Query {
     isAuthenticated: Boolean
   }
-  type AuthPayload {
-    user: User
-  }
   type Mutation {
-    loginUser(email: String!, password: String!): AuthPayload
+    loginUser(data: LoginUserInput): User!
   }
 `;
 

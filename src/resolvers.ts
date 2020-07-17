@@ -1,10 +1,6 @@
 const resolvers = {
   Query: {
-    isAuthenticated: (parent, args, { passport }) => {
-      console.log('--- isAuthenticated response ---');
-      console.log(`isAuthenticated: ${passport.isAuthenticated()}`);
-      return passport.isAuthenticated();
-    },
+    isAuthenticated: (parent, args, { passport }) => passport.isAuthenticated(),
   },
   Mutation: {
     loginUser: async (parent, args, { passport }) => {
