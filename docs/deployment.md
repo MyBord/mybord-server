@@ -140,3 +140,6 @@ and there you can see the database credentials needed to populate the dev.env an
   git remote add test-app1 <heroku_git_url>
   git push test-app1 master
   ```
+* **Getting the logs of a specifc app:**
+  * To get the logs of a specific app, run the following command:
+  `heroku logs --app sample_app_name --tail`.
