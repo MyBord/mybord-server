@@ -120,3 +120,7 @@ and there you can see the database credentials needed to populate the dev.env an
   branch: `git branch heroku testbranch:master`.
 * **Adding heroku git repository:**
   * To add an existing heroku git repository, run this command: `heroku git:remote -a yourapp`.
+* **Tip of current heroku branch is behind:**
+  * If, when trying to push to heroku, the attempt was rejected because 'the tip of your current
+   branch is behind', then you can just use the `-ff` flag to fast forward:
+   `git push heroku master -ff`.
