@@ -9,8 +9,8 @@ import { Prisma } from 'prisma-binding';
 import { PubSub } from 'graphql-subscriptions';
 import initializePassport from 'middleware/passport/initializePassport';
 import buildPassportContext from './middleware/passport/buildPassportContext';
-import resolvers from './schema/resolvers/resolvers';
-import typeDefs from './schema/typeDefs/typeDefs';
+import resolvers from './resolvers';
+import typeDefs from './typeDefs';
 
 // ----- INITIALIZE PRISMA ----- //
 
@@ -81,9 +81,11 @@ server.applyMiddleware({
 const httpServer = http.createServer(expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
-httpServer.listen(4000, () => {
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
-  console.log(`Subscriptions ready at ws://localhost:4000${server.subscriptionsPath}`);
+const PORT = 4000;
+
+httpServer.listen(PORT, () => {
+  console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
 });
 
 if (process.env.NODE_ENV !== 'PROD' && module.hot) {
