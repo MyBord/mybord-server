@@ -25,7 +25,7 @@ const expressSessionMiddleware = session({
   genid: (request) => uuid(),
   resave: false,
   saveUninitialized: false,
-  secret: 'thisIsMySecret',
+  secret: 'sample_session_secret',
 });
 
 expressMiddleware.use(cors({
