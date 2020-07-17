@@ -7,8 +7,11 @@ import uuid from 'uuid/v4';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
 import { PubSub } from 'graphql-subscriptions';
-import initializePassport from 'middleware/passport/initializePassport';
+import LocalStrategy
+  from './middleware/passport/strategies/localStrategy/localStrategy';
 import buildPassportContext from './middleware/passport/buildPassportContext';
+import localStrategyAuthentication
+  from './middleware/passport/strategies/localStrategy/localStrategyAuthentication';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
@@ -22,7 +25,19 @@ const prisma = new Prisma({
 
 // ----- INITIALIZE PASSPORT ----- //
 
-initializePassport(prisma);
+passport.use(
+  new LocalStrategy((email, password, done) => (
+    localStrategyAuthentication(email, password, done, prisma)
+  )),
+);
+
+passport.serializeUser((user: any, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  const user = await prisma.query.user({ where: { id } });
+  done(null, user);
+});
+
 const passportMiddleware = passport.initialize();
 const passportSessionMiddleware = passport.session();
 
