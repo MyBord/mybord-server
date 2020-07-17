@@ -11,6 +11,12 @@ const {
   prisma,
 } = initializeMiddleware();
 
+// We add some html pages to our node server (helpful for debugging and making sure our
+// deployments are up to date and accurate)
+expressMiddleware.get('/', (req, res) => {
+  res.sendFile('src/pages/index.html', { root: '.' });
+});
+
 // We initialize our Apollo Server
 const server = initializeServer(
   expressSessionMiddleware,
