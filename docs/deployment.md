@@ -112,7 +112,7 @@ Each instance will need the Heroku Postgres addon. Once you create this addon, y
 the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
 and there you can see the database credentials needed to populate the dev.env and test.env files.
 
-### C. Other Resources
+### C. Other Resources & Commands
 
 * **Deploying from a branch besides master:**
   * If you want to deploy code to Heroku from a non-master branch of your local repository
@@ -131,4 +131,12 @@ and there you can see the database credentials needed to populate the dev.env an
    git commit --allow-empty -m "redeploying to heroku"
    git push heroku master
    ```
-
+* **Listing all apps:**
+  * To list all heroku apps, run the following command: `heroku list`
+* **Pushing to a different heroku app:**
+  * To push do a different heroku app, first go to the respective heroku app and under 'settings'
+  find the heroku git url, then run the following commands:
+  ```
+  git remote add test-app1 <heroku_git_url>
+  git push test-app1 master
+  ```
