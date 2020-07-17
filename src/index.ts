@@ -4,13 +4,17 @@ import http from 'http';
 import passport from 'passport';
 import session from 'express-session';
 import uuid from 'uuid/v4';
+import { Prisma } from 'prisma-binding';
 import initializePassport from 'middleware/passport/initializePassport';
 import initializeServer from 'server/initializeServer';
-import initializePrisma from './prisma/initializePrisma';
 
 // ----- INITIALIZE PRISMA ----- //
 
-const prisma = initializePrisma();
+const prisma = new Prisma({
+  endpoint: 'http://localhost:4466',
+  secret: 'sample_prisma_secret',
+  typeDefs: 'src/schema/typeDefs/prismaSchema.graphql',
+});
 
 // ----- INITIALIZE PASSPORT ----- //
 
