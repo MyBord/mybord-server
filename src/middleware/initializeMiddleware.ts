@@ -29,6 +29,12 @@ export default (): Middleware => {
   const passportMiddleware = passport.initialize();
   const passportSessionMiddleware = passport.session();
 
+
+  const router = express.Router();
+  router.get('/', (req, res, next) => {
+    res.status(200).send('Hi, It works!');
+  });
+
   // implements our middleware into express
   // expressMiddleware.use(cors(corsOptions));
   expressMiddleware.use(cors({ origin: '*' }));
