@@ -1,5 +1,3 @@
-// Source: https://github.com/jkettmann/graphql-passport/blob/master/src/buildContext.ts
-
 import passport from 'passport';
 import {
   AuthenticateParams,

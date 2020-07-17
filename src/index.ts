@@ -7,11 +7,9 @@ import uuid from 'uuid/v4';
 import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
 import { PubSub } from 'graphql-subscriptions';
-import LocalStrategy
-  from './middleware/passport/strategies/localStrategy/localStrategy';
-import buildPassportContext from './middleware/passport/buildPassportContext';
-import localStrategyAuthentication
-  from './middleware/passport/strategies/localStrategy/localStrategyAuthentication';
+import LocalStrategy from './passport/localStrategy';
+import buildPassportContext from './passport/buildPassportContext';
+import localStrategyAuthentication from './passport/localStrategyAuthentication';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
