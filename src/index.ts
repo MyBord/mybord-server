@@ -4,9 +4,13 @@ import http from 'http';
 import passport from 'passport';
 import session from 'express-session';
 import uuid from 'uuid/v4';
+import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
+import { PubSub } from 'graphql-subscriptions';
 import initializePassport from 'middleware/passport/initializePassport';
-import initializeServer from 'server/initializeServer';
+import buildPassportContext from './middleware/passport/buildPassportContext';
+import resolvers from './schema/resolvers/resolvers';
+import typeDefs from './schema/typeDefs/typeDefs';
 
 // ----- INITIALIZE PRISMA ----- //
 
@@ -49,14 +53,23 @@ expressMiddleware.get('/', (req, res) => {
 
 // ----- INITIALIZE OUR SERVER ----- //
 
-const server = initializeServer(
-  expressSessionMiddleware,
-  passportMiddleware,
-  passportSessionMiddleware,
-  prisma,
-);
+const pubsub = new PubSub();
 
-// We apply the express middleware to our server
+const server = new ApolloServer({
+  context: (request) => ({
+    passport: buildPassportContext({ request: request.req, response: request.res }),
+    prisma,
+    pubsub,
+  }),
+  playground: {
+    settings: {
+      'request.credentials': 'same-origin',
+    },
+  },
+  resolvers,
+  typeDefs,
+});
+
 server.applyMiddleware({
   app: expressMiddleware,
   cors: false,
