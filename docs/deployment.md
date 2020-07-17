@@ -124,3 +124,11 @@ and there you can see the database credentials needed to populate the dev.env an
   * If, when trying to push to heroku, the attempt was rejected because 'the tip of your current
    branch is behind', then you can just use the `-ff` flag to fast forward:
    `git push heroku master -ff`.
+* **Redeploying to heroku:**
+  * If you want to redeploy to heroku but have not made any changes to your branch, run the
+   following commands:
+   ```
+   git commit --allow-empty -m "redeploying to heroku"
+   git push heroku master
+   ```
+
