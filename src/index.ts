@@ -58,12 +58,6 @@ expressMiddleware.use(expressSessionMiddleware);
 expressMiddleware.use(passportMiddleware);
 expressMiddleware.use(passportSessionMiddleware);
 
-// ----- ADD AN INDEX PAGE ----- //
-
-expressMiddleware.get('/', (req, res) => {
-  res.sendFile('src/index.html', { root: '.' });
-});
-
 // ----- INITIALIZE OUR SERVER ----- //
 
 const pubsub = new PubSub();

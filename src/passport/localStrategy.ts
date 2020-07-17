@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { Strategy } from 'passport-strategy';
-import { Done, Info, VerifyFunction } from 'types/passportTypes';
+import { Done, Info, VerifyFunction } from './passportTypes';
 
 class LocalStrategy extends Strategy {
   public constructor(cb: VerifyFunction) {

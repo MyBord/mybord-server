@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { Done } from 'types/passportTypes';
 import { Prisma } from 'prisma-binding';
+import { Done } from './passportTypes';
 
 export default async (
   email: string,
