@@ -7,7 +7,8 @@
     "build:prod": "npm-run-all remove-dist webpack:prod",
     "run:dev": "NODE_ENV=DEV PORT=4000 nodemon dist/index",
     "run:prod": "NODE_ENV=PROD node dist/index",
-    "start": "npm-run-all build:prod run:prod"
+    "heroku-postbuild": "build:prod",
+    "start": "run:prod"
   },
   "license": "UNLICENSED",
   "devDependencies": {
