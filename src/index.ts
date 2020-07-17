@@ -5,36 +5,29 @@ import passport from 'passport';
 import session from 'express-session';
 import uuid from 'uuid/v4';
 import { ApolloServer } from 'apollo-server-express';
-import { Prisma } from 'prisma-binding';
 import { PubSub } from 'graphql-subscriptions';
 import LocalStrategy from './passport/localStrategy';
 import buildPassportContext from './passport/buildPassportContext';
-import localStrategyAuthentication from './passport/localStrategyAuthentication';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
-
-// ----- INITIALIZE PRISMA ----- //
-
-const prisma = new Prisma({
-  endpoint: 'http://localhost:4466',
-  secret: 'sample_prisma_secret',
-  typeDefs: 'src/schema/typeDefs/prismaSchema.graphql',
-});
+import users from './users';
 
 // ----- INITIALIZE PASSPORT ----- //
 
-passport.use(
-  new LocalStrategy((email, password, done) => (
-    localStrategyAuthentication(email, password, done, prisma)
-  )),
-);
-
 passport.serializeUser((user: any, done) => done(null, user.id));
 
-passport.deserializeUser(async (id, done) => {
-  const user = await prisma.query.user({ where: { id } });
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  const matchingUser = users.find((user) => user.id === id);
+  done(null, matchingUser);
 });
+
+passport.use(
+  new LocalStrategy((email, password, done) => {
+    const matchingUser = users.find((user) => email === user.email && password === user.password);
+    const error = matchingUser ? null : new Error('no matching user');
+    done(error, matchingUser);
+  }),
+);
 
 const passportMiddleware = passport.initialize();
 const passportSessionMiddleware = passport.session();
@@ -65,7 +58,6 @@ const pubsub = new PubSub();
 const server = new ApolloServer({
   context: (request) => ({
     passport: buildPassportContext({ request: request.req, response: request.res }),
-    prisma,
     pubsub,
   }),
   playground: {
