@@ -111,3 +111,16 @@ Each instance is created by creating a new app in heroku. We have the following 
 Each instance will need the Heroku Postgres addon. Once you create this addon, you can then go to
 the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
 and there you can see the database credentials needed to populate the dev.env and test.env files.
+
+### C. Other Resources
+
+* **Deploying from a branch besides master:**
+  * If you want to deploy code to Heroku from a non-master branch of your local repository
+  (for example, `testbranch`), use the following syntax to ensure it is pushed to the remote’s master
+  branch: `git branch heroku testbranch:master`.
+* **Adding heroku git repository:**
+  * To add an existing heroku git repository, run this command: `heroku git:remote -a yourapp`.
+* **Tip of current heroku branch is behind:**
+  * If, when trying to push to heroku, the attempt was rejected because 'the tip of your current
+   branch is behind', then you can just use the `-ff` flag to fast forward:
+   `git push heroku master -ff`.
