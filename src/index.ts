@@ -76,18 +76,16 @@ server.applyMiddleware({
   path: '/graphql',
 });
 
-// We create an http server and then add subscriptions
-// https://www.apollographql.com/docs/apollo-server/data/subscriptions/#subscriptions-with-additional-middleware
+// ----- RUNNING THE SERVER ----- //
+
 const httpServer = http.createServer(expressMiddleware);
 server.installSubscriptionHandlers(httpServer);
 
-// We run our http server.
-httpServer.listen(process.env.PORT, () => {
-  console.log(`Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`);
-  console.log(`Subscriptions ready at ws://localhost:${process.env.PORT}${server.subscriptionsPath}`);
+httpServer.listen(4000, () => {
+  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+  console.log(`Subscriptions ready at ws://localhost:4000${server.subscriptionsPath}`);
 });
 
-// Using webpack's hot module replacement, if needed.
 if (process.env.NODE_ENV !== 'PROD' && module.hot) {
   module.hot.accept();
   module.hot.dispose(() => server.stop());
