@@ -31,7 +31,7 @@ export default (): Middleware => {
 
   // implements our middleware into express
   // expressMiddleware.use(cors(corsOptions));
-  expressMiddleware.use(cors());
+  expressMiddleware.use(cors({ origin: '*' }));
   expressMiddleware.use(expressSessionMiddleware);
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);
