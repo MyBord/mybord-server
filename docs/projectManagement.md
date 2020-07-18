@@ -16,9 +16,7 @@ This document is used to outline current project management priorities.
 ### B. High - MVP
 
 * add a heroku-postbuild command?
-* document how we attach a cookie to our session via information here:
-  * https://github.com/jkettmann/graphql-passport/issues/5
-  * https://jkettmann.com/authentication-and-authorization-with-graphql-and-passport/
+* update application summary doc image
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
 * change secrets

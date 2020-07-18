@@ -25,6 +25,7 @@ the following:
 
 Further documentation can be found below:
 
+  * [Application Summary](https://github.com/jimmy-e/mybord-server/tree/master/docs/applicationSummary.md)
   * [Architecture](https://github.com/jimmy-e/mybord-server/tree/master/docs/architecture.md)
   * [Build Process](https://github.com/jimmy-e/mybord-server/tree/master/docs/build.md)
   * [Deployment](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md)
