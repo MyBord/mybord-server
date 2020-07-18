@@ -1,4 +1,4 @@
-<img align="right" width="280" height="230" src="https://github.com/jimmy-e/mybord-server/blob/master/etc/assets/build.jpg">
+<img align="right" width="295" height="180.5" src="https://github.com/jimmy-e/mybord-server/blob/master/etc/assets/nodeLogo.svg">
 
 # Application Summary
 
