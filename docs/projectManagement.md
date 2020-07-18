@@ -16,7 +16,6 @@ This document is used to outline current project management priorities.
 ### B. High - MVP
 
 * add a heroku-postbuild command?
-* update application summary doc image
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
 * change secrets
@@ -31,6 +30,8 @@ Production Deployment:
 * Get domain running on mybord.io ?
 * Get production db running with backup
 * Make sure it is always spinning on heroku
+
+* make backups of github repos
 
 ### C. Medium
 
