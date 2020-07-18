@@ -13,6 +13,7 @@ deploying to our production instance, please see the [deployment doc](https://gi
 * [IV. Yarn Commands](#iv-yarn-commands)
 * [V. Env Vars](#v-env-vars)
 * [VI. Running Locally](#vi-running-locally)
+* [VII. Important Branches](#vii-important-branches)
 
 ## I. Babel
 
@@ -182,3 +183,13 @@ Once you are ready to run the server locally, you must do the following steps:
 1. Run `yarn prisma-deploy:dev`.
 2. Run `yarn build:dev`.
 3. In a second terminal window, run `yarn run:dev`.
+
+## VII. Important Branches
+
+The following are important branches in regards to the `mybord-server` repo:
+
+* **`master:`**:
+  * This is the branch where our production code lives.
+* **`mini_server:`**:
+  * This branch contains a very simplified build of our node.js application and is used for
+   debugging.
