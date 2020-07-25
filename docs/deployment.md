@@ -67,21 +67,31 @@ In order to create our necessary prisma services, we need to:
 the button 'view on heroku'. From there, you can get the database credentials for the server and
  use those credentials to populate the respective .env file.
 
-### B. Deploying our application to a Prisma service
+### B. Deploying the application to a Prisma service
 
-In order to deploy to Prisma, you must do the following:
+In order to deploy to Prisma, you can run the command `yarn prisma-deploy:<prod, dev, etc>`.
 
-1. If you haven't done so already, run the command `prisma login` to authenticate your
-credentials with the prisma cloud service.
-2. Run the command `yarn prisma-deploy:<prod, dev, etc>`.
-  *  If you haven't set up the service before, make sure you do the following:
-      * You shouldn't have the `PRISMA_ENDPOINT` env var in the respective .env file
-      * Select the server you want to deploy to
-      * Create the name for the service; you should add `-service` to the server name, e.g.
-      `mbps-prod-service`, `mbps-dev-jimmy-service`.
-      * Choose the respective name for your the stage.
-      * Copy the endpoint added to the prisma.yml file and add it to the respective .env file under
-       the env var `PRISMA_ENDPOINT`
+If you haven't deployed to Prisma before and created the necessary service, you must do the
+following:
+
+1. Run the command `prisma login` to authenticate your credentials with the prisma cloud service.
+2. Make sure you don't have the `PRISMA_ENDPOINT` env var in the respective .env file
+3. Run the command `yarn prisma-deploy:<prod, dev, etc>`.
+4. Select the server you want to deploy to
+5. Create the name for the service; you should add `-service` to the server name, e.g.
+`mbps-prod-service`, `mbps-dev-jimmy-service`.
+6. Choose the respective name for your the stage.
+7. Copy the endpoint added to the prisma.yml file and add it to the respective .env file under
+the env var `PRISMA_ENDPOINT`.
+8. Go to prisma cloud and click on the respective server. For the server, click on 'view on
+heroku'. From here, you will want to go to the settings tab and make sure you add all of the env
+vars to the heroku instance *except* for the `DOCKER_DB_...` env vars. Doing this is important
+and will allow us to further deploy our node.js application to this heroku instance and make sure
+that it successfully runs with its necessary env vars.
+9. Also make sure that you add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list
+of our heroku env vars. This allows us to increase our javascript application memory allocation
+and avoiding a javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
+and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
        
 ## IV. Heroku
 
@@ -91,31 +101,17 @@ Heroku is used to:
 * Host our docker container - via prisma cloud
 * Host our node js application
 
-To create an instance:
-
-1. Go to the heroku dashboard and create a new app, and give it a proper name.
-2. Make sure that under the 'settings' tab, our heroku app has all the same config / env vars that
-our prod.env file should have.
-3. Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.
-This allows us to increase our javascript application memory allocation and avoiding a
-javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
-and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
-4. Each instance will need the Heroku Postgres addon. Once you create this addon, you can then go to
-the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
-and there you can see the database credentials needed to populate the dev.env and test.env files,
-if necessary.
-
-### A. Deploying our node.js application to Heroku
+### A. Deploying a node.js application to Heroku
 
 In order to deploy our node.js application to Heroku, make sure you do the following:
 
 1. Make sure all of the necessary instances listed in ['managing out instances'](#ii-managing-our-instances)
 have been created.
 2. Add the production heroku app as a git repository. Do this by going to the production heroku
-app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
+app in the heroku dashboard, click on the settings tab, copying the 'Heroku git URL', and running
 the following command: `git remote add heroku-prod <heroku_git_url>`.
 3. Add the development heroku app as a git repository. Do this by going to your heroku development
-app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
+app in the heroku dashboard, click on the settings tab, copying the 'Heroku git URL', and running
 the following command: `git remote add heroku-dev <heroku_git_url>`.
 
 Once these commands have been run, you can then deploy your application to Heroku by running
