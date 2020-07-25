@@ -2,7 +2,7 @@ import uuid from 'uuid/v4';
 import { SessionOptions } from 'express-session';
 
 const sessionOptions: SessionOptions = {
-  cookie: { sameSite: 'strict', secure: true }, // cookie must be sent via https
+  cookie: { sameSite: 'none', secure: true }, // cookie must be sent via https
   genid: (request) => uuid(), // generates a session ID
   resave: false,
   saveUninitialized: false,
