@@ -8,8 +8,9 @@ other related build matters, please see the [build doc](https://github.com/jimmy
 ## Table of Contents:
 
 * [I. Summary](#i-summary)
-* [II. Prisma Cloud](#ii-prisma-cloud)
-* [III. Heroku](#iii-heroku)
+* [II. Managing Our Instances](#ii-managing-our-instances)
+* [III. Prisma Cloud](#iii-prisma-cloud)
+* [IV. Heroku](#iv-heroku)
 
 ## I. Summary
 
@@ -26,16 +27,26 @@ In order to deploy our back end production application, we need to do the follow
 
 1. [Create a Prisma Server and database](#a-creating-a-prisma-server-and-database)
 2. [Deploy our application to a Prisma service](#b-deploying-our-application-to-a-prisma-service)
-3. [Deploy our node.js application to heroku](#b-deploying-our-nodejs-application-to-heroku)
+3. [Deploy our node.js application to heroku](#a-deploying-our-nodejs-application-to-heroku)
 
-Furthermore, see [this section](#b-deploying-our-application-to-a-prisma-service) on how we
-manage our heroku instances.
+## II. Managing Our Instances
 
-## II. Prisma Cloud
+Before we create our servers, databases, and running applications, we first need to list what
+instances we need and need to manage:
 
-Prisma Cloud is the service we use to manage our heroku prisma instances. We can find this service
-at `https://app.prisma.io/`. Prisma Cloud is also where we go to create our server and database
-that gets linked to heroku.
+* **`mbps-prod`:**
+  * This is where our production server and database is hosted.
+* **`mbps-dev-<developer_first_name>`:**
+  * Where a development server and database is hosted for each developer, e.g. `mbps-dev-jimmy`.
+  If multiple are needed per developer, then we can add additional numbers, e.g. `mbps-dev-jimmy-1`,
+  `mbps-dev-jimmy-2`.
+  
+*Note:* `mbps` stands for 'mybord-prisma-server'
+
+## III. Prisma Cloud
+
+Prisma Cloud is the service we use to manage our instances. We can find this service
+at `https://app.prisma.io/`.
 
 In order to use Prisma Cloud, we need to:
 
@@ -47,13 +58,14 @@ In order to use Prisma Cloud, we need to:
 In order to create our necessary prisma services, we need to:
 
 1. Create a prisma account
-2. Create a new prisma server. The server name should be `mybord-prisma`.
+2. Create a new prisma server. The server name should be one of the instance names listed in the
+ [managing our instances](#ii-managing-our-instances) section.
 3. Set up a database that is connected to Heroku and connect it to your existing Heroku account.
 4. Set up a PostgreSQL database.
 5. Set up a server connected to Heroku.
 6. Once the server is set up and running, view the server details and click on the database and
-the button 'view on heroku'. From there, you can get the database credentials from heroku for
-our production prisma service. These credentials are what are needed for our prod.env env vars.
+the button 'view on heroku'. From there, you can get the database credentials for the server and
+ use those credentials to populate the respective .env file.
 
 ### B. Deploying our application to a Prisma service
 
@@ -61,33 +73,23 @@ In order to deploy to Prisma, you must do the following:
 
 1. If you haven't done so already, run the command `prisma login` to authenticate your
 credentials with the prisma cloud service.
-2. Run the command `yarn prisma-deploy:prod`.
+2. Run the command `yarn prisma-deploy:<prod, dev, etc>`.
   *  If you haven't set up the service before, make sure you do the following:
-      * You shouldn't have the `PRISMA_ENDPOINT` env var in your prod.env file
-      * Select the `mybord-prisma` server to deploy to
-      * Create the name for the service; you should call it `mybord-server-prisma-service`
-      * Choose the name for your the stage; you should choose `prod`
-      * Copy the endpoint added to the prisma.yml file and add it to the prod.env file under the
-       env var `PRISMA_ENDPOINT`
+      * You shouldn't have the `PRISMA_ENDPOINT` env var in the respective .env file
+      * Select the server you want to deploy to
+      * Create the name for the service; you should add `-service` to the server name, e.g.
+      `mbps-prod-service`, `mbps-dev-jimmy-service`.
+      * Choose the respective name for your the stage.
+      * Copy the endpoint added to the prisma.yml file and add it to the respective .env file under
+       the env var `PRISMA_ENDPOINT`
        
-## III. Heroku
+## IV. Heroku
 
 Heroku is used to:
 
 * Host our database - via prisma cloud
 * Host our docker container - via prisma cloud
 * Host our node js application
-
-### A. Managing our instances
-
-The following instances are hosted on heroku:
-
-* **`mybord-server-prod`:**
-  * This is where our production node.js application is hosted.
-* **`mybord-server-dev-<developer_first_name>`:**
-  * A development server for each developer, e.g. `mybord-server-dev-jimmy`. If multiple are
-  needed per developer, then we can add additional numbers, e.g. `mybord-server-dev-jimmy-1`,
-  `mybord-server-dev-jimmy-2`.
 
 To create an instance:
 
@@ -103,11 +105,11 @@ the instance's datastore dashboard, go to the 'settings' tab and click on 'view 
 and there you can see the database credentials needed to populate the dev.env and test.env files,
 if necessary.
 
-### B. Deploying our node.js application to Heroku
+### A. Deploying our node.js application to Heroku
 
 In order to deploy our node.js application to Heroku, make sure you do the following:
 
-1. Make sure all of the necessary instances listed in ['managing out instances'](#a-managing-our-instances)
+1. Make sure all of the necessary instances listed in ['managing out instances'](#ii-managing-our-instances)
 have been created.
 2. Add the production heroku app as a git repository. Do this by going to the production heroku
 app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
@@ -119,7 +121,7 @@ the following command: `git remote add heroku-dev <heroku_git_url>`.
 Once these commands have been run, you can then deploy your application to Heroku by running
 either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
 
-### C. Other Resources & Commands
+### B. Other Resources & Commands
 
 * **Deploying from a branch besides master:**
   * If you want to deploy code to Heroku from a non-master branch of your local repository
