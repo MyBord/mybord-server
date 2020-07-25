@@ -57,12 +57,12 @@ at `https://app.prisma.io/`.
 
 In order to use Prisma Cloud, we need to:
 
-1. Create a Prisma database
+1. Create a Prisma database / prisma server
 2. Deploy our prisma instance to a Prisma service
 
 ### A. Creating a Prisma database
 
-In order to create the necessary prisma database, we need to:
+In order to create the necessary prisma database / prisma server, we need to:
 
 1. Create a prisma account.
 2. Create a new prisma server. The server name should be one of the instance names listed in the
