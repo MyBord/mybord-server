@@ -2,7 +2,8 @@
   "name": "myBord-server",
   "scripts": {
     "compose-docker:dev": "docker-compose -f src/prisma/docker-compose.yml --env-file dev.env up -d",
-    "push-heroku": "git push heroku master",
+    "push-heroku:prod": "git push heroku-production master",
+    "push-heroku:dev": "git push heroku-development master",
     "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
     "prisma-delete:test": "cd src/prisma/ && env-cmd -f ../../test.env prisma delete -f",

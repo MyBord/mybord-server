@@ -26,7 +26,7 @@ In order to deploy our back end production application, we need to do the follow
 
 1. [Create a Prisma Server and database](#a-creating-a-prisma-server-and-database)
 2. [Deploy our application to a Prisma service](#b-deploying-our-application-to-a-prisma-service)
-3. [Deploy our node.js application to heroku](#a-deploying-our-nodejs-application-to-heroku)
+3. [Deploy our node.js application to heroku](#b-deploying-our-nodejs-application-to-heroku)
 
 Furthermore, see [this section](#b-deploying-our-application-to-a-prisma-service) on how we
 manage our heroku instances.
@@ -78,39 +78,46 @@ Heroku is used to:
 * Host our docker container - via prisma cloud
 * Host our node js application
 
-### A. Deploying our node.js application to Heroku
+### A. Managing our instances
+
+The following instances are hosted on heroku:
+
+* **`mybord-server-prod`:**
+  * This is where our production node.js application is hosted.
+* **`mybord-server-dev-<developer_first_name>`:**
+  * A development server for each developer, e.g. `mybord-server-dev-jimmy`. If multiple are
+  needed per developer, then we can add additional numbers, e.g. `mybord-server-dev-jimmy-1`,
+  `mybord-server-dev-jimmy-2`.
+
+To create an instance:
+
+1. Go to the heroku dashboard and create a new app, and give it a proper name.
+2. Make sure that under the 'settings' tab, our heroku app has all the same config / env vars that
+our prod.env file should have.
+3. Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.
+This allows us to increase our javascript application memory allocation and avoiding a
+javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
+and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
+4. Each instance will need the Heroku Postgres addon. Once you create this addon, you can then go to
+the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
+and there you can see the database credentials needed to populate the dev.env and test.env files,
+if necessary.
+
+### B. Deploying our node.js application to Heroku
 
 In order to deploy our node.js application to Heroku, make sure you do the following:
 
-1. If you haven't already:
-  * run the command `heroku login` to authenticate your credentials with heroku.
-  * create the heroku app by running the command `heroku create` and then rename that app to the
-    name `mybord-server-prod` by running the command
-   `heroku apps:rename mybord-server-prod --app <old-app-name>`.
-  * Make sure that under the 'settings' tab, our heroku app has all the same config / env vars as
-    our prod.env file.
-  * Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.
-  This allows us to increase our javascript application memory allocation and avoiding a
-  javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
-  and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
-2. Run the yarn command `yarn push-heroku`.
-3. To view the production instance, go to `https://mybord-server-prod.herokuapp.com/graphql`.
+1. Make sure all of the necessary instances listed in ['managing out instances'](#a-managing-our-instances)
+have been created.
+2. Add the production heroku app as a git repository. Do this by going to the production heroku
+app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
+the following command: `git remote add heroku-production <heroku_git_url>`.
+3. Add the development heroku app as a git repository. Do this by going to your heroku development
+app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
+the following command: `git remote add heroku-development <heroku_git_url>`.
 
-### B. Managing our instances
-
-In addition to hosting our production instance, heroku also hosts our development and testing
-instances.
-
-Each instance is created by creating a new app in heroku. We have the following instances:
-
-* `mybord-server-testing`: Our testing instance
-* `mybord-server-dev-<developer_first_name>`: The testing instance for each developer (e.g.
-`mybord-server-dev-jimmy`, or if multiple are needed per developer, `mybord-server-dev-jimmy-1`,
-`mybord-server-dev-jimmy-2`, etc).
-
-Each instance will need the Heroku Postgres addon. Once you create this addon, you can then go to
-the instance's datastore dashboard, go to the 'settings' tab and click on 'view credentials',
-and there you can see the database credentials needed to populate the dev.env and test.env files.
+Once these commands have been run, you can then deploy your application to Heroku by running
+either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
 
 ### C. Other Resources & Commands
 
