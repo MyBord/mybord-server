@@ -1,7 +1,7 @@
 import uuid from 'uuid/v4';
 
 export default {
-  // cookie: { secure: true }, // cookie must be sent via https
+  cookie: { sameSite: 'strict', secure: true }, // cookie must be sent via https
   genid: (request) => uuid(), // generates a session ID
   resave: false,
   saveUninitialized: false,
