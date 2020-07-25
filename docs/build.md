@@ -63,8 +63,14 @@ The following are the yarn commands for our server application:
 * **`compose-docker:dev`:**
   * This composes a local docker image / container based upon the development database instance
    from heroku.
-* **`push-heroku`:**
-  * This pushes our node.js application to our heroku app / instance.
+* **`push-heroku:dev`:**
+  * This pushes our node.js application to our development heroku app (e.g.
+  `mybord-server-dev-jimmy`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#b-deploying-our-nodejs-application-to-heroku)
+  for more information.
+* **`push-heroku:prod`:**
+  * This pushes our node.js application to our production heroku app (e.g.
+  `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#b-deploying-our-nodejs-application-to-heroku)
+  for more information.
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**

@@ -111,10 +111,10 @@ In order to deploy our node.js application to Heroku, make sure you do the follo
 have been created.
 2. Add the production heroku app as a git repository. Do this by going to the production heroku
 app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
-the following command: `git remote add heroku-production <heroku_git_url>`.
+the following command: `git remote add heroku-prod <heroku_git_url>`.
 3. Add the development heroku app as a git repository. Do this by going to your heroku development
 app in the heroku dashbord, click on the settings tab, copying the 'Heroku git URL', and running
-the following command: `git remote add heroku-development <heroku_git_url>`.
+the following command: `git remote add heroku-dev <heroku_git_url>`.
 
 Once these commands have been run, you can then deploy your application to Heroku by running
 either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
