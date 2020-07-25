@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* change cors origin to heroku server?
 * add a heroku-postbuild command?
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
