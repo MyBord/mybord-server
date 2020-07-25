@@ -25,23 +25,30 @@ We use two services for deployment:
     
 In order to deploy our back end production application, we need to do the following:    
 
-1. [Create a Prisma Server and database](#a-creating-a-prisma-server-and-database)
-2. [Deploy our application to a Prisma service](#b-deploying-our-application-to-a-prisma-service)
-3. [Deploy our node.js application to heroku](#a-deploying-our-nodejs-application-to-heroku)
+1. [Create a Prisma database](#a-creating-a-prisma-database)
+2. [Deploy a Prisma instance to a Prisma service](#b-deploying-a-prisma-instance-to-a-prisma-service)
+3. [Create a node.js server](#a-creating-nodejs-server-in-heroku)
+4. [Deploy our node.js application to heroku](#b-deploying-a-nodejs-application-to-heroku)
 
 ## II. Managing Our Instances
 
 Before we create our servers, databases, and running applications, we first need to list what
-instances we need and need to manage:
+instances we need and need to manage. We have instances that are managed on both Prisma and
+ Heroku. This is how they are named and managed:
 
-* **`mbps-prod`:**
-  * This is where our production server and database is hosted.
-* **`mbps-dev-<developer_first_name>`:**
-  * Where a development server and database is hosted for each developer, e.g. `mbps-dev-jimmy`.
-  If multiple are needed per developer, then we can add additional numbers, e.g. `mbps-dev-jimmy-1`,
-  `mbps-dev-jimmy-2`.
+* **prod instances:**
+  * `mbp-db-prod`: This is where our production database is hosted via prisma.
+  * `mbp-db-prod-service`: This is where our production prisma service is managed.
+  * `mbh-server-prod`: This is where our production node.js server is hosted via heroku.
+* **dev instances:**
+  * `mbp-db-dev-<developer_name>`: This is where our production database is hosted via prisma.
+  * `mbp-db-dev-<developer_name>-service`: This is where our production prisma service is managed.
+  * `mbh-server-dev-<developer_name>`: This is where our production node.js server is hosted via
+  heroku.
+  * *Note*: dev instances are per developer. If multiple instances are needed, then we can add
+   additional numbers, e.g. `mbp-db-dev-jimmy-1`, `mbp-db-dev-jimmy-2`.
   
-*Note:* `mbps` stands for 'mybord-prisma-server'
+*Note:* `mbp` stands for 'mybord-prisma' and `mbh` stands for 'mybord-heroku'.
 
 ## III. Prisma Cloud
 
@@ -50,24 +57,24 @@ at `https://app.prisma.io/`.
 
 In order to use Prisma Cloud, we need to:
 
-1. Create a Prisma Server and database
-2. Deploy our application to a Prisma service
+1. Create a Prisma database
+2. Deploy our prisma instance to a Prisma service
 
-### A. Creating a Prisma Server and database
+### A. Creating a Prisma database
 
-In order to create our necessary prisma services, we need to:
+In order to create the necessary prisma database, we need to:
 
-1. Create a prisma account
+1. Create a prisma account.
 2. Create a new prisma server. The server name should be one of the instance names listed in the
  [managing our instances](#ii-managing-our-instances) section.
 3. Set up a database that is connected to Heroku and connect it to your existing Heroku account.
 4. Set up a PostgreSQL database.
 5. Set up a server connected to Heroku.
-6. Once the server is set up and running, view the server details and click on the database and
-the button 'view on heroku'. From there, you can get the database credentials for the server and
- use those credentials to populate the respective .env file.
+6. Once the server is set up and running, view the database details by clicking on the database
+and the button 'view on heroku'. From there, you can get the database credentials and
+use those credentials to populate the respective .env file.
 
-### B. Deploying the application to a Prisma service
+### B. Deploying a Prisma instance to a Prisma service
 
 In order to deploy to Prisma, you can run the command `yarn prisma-deploy:<prod, dev, etc>`.
 
@@ -79,20 +86,11 @@ following:
 3. Run the command `yarn prisma-deploy:<prod, dev, etc>`.
 4. Select the server you want to deploy to
 5. Create the name for the service; you should add `-service` to the server name, e.g.
-`mbps-prod-service`, `mbps-dev-jimmy-service`.
+`mbp-db-prod-service`, `mbp-db-dev-jimmy-service`.
 6. Choose the respective name for your the stage.
 7. Copy the endpoint added to the prisma.yml file and add it to the respective .env file under
 the env var `PRISMA_ENDPOINT`.
-8. Go to prisma cloud and click on the respective server. For the server, click on 'view on
-heroku'. From here, you will want to go to the settings tab and make sure you add all of the env
-vars to the heroku instance *except* for the `DOCKER_DB_...` env vars. Doing this is important
-and will allow us to further deploy our node.js application to this heroku instance and make sure
-that it successfully runs with its necessary env vars.
-9. Also make sure that you add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list
-of our heroku env vars. This allows us to increase our javascript application memory allocation
-and avoiding a javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)
-and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).
-       
+
 ## IV. Heroku
 
 Heroku is used to:
@@ -101,11 +99,25 @@ Heroku is used to:
 * Host our docker container - via prisma cloud
 * Host our node js application
 
-### A. Deploying a node.js application to Heroku
+### A. Creating node.js server in Heroku
+
+In order to create a node.js server in Heroku, do the following:
+
+1. Make sure you have created the respective Prisma DB and instance and have all of the
+neccessary env vars, including the DB credentials as well as the Prisma endpoint.
+2. Go to the heroku dashboard and create a new app, and give it the appropriate name.	
+3. Make sure under the 'settings' tab, our heroku app has all the same config / env vars that	
+is needed for the respective .env file.
+4. Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.	
+This allows us to increase our javascript application memory allocation and avoiding a	
+javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)	
+and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).	
+
+### B. Deploying a node.js application to Heroku
 
 In order to deploy our node.js application to Heroku, make sure you do the following:
 
-1. Make sure all of the necessary instances listed in ['managing out instances'](#ii-managing-our-instances)
+1. Make sure all of the necessary instances listed in ['managing our instances'](#ii-managing-our-instances)
 have been created.
 2. Add the production heroku app as a git repository. Do this by going to the production heroku
 app in the heroku dashboard, click on the settings tab, copying the 'Heroku git URL', and running
@@ -117,7 +129,7 @@ the following command: `git remote add heroku-dev <heroku_git_url>`.
 Once these commands have been run, you can then deploy your application to Heroku by running
 either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
 
-### B. Other Resources & Commands
+### C. Other Herku Resources & Commands
 
 * **Deploying from a branch besides master:**
   * If you want to deploy code to Heroku from a non-master branch of your local repository
