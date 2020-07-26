@@ -16,6 +16,7 @@ This document is used to outline current project management priorities.
 ### B. High - MVP
 
 * fix cors options
+* hot module should run only when node env === LOCAL
 * add build version to index page  
   *  https://devcenter.heroku.com/changelog-items/630 
 * add a heroku-postbuild command?
