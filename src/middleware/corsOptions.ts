@@ -6,9 +6,8 @@ const corsOptions: CorsOptions = {
   credentials: true,
 };
 
-if (process.env.NODE_ENV === 'FOOB') {
+if (process.env.MODE === 'DEV') {
   corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
-  // corsOptions.origin = 'http://localhost:8080';
 }
 
 console.log('----------- DEBUGGING CORS -------------');
@@ -16,11 +15,8 @@ console.log('CORS OPTIONS:');
 console.log(corsOptions);
 console.log('NODE ENV:');
 console.log(process.env.NODE_ENV);
-console.log(process.env.NODE_ENV === 'DEV');
-console.log('NODE_ENV:');
-console.log(process.env.NODE_ENV);
-console.log('FOOB:');
-console.log(process.env.FOOB);
+console.log('MODE:');
+console.log(process.env.MODE);
 console.log('----------- DEBUGGING CORS -------------');
 
 export default corsOptions;

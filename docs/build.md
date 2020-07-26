@@ -141,9 +141,13 @@ credentials that come from the [relevant Heroku database information](https://gi
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
-* **`NODE_ENV`**:
+* **`MODE`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'LOCAL',
   or 'PROD'.
+* **`NODE_ENV`**:
+  * Should be the same as `MODE`. Does not need to be listed in the local env var files. Despite
+   webpack overriding what `process.env.NODE_ENV` will be, we for some reason need to list this in
+  the Heroku config env vars or else the server will fail to build  ¯\_(ツ)_/¯
 * **`PORT`**:
   * The exposed port that the server will run on.
   * NOTE: This env var **must** be named `PORT` because Heroku uses this env var to declare what
@@ -170,7 +174,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-NODE_ENV=DEV
+MODE=DEV
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
@@ -185,7 +189,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-NODE_ENV=LOCAL
+MODE=LOCAL
 PRISMA_ENDPOINT=http://localhost:4466/default/default
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
@@ -200,7 +204,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-NODE_ENV=PROD
+MODE=PROD
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret

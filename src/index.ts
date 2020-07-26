@@ -47,13 +47,8 @@ httpServer.listen(PORT, () => {
   console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
 });
 
-console.log('----------- DEBUGGING FOO -------------');
-console.log('NODE ENV:');
-console.log(process.env.NODE_ENV);
-console.log('----------- DEBUGGING FOO -------------');
-
 // Using webpack's hot module replacement, if needed.
-if (process.env.FOOB === 'LOCAL' && module.hot) {
+if (process.env.MODE === 'LOCAL' && module.hot) {
   module.hot.accept();
   module.hot.dispose(() => server.stop());
 }
