@@ -12,8 +12,7 @@ deploying to our production instance, please see the [deployment doc](https://gi
 * [III. Docker](#iii-docker)
 * [IV. Yarn Commands](#iv-yarn-commands)
 * [V. Env Vars](#v-env-vars)
-* [VI. Running Locally](#vi-running-locally)
-* [VII. Important Branches](#vii-important-branches)
+* [VI. Important Branches](#vi-important-branches)
 
 ## I. Babel
 
@@ -75,18 +74,18 @@ The following are the yarn commands for our server application:
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
   * Removes the 'dist/' folder.
-* **`prisma-delete:test`:**
-  * Deletes the prisma instance with the test env vars.
-* **`prisma-deploy:test`:**
-  * Generates / deploys the prisma instance with the test env vars.
 * **`prisma-delete:dev`:**
-  * Deletes the prisma instance with the dev env vars.
+  * Deletes the prisma instance hosted on the dev instance.
 * **`prisma-deploy:dev`:**
-  * Generates / deploys the prisma instance with the dev env vars.
+  * Generates / deploys the prisma instance to the dev instance.
+* **`prisma-delete:local`:**
+  * Deletes the prisma instance hosted that is hosted locally.
+* **`prisma-deploy:local`:**
+  * Generates / deploys the prisma instance to a local instance.
 * **`prisma-delete:prod`:**
-  * Deletes the prisma instance with the test prod vars.
+  * Deletes the prisma instance hosted on the prod instance.
 * **`prisma-deploy:prod`:**
-  * Generates / deploys the prisma instance with the test env vars.
+  * Generates / deploys the prisma instance to the prod instance.
 * **`webpack:dev`:**
   * Builds the server with the dev webpack configuration.
 * **`webpack:prod`:**
@@ -97,6 +96,8 @@ The following are the yarn commands for our server application:
   * Builds the prod server.
 * **`run:dev`:**
   * Runs the dev server.
+* **`run:local`:**
+  * Runs a local server.
 * **`run:prod`:**
   * Runs the prod server.
   * NOTE: this command *does not* include using the prod.env file because the production env vars
@@ -108,17 +109,21 @@ The following are the yarn commands for our server application:
     
 ## V. Env Vars
 
+### A. Env Var Files
+
 When running locally, at the root of folder, you will need to create three separate env var files:
 
-* **`dev.env`:**
+* **`local.env`:**
   * a file containing node environment variables for your local instance when running
+   the server in 'LOCAL' mode.
+* **`dev.env`:**
+  * a file containing node environment variables for your deployed development instance when running
    the server in 'DEV' mode.
 * **`prod.env`:**
-  * a file containing node environment variables for your local instance when running
+  * a file containing node environment variables for your deployed production instance when running
    the server in 'PROD' mode.
-* **`test.env`:**
-  * a file containing node environment variables for your local instance when running
-   the server in 'TEST' mode.
+   
+### B. List of Env Vars   
 
 The following are the env vars needed to run our server application. Note that `DOCKER_DB_HOST`,
 `DOCKER_DB_NAME`, `DOCKER_DB_PASSWORD`, `DOCKER_DB_PORT`, and `DOCKER_DB_USER` are database
@@ -140,24 +145,26 @@ credentials that come from the [relevant Heroku database information](https://gi
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
 * **`NODE_ENV`**:
-  * Declares what environment the server application is running in; can either be 'DEV', 'PROD',
-  or 'TESTING'
+  * Declares what environment the server application is running in; can either be 'DEV', 'LOCAL',
+  or 'PROD'.
 * **`PORT`**:
   * The exposed port that the server will run on.
   * NOTE: This env var **must** be named `PORT` because Heroku uses this env var to declare what
    port the node.js application must run on when the application is deployed to Heroku. Because
-   of this, *any .env file that is used to deploy to heroku should not include this env var*.
+   of this, *all .env files should not declare this env var*.
 * **`PRISMA_ENDPOINT`**:
   * The endpoint that our prisma instance should run on.
-  * NOTE: for the prod.env file, you can find the necessary http endpoint in our prisma cloud app
-   at https://app.prisma.io (the http endpoint is everything before the `?`).
+  * NOTE: except for the local.env file, you can find the necessary http endpoint in our prisma
+   cloud app at https://app.prisma.io (the http endpoint is everything before the `?`).
+  * NOTE: the `PRISMA_ENDPOINT` for local.env should be `http://localhost:4466/default/default`
 * **`PRISMA_SECRET`**:
   * The secret that authenticates our prisma instance.
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
   
-Below is an example of a `dev.env` file:
-
+### C. Env Var File Examples  
+  
+**`dev.env`:**
 ```
 DOCKER_DB_HOST=ec2-1234.compute-1.amazonaws.com
 DOCKER_DB_NAME=db1234
@@ -167,30 +174,42 @@ DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
 NODE_ENV=DEV
-PORT=4000
+PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
+PRISMA_SECRET=thisIsAPrismaSecret
+SESSION_SECRET=thisisASessionSecret
+```
+
+**`local.env`:**
+```
+DOCKER_DB_HOST=ec2-1234.compute-1.amazonaws.com
+DOCKER_DB_NAME=db1234
+DOCKER_DB_PASSWORD=abcd1234
+DOCKER_DB_PORT=9876
+DOCKER_DB_USER=jklmno
+EXTERNAL_PORT=8080
+GAPI_KEY=defgh34567
+NODE_ENV=LOCAL
 PRISMA_ENDPOINT=http://localhost:4466/default/default
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
 ```
-  
-## VI. Running Locally
 
-Before running the server locally, you must do the following:
+**`prod.env`:**
+```
+DOCKER_DB_HOST=ec2-1234.compute-1.amazonaws.com
+DOCKER_DB_NAME=db1234
+DOCKER_DB_PASSWORD=abcd1234
+DOCKER_DB_PORT=9876
+DOCKER_DB_USER=jklmno
+EXTERNAL_PORT=8080
+GAPI_KEY=defgh34567
+NODE_ENV=PROD
+PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
+PRISMA_SECRET=thisIsAPrismaSecret
+SESSION_SECRET=thisisASessionSecret
+```
 
-1. Make sure you have created a development instance on Heroku with a postgres addon and named it
-appropriately (e.g. `mybord-server-dev-jimmy`).
-2. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
-3. Download docker community edition.
-4. Build the docker container by running the command `yarn compose-docker:dev`.
-5. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
-
-Once you are ready to run the server locally, you must do the following steps:
-
-1. Run `yarn prisma-deploy:dev`.
-2. Run `yarn build:dev`.
-3. In a second terminal window, run `yarn run:dev`.
-
-## VII. Important Branches
+## VI. Important Branches
 
 The following are important branches in regards to the `mybord-server` repo:
 

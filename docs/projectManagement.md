@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* fix yarn start to dynamically run different prod, env commands && fix cors options
 * create a local.env and document local running
   PORT=4000
   PRISMA_ENDPOINT=http://localhost:4466/default/default
