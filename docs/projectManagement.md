@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* change node env flag to something else to not interfere with webpack
 * fix cors options
 * hot module should run only when node env === LOCAL
 * add build version to index page  
