@@ -15,13 +15,9 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* fix yarn start to dynamically run different prod, env commands && fix cors options
-* create a local.env and document local running
-  PORT=4000
-  PRISMA_ENDPOINT=http://localhost:4466/default/default
+* fix cors options
 * add build version to index page  
   *  https://devcenter.heroku.com/changelog-items/630 
-* change cors origin to heroku server?
 * add a heroku-postbuild command?
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
