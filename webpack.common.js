@@ -3,6 +3,7 @@ const path = require('path');
 
 console.log(' ----- SOURCE VERSION: ----- ');
 console.log(process.env.SOURCE_VERSION);
+console.log(process.env.HEROKU_RELEASE_VERSION);
 console.log(' ----- SOURCE VERSION: ----- ');
 
 const x = new Date();
