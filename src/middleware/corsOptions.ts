@@ -6,8 +6,7 @@ const corsOptions: CorsOptions = {
   credentials: true,
 };
 
-
-if (process.env.NODE_ENV === 'DEV') {
+if (process.env.NODE_ENV === 'FOOB') {
   corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
   // corsOptions.origin = 'http://localhost:8080';
 }
