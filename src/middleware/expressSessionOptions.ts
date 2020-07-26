@@ -1,3 +1,5 @@
+// See https://github.com/jimmy-e/mybord-server/blob/master/docs/applicationSummary.md#i-user-sessions--cookies
+
 import uuid from 'uuid/v4';
 import { SessionOptions } from 'express-session';
 
