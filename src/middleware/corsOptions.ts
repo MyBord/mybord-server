@@ -7,6 +7,17 @@ const corsOptions: CorsOptions = {
   // origin: 'http://localhost:8080',
 };
 
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+console.log('----------- DEBUGGING -------------');
+
 if (process.env.NODE_ENV === 'DEV') {
   // corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
   corsOptions.origin = 'http://localhost:8080';
