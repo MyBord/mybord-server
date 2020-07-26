@@ -1,6 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+console.log(' ----- SOURCE VERSION: ----- ');
+console.log(process.env.SOURCE_VERSION);
+console.log(' ----- SOURCE VERSION: ----- ');
+
+const x = new Date();
+console.log(x.toDateString());
+console.log(x.toTimeString());
+
 const SRC_DIR = path.resolve(__dirname, 'src');
 
 const output = {
@@ -11,7 +19,7 @@ const output = {
 const plugins = [
   new HtmlWebpackPlugin({
     title: 'Custom template',
-    template: 'src/pages/index.html',
+    template: `${SRC_DIR}/pages/index.html`,
   }),
 ];
 
