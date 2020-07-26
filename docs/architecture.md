@@ -95,7 +95,7 @@ application folder.
 * **`.gitignore`:**
   * configuration list of git ignores.
 * **`dev.env`:**
-  * a file containing node environment variables for your deployed devlepment instance when running
+  * a file containing node environment variables for your deployed development instance when running
    the server in 'DEV' mode.
 * **`LICENSE.md`:**
   * Contains the software license / copyright.
