@@ -15,6 +15,8 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* add instructions about enabling dyno metadata
+  https://devcenter.heroku.com/articles/dyno-metadata
 * add build version to index page  
   *  https://devcenter.heroku.com/changelog-items/630 
 * add a heroku-postbuild command?
