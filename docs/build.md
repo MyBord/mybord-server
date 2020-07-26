@@ -12,8 +12,7 @@ deploying to our production instance, please see the [deployment doc](https://gi
 * [III. Docker](#iii-docker)
 * [IV. Yarn Commands](#iv-yarn-commands)
 * [V. Env Vars](#v-env-vars)
-* [VI. Running Locally](#vi-running-locally)
-* [VII. Important Branches](#vii-important-branches)
+* [VI. Important Branches](#vi-important-branches)
 
 ## I. Babel
 
@@ -75,18 +74,18 @@ The following are the yarn commands for our server application:
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
   * Removes the 'dist/' folder.
-* **`prisma-delete:test`:**
-  * Deletes the prisma instance with the test env vars.
-* **`prisma-deploy:test`:**
-  * Generates / deploys the prisma instance with the test env vars.
 * **`prisma-delete:dev`:**
-  * Deletes the prisma instance with the dev env vars.
+  * Deletes the prisma instance hosted on the dev instance.
 * **`prisma-deploy:dev`:**
-  * Generates / deploys the prisma instance with the dev env vars.
+  * Generates / deploys the prisma instance to the dev instance.
+* **`prisma-delete:local`:**
+  * Deletes the prisma instance hosted that is hosted locally.
+* **`prisma-deploy:local`:**
+  * Generates / deploys the prisma instance to a local instance.
 * **`prisma-delete:prod`:**
-  * Deletes the prisma instance with the test prod vars.
+  * Deletes the prisma instance hosted on the prod instance.
 * **`prisma-deploy:prod`:**
-  * Generates / deploys the prisma instance with the test env vars.
+  * Generates / deploys the prisma instance to the prod instance.
 * **`webpack:dev`:**
   * Builds the server with the dev webpack configuration.
 * **`webpack:prod`:**
@@ -97,6 +96,8 @@ The following are the yarn commands for our server application:
   * Builds the prod server.
 * **`run:dev`:**
   * Runs the dev server.
+* **`run:local`:**
+  * Runs a local server.
 * **`run:prod`:**
   * Runs the prod server.
   * NOTE: this command *does not* include using the prod.env file because the production env vars
@@ -207,25 +208,8 @@ PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
 ```
-  
-## VI. Running Locally
 
-Before running the server locally, you must do the following:
-
-1. Make sure you have created a development instance on Heroku with a postgres addon and named it
-appropriately (e.g. `mybord-server-dev-jimmy`).
-2. Create a `dev.env` file at the root of the directory with the required env vars outlined above.
-3. Download docker community edition.
-4. Build the docker container by running the command `yarn compose-docker:dev`.
-5. If there were any previous prisma instances that ran, run `yarn prisma-delete:dev`.
-
-Once you are ready to run the server locally, you must do the following steps:
-
-1. Run `yarn prisma-deploy:dev`.
-2. Run `yarn build:dev`.
-3. In a second terminal window, run `yarn run:dev`.
-
-## VII. Important Branches
+## VI. Important Branches
 
 The following are important branches in regards to the `mybord-server` repo:
 
