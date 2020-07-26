@@ -14,6 +14,7 @@ module.exports = merge.smart(common, {
       whitelist: ['webpack/hot/poll?1000'],
     }),
   ],
+  mode: 'development',
   plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
   watch: true,
 });
