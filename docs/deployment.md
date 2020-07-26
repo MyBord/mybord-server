@@ -2,8 +2,9 @@
 
 # Deployment
 
-This summarizes the process for deploying the MyBord codebase to our production application. For
-other related build matters, please see the [build doc](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md).
+This summarizes the process for deploying the MyBord server application to various
+running databases and servers. For other related build matters, please see the
+[build doc](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md).
 
 ## Table of Contents:
 
@@ -41,9 +42,9 @@ instances we need and need to manage. We have instances that are managed on both
   * `mbp-db-prod-service`: This is where our production prisma service is managed.
   * `mbh-server-prod`: This is where our production node.js server is hosted via heroku.
 * **dev instances:**
-  * `mbp-db-dev-<developer_name>`: This is where our production database is hosted via prisma.
-  * `mbp-db-dev-<developer_name>-service`: This is where our production prisma service is managed.
-  * `mbh-server-dev-<developer_name>`: This is where our production node.js server is hosted via
+  * `mbp-db-dev-<developer_name>`: This is where our development database is hosted via prisma.
+  * `mbp-db-dev-<developer_name>-service`: This is where our development prisma service is managed.
+  * `mbh-server-dev-<developer_name>`: This is where our development node.js server is hosted via
   heroku.
   * *Note*: dev instances are per developer. If multiple instances are needed, then we can add
    additional numbers, e.g. `mbp-db-dev-jimmy-1`, `mbp-db-dev-jimmy-2`.
