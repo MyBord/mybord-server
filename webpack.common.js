@@ -1,14 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-console.log(' ----- SOURCE VERSION: ----- ');
-console.log(process.env.SOURCE_VERSION);
+console.log(' ----- DEBUGGING: ----- ');
+console.log('HEROKU RELEASE VERSION:');
 console.log(process.env.HEROKU_RELEASE_VERSION);
-console.log(' ----- SOURCE VERSION: ----- ');
-
-const x = new Date();
-console.log(x.toDateString());
-console.log(x.toTimeString());
+const releaseCreatedAt = new Date(process.env.HEROKU_RELEASE_CREATED_AT);
+console.log(releaseCreatedAt.toDateString());
+console.log(releaseCreatedAt.toTimeString());
+console.log(' ----- DEBUGGING: ----- ');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 
