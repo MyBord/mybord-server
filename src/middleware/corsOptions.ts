@@ -20,6 +20,8 @@ console.log(process.env.NODE_ENV);
 console.log(process.env.NODE_ENV === 'DEV');
 console.log('NODE_ENV:');
 console.log(process.env.NODE_ENV);
+console.log('FOOB:');
+console.log(process.env.FOOB);
 console.log('----------- DEBUGGING CORS -------------');
 
 export default corsOptions;
