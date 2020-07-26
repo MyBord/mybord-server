@@ -47,7 +47,7 @@ httpServer.listen(PORT, () => {
 });
 
 // Using webpack's hot module replacement, if needed.
-if (process.env.NODE_ENV !== 'PROD' && module.hot) {
+if (process.env.MODE === 'LOCAL' && module.hot) {
   module.hot.accept();
   module.hot.dispose(() => server.stop());
 }
