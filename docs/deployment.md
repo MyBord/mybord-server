@@ -103,15 +103,19 @@ Heroku is used to:
 
 In order to create a node.js server in Heroku, do the following:
 
-1. Make sure you have created the respective Prisma DB and instance and have all of the
+1. If you haven't done so already, authenticate with heroku by running `heroku login`.
+2. Make sure you have created the respective Prisma DB and instance and have all of the
 neccessary env vars, including the DB credentials as well as the Prisma endpoint.
-2. Go to the heroku dashboard and create a new app, and give it the appropriate name.	
-3. Make sure under the 'settings' tab, our heroku app has all the same config / env vars that	
+3. Go to the heroku dashboard and create a new app, and give it the appropriate name.	
+4. Make sure under the 'settings' tab, our heroku app has all the same config / env vars that	
 is needed for the respective .env file.
-4. Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.	
+5. Add the env var `NODE_OPTIONS=--max_old_space_size=2560` to the list of our heroku env vars.	
 This allows us to increase our javascript application memory allocation and avoiding a	
 javascript heap memory error. See [here](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)	
 and [here](https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory).	
+6. In your terminal, run the command `heroku labs:enable runtime-dyno-metadata -a <app_name>`
+with `app_name` being the respective name of the heroku app. Doing so will enable our node.js
+application access to runtime heroku metadata. For more information, see [here](https://devcenter.heroku.com/articles/dyno-metadata).
 
 ### B. Deploying a node.js application to Heroku
 
