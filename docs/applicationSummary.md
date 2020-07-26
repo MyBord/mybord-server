@@ -34,7 +34,7 @@ const sessionOptions = {
 };
 
 // cookie must be sent via https
-if (process.env.FOOB === 'PROD') {
+if (process.env.NODE_ENV === 'PROD') {
   sessionOptions.cookie = {
     sameSite: 'none',
     secure: true,
@@ -69,7 +69,7 @@ const corsOptions = {
   credentials: true,
 };
 
-if (process.env.FOOB === 'DEV') {
+if (process.env.NODE_ENV === 'DEV') {
   corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
 }
 
