@@ -18,6 +18,8 @@ This document is used to outline current project management priorities.
 * create a local.env and document local running
   PORT=4000
   PRISMA_ENDPOINT=http://localhost:4466/default/default
+* add build version to index page  
+  *  https://devcenter.heroku.com/changelog-items/630 
 * change cors origin to heroku server?
 * add a heroku-postbuild command?
 * internal server error for new user trying to login but doesn't exist?
