@@ -14,12 +14,11 @@
     "prisma-deploy:prod": "cd src/prisma/ && env-cmd -f ../../prod.env prisma deploy",
     "webpack:dev": "webpack --config webpack.dev.js",
     "webpack:prod": "webpack --config webpack.prod.js",
-    "build:dev": "npm-run-all remove-dist webpack:dev",
-    "build:prod": "npm-run-all remove-dist webpack:prod",
-    "run:dev": "env-cmd -f dev.env nodemon dist/index",
-    "run:local": "env-cmd -f local.env nodemon dist/index",
-    "run:prod": "node dist/index",
-    "start": "npm-run-all build:prod run:prod"
+    "build:local-server": "npm-run-all remove-dist webpack:dev",
+    "build:server": "npm-run-all remove-dist webpack:prod",
+    "run:local-server": "env-cmd -f local.env nodemon dist/index",
+    "run:server": "node dist/index",
+    "start": "npm-run-all build:server run:server"
   },
   "authors": [
     "Jimmy Emery"

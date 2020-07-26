@@ -31,5 +31,5 @@ In order to run a local back end instance, you must do the following:
 
 Once you are ready to run the server locally, you must do the following:
 
-1. Run `yarn build:dev`.
-2. In a second terminal window, run `yarn run:local`.
+1. Run `yarn build:local-server`.
+2. In a second terminal window, run `yarn run:local-server`.

@@ -90,18 +90,15 @@ The following are the yarn commands for our server application:
   * Builds the server with the dev webpack configuration.
 * **`webpack:prod`:**
   * Builds the server with the prod webpack configuration.
-* **`build:dev`:**
-  * Builds the dev server.
-* **`build:prod`:**
-  * Builds the prod server.
-* **`run:dev`:**
-  * Runs the dev server.
-* **`run:local`:**
+* **`build:local-server`:**
+  * Builds a local server using the dev webpack configurations.
+* **`build:server`:**
+  * Builds the server.
+* **`run:local-server`:**
   * Runs a local server.
-* **`run:prod`:**
-  * Runs the prod server.
-  * NOTE: this command *does not* include using the prod.env file because the production env vars
-    get injected via heroku when we run `yarn start`.
+* **`run:server`:**
+  * Runs the built server.
+  * NOTE: env vars will get injected via heroku when we run `yarn start`.
 * **`start`:**
   * This is the command that creates our production application; it builds our production node.js
     server / application and then runs it. We use the `start` command because when we deploy our
