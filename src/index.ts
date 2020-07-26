@@ -1,6 +1,7 @@
 import http from 'http';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
+import corsOptions from "middleware/corsOptions";
 
 // We initialize our middleware
 const {
@@ -45,6 +46,11 @@ httpServer.listen(PORT, () => {
   console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
   console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
 });
+
+console.log('----------- DEBUGGING FOO -------------');
+console.log('NODE ENV:');
+console.log(process.env.NODE_ENV);
+console.log('----------- DEBUGGING FOO -------------');
 
 // Using webpack's hot module replacement, if needed.
 if (process.env.FOOB === 'LOCAL' && module.hot) {
