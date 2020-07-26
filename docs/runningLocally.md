@@ -11,3 +11,10 @@ outlines what is need to instead run a server and database on your local machine
 * [I. How to run locally](#i-how-to-run-locally)
 
 ## I. How to run locally
+
+In order to run a local back end instance, you must do the following:
+
+1. Download Docker Community Edition.
+2. Create a local.env file at the root of the folder.
+  * This file should contain the DB credentials for whatever running development DB on Heroku you
+   want to connect to.

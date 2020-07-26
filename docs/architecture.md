@@ -64,10 +64,10 @@ application folder.
   .gitignore
   dev.env
   LICENSE.md
+  local.env
   package.json
   prod.env
   README.md
-  test.env
   tsconfig.json
   typings.d.ts
   webpack.common.js
@@ -95,20 +95,20 @@ application folder.
 * **`.gitignore`:**
   * configuration list of git ignores.
 * **`dev.env`:**
-  * a file containing node environment variables for your local instance when running
+  * a file containing node environment variables for your deployed devlepment instance when running
    the server in 'DEV' mode.
 * **`LICENSE.md`:**
   * Contains the software license / copyright.
+* **`local.env`:**
+  * a file containing node environment variables for your local instance when running
+   the server in 'LOCAL' mode.
 * **`package.json`:**
   * the package manager and metadata.
 * **`prod.env`:**
-  * a file containing node environment variables for your local instance when running
+  * a file containing node environment variables for your deployed production instance when running
    the server in 'PROD' mode.
 * **`README.md`:**
   * the root readme document.
-* **`test.env`:**
-  * a file containing node environment variables for your local instance when running
-   the server in 'TEST' mode.
 * **`tsconfig.json`:**
   * Specifies how TypeScript should be compiled.
 * **`typings.d.ts`:**
