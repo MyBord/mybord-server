@@ -1,14 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-console.log(' ----- DEBUGGING: ----- ');
-console.log('HEROKU RELEASE VERSION:');
-console.log(process.env.HEROKU_RELEASE_VERSION);
-const releaseCreatedAt = new Date(process.env.HEROKU_RELEASE_CREATED_AT);
-console.log(releaseCreatedAt.toDateString());
-console.log(releaseCreatedAt.toTimeString());
-console.log(' ----- DEBUGGING: ----- ');
-
 const SRC_DIR = path.resolve(__dirname, 'src');
 
 const output = {
@@ -16,9 +8,13 @@ const output = {
   path: path.resolve(__dirname, 'dist'),
 };
 
+const releaseCreatedAt = new Date(process.env.HEROKU_RELEASE_CREATED_AT);
+
 const plugins = [
   new HtmlWebpackPlugin({
-    title: 'Custom template',
+    releaseDate: releaseCreatedAt.toDateString(),
+    releaseTime: releaseCreatedAt.toTimeString(),
+    releaseVersion: process.env.HEROKU_RELEASE_VERSION,
     template: `${SRC_DIR}/pages/index.html`,
   }),
 ];
