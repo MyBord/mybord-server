@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -6,6 +7,13 @@ const output = {
   filename: 'index.js',
   path: path.resolve(__dirname, 'dist'),
 };
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    title: 'Custom template',
+    template: 'src/pages/index.html',
+  }),
+];
 
 const resolve = {
   extensions: ['.graphql', '.js', '.ts'],
@@ -38,6 +46,7 @@ const rules = [
 module.exports = {
   module: { rules },
   output,
+  plugins,
   resolve,
   target: 'node',
 };
