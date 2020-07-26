@@ -141,7 +141,7 @@ credentials that come from the [relevant Heroku database information](https://gi
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
-* **`MODE`**:
+* **`FOOB`**:
   * Declares what environment the server application is running in; can either be 'DEV', 'LOCAL',
   or 'PROD'.
 * **`PORT`**:
@@ -170,7 +170,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-MODE=DEV
+FOOB=DEV
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
@@ -185,7 +185,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-MODE=LOCAL
+FOOB=LOCAL
 PRISMA_ENDPOINT=http://localhost:4466/default/default
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
@@ -200,7 +200,7 @@ DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
 GAPI_KEY=defgh34567
-MODE=PROD
+FOOB=PROD
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
