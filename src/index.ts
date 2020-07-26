@@ -1,7 +1,6 @@
 import http from 'http';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
-import corsOptions from "middleware/corsOptions";
 
 // We initialize our middleware
 const {
