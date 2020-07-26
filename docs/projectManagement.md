@@ -49,6 +49,7 @@ Production Deployment:
 * outline / document where domains are kept, how they are handled, etc. -- add to root readme?
 * get the `yarn run:dev` command to open up the window
 * dev dependencies do not get pruned when pushed to heroku because flag is not 'produciton'
+* add styling to index.html landing page
 
 ### D. Low
 
