@@ -11,7 +11,7 @@ const sessionOptions: SessionOptions = {
 };
 
 // cookie must be sent via https
-if (process.env.NODE_ENV === 'PROD') {
+if (process.env.FOOB === 'PROD') {
   sessionOptions.cookie = {
     sameSite: 'none',
     secure: true,
