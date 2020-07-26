@@ -1,5 +1,11 @@
-export default {
+import { CorsOptions } from 'cors';
+
+const corsOptions: CorsOptions = {
   credentials: true,
-  // origin: `http://localhost:${process.env.EXTERNAL_PORT}`,
-  origin: 'https://mbh-server-dev-jimmy.herokuapp.com',
 };
+
+if (process.env.NODE_ENV === 'DEV') {
+  corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
+}
+
+export default corsOptions;

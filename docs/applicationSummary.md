@@ -8,6 +8,7 @@ built, and how it runs.
 ## Table of Contents:
 
 * [I. User Sessions & Cookies](#i-user-sessions--cookies)
+* [II. CORS Configuration](#ii-cors-configuration)
 
 ## I. User Sessions & Cookies
 
@@ -58,3 +59,26 @@ sent via https and set the sameSite attribute to 'none'.
 ### B. Resources
 
 * https://jkettmann.com/authentication-and-authorization-with-graphql-and-passport/
+
+## II. CORS Configuration
+
+Our CORS are configured per the following:
+
+```js
+const corsOptions = {
+  credentials: true,
+};
+
+if (process.env.NODE_ENV === 'DEV') {
+  corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
+}
+
+export default corsOptions;
+```
+
+* **`credentials: true`:**
+  * Configures the Access-Control-Allow-Credentials CORS header; is set to true to pass the header.
+* **origin:**  
+  * Declares where requests are allowed from.
+  * If the server is in 'DEV' mode, then we allow it to be accessed via a localhost / local
+   running front end.
