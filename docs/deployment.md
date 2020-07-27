@@ -140,7 +140,7 @@ either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
   * If you want to deploy code to Heroku from a non-master branch of your local repository
   (for example, `testbranch`), use the following syntax to ensure it is pushed to the remote’s master
   branch: `git push heroku testbranch:master`.
-* **Adding heroku git repository:**
+* **Adding a heroku git repository:**
   * To add an existing heroku git repository, run this command: `heroku git:remote -a yourapp`.
 * **Tip of current heroku branch is behind:**
   * If, when trying to push to heroku, the attempt was rejected because 'the tip of your current
