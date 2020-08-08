@@ -26,32 +26,24 @@ const sshFolder = path.join(__dirname, '../../../', '.ssh/');
 const id_rsa_file = path.join(sshFolder, 'id_rsa');
 const id_rsa_pub_file = path.join(sshFolder, 'id_rsa.pub');
 
+const certificateCheck = (): number => 0;
+
+const credentials = (url, username): object => nodegit.Cred.sshKeyNew(
+  username,
+  id_rsa_pub_file,
+  id_rsa_file,
+  'id_rsa_passphrase',
+);
 
 const cloneOptions = {
   fetchOpts: {
     callbacks: {
-      // change fn notation
-      certificateCheck() { return 0; },
-      credentials(url, userName) {
-        return nodegit.Cred.sshKeyNew(
-          userName,
-          id_rsa_pub_file,
-          id_rsa_file,
-          '<your-passphrase-here>',
-        );
-      },
+      certificateCheck,
+      credentials,
     },
   },
 };
 
 // ----- 4. CLONE THE REPOSITORY ----- //
 
-const cloneClientRepository = async (): Promise<void> => {
-  try {
-    await nodegit.Clone(cloneUrl, localPath, cloneOptions);
-  } catch (error) {
-    throw Error(error);
-  }
-};
-
-cloneClientRepository();
+nodegit.Clone(cloneUrl, localPath, cloneOptions);

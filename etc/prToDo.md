@@ -5,3 +5,5 @@ remove ts-node package
 remove foo yarn command
 
 document nodegit cloning process
+
+move ssh files to folder of repo and document
