@@ -46,4 +46,13 @@ const cloneOptions = {
 
 // ----- 4. CLONE THE REPOSITORY ----- //
 
-nodegit.Clone(cloneUrl, localPath, cloneOptions);
+const cloneRepository = async (): Promise<void> => {
+  try {
+    const clonedRepository = await nodegit.Clone(cloneUrl, localPath, cloneOptions);
+  } catch (error) {
+    console.log('error: could not clone');
+    console.log(error);
+  }
+};
+
+cloneRepository();
