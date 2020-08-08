@@ -18,7 +18,7 @@ const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
 // const localPath = path.join(__dirname, 'client');
 
 const d = new Date();
-const localPath = `client-${d.getHours}${d.getMinutes()}`;
+const localPath = `client-${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
 
 // ----- 3. SET CLONE OPTIONS ----- //
 
@@ -32,7 +32,7 @@ const credentials = (url, username): object => nodegit.Cred.sshKeyNew(
   username,
   id_rsa_pub_file,
   id_rsa_file,
-  'id_rsa_passphrase',
+  'foo', // it does not seem to care what the passphrase is
 );
 
 const cloneOptions = {
