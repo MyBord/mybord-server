@@ -10,7 +10,7 @@ const fs = require('fs');
 
 // ----- 1. SET CLONE URL ----- //
 
-const cloneUrl = 'https://github.com/jimmy-e/mybord';
+const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
 
 // ----- 2. SET FOLDER THAT STORES CLONED REPOSITORY ----- //
 
