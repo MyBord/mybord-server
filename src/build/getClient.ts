@@ -2,7 +2,6 @@
 // * https://www.nodegit.org/guides/cloning/ssh-with-agent/
 // * https://radek.io/2015/10/27/nodegit/
 
-// todo: change to import statement
 const fs = require('fs-extra');
 const nodegit = require('nodegit');
 const path = require('path');
@@ -49,13 +48,14 @@ const cloneRepository = async (): Promise<void> => {
   }
 };
 
-// ----- 4. REMOVE THE CURRENT CONTENTS OF THE CLIENT FOLDER AND COPY THE CONTENTS OF THE
-// TMP REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
+// ----- 4. ----- //
+// ----- a. REMOVE THE CURRENT CONTENTS OF THE CLIENT FOLDER ----- //
+// ----- b. COPY THE CONTENTS OF THE TMP REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
 const copyDist = async (): Promise<void> => {
   try {
-    await fs.rmdirSync(clientFolder, { recursive: true });
-    await fs.copy(tmpDistFolder, clientFolder);
+    await fs.emptyDirSync(clientFolder); // a.
+    await fs.copy(tmpDistFolder, clientFolder); // b.
   } catch (error) {
     console.log('Error trying to copy the dist folder:');
     console.log(error);

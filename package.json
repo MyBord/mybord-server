@@ -4,6 +4,7 @@
     "compose-docker:dev": "docker-compose -f src/prisma/docker-compose.yml --env-file dev.env up -d",
     "push-heroku:dev": "git push heroku-dev master",
     "push-heroku:prod": "git push heroku-prod master",
+    "get-client": "ts-node src/build/getClient.ts",
     "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
     "prisma-delete:dev": "cd src/prisma/ && env-cmd -f ../../dev.env prisma delete -f",
@@ -18,7 +19,6 @@
     "build:server": "npm-run-all remove-dist webpack:prod",
     "run:local-server": "env-cmd -f local.env nodemon dist/index",
     "run:server": "node dist/index",
-    "foo": "ts-node src/foo.ts",
     "start": "npm-run-all build:server run:server"
   },
   "authors": [
