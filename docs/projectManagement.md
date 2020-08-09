@@ -15,16 +15,10 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* move express.use to initializemiddleware script and change to make-public and makePublic.ts?
-* change client folder to public folder
 * prod-server should not allow any cors
 * prod client should use local path
-* have server serve client index
-* add instructions about enabling dyno metadata
-  https://devcenter.heroku.com/articles/dyno-metadata
 * add build version to index page  
   *  https://devcenter.heroku.com/changelog-items/630 
-* add a heroku-postbuild command?
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
 * change secrets
@@ -55,6 +49,7 @@ Production Deployment:
 * get the `yarn run:dev` command to open up the window
 * dev dependencies do not get pruned when pushed to heroku because flag is not 'produciton'
 * add styling to index.html landing page
+* add a heroku-postbuild command?
 
 ### D. Low
 
