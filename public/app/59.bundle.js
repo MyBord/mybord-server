@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[59],{933:function(t,e,n){"use strict";n.r(e);var o=n(0),i=n(114),r=n(106);e.default=function(t){var e=t.children,n=t.color,a=t.commonStyles,l=t.link,s=t.onClick,c=[r.link,"white"===n?r.whiteButtonLink:void 0,a].join(" "),h=l.startsWith("https")||l.startsWith("mailto"),k=l.startsWith("mailto");return h?o.createElement("a",{className:c,href:l,onClick:s,rel:k?void 0:"noopener noreferrer",target:k?void 0:"blank"},e):o.createElement(i.b,{className:c,to:l,onClick:s},e)}}}]);
+//# sourceMappingURL=59.bundle.js.map
