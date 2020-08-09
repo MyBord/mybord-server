@@ -8,11 +8,12 @@ deploying to our production instance, please see the [deployment doc](https://gi
 ## Table of Contents:
 
 * [I. Babel](#i-babel)
-* [II. ESLint](#ii-eslint)
-* [III. Docker](#iii-docker)
-* [IV. Yarn Commands](#iv-yarn-commands)
-* [V. Env Vars](#v-env-vars)
-* [VI. Important Branches](#vi-important-branches)
+* [II. Client](#ii-client)
+* [III. ESLint](#iii-eslint)
+* [IV. Docker](#iv-docker)
+* [V. Yarn Commands](#v-yarn-commands)
+* [VI. Env Vars](#vi-env-vars)
+* [VII. Important Branches](#vii-important-branches)
 
 ## I. Babel
 
@@ -22,7 +23,13 @@ Babel is a javascript compiler. Its configs can be found at
 * [Documentation](https://babeljs.io/docs/en/)
 * [Source Code](https://github.com/babel/babel)
 
-## II. Eslint
+## II. Client
+
+In order to serve our client application, we grab the bundled files from the client application
+by cloning the client repository, taking the bundled files and copying them to the `client`
+folder, and then deleting the cloned repository.
+
+## III. Eslint
 
 Eslint is used to lint our javascript and TypeScript code. It's config file in the root 
 directory, [`.eslintrc.js`](https://github.com/jimmy-e/mybord/blob/master/.eslintrc.js),
@@ -32,7 +39,7 @@ By principle, MyBord-Server is set to follow
 [AirBnB's Javascript Style Guide](https://github.com/airbnb/javascript) and
 [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint).
 
-## III. Docker
+## IV. Docker
 
 We use docker for our virtualized containers.
 
@@ -55,7 +62,7 @@ the `dev.env` file and access to your own development database via heroku and th
 
 * [Docker CLI Reference](https://docs.docker.com/compose/reference/overview/)
 
-## IV. Yarn Commands
+## V. Yarn Commands
 
 The following are the yarn commands for our server application:
 
@@ -70,6 +77,8 @@ The following are the yarn commands for our server application:
   * This pushes our node.js application to our production heroku app (e.g.
   `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#a-deploying-our-nodejs-application-to-heroku)
   for more information.
+* **`get-client`:**
+  * Gets the front-end bundle and saves it to the `client` folder. For more information, see [here](#ii-client).
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
@@ -104,7 +113,7 @@ The following are the yarn commands for our server application:
     server / application and then runs it. We use the `start` command because when we deploy our
     node.js application to heroku, it looks at our `package.json` file and runs the `start` command.
     
-## V. Env Vars
+## VI. Env Vars
 
 ### A. Env Var Files
 
@@ -210,7 +219,7 @@ PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
 ```
 
-## VI. Important Branches
+## VII. Important Branches
 
 The following are important branches in regards to the `mybord-server` repo:
 
