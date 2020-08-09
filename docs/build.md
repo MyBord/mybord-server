@@ -86,8 +86,8 @@ The following are the yarn commands for our server application:
   * Gets the front-end bundle and saves it to the `client` folder. For more information, see [here](#ii-client).
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
-* **`remove-dist`:**
-  * Removes the 'dist/' folder.
+* **`make-dist`:**
+  * Builds the 'dist/' folder.
 * **`prisma-delete:dev`:**
   * Deletes the prisma instance hosted on the dev instance.
 * **`prisma-deploy:dev`:**

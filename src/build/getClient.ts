@@ -2,8 +2,11 @@
 // * https://www.nodegit.org/guides/cloning/ssh-with-agent/
 // * https://radek.io/2015/10/27/nodegit/
 
+// @ts-ignore
 const fs = require('fs-extra');
+// @ts-ignore
 const nodegit = require('nodegit');
+// @ts-ignore
 const path = require('path');
 
 // ----- 1. SET PRIMITIVES ----- //
