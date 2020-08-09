@@ -15,6 +15,10 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* move express.use to initializemiddleware script and change to make-public and makePublic.ts?
+* change client folder to public folder
+* prod-server should not allow any cors
+* prod client should use local path
 * have server serve client index
 * add instructions about enabling dyno metadata
   https://devcenter.heroku.com/articles/dyno-metadata

@@ -1,4 +1,5 @@
 import http from 'http';
+import express from 'express';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
 
@@ -13,9 +14,7 @@ const {
 
 // We add some html pages to our node server (helpful for debugging and making sure our
 // deployments are up to date and accurate)
-expressMiddleware.get('/', (req, res) => {
-  res.sendFile('dist/index.html', { root: '.' });
-});
+expressMiddleware.use(express.static('client'));
 
 // We initialize our Apollo Server
 const server = initializeServer(
