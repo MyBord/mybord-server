@@ -3,8 +3,7 @@
 // * https://radek.io/2015/10/27/nodegit/
 
 // todo: change to import statement
-const fs = require('fs');
-const fsExtra = require("fs-extra");
+const fs = require('fs-extra');
 const nodegit = require('nodegit');
 const path = require('path');
 
@@ -13,6 +12,7 @@ const path = require('path');
 const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
 const clientFolder = path.join(__dirname, 'client');
 const tmpFolder = path.join(__dirname, 'tmp');
+const tmpDistFolder = path.join(tmpFolder, 'dist');
 
 const sshFolder = path.join(__dirname, '../../../', '.ssh/');
 const id_rsa_file = path.join(sshFolder, 'id_rsa');
@@ -51,24 +51,33 @@ const cloneRepository = async (): Promise<void> => {
 
 // ----- 4. COPY THE CONTENTS OF THE REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
-const copyTmp = (): void => fsExtra.copy(tmpFolder, clientFolder, (error) => {
-  if (error) {
+const copyDist = async (): Promise<void> => {
+  try {
+    await fs.copy(tmpDistFolder, clientFolder);
+  } catch (error) {
     console.log('Error trying to copy the dist folder:');
     console.log(error);
   }
-});
+};
 
 // ----- 5. DELETE THE TMP REPOSITORY FOLDER ----- //
 
-const deleteRepository = (): void => fs.rmdirSync(tmpFolder, { recursive: true });
+const deleteRepository = async (): Promise<void> => {
+  try {
+    await fs.rmdirSync(tmpFolder, { recursive: true });
+  } catch (error) {
+    console.log('Error trying to delete repository:');
+    console.log(error);
+  }
+};
 
 // ----- 6. INVOKE 3, 4, AND 5 SYNCHRONOUSLY ----- //
 
 const getClient = async (): Promise<void> => {
   try {
     await cloneRepository();
-    copyTmp();
-    deleteRepository();
+    await copyDist();
+    await deleteRepository();
   } catch (error) {
     throw new Error(error);
   }

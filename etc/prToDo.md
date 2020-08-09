@@ -16,3 +16,5 @@ document new folders -- client folder
 rename foo.ts and move it to a certain folder?
 
 do I need fs and fsExtra, or can I replace fs with fsExtra?
+
+remove pages folder and remove documenation about it from architecture
