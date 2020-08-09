@@ -10,11 +10,12 @@ This summarizes the general architecture behind the MyBord back-end codebase.
 * [II. Architecture](#ii-architecture)   
   * [A. Root folder](#a-root)
   * [B. src folder](#b-src-folder)
-  * [C. middleware folder](#c-middleware-folder)
-  * [D. passport folder](#d-passport-folder)
-  * [E. prisma folder](#e-prisma-folder)
-  * [F. schema folder](#f-schema-folder)
-  * [G. server folder](#g-server-folder)
+  * [C. build folder](#c-build-folder)
+  * [D. middleware folder](#d-middleware-folder)
+  * [E. passport folder](#e-passport-folder)
+  * [F. prisma folder](#f-prisma-folder)
+  * [G. schema folder](#g-schema-folder)
+  * [H. server folder](#h-server-folder)
 
 ## I. Summary
 
@@ -148,9 +149,7 @@ src/
 
 * **build/:**
   * This contains scripts that are used to help build our server in addition to all of our other
-   tooling. Most importantly, this contains the script `getClient.ts` which gets the client
-   bundle that we serve as the front end part of our application. For more information, see
-   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
+   tooling. For more information, see [here](#c-build-folder).
 * **client/:**
   * This contains the files used to serve our client application. Most importantly, it contains
    the `index.html` and bundled files to serve said client. For more information, see
@@ -186,7 +185,24 @@ src/
     * Open up our http server on a certain port.
     * Uses hot module replacement if not in PROD mode.
     
-### C. middleware folder
+### C. build folder
+
+Our build folder contains scripts that are used to help build our server in addition to all of
+our other tooling.
+
+```
+build/
+  |- getClient.ts
+  |- makeDist.ts
+```
+
+* **`getClient.ts`:**
+   * Gets the client bundle that we serve as the front end part of our application. For more
+   information, see [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
+* **`makeDist`:**
+  * Creates the dist folder at the root of the repository.
+
+### D. middleware folder
 
 Our server folder contains various configuration files and scripts that allows us to initialize
 our server. Most importantly, it is in this folder where we initialize our middleware, our prisma
@@ -215,7 +231,7 @@ server/
     * Configure our cors options
     * Configure our express session options
 
-### D. passport folder
+### E. passport folder
 
 The passport folder contains code that is used to create our passport authentication middleware.
 
@@ -251,7 +267,7 @@ passport/
 * **`initializePassport.ts`:**
   * Initializes the passport authentication instance and strategies.
 
-### E. prisma folder
+### F. prisma folder
 
 The prisma folder contains the code used to configure and initialize our prisma orm instance. It is
 organized in the following manner:
@@ -271,7 +287,7 @@ prisma/
 * **`prisma.yml`:**
   * Configures our prisma service.
   
-### F. schema folder
+### G. schema folder
 
 The `schema/` folder contains the schema that structures our database and server orm. It is
 structured in the following way:
@@ -371,7 +387,7 @@ schema/
   * The final file that gets used to generate the typeDefs when we initialize our server;
   contains both our prisma schema and our non prisma schema.
 
-### G. server folder
+### H. server folder
 
 Our server folder contains the script that intializes our apollo server.
 
