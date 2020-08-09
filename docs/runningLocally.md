@@ -17,7 +17,7 @@ In order to run a local back end instance, you must do the following:
 
 1. Make sure you have created a development DB instance on Heroku via Prisma by following
 [these instructions](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#iii-prisma-cloud).
-2. Create a local.env file at the root of the folder. See more information [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#v-env-vars).
+2. Create a local.env file at the root of the folder. See more information [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#vi-env-vars).
   * This file should contain the DB credentials for the running development DB instance on Heroku
    you want to connect to.
 3. Download Docker Community Edition.

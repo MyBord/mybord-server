@@ -15,6 +15,8 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* move ssh files to folder of repo and document
+* remove pages folder and remove documenation about it from architecture
 * add instructions about enabling dyno metadata
   https://devcenter.heroku.com/articles/dyno-metadata
 * add build version to index page  
