@@ -53,6 +53,7 @@ application folder.
 
 ```
   .ssh/
+  client/
   dist/
   docs/
   etc/
@@ -80,6 +81,10 @@ application folder.
 * **.ssh/:**
   * This folder contains the `id_rsa` and `id_rsa.pub` files so that we can clone the client
   repository. For more information, see [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
+* **client/:**
+  * This contains the files used to serve our client application. Most importantly, it contains
+   the `index.html` and bundled files to serve said client. For more information, see
+   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
 * **dist/:**
   * folder that contains the server build.
 * **docs/:**
@@ -134,7 +139,6 @@ manner:
 ```
 src/
   |- build/ 
-  |- client/ 
   |- middleware/
   |- prisma/ 
   |- schema/ 
@@ -150,10 +154,6 @@ src/
   * This contains scripts that are used to help build our server in addition to all of our other
    tooling. Most importantly, this contains the script `getClient.ts` which gets the client
    bundle that we serve as the front end part of our application. For more information, see
-   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
-* **client/:**
-  * This contains the files used to serve our client application. Most importantly, it contains
-   the `index.html` and bundled files to serve said client. For more information, see
    [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
 * **middleware/:**
   * Contains configurations and files that create and initialize our middleware. For further

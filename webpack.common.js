@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -7,18 +6,6 @@ const output = {
   filename: 'index.js',
   path: path.resolve(__dirname, 'dist'),
 };
-
-const releaseCreatedAt = new Date(process.env.HEROKU_RELEASE_CREATED_AT);
-
-const plugins = [
-  new HtmlWebpackPlugin({
-    inject: false,
-    releaseDate: releaseCreatedAt.toDateString(),
-    releaseTime: releaseCreatedAt.toTimeString(),
-    releaseVersion: process.env.HEROKU_RELEASE_VERSION,
-    template: `${SRC_DIR}/client/index.html`,
-  }),
-];
 
 const resolve = {
   extensions: ['.graphql', '.js', '.ts'],
@@ -51,7 +38,6 @@ const rules = [
 module.exports = {
   module: { rules },
   output,
-  plugins,
   resolve,
   target: 'node',
 };
