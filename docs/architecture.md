@@ -52,6 +52,7 @@ The following architecture details are concerned with what should be contained i
 application folder.
 
 ```
+  .ssh/
   dist/
   docs/
   etc/
@@ -76,6 +77,9 @@ application folder.
   yarn.lock
 ```
 
+* **.ssh/:**
+  * This folder contains the `id_rsa` and `id_rsa.pub` files so that we can clone the client
+  repository. For more information, see [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
 * **dist/:**
   * folder that contains the server build.
 * **docs/:**

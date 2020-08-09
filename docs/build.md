@@ -29,6 +29,11 @@ In order to serve our client application, we grab the bundled files from the cli
 by cloning the client repository, taking the bundled files and copying them to the `client`
 folder, and then deleting the cloned repository.
 
+In order to clone the client repository, we need to use our ssh keys. These keys are stored in
+the `.ssh/` folder at the root of the repository and should always be gitignored for security
+purposes. Thus, in order to perform the operation to get the client's bundled files, you will
+need to take your `id_rsa` and `id_rsa.pub` files and copy them to the `.ssh/` folder.
+
 ## III. Eslint
 
 Eslint is used to lint our javascript and TypeScript code. It's config file in the root 
