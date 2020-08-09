@@ -1,5 +1,4 @@
 import http from 'http';
-import express from 'express';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
 
@@ -11,10 +10,6 @@ const {
   passportSessionMiddleware,
   prisma,
 } = initializeMiddleware();
-
-// We add some html pages to our node server (helpful for debugging and making sure our
-// deployments are up to date and accurate)
-expressMiddleware.use(express.static('client'));
 
 // We initialize our Apollo Server
 const server = initializeServer(
