@@ -8,7 +8,7 @@ deploying to our production instance, please see the [deployment doc](https://gi
 ## Table of Contents:
 
 * [I. Babel](#i-babel)
-* [II. Client](#ii-client)
+* [II. Public](#ii-public)
 * [III. ESLint](#iii-eslint)
 * [IV. Docker](#iv-docker)
 * [V. Yarn Commands](#v-yarn-commands)
@@ -23,10 +23,10 @@ Babel is a javascript compiler. Its configs can be found at
 * [Documentation](https://babeljs.io/docs/en/)
 * [Source Code](https://github.com/babel/babel)
 
-## II. Client
+## II. Public
 
 In order to serve our client application, we grab the bundled files from the client application
-by cloning the client repository, taking the bundled files and copying them to the `client`
+by cloning the client repository, taking the bundled files and copying them to the `public`
 folder, and then deleting the cloned repository.
 
 In order to clone the client repository, we need to use our ssh keys. These keys are stored in
@@ -82,8 +82,9 @@ The following are the yarn commands for our server application:
   * This pushes our node.js application to our production heroku app (e.g.
   `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#a-deploying-our-nodejs-application-to-heroku)
   for more information.
-* **`get-client`:**
-  * Gets the front-end bundle and saves it to the `client` folder. For more information, see [here](#ii-client).
+* **`build-public`:**
+  * Gets the front-end bundle and saves it to the `client` folder. For more information, see
+  [here](#ii-public).
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**

@@ -36,7 +36,7 @@ export default (): Middleware => {
   expressMiddleware.use(passportSessionMiddleware);
 
   // We serve our public client application
-  expressMiddleware.use(express.static('client'));
+  expressMiddleware.use(express.static('public'));
 
   // returns our middleware
   return {

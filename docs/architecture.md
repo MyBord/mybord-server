@@ -53,13 +53,13 @@ application folder.
 
 ```
   .ssh/
-  client/
   dist/
   docs/
   etc/
     |- assets/ 
     |- prToDo.md
   node_modules/
+  public/
   src/
   .babelrc
   .eslintrc.js
@@ -80,11 +80,7 @@ application folder.
 
 * **.ssh/:**
   * This folder contains the `id_rsa` and `id_rsa.pub` files so that we can clone the client
-  repository. For more information, see [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
-* **client/:**
-  * This contains the files used to serve our client application. Most importantly, it contains
-   the `index.html` and bundled files to serve said client. For more information, see
-   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
+  repository. For more information, see [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-public).
 * **dist/:**
   * folder that contains the server build.
 * **docs/:**
@@ -93,8 +89,12 @@ application folder.
   * folder containing images used in our docs.
 * **`etc/prToDo.md`:**
   * a space to put notes regarding a current branch / pr.
-* **`node_modules`:**
+* **node_modules/:**
   * folder that holds all npm packages. should be git ignored.
+* **public/:**
+  * This contains the files used to serve our client application. Most importantly, it contains
+   the `index.html` and bundled files to serve said client. For more information, see
+   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-public).
 * **src/:**
   * folder that contains the server source code.
 * **`.babelrc`:**
@@ -152,9 +152,9 @@ src/
 
 * **build/:**
   * This contains scripts that are used to help build our server in addition to all of our other
-   tooling. Most importantly, this contains the script `getClient.ts` which gets the client
+   tooling. Most importantly, this contains the script `buildPublic.ts` which gets the client
    bundle that we serve as the front end part of our application. For more information, see
-   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-client).
+   [here](https://github.com/jimmy-e/mybord-server/blob/master/docs/build.md#ii-public).
 * **middleware/:**
   * Contains configurations and files that create and initialize our middleware. For further
    information, see the [middleware folder outline](#c-middleware-folder)

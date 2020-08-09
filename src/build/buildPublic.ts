@@ -9,7 +9,7 @@ const path = require('path');
 // ----- 1. SET PRIMITIVES ----- //
 
 const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
-const clientFolder = path.join(__dirname, '../../client');
+const publicFolder = path.join(__dirname, '../../public');
 const tmpFolder = path.join(__dirname, '../tmp');
 const tmpDistFolder = path.join(tmpFolder, 'dist');
 
@@ -49,13 +49,13 @@ const cloneRepository = async (): Promise<void> => {
 };
 
 // ----- 4. ----- //
-// ----- a. REMOVE THE CURRENT CONTENTS OF THE CLIENT FOLDER ----- //
+// ----- a. REMOVE THE CURRENT CONTENTS OF THE PUBLIC FOLDER ----- //
 // ----- b. COPY THE CONTENTS OF THE TMP REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
 const copyDist = async (): Promise<void> => {
   try {
-    await fs.emptyDirSync(clientFolder); // a.
-    await fs.copy(tmpDistFolder, clientFolder); // b.
+    await fs.emptyDirSync(publicFolder); // a.
+    await fs.copy(tmpDistFolder, publicFolder); // b.
   } catch (error) {
     console.log('Error trying to copy the dist folder:');
     console.log(error);
@@ -75,7 +75,7 @@ const deleteRepository = async (): Promise<void> => {
 
 // ----- 6. INVOKE 3, 4, AND 5 SYNCHRONOUSLY ----- //
 
-const getClient = async (): Promise<void> => {
+const buildPublic = async (): Promise<void> => {
   try {
     await cloneRepository();
     await copyDist();
@@ -86,4 +86,4 @@ const getClient = async (): Promise<void> => {
   }
 };
 
-getClient();
+buildPublic();
