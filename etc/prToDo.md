@@ -7,3 +7,12 @@ remove foo yarn command
 document nodegit cloning process
 
 move ssh files to folder of repo and document
+
+nodegit package should be a dev dependency
+
+
+document new folders -- client folder
+
+rename foo.ts and move it to a certain folder?
+
+do I need fs and fsExtra, or can I replace fs with fsExtra?

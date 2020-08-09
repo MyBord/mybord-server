@@ -3,23 +3,22 @@
 // * https://radek.io/2015/10/27/nodegit/
 
 // todo: change to import statement
+const fs = require('fs');
+const fsExtra = require("fs-extra");
 const nodegit = require('nodegit');
 const path = require('path');
-const fs = require('fs');
 
-// ----- 1. SET CLONE URL ----- //
+// ----- 1. SET PRIMITIVES ----- //
 
 const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
-
-// ----- 2. SET FOLDER THAT STORES CLONED REPOSITORY ----- //
-
-const localPath = path.join(__dirname, 'tmp');
-
-// ----- 3. SET CLONE OPTIONS ----- //
+const clientFolder = path.join(__dirname, 'client');
+const tmpFolder = path.join(__dirname, 'tmp');
 
 const sshFolder = path.join(__dirname, '../../../', '.ssh/');
 const id_rsa_file = path.join(sshFolder, 'id_rsa');
 const id_rsa_pub_file = path.join(sshFolder, 'id_rsa.pub');
+
+// ----- 2. SET CLONE OPTIONS ----- //
 
 const certificateCheck = (): number => 0;
 
@@ -39,32 +38,36 @@ const cloneOptions = {
   },
 };
 
-// ----- 4. CLONE THE REPOSITORY ----- //
+// ----- 3. CLONE THE REPOSITORY ----- //
 
 const cloneRepository = async (): Promise<void> => {
   try {
-    await nodegit.Clone(cloneUrl, localPath, cloneOptions);
+    await nodegit.Clone(cloneUrl, tmpFolder, cloneOptions);
   } catch (error) {
-    throw new Error(error);
+    console.log('Error trying to clone the repository:');
+    console.log(error);
   }
 };
 
-// ----- 5. COPY THE CONTENTS OF THE REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
+// ----- 4. COPY THE CONTENTS OF THE REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
-// const foopath = path.join(__dirname, 'pages');
-// console.log(foopath);
-// fs.rmdirSync(foopath, { recursive: true });
-//
+const copyTmp = (): void => fsExtra.copy(tmpFolder, clientFolder, (error) => {
+  if (error) {
+    console.log('Error trying to copy the dist folder:');
+    console.log(error);
+  }
+});
 
-// ----- 6. DELETE THE TMP REPOSITORY FOLDER ----- //
+// ----- 5. DELETE THE TMP REPOSITORY FOLDER ----- //
 
-const deleteRepository = (): void => fs.rmdirSync(localPath, { recursive: true });
+const deleteRepository = (): void => fs.rmdirSync(tmpFolder, { recursive: true });
 
-// ----- 7. INVOKE 4, 5, AND 6 SYNCHRONOUSLY ----- //
+// ----- 6. INVOKE 3, 4, AND 5 SYNCHRONOUSLY ----- //
 
 const getClient = async (): Promise<void> => {
   try {
     await cloneRepository();
+    copyTmp();
     deleteRepository();
   } catch (error) {
     throw new Error(error);
