@@ -155,9 +155,6 @@ src/
 * **middleware/:**
   * Contains configurations and files that create and initialize our middleware. For further
    information, see the [middleware folder outline](#c-middleware-folder)
-* **middleware/:**
-  * Contains configurations and files that create and initialize our middleware. For further
-   information, see the [middleware folder outline](#c-middleware-folder)
 * **pages/:**
   * This contains html files that are used in our node.js server application. Including some html
    in our server application can be useful because, importantly, this allows us to make sure
