@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{937:function(e,r,a){"use strict";a.r(r);var i=a(0),s=a(234),d=a(745);r.default=function(e){var r=e.form;return i.createElement(s.a,{fieldName:"email",form:r,required:!0,requiredMessage:"Your email address is required."},i.createElement(d.a,{placeholder:"Please enter your email address"}))}}}]);
+//# sourceMappingURL=42.bundle.js.map
