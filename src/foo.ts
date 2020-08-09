@@ -13,7 +13,7 @@ const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
 
 // ----- 2. SET FOLDER THAT STORES CLONED REPOSITORY ----- //
 
-const tmpPath = path.join(__dirname, 'tmp');
+const localPath = path.join(__dirname, 'tmp');
 
 // ----- 3. SET CLONE OPTIONS ----- //
 
@@ -43,14 +43,11 @@ const cloneOptions = {
 
 const cloneRepository = async (): Promise<void> => {
   try {
-    const clonedRepository = await nodegit.Clone(cloneUrl, tmpPath, cloneOptions);
+    await nodegit.Clone(cloneUrl, localPath, cloneOptions);
   } catch (error) {
-    console.log('error: could not clone');
-    console.log(error);
+    throw new Error(error);
   }
 };
-
-cloneRepository();
 
 // ----- 5. COPY THE CONTENTS OF THE REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
@@ -61,4 +58,17 @@ cloneRepository();
 
 // ----- 6. DELETE THE TMP REPOSITORY FOLDER ----- //
 
-fs.rmdirSync(tmpPath, { recursive: true });
+const deleteRepository = (): void => fs.rmdirSync(localPath, { recursive: true });
+
+// ----- 7. INVOKE 4, 5, AND 6 SYNCHRONOUSLY ----- //
+
+const getClient = async (): Promise<void> => {
+  try {
+    await cloneRepository();
+    deleteRepository();
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+getClient();
