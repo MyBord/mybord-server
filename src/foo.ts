@@ -49,10 +49,12 @@ const cloneRepository = async (): Promise<void> => {
   }
 };
 
-// ----- 4. COPY THE CONTENTS OF THE REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
+// ----- 4. REMOVE THE CURRENT CONTENTS OF THE CLIENT FOLDER AND COPY THE CONTENTS OF THE
+// TMP REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
 
 const copyDist = async (): Promise<void> => {
   try {
+    await fs.rmdirSync(clientFolder, { recursive: true });
     await fs.copy(tmpDistFolder, clientFolder);
   } catch (error) {
     console.log('Error trying to copy the dist folder:');
