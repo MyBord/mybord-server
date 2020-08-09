@@ -12,10 +12,11 @@ const releaseCreatedAt = new Date(process.env.HEROKU_RELEASE_CREATED_AT);
 
 const plugins = [
   new HtmlWebpackPlugin({
+    inject: false,
     releaseDate: releaseCreatedAt.toDateString(),
     releaseTime: releaseCreatedAt.toTimeString(),
     releaseVersion: process.env.HEROKU_RELEASE_VERSION,
-    template: `${SRC_DIR}/pages/index.html`,
+    template: `${SRC_DIR}/client/index.html`,
   }),
 ];
 
