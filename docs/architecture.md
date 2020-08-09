@@ -136,7 +136,6 @@ src/
   |- build/ 
   |- client/ 
   |- middleware/
-  |- pages/ 
   |- prisma/ 
   |- schema/ 
   |- server/ 
@@ -159,11 +158,6 @@ src/
 * **middleware/:**
   * Contains configurations and files that create and initialize our middleware. For further
    information, see the [middleware folder outline](#c-middleware-folder)
-* **pages/:**
-  * This contains html files that are used in our node.js server application. Including some html
-   in our server application can be useful because, importantly, this allows us to make sure
-   that our deployments are up to date and accurate, especially when debugging and trying to
-   make sure that new changes to our node.js application have been successfully deployed.
 * **prisma/:**
   * Contains the code used to configure and initialize our prisma orm instance. Fur further
    information, see the [prisma folder outline](#e-prisma-folder).
