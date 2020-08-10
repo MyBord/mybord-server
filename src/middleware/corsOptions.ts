@@ -6,7 +6,7 @@ const corsOptions: CorsOptions = {
   credentials: true,
 };
 
-if (process.env.MODE === 'DEV') {
+if (['DEV', 'LOCAL'].includes(process.env.MODE)) {
   corsOptions.origin = `http://localhost:${process.env.EXTERNAL_PORT}`;
 }
 
