@@ -134,7 +134,7 @@ the following command: `git remote add heroku-dev <heroku_git_url>`.
 Once these commands have been run, you can then deploy your application to Heroku by running
 either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
 
-### C. Other Herku Resources & Commands
+### C. Other Heroku Commands
 
 * **Deploying from a branch besides master:**
   * If you want to deploy code to Heroku from a non-master branch of your local repository
@@ -165,3 +165,7 @@ either `yarn push-heroku:prod` or `yarn push-heroku:dev`.
 * **Getting the logs of a specifc app:**
   * To get the logs of a specific app, run the following command:
   `heroku logs --app sample_app_name --tail`.
+  
+### D. Additional Heroku Resources
+
+* [Troubleshooting Node.js Memory Use](https://devcenter.heroku.com/articles/node-memory-use)
