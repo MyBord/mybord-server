@@ -6,6 +6,11 @@ enum CardType {
 
 # ----- TYPES ----- #
 
+type CardData {
+  id: ID! @id
+  youtubeCardData: YoutubeCardData
+}
+
 type YoutubeCardData {
   id: ID! @id
   channelThumbnail: String!
@@ -17,11 +22,6 @@ type YoutubeCardData {
   videoThumbnail: String!
   videoTitle: String!
   views: String!
-}
-
-type CardData {
-  id: ID! @id
-  youtubeCardData: YoutubeCardData
 }
 
 # ----- FINAL SCHEMA ----- #

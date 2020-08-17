@@ -1,6 +1,7 @@
 import ServerError from 'server/serverError';
 import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
+import cardEnums from './cardEnums';
 import cardInfo from './cardInfo';
 
 export default {
@@ -24,7 +25,7 @@ export default {
           },
           isFavorite: false,
           isToDo: false,
-          type: 'Youtube',
+          type: cardEnums.youtube,
           user: {
             connect: {
               id: userId,
@@ -72,6 +73,20 @@ export default {
       message: 'The user does not have access to delete this card',
       status: 403,
     });
+  },
+  initiateYoutubeCard: async (parent, args) => {
+    try {
+      const videoId = getYoutubeVideoId(args.data.videoUrl);
+      const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
+
+      return {
+        title: youtubeVideoData.channelTitle,
+        type: cardEnums.youtube,
+        youtubeCardData: youtubeVideoData,
+      };
+    } catch (error) {
+      throw new ServerError({ message: error.message, status: 400 });
+    }
   },
   toggleFavoriteUserCard: async (parent, args, { passport, prisma }) => {
     const userId = passport.getUserId();

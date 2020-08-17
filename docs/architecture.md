@@ -294,6 +294,7 @@ schema/
   |- comment/ 
   |- post/ 
   |- user/ 
+     |- userEnums.ts
      |- userInfo.ts
      |- userMutations.ts
      |- userPrismaSchema.graphql
@@ -303,6 +304,8 @@ schema/
      |- userTypes.ts
 ```
 
+* **`userEnums.ts`:**
+  * This contains a list of constants to be used for our mutations, subscriptions, and queries.
 * **`userInfo.ts`:**
   * This contains common strings that are used to replace the `info` portions of a prisma query or
     mutation. This is especially helpful to assure that subscriptions return consistent data
