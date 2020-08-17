@@ -30,6 +30,7 @@ input YoutubeCardInput {
 extend type Mutation {
   createYoutubeCard(data: YoutubeCardInput!): Card!
   deleteUserCard(data: CardIdInput): Card!
+  initiateYoutubeCard(data: YoutubeCardInput!): Card!
   toggleFavoriteUserCard(data: CardIdInput): Card!
   toggleToDoUserCard(data: CardIdInput): Card!
 }
