@@ -80,8 +80,8 @@ export default {
       const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
       return {
-        cardType: cardEnums.youtube,
         title: youtubeVideoData.channelTitle,
+        type: cardEnums.youtube,
         youtubeCardData: youtubeVideoData,
       };
     } catch (error) {
