@@ -1,6 +1,7 @@
 import ServerError from 'server/serverError';
 import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
+import cardEnums from './cardEnums';
 import cardInfo from './cardInfo';
 
 export default {
@@ -24,7 +25,7 @@ export default {
           },
           isFavorite: false,
           isToDo: false,
-          type: 'Youtube',
+          type: cardEnums.youtube,
           user: {
             connect: {
               id: userId,
@@ -79,6 +80,8 @@ export default {
       const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
       return {
+        cardType: cardEnums.youtube,
+        title: youtubeVideoData.channelTitle,
         youtubeCardData: youtubeVideoData,
       };
     } catch (error) {
