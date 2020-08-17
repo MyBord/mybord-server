@@ -73,37 +73,14 @@ export default {
       status: 403,
     });
   },
-  initiateYoutubeCard: async (parent, args, { passport, prisma }) => {
+  initiateYoutubeCard: async (parent, args) => {
     try {
-      const userId = passport.getUserId();
       const videoId = getYoutubeVideoId(args.data.videoUrl);
       const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
-      const finalArgs = {
-        ...args,
-        data: {
-          cardData: {
-            create: {
-              youtubeCardData: {
-                create: {
-                  ...youtubeVideoData,
-                },
-              },
-            },
-          },
-          isFavorite: false,
-          isToDo: false,
-          type: 'Youtube',
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
-        },
+      return {
+        youtubeCardData: youtubeVideoData,
       };
-
-      const card = await prisma.mutation.createCard(finalArgs, cardInfo);
-      return card;
     } catch (error) {
       throw new ServerError({ message: error.message, status: 400 });
     }

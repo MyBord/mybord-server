@@ -50,6 +50,7 @@ Production Deployment:
 * dev dependencies do not get pruned when pushed to heroku because flag is not 'produciton'
 * add styling to index.html landing page
 * add a heroku-postbuild command?
+* we should cache the card data for the two requests - initiateYoutubeCard and createYoutubeCard
 
 ### D. Low
 
