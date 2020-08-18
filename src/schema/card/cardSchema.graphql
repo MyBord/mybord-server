@@ -19,6 +19,7 @@ type FilteredUserCardsType {
 type InitialCardData {
   category: CardCategory!
   title: String!
+  url: String!
   youtubeCardData: YoutubeCardData!
 }
 

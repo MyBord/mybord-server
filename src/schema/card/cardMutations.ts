@@ -82,6 +82,7 @@ export default {
       return {
         category: cardEnums.video,
         title: youtubeVideoData.channelTitle,
+        url: args.data.videoUrl,
         youtubeCardData: youtubeVideoData,
       };
     } catch (error) {
