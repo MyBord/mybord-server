@@ -74,17 +74,21 @@ export default {
       status: 403,
     });
   },
-  initiateYoutubeCard: async (parent, args) => {
+  initiateCard: async (parent, args) => {
     try {
-      const videoId = getYoutubeVideoId(args.data.videoUrl);
-      const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
+      if (args.data.type === cardEnums.youtube) {
+        const videoId = getYoutubeVideoId(args.data.url);
+        const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
-      return {
-        category: cardEnums.video,
-        title: youtubeVideoData.channelTitle,
-        url: args.data.videoUrl,
-        youtubeCardData: youtubeVideoData,
-      };
+        return {
+          category: cardEnums.video,
+          title: youtubeVideoData.channelTitle,
+          url: args.data.url,
+          youtubeCardData: youtubeVideoData,
+        };
+      }
+
+      throw new Error('invalid card type');
     } catch (error) {
       throw new ServerError({ message: error.message, status: 400 });
     }
