@@ -1,3 +1,9 @@
+# ----- ENUMS ----- #
+
+enum CardCategory {
+  Video
+}
+
 # ----- TYPES ----- #
 
 type Filters {
@@ -11,8 +17,8 @@ type FilteredUserCardsType {
 }
 
 type InitialCardData {
+  category: CardCategory!
   title: String!
-  type: CardType!
   youtubeCardData: YoutubeCardData!
 }
 
