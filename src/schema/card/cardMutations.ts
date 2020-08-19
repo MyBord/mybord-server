@@ -100,7 +100,7 @@ export default {
 
       return {
         category: cardEnums.video,
-        title: youtubeVideoData.channelTitle,
+        title: youtubeVideoData.videoTitle,
         url: args.data.url,
         youtubeCardData: youtubeVideoData,
       };
