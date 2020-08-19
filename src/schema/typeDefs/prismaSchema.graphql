@@ -23,10 +23,16 @@ type Card {
   createdAt: DateTime!
   updatedAt: DateTime!
   cardData: CardData!
+  category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
+  title: String!
   type: CardType!
   user: User!
+}
+
+enum CardCategory {
+  Video
 }
 
 type CardConnection {
@@ -38,8 +44,10 @@ type CardConnection {
 input CardCreateInput {
   id: ID
   cardData: CardDataCreateOneInput!
+  category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
+  title: String!
   type: CardType!
   user: UserCreateOneWithoutCardsInput!
 }
@@ -52,8 +60,10 @@ input CardCreateManyWithoutUserInput {
 input CardCreateWithoutUserInput {
   id: ID
   cardData: CardDataCreateOneInput!
+  category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
+  title: String!
   type: CardType!
 }
 
@@ -167,10 +177,14 @@ enum CardOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  category_ASC
+  category_DESC
   isFavorite_ASC
   isFavorite_DESC
   isToDo_ASC
   isToDo_DESC
+  title_ASC
+  title_DESC
   type_ASC
   type_DESC
 }
@@ -179,8 +193,10 @@ type CardPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
+  category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
+  title: String!
   type: CardType!
 }
 
@@ -215,10 +231,28 @@ input CardScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  category: CardCategory
+  category_not: CardCategory
+  category_in: [CardCategory!]
+  category_not_in: [CardCategory!]
   isFavorite: Boolean
   isFavorite_not: Boolean
   isToDo: Boolean
   isToDo_not: Boolean
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   type: CardType
   type_not: CardType
   type_in: [CardType!]
@@ -252,21 +286,27 @@ enum CardType {
 
 input CardUpdateInput {
   cardData: CardDataUpdateOneRequiredInput
+  category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
+  title: String
   type: CardType
   user: UserUpdateOneRequiredWithoutCardsInput
 }
 
 input CardUpdateManyDataInput {
+  category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
+  title: String
   type: CardType
 }
 
 input CardUpdateManyMutationInput {
+  category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
+  title: String
   type: CardType
 }
 
@@ -289,8 +329,10 @@ input CardUpdateManyWithWhereNestedInput {
 
 input CardUpdateWithoutUserDataInput {
   cardData: CardDataUpdateOneRequiredInput
+  category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
+  title: String
   type: CardType
 }
 
@@ -337,10 +379,28 @@ input CardWhereInput {
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
   cardData: CardDataWhereInput
+  category: CardCategory
+  category_not: CardCategory
+  category_in: [CardCategory!]
+  category_not_in: [CardCategory!]
   isFavorite: Boolean
   isFavorite_not: Boolean
   isToDo: Boolean
   isToDo_not: Boolean
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   type: CardType
   type_not: CardType
   type_in: [CardType!]

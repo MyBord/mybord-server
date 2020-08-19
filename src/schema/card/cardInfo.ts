@@ -1,8 +1,10 @@
 export default `
 {
   id
+  category
   isFavorite
   isToDo
+  title
   type
   cardData{
     youtubeCardData{
