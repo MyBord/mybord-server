@@ -1,5 +1,9 @@
 # ----- ENUMS ----- #
 
+enum CardCategory {
+  Video
+}
+
 enum CardType {
   Youtube
 }
@@ -31,8 +35,10 @@ type Card {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   cardData: CardData!
+  category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
+  title: String!
   type: CardType!
   user: User! @relation(name: "CardToUser", onDelete: SET_NULL)
 }

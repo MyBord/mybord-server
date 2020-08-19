@@ -1,9 +1,3 @@
-# ----- ENUMS ----- #
-
-enum CardCategory {
-  Video
-}
-
 # ----- TYPES ----- #
 
 type Filters {
@@ -34,21 +28,26 @@ input CardIdInput {
   cardId: String!
 }
 
+input CardInput {
+  category: CardCategory!
+  isFavorite: Boolean!
+  isToDo: Boolean!
+  title: String!
+  type: CardType!
+  url: String!
+}
+
 input InitiateCardInput {
   type: CardType!
   url: String!
 }
 
-input YoutubeCardInput {
-  videoUrl: String!
-}
-
 # ----- MUTATION ----- #
 
 extend type Mutation {
-  createYoutubeCard(data: YoutubeCardInput!): Card!
+  createUserCard(data: CardInput!): Card!
   deleteUserCard(data: CardIdInput): Card!
-  initiateCard(data: InitiateCardInput!): InitialCardData!
+  initiateUserCard(data: InitiateCardInput!): InitialCardData!
   toggleFavoriteUserCard(data: CardIdInput): Card!
   toggleToDoUserCard(data: CardIdInput): Card!
 }
