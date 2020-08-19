@@ -1,6 +1,19 @@
-// source: https://stackoverflow.com/a/27728417/7460467
+import { CardType } from './cardTypes';
 
-export default (url): string => {
+export const getCardType = (url: string): CardType => {
+  if (
+    url.includes('youtube.com')
+    || url.includes('youtu.be')
+    || url.includes('youtube-nocookie.com')
+  ) {
+    return 'Youtube';
+  }
+
+  throw Error('Cannot detect a valid card type');
+};
+
+// source: https://stackoverflow.com/a/27728417/7460467
+export const getYoutubeVideoId = (url): string => {
   if (
     url.includes('youtube.com')
     || url.includes('youtu.be')
@@ -15,3 +28,4 @@ export default (url): string => {
   }
   throw Error('You must provide a youtube url');
 };
+

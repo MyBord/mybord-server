@@ -302,6 +302,7 @@ schema/
      |- userSchema.graqphql
      |- userSubscriptions.ts
      |- userTypes.ts
+     |- userUtils.ts
 ```
 
 * **`userEnums.ts`:**
@@ -322,6 +323,8 @@ schema/
   * Contains non prisma ORM subscriptions for our individual schema.
 * **`userTypes.ts`:**
   * Relevant types and interfaces to the user schema.
+* **`userUtils.ts`:**
+  * Relevant utility functions for our mutations, subscriptions, and queries.
 
 #### ii. Resolvers
 

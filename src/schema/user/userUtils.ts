@@ -1,4 +1,13 @@
-export default (password): void => {
+import bcrypt from 'bcryptjs';
+import { User } from './userTypes';
+
+export const restrictUserData = (user): User => ({
+  ...user,
+  email: 'null',
+  password: 'null',
+});
+
+const testPasswordStrength = (password): void => {
   const passwordArray = password.split('');
 
   const specialCharacters = ['!', '@', '#', '$', '&', '*', '-'];
@@ -14,4 +23,10 @@ export default (password): void => {
   if (!isPasswordStrong) {
     throw new Error('password is weak');
   }
+};
+
+export const hashPassword = (password: string): Promise<string> => {
+  testPasswordStrength(password);
+
+  return bcrypt.hash(password, 10);
 };

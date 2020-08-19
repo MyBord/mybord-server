@@ -1,8 +1,8 @@
 import ServerError from 'server/serverError';
-import getYoutubeVideoId from 'utils/getYoutubeVideoId';
 import youtube from 'youtube/youtube';
 import cardEnums from './cardEnums';
 import cardInfo from './cardInfo';
+import { getCardType, getYoutubeVideoId } from './cardUtils';
 
 export default {
   createUserCard: async (parent, args, { passport, prisma, pubsub }) => {
@@ -12,14 +12,15 @@ export default {
         isFavorite,
         isToDo,
         title,
-        type,
         url,
       } = args.data;
+
+      const type = getCardType(url);
 
       const userId = passport.getUserId();
       let createArgs: object;
 
-      if (type === cardEnums.youtube) {
+      if (type === 'Youtube') {
         const videoId = getYoutubeVideoId(url);
         const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
         createArgs = {
@@ -94,19 +95,15 @@ export default {
   },
   initiateUserCard: async (parent, args) => {
     try {
-      if (args.data.type === cardEnums.youtube) {
-        const videoId = getYoutubeVideoId(args.data.url);
-        const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
+      const videoId = getYoutubeVideoId(args.data.url);
+      const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
-        return {
-          category: cardEnums.video,
-          title: youtubeVideoData.channelTitle,
-          url: args.data.url,
-          youtubeCardData: youtubeVideoData,
-        };
-      }
-
-      throw new Error('invalid card type');
+      return {
+        category: cardEnums.video,
+        title: youtubeVideoData.channelTitle,
+        url: args.data.url,
+        youtubeCardData: youtubeVideoData,
+      };
     } catch (error) {
       throw new ServerError({ message: error.message, status: 400 });
     }
