@@ -1,6 +1,5 @@
 import ServerError from 'server/serverError';
-import hashPassword from 'utils/hashPassword';
-import restrictUserData from 'utils/restrictUserData';
+import { hashPassword, restrictUserData } from './userUtils';
 
 export default {
   createUser: async (parent, args, { passport, prisma }, info) => {

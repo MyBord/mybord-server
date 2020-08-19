@@ -1,6 +1,5 @@
 // source: https://stackoverflow.com/a/27728417/7460467
-
-export default (url): string => {
+export const getYoutubeVideoId = (url): string => {
   if (
     url.includes('youtube.com')
     || url.includes('youtu.be')

@@ -33,12 +33,10 @@ input CardInput {
   isFavorite: Boolean!
   isToDo: Boolean!
   title: String!
-  type: CardType!
   url: String!
 }
 
 input InitiateCardInput {
-  type: CardType!
   url: String!
 }
 
