@@ -12,3 +12,5 @@ export interface Filters {
   isFavorite?: boolean;
   isToDo?: boolean;
 }
+
+export type CardType = 'Youtube';
