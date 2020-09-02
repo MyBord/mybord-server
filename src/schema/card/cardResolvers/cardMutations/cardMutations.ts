@@ -3,63 +3,10 @@ import youtube from 'youtube/youtube';
 import cardEnums from '../../cardUtils/cardEnums';
 import cardInfo from '../../cardUtils/cardInfo';
 import { getCardType, getYoutubeVideoId } from '../../cardUtils/cardUtils';
+import createUserCard from './createUserCard';
 
 export default {
-  createUserCard: async (parent, args, { passport, prisma, pubsub }) => {
-    try {
-      const {
-        category,
-        isFavorite,
-        isToDo,
-        title,
-        url,
-      } = args.data;
-
-      const type = getCardType(url);
-
-      const userId = passport.getUserId();
-      let createArgs: object;
-
-      if (type === 'Youtube') {
-        const videoId = getYoutubeVideoId(url);
-        const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
-        createArgs = {
-          youtubeCardData: {
-            create: {
-              ...youtubeVideoData,
-            },
-          },
-        };
-      } else {
-        throw new Error('invalid card type');
-      }
-
-      const finalArgs = {
-        ...args,
-        data: {
-          cardData: {
-            create: { ...createArgs },
-          },
-          category,
-          isFavorite,
-          isToDo,
-          title,
-          type,
-          user: {
-            connect: {
-              id: userId,
-            },
-          },
-        },
-      };
-
-      const card = await prisma.mutation.createCard(finalArgs, cardInfo);
-      pubsub.publish('userCard', { userCard: card });
-      return card;
-    } catch (error) {
-      throw new ServerError({ message: error.message, status: 400 });
-    }
-  },
+  createUserCard,
   deleteUserCard: async (parent, args, { passport, prisma, pubsub }) => {
     const userId = passport.getUserId();
     const { cardId } = args.data;
