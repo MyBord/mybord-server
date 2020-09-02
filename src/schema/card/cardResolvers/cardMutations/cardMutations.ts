@@ -1,8 +1,8 @@
 import ServerError from 'server/serverError';
 import youtube from 'youtube/youtube';
-import cardEnums from '../cardUtils/cardEnums';
-import cardInfo from '../cardUtils/cardInfo';
-import { getCardType, getYoutubeVideoId } from '../cardUtils/cardUtils';
+import cardEnums from '../../cardUtils/cardEnums';
+import cardInfo from '../../cardUtils/cardInfo';
+import { getCardType, getYoutubeVideoId } from '../../cardUtils/cardUtils';
 
 export default {
   createUserCard: async (parent, args, { passport, prisma, pubsub }) => {

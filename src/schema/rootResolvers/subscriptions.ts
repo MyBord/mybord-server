@@ -1,4 +1,4 @@
-import cardSubscriptions from '../card/cardResolvers/cardSubscriptions';
+import cardSubscriptions from '../card/cardResolvers/cardSubscriptions/cardSubscriptions';
 
 export default {
   ...cardSubscriptions,

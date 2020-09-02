@@ -1,5 +1,5 @@
-import cardMutations from '../card/cardResolvers/cardMutations';
-import userMutations from '../user/userResolvers/userMutations';
+import cardMutations from '../card/cardResolvers/cardMutations/cardMutations';
+import userMutations from '../user/userResolvers/userMutations/userMutations';
 
 export default {
   ...cardMutations,

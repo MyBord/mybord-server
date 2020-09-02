@@ -1,4 +1,4 @@
-import { restrictUserData } from '../userUtils/userUtils';
+import { restrictUserData } from '../../userUtils/userUtils';
 
 export default {
   isAuthenticated: async (parent, args, { passport }) => (
