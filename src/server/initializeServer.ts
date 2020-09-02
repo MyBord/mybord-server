@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { Prisma } from 'prisma-binding';
 import { PubSub } from 'graphql-subscriptions';
 import buildPassportContext from 'middleware/passport/buildPassportContext';
-import resolvers from 'schema/resolvers/resolvers';
+import resolvers from 'schema/rootResolvers/rootResolvers';
 import typeDefs from 'schema/typeDefs/typeDefs';
 
 // creates new apollo server

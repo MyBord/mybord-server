@@ -1,4 +1,4 @@
-import { CardQueryArgs, Filters } from './cardTypes';
+import { CardQueryArgs, Filters } from '../cardUtils/cardTypes';
 
 export default {
   userCards: async (parent, args, { passport, prisma }, info) => {
