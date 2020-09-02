@@ -281,7 +281,7 @@ schema/
   |- individualSchemaOne/ 
   |- individualSchemaTwo/ 
   |- individualSchemaThree/ 
-  |- resolvers/ 
+  |- rootResolvers/ 
   |- typeDefs/ 
 ```
 
@@ -294,17 +294,24 @@ schema/
   |- comment/ 
   |- post/ 
   |- user/ 
-     |- userEnums.ts
-     |- userInfo.ts
-     |- userMutations.ts
+     |- userResolvers/
+        |- userMutations.ts
+        |- userSubscriptions.ts
+        |- userQueries.ts
+     |- userUtils/
+        |- userEnums.ts
+        |- userInfo.ts
+        |- userTypes.ts
+        |- userUtils.ts
      |- userPrismaSchema.graphql
-     |- userQueries.ts
      |- userSchema.graqphql
-     |- userSubscriptions.ts
-     |- userTypes.ts
-     |- userUtils.ts
 ```
 
+* **userResolvers/:**
+  * Contains the resolver scripts for our individual schema resolvers: mutations, subscriptions,
+  and queries.
+* **userUtils/:**
+  * Contains additional utility files to aid in building our schema resolvers.
 * **`userEnums.ts`:**
   * This contains a list of constants to be used for our mutations, subscriptions, and queries.
 * **`userInfo.ts`:**
@@ -326,9 +333,9 @@ schema/
 * **`userUtils.ts`:**
   * Relevant utility functions for our mutations, subscriptions, and queries.
 
-#### ii. Resolvers
+#### ii. Root Resolvers
 
-Our resolvers folder contains all of the non prisma resolvers (mutations, queries, and
+Our root resolvers folder contains all of the non prisma resolvers (mutations, queries, and
 subscriptions), to be used by our server.
 
 ```
@@ -336,10 +343,10 @@ schema/
   |- comment/ 
   |- post/ 
   |- user/ 
-  |- resolvers/ 
+  |- rootResolvers/ 
      |- mutations.ts
      |- queries.ts
-     |- resolvers.ts
+     |- rootResolvers.ts
      |- subscriptions.ts
 ```
 
@@ -347,7 +354,7 @@ schema/
   * Contains all non prisma ORM mutations.
 * **`queries.ts`:**
   * Contains all non prisma ORM queries.
-* **`resolvers.ts`:**
+* **`rootResolvers.ts`:**
   * Contains all non prisma ORM resolvers (mutations, queries, and subscriptions) and is the
    final file that gets used to generate the resolvers when we initialize our server.
 * **`subscriptions.ts`:**
@@ -362,7 +369,7 @@ schema/
   |- comment/ 
   |- post/ 
   |- user/ 
-  |- resolvers/ 
+  |- rootResolvers/ 
   |- typeDefs/ 
      |- prismaSchema.graphql
      |- schema.graphql
