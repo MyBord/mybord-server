@@ -295,9 +295,9 @@ schema/
   |- post/ 
   |- user/ 
      |- userResolvers/
-        |- userMutations.ts
-        |- userSubscriptions.ts
-        |- userQueries.ts
+        |- userMutations/
+        |- userSubscriptions/
+        |- userQueries/
      |- userUtils/
         |- userEnums.ts
         |- userInfo.ts
@@ -318,15 +318,15 @@ schema/
   * This contains common strings that are used to replace the `info` portions of a prisma query or
     mutation. This is especially helpful to assure that subscriptions return consistent data
     structures.
-* **`userMutations.ts`:**
+* **userMutations/:**
   * Contains non prisma ORM mutations for our individual schema.
 * **`userPrismaSchema.graphql`:**
   * Outlines the relational model for each individual schema for our prisma ORM.
-* **`userQueries.ts`:**
+* **userQueries/:**
   * Contains non prisma ORM queries for our individual schema.
 * **`userSchema.ts`:**
   * Contains non prisma ORM type definitions for our individual schema.
-* **`userSubscriptions.ts`:**
+* **userSubscriptions.ts/:**
   * Contains non prisma ORM subscriptions for our individual schema.
 * **`userTypes.ts`:**
   * Relevant types and interfaces to the user schema.
