@@ -33,6 +33,7 @@ module.exports = {
     }],
     'semi': 'off',
     '@typescript-eslint/semi': ['error'],
+    'import/no-unresolved': 0
   },
   settings: {
     'import/extensions': [
