@@ -83,8 +83,11 @@ The following are the yarn commands for our server application:
   `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#a-deploying-our-nodejs-application-to-heroku)
   for more information.
 * **`build-public`:**
-  * Gets the front-end bundle and saves it to the `client` folder. For more information, see
+  * Gets the master front-end bundle and saves it to the `client` folder. For more information, see
   [here](#ii-public).
+* **`build-public:dev`:**
+  * Gets the front-end bundle based off the branch specified in dev.env and saves it to the `client`
+  folder. For more information, see [here](#ii-public).
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
