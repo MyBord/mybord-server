@@ -19,7 +19,7 @@
     "build:local-server": "npm-run-all remove-dist webpack:dev",
     "build:server": "npm-run-all remove-dist webpack:prod",
     "run:local-server": "env-cmd -f local.env nodemon dist/index",
-    "run:server": "node dist/index.js",
+    "run:server": "node dist/index",
     "start": "npm-run-all build:server run:server"
   },
   "authors": [
