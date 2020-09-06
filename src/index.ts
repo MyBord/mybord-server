@@ -39,6 +39,7 @@ httpServer.listen(PORT, () => {
   if (process.env.MODE === 'LOCAL') {
     console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
     console.log(`Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+    console.log(`Client ready at http://localhost:${PORT}`);
   }
 });
 
