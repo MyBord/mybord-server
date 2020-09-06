@@ -153,6 +153,8 @@ credentials that come from the [relevant Heroku database information](https://gi
   * This is the database user id of the relevant heroku database instance.
 * **`EXTERNAL_PORT`**:
   * This is the external port that our client application can connect to.
+* **`FE_BRANCH`**:
+  * The front end branch that should be cloned when creating the client application to serve.
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
@@ -188,6 +190,7 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=master
 GAPI_KEY=defgh34567
 MODE=DEV
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
