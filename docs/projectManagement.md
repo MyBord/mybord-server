@@ -38,6 +38,7 @@ Production Deployment:
 
 ### C. Medium
 
+* hide webpack build for prod applicaiton
 * gitignore dist folder
 * upgrade to prisma 2
   * https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1
