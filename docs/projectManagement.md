@@ -40,7 +40,7 @@ Production Deployment:
 
 ### C. Medium
 
-* add `build-public` command to yarn start
+* add `build-public:prod` command to yarn start
 * hide webpack build for prod applicaiton
 * gitignore dist folder
 * upgrade to prisma 2
