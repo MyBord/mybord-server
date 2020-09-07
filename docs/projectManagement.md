@@ -35,9 +35,12 @@ Production Deployment:
 * Make sure it is always spinning on heroku
 * make backups of github repos
 * figure out migrations
+* document heroku server instance sizes and memory management
+  * https://devcenter.heroku.com/articles/node-memory-use
 
 ### C. Medium
 
+* add `build-public` command to yarn start
 * hide webpack build for prod applicaiton
 * gitignore dist folder
 * upgrade to prisma 2
