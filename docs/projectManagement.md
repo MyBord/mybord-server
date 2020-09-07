@@ -37,6 +37,7 @@ Production Deployment:
 * figure out migrations
 * document heroku server instance sizes and memory management
   * https://devcenter.heroku.com/articles/node-memory-use
+* add godaddy premium dns  
 
 ### C. Medium
 
