@@ -82,7 +82,7 @@ The following are the yarn commands for our server application:
   * This pushes our node.js application to our production heroku app (e.g.
   `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#a-deploying-our-nodejs-application-to-heroku)
   for more information.
-* **`build-public`:**
+* **`build-public:prod`:**
   * Gets the master front-end bundle and saves it to the `client` folder. For more information, see
   [here](#ii-public).
 * **`build-public:dev`:**
@@ -108,13 +108,13 @@ The following are the yarn commands for our server application:
   * Builds the server with the dev webpack configuration.
 * **`webpack:prod`:**
   * Builds the server with the prod webpack configuration.
-* **`build:local-server`:**
+* **`build-server:local`:**
   * Builds a local server using the dev webpack configurations.
-* **`build:server`:**
+* **`build-server:prod`:**
   * Builds the server.
-* **`run:local-server`:**
+* **`run-server:prod`:**
   * Runs a local server.
-* **`run:server`:**
+* **`run-server:prod`:**
   * Runs the built server.
   * NOTE: env vars will get injected via heroku when we run `yarn start`.
 * **`start`:**
