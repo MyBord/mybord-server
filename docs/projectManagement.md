@@ -33,8 +33,8 @@ Production Deployment:
 * Get domain running on mybord.io ?
 * Get production db running with backup
 * Make sure it is always spinning on heroku
-
 * make backups of github repos
+* figure out migrations
 
 ### C. Medium
 
