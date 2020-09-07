@@ -20,7 +20,7 @@
     "build:server": "npm-run-all remove-dist webpack:prod",
     "run:local-server": "env-cmd -f local.env nodemon dist/index",
     "run:server": "node dist/index",
-    "start": "npm-run-all run:server"
+    "start": "npm-run-all build:server run:server"
   },
   "authors": [
     "Jimmy Emery"
