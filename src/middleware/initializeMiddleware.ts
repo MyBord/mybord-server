@@ -1,4 +1,7 @@
+// *1: https://help.heroku.com/J2R1S4T8/can-heroku-force-an-application-to-use-ssl-tls
+
 import cors from 'cors';
+import enforce from 'express-sslify';
 import express, { Express } from 'express';
 import passport from 'passport';
 import session from 'express-session';
@@ -31,6 +34,7 @@ export default (): Middleware => {
 
   // implements our middleware into express
   expressMiddleware.use(cors(corsOptions));
+  expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true })); // *1
   expressMiddleware.use(expressSessionMiddleware);
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);
