@@ -60,4 +60,4 @@ Production Deployment:
 
 ## II. Long Term  
 
-* add lazy loading and code splitting - test
+* add lazy loading and code splitting
