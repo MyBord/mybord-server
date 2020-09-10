@@ -42,19 +42,9 @@ export default (): Middleware => {
   expressMiddleware.use(passportSessionMiddleware);
 
   // We serve our public client application
-  expressMiddleware.get('/', (request, response) => {
-    response.sendFile('index.html', { root: '.' });
+  expressMiddleware.get('*', (request, response) => {
+    response.sendFile('public/index.html', { root: '.' });
   });
-
-  expressMiddleware.get('/graphql', (request, response) => {});
-
-  expressMiddleware.get('/*', (request, response) => {
-    response.sendFile('index.html', { root: '.' });
-  });
-
-  // expressMiddleware.get('/*', (request, response) => {
-  //   response.sendFile('index.html', { root: '.' });
-  // });
 
   // returns our middleware
   return {
