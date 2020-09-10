@@ -41,6 +41,9 @@ export default (): Middleware => {
 
   // We serve our public client application
   expressMiddleware.use(express.static('public'));
+  expressMiddleware.get('*', (request, response) => {
+    response.sendFile('public/index.html', { root: '.' });
+  });
 
   // returns our middleware
   return {
