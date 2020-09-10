@@ -3,9 +3,7 @@
 import cors from 'cors';
 import enforce from 'express-sslify';
 import express, { Express } from 'express';
-import fs from 'fs';
 import passport from 'passport';
-import path from 'path';
 import session from 'express-session';
 import { Prisma } from 'prisma-binding';
 import corsOptions from './corsOptions';
@@ -36,12 +34,13 @@ export default (): Middleware => {
 
   // implements our middleware into express
   expressMiddleware.use(cors(corsOptions));
-  // expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true })); // *1
+  expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true })); // *1
   expressMiddleware.use(expressSessionMiddleware);
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);
 
   // We serve our public client application
+  expressMiddleware.use(express.static('public'));
   expressMiddleware.get('*', (request, response) => {
     response.sendFile('public/index.html', { root: '.' });
   });
