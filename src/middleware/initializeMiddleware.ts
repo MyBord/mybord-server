@@ -3,7 +3,9 @@
 import cors from 'cors';
 import enforce from 'express-sslify';
 import express, { Express } from 'express';
+import fs from 'fs';
 import passport from 'passport';
+import path from 'path';
 import session from 'express-session';
 import { Prisma } from 'prisma-binding';
 import corsOptions from './corsOptions';
@@ -40,11 +42,19 @@ export default (): Middleware => {
   expressMiddleware.use(passportSessionMiddleware);
 
   // We serve our public client application
-  expressMiddleware.use(express.static('public'));
-
-  expressMiddleware.get('/foo', (request, response) => {
-    response.sendFile('../index.html', { root: '.' });
+  expressMiddleware.get('/', (request, response) => {
+    response.sendFile('index.html', { root: '.' });
   });
+
+  expressMiddleware.get('/graphql', (request, response) => {});
+
+  expressMiddleware.get('/*', (request, response) => {
+    response.sendFile('index.html', { root: '.' });
+  });
+
+  // expressMiddleware.get('/*', (request, response) => {
+  //   response.sendFile('index.html', { root: '.' });
+  // });
 
   // returns our middleware
   return {
