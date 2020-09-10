@@ -15,18 +15,17 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* allow graphql endpoing to be exposed again
 * update express session options such that cookies must be sent over same site
 * prod-server should not allow any cors
 * prod client should use local path
-* add build version to index page  
-  *  https://devcenter.heroku.com/changelog-items/630 
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
 * change secrets
 * Google API
   * reset gapi key?
   * restrict gapi key to certain ip addresses?
-* lock down playground from heroku url  
+* lock down graphql playground from prod heroku url  
 
 Production Deployment:
 
@@ -41,6 +40,8 @@ Production Deployment:
 
 ### C. Medium
 
+* add build version to index page  
+  *  https://devcenter.heroku.com/changelog-items/630 
 * add `build-public:prod` command to yarn start
 * hide webpack build for prod applicaiton
 * gitignore dist folder
