@@ -34,7 +34,7 @@ export default (): Middleware => {
 
   // implements our middleware into express
   expressMiddleware.use(cors(corsOptions));
-  expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true })); // *1
+  // expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true })); // *1
   expressMiddleware.use(expressSessionMiddleware);
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);

@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* update express session options such that cookies must be sent over same site
 * prod-server should not allow any cors
 * prod client should use local path
 * add build version to index page  
