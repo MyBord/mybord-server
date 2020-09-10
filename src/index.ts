@@ -1,6 +1,7 @@
 import http from 'http';
 import initializeMiddleware from 'middleware/initializeMiddleware';
 import initializeServer from 'server/initializeServer';
+import express from "express";
 
 // We initialize our middleware
 const {
@@ -24,6 +25,12 @@ server.applyMiddleware({
   app: expressMiddleware,
   cors: false,
   path: '/graphql',
+});
+
+// We serve our public client application
+expressMiddleware.use(express.static('public'));
+expressMiddleware.get('*', (request, response) => {
+  response.sendFile('public/index.html', { root: '.' });
 });
 
 // We create an http server and then add subscriptions
