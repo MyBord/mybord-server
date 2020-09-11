@@ -184,6 +184,8 @@ credentials that come from the [relevant Heroku database information](https://gi
   * The secret that authenticates our prisma instance.
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
+* **`SSH_PASSPHRASE`**:
+  * The ssh passphrase of the github user that is used to clone the mybord-client repository.
   
 ### C. Env Var File Examples  
   
@@ -195,12 +197,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
-FE_BRANCH=master
+FE_BRANCH=dev_branch
 GAPI_KEY=defgh34567
 MODE=DEV
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 **`local.env`:**
@@ -211,11 +214,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=local_branch
 GAPI_KEY=defgh34567
 MODE=LOCAL
 PRISMA_ENDPOINT=http://localhost:4466/default/default
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 **`prod.env`:**
@@ -226,11 +231,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=master
 GAPI_KEY=defgh34567
 MODE=PROD
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 ## VII. Important Branches

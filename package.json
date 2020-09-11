@@ -4,7 +4,7 @@
     "compose-docker:dev": "docker-compose -f src/prisma/docker-compose.yml --env-file dev.env up -d",
     "push-heroku:dev": "git push heroku-dev master",
     "push-heroku:prod": "git push heroku-prod master",
-    "build-public:prod": "ts-node src/build/buildPublic.ts",
+    "build-public:prod": "env-cmd -f prod.env ts-node src/build/buildPublic.ts",
     "build-public:dev": "env-cmd -f dev.env ts-node src/build/buildPublic.ts",
     "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
