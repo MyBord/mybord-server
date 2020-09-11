@@ -9,9 +9,7 @@ const path = require('path');
 // ----- 1. SET PRIMITIVES ----- //
 
 const cloneUrl = 'git@github.com:MyBord/mybord-client.git';
-const publicFolder = path.join(__dirname, '../../public');
 const tmpFolder = path.join(__dirname, '../tmp');
-const tmpDistFolder = path.join(tmpFolder, 'dist');
 
 const sshFolder = path.join(__dirname, '../../', '.ssh/');
 const id_rsa_file = path.join(sshFolder, 'id_rsa');
