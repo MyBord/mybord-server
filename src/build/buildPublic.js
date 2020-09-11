@@ -1,4 +1,3 @@
-const fs = require('fs-extra');
 const nodegit = require('nodegit');
 const path = require('path');
 
@@ -13,9 +12,9 @@ const id_rsa_pub_file = path.join(sshFolder, 'id_rsa.pub');
 
 // ----- 2. SET CLONE OPTIONS ----- //
 
-const certificateCheck = (): number => 0;
+const certificateCheck = () => 0;
 
-const credentials = (url, username): object => nodegit.Cred.sshKeyNew(
+const credentials = (url, username) => nodegit.Cred.sshKeyNew(
   username,
   id_rsa_pub_file,
   id_rsa_file,
@@ -33,7 +32,7 @@ const cloneOptions = {
 
 // ----- 3. CLONE THE REPOSITORY ----- //
 
-const cloneRepository = async (): Promise<void> => {
+const cloneRepository = async () => {
   try {
     await nodegit.Clone(cloneUrl, tmpFolder, cloneOptions);
   } catch (error) {
