@@ -49,42 +49,4 @@ const cloneRepository = async (): Promise<void> => {
   }
 };
 
-// ----- 4. ----- //
-// ----- a. REMOVE THE CURRENT CONTENTS OF THE PUBLIC FOLDER ----- //
-// ----- b. COPY THE CONTENTS OF THE TMP REPOSITORY'S DIST FOLDER INTO THE CLIENT FOLDER ----- //
-
-const copyDist = async (): Promise<void> => {
-  try {
-    await fs.emptyDirSync(publicFolder); // a.
-    await fs.copy(tmpDistFolder, publicFolder); // b.
-  } catch (error) {
-    console.log('Error trying to copy the dist folder:');
-    console.log(error);
-  }
-};
-
-// ----- 5. DELETE THE TMP REPOSITORY FOLDER ----- //
-
-const deleteRepository = async (): Promise<void> => {
-  try {
-    await fs.rmdirSync(tmpFolder, { recursive: true });
-  } catch (error) {
-    console.log('Error trying to delete repository:');
-    console.log(error);
-  }
-};
-
-// ----- 6. INVOKE 3, 4, AND 5 SYNCHRONOUSLY ----- //
-
-const buildPublic = async (): Promise<void> => {
-  try {
-    await cloneRepository();
-    await copyDist();
-    await deleteRepository();
-    console.log('Client Copied!');
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-buildPublic();
+cloneRepository();
