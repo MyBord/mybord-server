@@ -8,7 +8,7 @@ const path = require('path');
 
 // ----- 1. SET PRIMITIVES ----- //
 
-const cloneUrl = 'git@github.com:jimmy-e/mybord.git';
+const cloneUrl = 'git@github.com:MyBord/mybord-client.git';
 const publicFolder = path.join(__dirname, '../../public');
 const tmpFolder = path.join(__dirname, '../tmp');
 const tmpDistFolder = path.join(tmpFolder, 'dist');
