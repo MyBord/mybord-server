@@ -1,7 +1,3 @@
-// Sources:
-// * https://www.nodegit.org/guides/cloning/ssh-with-agent/
-// * https://radek.io/2015/10/27/nodegit/
-
 const fs = require('fs-extra');
 const nodegit = require('nodegit');
 const path = require('path');
@@ -27,7 +23,6 @@ const credentials = (url, username): object => nodegit.Cred.sshKeyNew(
 );
 
 const cloneOptions = {
-  checkoutBranch: process.env.FE_BRANCH || 'master',
   fetchOpts: {
     callbacks: {
       certificateCheck,
