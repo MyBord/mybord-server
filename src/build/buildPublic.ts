@@ -29,7 +29,7 @@ const credentials = (url, username): object => nodegit.Cred.sshKeyNew(
 );
 
 const cloneOptions = {
-  checkoutBranch: process.env.FE_BRANCH,
+  checkoutBranch: process.env.FE_BRANCH || 'master',
   fetchOpts: {
     callbacks: {
       certificateCheck,
