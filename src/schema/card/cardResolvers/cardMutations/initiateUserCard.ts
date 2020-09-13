@@ -1,19 +1,10 @@
 import ServerError from 'server/serverError';
-import youtube from 'youtube/youtube';
-import cardEnums from '../../cardUtils/cardEnums';
+import { getInitialCardData } from '../../cardUtils/cardUtils';
 
 export default async (parent, args) => {
   try {
-    const youtubeVideoData = await youtube.getYoutubeVideoData(args.data.url);
-
-    return {
-      cardData: {
-        youtubeCardData: youtubeVideoData,
-      },
-      category: cardEnums.video,
-      title: youtubeVideoData.videoTitle,
-      url: args.data.url,
-    };
+    const initialCardData = await getInitialCardData(args.data.url);
+    return initialCardData;
   } catch (error) {
     throw new ServerError({ message: error.message, status: 400 });
   }
