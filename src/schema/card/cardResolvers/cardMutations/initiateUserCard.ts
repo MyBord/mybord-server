@@ -9,10 +9,12 @@ export default async (parent, args) => {
     const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
 
     return {
+      cardData: {
+        youtubeCardData: youtubeVideoData,
+      },
       category: cardEnums.video,
       title: youtubeVideoData.videoTitle,
       url: args.data.url,
-      youtubeCardData: youtubeVideoData,
     };
   } catch (error) {
     throw new ServerError({ message: error.message, status: 400 });

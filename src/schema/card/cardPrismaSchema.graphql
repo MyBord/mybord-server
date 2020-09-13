@@ -12,7 +12,13 @@ enum CardType {
 
 type CardData {
   id: ID! @id
+  imageCardData: ImageCardData
   youtubeCardData: YoutubeCardData
+}
+
+type ImageCardData {
+  id: ID! @id
+  imageUrl: String!
 }
 
 type YoutubeCardData {
