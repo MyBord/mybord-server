@@ -2,7 +2,7 @@ import youtube from 'youtube/youtube';
 import { category, type } from 'schema/card/cardUtils/cardEnums';
 import { CardType, InitialCardDataSchema } from './cardTypes';
 
-const getCardType = (url: string): CardType => {
+export const getCardType = (url: string): CardType => {
   if (
     url.includes('youtube.com')
     || url.includes('youtu.be')
@@ -18,7 +18,7 @@ const getCardType = (url: string): CardType => {
   throw Error('Cannot detect a valid card type');
 };
 
-const getInitialImageData = (url: string): InitialCardDataSchema => ({
+export const getInitialImageData = (url: string): InitialCardDataSchema => ({
   cardData: {
     imageCardData: {
       imageUrl: url,
@@ -28,7 +28,7 @@ const getInitialImageData = (url: string): InitialCardDataSchema => ({
   url,
 });
 
-const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema> => {
+export const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema> => {
   const youtubeVideoData = await youtube.getYoutubeVideoData(url);
 
   return {
@@ -39,19 +39,4 @@ const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema
     title: youtubeVideoData.videoTitle,
     url,
   };
-};
-
-export const getInitialCardData = async (url: string): Promise<InitialCardDataSchema> => {
-  const cardType = getCardType(url);
-
-  if (cardType === type.image) {
-    return getInitialImageData(url);
-  }
-
-  if (cardType === type.youtube) {
-    const initialYoutubeData = await getInitialYoutubeData(url);
-    return initialYoutubeData;
-  }
-
-  throw Error('Cannot detect a valid card type');
 };
