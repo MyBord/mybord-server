@@ -11,10 +11,10 @@ type FilteredUserCardsType {
 }
 
 type InitialCardData {
+  cardData: CardData!
   category: CardCategory!
   title: String!
   url: String!
-  youtubeCardData: YoutubeCardData!
 }
 
 # ----- INPUTS ----- #
