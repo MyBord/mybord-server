@@ -1,7 +1,7 @@
 import ServerError from 'server/serverError';
 import youtube from 'youtube/youtube';
 import cardInfo from '../../cardUtils/cardInfo';
-import { getCardType, getYoutubeVideoId } from '../../cardUtils/cardUtils';
+import { getCardType } from '../../cardUtils/cardUtils';
 
 export default async (parent, args, { passport, prisma, pubsub }) => {
   try {
@@ -19,8 +19,7 @@ export default async (parent, args, { passport, prisma, pubsub }) => {
     let createArgs: object;
 
     if (type === 'Youtube') {
-      const videoId = getYoutubeVideoId(url);
-      const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
+      const youtubeVideoData = await youtube.getYoutubeVideoData(url);
       createArgs = {
         youtubeCardData: {
           create: {
