@@ -15,17 +15,17 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* allow graphql endpoing to be exposed again
+* update express session options such that cookies must be sent over same site
 * prod-server should not allow any cors
 * prod client should use local path
-* add build version to index page  
-  *  https://devcenter.heroku.com/changelog-items/630 
 * internal server error for new user trying to login but doesn't exist?
 * have session be remembered by user
 * change secrets
 * Google API
   * reset gapi key?
   * restrict gapi key to certain ip addresses?
-* lock down playground from heroku url  
+* lock down graphql playground from prod heroku url  
 
 Production Deployment:
 
@@ -33,11 +33,17 @@ Production Deployment:
 * Get domain running on mybord.io ?
 * Get production db running with backup
 * Make sure it is always spinning on heroku
-
 * make backups of github repos
+* figure out migrations
+* document heroku server instance sizes and memory management
+  * https://devcenter.heroku.com/articles/node-memory-use
 
 ### C. Medium
 
+* add build version to index page  
+  *  https://devcenter.heroku.com/changelog-items/630 
+* add `build-public:prod` command to yarn start
+* hide webpack build for prod applicaiton
 * gitignore dist folder
 * upgrade to prisma 2
   * https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1

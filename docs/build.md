@@ -82,9 +82,12 @@ The following are the yarn commands for our server application:
   * This pushes our node.js application to our production heroku app (e.g.
   `mybord-server-prod`). See [deploying our node.js application to Heroku](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md#a-deploying-our-nodejs-application-to-heroku)
   for more information.
-* **`build-public`:**
-  * Gets the front-end bundle and saves it to the `client` folder. For more information, see
+* **`build-public:prod`:**
+  * Gets the master front-end bundle and saves it to the `client` folder. For more information, see
   [here](#ii-public).
+* **`build-public:dev`:**
+  * Gets the front-end bundle based off the branch specified in dev.env and saves it to the `client`
+  folder. For more information, see [here](#ii-public).
 * **`get-schema`:**
   * Generates graphql schema / typedefs from our prisma ORM.
 * **`remove-dist`:**
@@ -105,19 +108,21 @@ The following are the yarn commands for our server application:
   * Builds the server with the dev webpack configuration.
 * **`webpack:prod`:**
   * Builds the server with the prod webpack configuration.
-* **`build:local-server`:**
+* **`build-server:local`:**
   * Builds a local server using the dev webpack configurations.
-* **`build:server`:**
+* **`build-server:prod`:**
   * Builds the server.
-* **`run:local-server`:**
+* **`run-server:prod`:**
   * Runs a local server.
-* **`run:server`:**
+* **`run-server:prod`:**
   * Runs the built server.
   * NOTE: env vars will get injected via heroku when we run `yarn start`.
 * **`start`:**
-  * This is the command that creates our production application; it builds our production node.js
-    server / application and then runs it. We use the `start` command because when we deploy our
-    node.js application to heroku, it looks at our `package.json` file and runs the `start` command.
+  * This is the command that creates our production application by doing the following, in order:
+    * It builds our production node.js server / application.
+    * It runs our node.js server / application.
+  * We use the `start` command because when we deploy our node.js application to heroku, it looks
+   at our `package.json` file and runs the `start` command.
     
 ## VI. Env Vars
 
@@ -153,6 +158,8 @@ credentials that come from the [relevant Heroku database information](https://gi
   * This is the database user id of the relevant heroku database instance.
 * **`EXTERNAL_PORT`**:
   * This is the external port that our client application can connect to.
+* **`FE_BRANCH`**:
+  * The front end branch that should be cloned when creating the client application to serve.
 * **`GAPI_KEY`**:
   * This is the google api key that is used to access the Youtube Data API. The GAPI key can be
     found [here](https://console.developers.google.com/apis/credentials?showWizardSurvey=true&project=mybord).
@@ -177,6 +184,8 @@ credentials that come from the [relevant Heroku database information](https://gi
   * The secret that authenticates our prisma instance.
 * **`SESSION_SECRET`**:
   * Signs our express session cookie.
+* **`SSH_PASSPHRASE`**:
+  * The ssh passphrase of the github user that is used to clone the mybord-client repository.
   
 ### C. Env Var File Examples  
   
@@ -188,11 +197,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=dev_branch
 GAPI_KEY=defgh34567
 MODE=DEV
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/dev
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 **`local.env`:**
@@ -203,11 +214,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=local_branch
 GAPI_KEY=defgh34567
 MODE=LOCAL
 PRISMA_ENDPOINT=http://localhost:4466/default/default
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 **`prod.env`:**
@@ -218,11 +231,13 @@ DOCKER_DB_PASSWORD=abcd1234
 DOCKER_DB_PORT=9876
 DOCKER_DB_USER=jklmno
 EXTERNAL_PORT=8080
+FE_BRANCH=master
 GAPI_KEY=defgh34567
 MODE=PROD
 PRISMA_ENDPOINT=https://sample-app.herokuapp.com/sample-app-prisma-service/prod
 PRISMA_SECRET=thisIsAPrismaSecret
 SESSION_SECRET=thisisASessionSecret
+SSH_PASSPHRASE=sample-passphrase
 ```
 
 ## VII. Important Branches

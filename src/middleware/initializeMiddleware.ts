@@ -1,4 +1,5 @@
 import cors from 'cors';
+import enforce from 'express-sslify';
 import express, { Express } from 'express';
 import passport from 'passport';
 import session from 'express-session';
@@ -35,8 +36,11 @@ export default (): Middleware => {
   expressMiddleware.use(passportMiddleware);
   expressMiddleware.use(passportSessionMiddleware);
 
-  // We serve our public client application
-  expressMiddleware.use(express.static('public'));
+  // enforces HTTPS for our production server
+  // https://help.heroku.com/J2R1S4T8/can-heroku-force-an-application-to-use-ssl-tls
+  if (process.env.MODE === 'PROD') {
+    expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true }));
+  }
 
   // returns our middleware
   return {

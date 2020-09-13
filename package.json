@@ -4,7 +4,8 @@
     "compose-docker:dev": "docker-compose -f src/prisma/docker-compose.yml --env-file dev.env up -d",
     "push-heroku:dev": "git push heroku-dev master",
     "push-heroku:prod": "git push heroku-prod master",
-    "build-public": "ts-node src/build/buildPublic.ts",
+    "build-public:prod": "env-cmd -f prod.env ts-node src/build/buildPublic.ts",
+    "build-public:dev": "env-cmd -f dev.env ts-node src/build/buildPublic.ts",
     "get-schema": "env-cmd -f dev.env graphql get-schema -p prisma",
     "remove-dist": "rm -rf dist",
     "prisma-delete:dev": "cd src/prisma/ && env-cmd -f ../../dev.env prisma delete -f",
@@ -15,11 +16,11 @@
     "prisma-deploy:prod": "cd src/prisma/ && env-cmd -f ../../prod.env prisma deploy",
     "webpack:dev": "webpack --config webpack.dev.js",
     "webpack:prod": "webpack --config webpack.prod.js",
-    "build:local-server": "npm-run-all remove-dist webpack:dev",
-    "build:server": "npm-run-all remove-dist webpack:prod",
-    "run:local-server": "env-cmd -f local.env nodemon dist/index",
-    "run:server": "node dist/index",
-    "start": "npm-run-all build:server run:server"
+    "build-server:local": "npm-run-all remove-dist webpack:dev",
+    "build-server:prod": "npm-run-all remove-dist webpack:prod",
+    "run-server:local": "env-cmd -f local.env nodemon dist/index",
+    "run-server:prod": "node dist/index",
+    "start": "npm-run-all build-server:prod run-server:prod"
   },
   "authors": [
     "Jimmy Emery"
@@ -77,6 +78,7 @@
     "env-cmd": "^10.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "express-sslify": "^1.2.0",
     "googleapis": "^49.0.0",
     "graphql": "^14.5.8",
     "graphql-cli": "^3.0.14",
