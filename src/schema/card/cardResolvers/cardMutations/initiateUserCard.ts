@@ -1,12 +1,10 @@
 import ServerError from 'server/serverError';
 import youtube from 'youtube/youtube';
 import cardEnums from '../../cardUtils/cardEnums';
-import { getYoutubeVideoId } from '../../cardUtils/cardUtils';
 
 export default async (parent, args) => {
   try {
-    const videoId = getYoutubeVideoId(args.data.url);
-    const youtubeVideoData = await youtube.getYoutubeVideoData(videoId);
+    const youtubeVideoData = await youtube.getYoutubeVideoData(args.data.url);
 
     return {
       cardData: {
