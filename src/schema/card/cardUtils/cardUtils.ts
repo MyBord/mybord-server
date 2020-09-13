@@ -1,5 +1,5 @@
 import youtube from 'youtube/youtube';
-import { category } from 'schema/card/cardUtils/cardEnums';
+import { category, type } from 'schema/card/cardUtils/cardEnums';
 import { CardType, InitialCardDataSchema } from './cardTypes';
 
 const getCardType = (url: string): CardType => {
@@ -8,11 +8,11 @@ const getCardType = (url: string): CardType => {
     || url.includes('youtu.be')
     || url.includes('youtube-nocookie.com')
   ) {
-    return 'Youtube';
+    return type.youtube;
   }
 
   if (url.endsWith('.jpg') || url.endsWith('.png')) {
-    return 'Image';
+    return type.image;
   }
 
   throw Error('Cannot detect a valid card type');
@@ -35,7 +35,7 @@ const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema
 export const getInitialCardData = async (url: string): Promise<InitialCardDataSchema> => {
   const cardType = getCardType(url);
 
-  if (cardType === 'Youtube') {
+  if (cardType === type.youtube) {
     const initialYoutubeData = await getInitialYoutubeData(url);
     return initialYoutubeData;
   }
