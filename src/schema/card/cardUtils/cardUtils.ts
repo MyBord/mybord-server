@@ -25,7 +25,6 @@ const getInitialImageData = (url: string): InitialCardDataSchema => ({
     },
   },
   category: category.image,
-  // category: 'Image',
   url,
 });
 
@@ -46,11 +45,7 @@ export const getInitialCardData = async (url: string): Promise<InitialCardDataSc
   const cardType = getCardType(url);
 
   if (cardType === type.image) {
-    console.log('********* 9999');
-    const foo = getInitialImageData(url);
-    console.log('000');
-    console.log(foo);
-    return foo;
+    return getInitialImageData(url);
   }
 
   if (cardType === type.youtube) {
