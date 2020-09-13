@@ -36,6 +36,7 @@ type Card {
 }
 
 enum CardCategory {
+  Image
   Video
 }
 

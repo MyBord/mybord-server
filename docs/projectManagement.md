@@ -15,6 +15,8 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* update how we detect images via url
+  - https://github.com/wzbg/is-image-url/blob/master/index.js
 * allow graphql endpoing to be exposed again
 * update express session options such that cookies must be sent over same site
 * prod-server should not allow any cors

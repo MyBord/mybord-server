@@ -11,13 +11,23 @@ const getCardType = (url: string): CardType => {
     return type.youtube;
   }
 
-  if (url.endsWith('.jpg') || url.endsWith('.png')) {
+  if (url.endsWith('.jpeg') || url.endsWith('.jpg') || url.endsWith('.png')) {
     return type.image;
   }
 
   throw Error('Cannot detect a valid card type');
 };
 
+const getInitialImageData = (url: string): InitialCardDataSchema => ({
+  cardData: {
+    imageCardData: {
+      imageUrl: url,
+    },
+  },
+  category: category.image,
+  // category: 'Image',
+  url,
+});
 
 const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema> => {
   const youtubeVideoData = await youtube.getYoutubeVideoData(url);
@@ -34,6 +44,14 @@ const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema
 
 export const getInitialCardData = async (url: string): Promise<InitialCardDataSchema> => {
   const cardType = getCardType(url);
+
+  if (cardType === type.image) {
+    console.log('********* 9999');
+    const foo = getInitialImageData(url);
+    console.log('000');
+    console.log(foo);
+    return foo;
+  }
 
   if (cardType === type.youtube) {
     const initialYoutubeData = await getInitialYoutubeData(url);

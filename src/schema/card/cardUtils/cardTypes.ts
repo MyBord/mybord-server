@@ -25,7 +25,7 @@ export interface CardSchema {
 export interface InitialCardDataSchema {
   cardData: CardData;
   category: CardCategory;
-  title: string;
+  title?: string;
   url: string;
 }
 
