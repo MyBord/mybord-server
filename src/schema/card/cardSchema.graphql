@@ -13,7 +13,7 @@ type FilteredUserCardsType {
 type InitialCardData {
   cardData: CardData!
   category: CardCategory!
-  title: String!
+  title: String
   url: String!
 }
 
