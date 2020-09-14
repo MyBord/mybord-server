@@ -7,9 +7,7 @@ export type CardCategory = 'Image' | 'Video';
 export type CardType = 'Image' | 'Youtube';
 
 export interface CardData {
-  imageCardData?: {
-    imageUrl: string;
-  };
+  imageCardData?: ImageData;
   youtubeCardData?: YoutubeVideoData;
 }
 
@@ -20,6 +18,10 @@ export interface CardSchema {
   isToDo: boolean;
   title: string;
   type: CardType;
+}
+
+export interface ImageData {
+  imageUrl: string;
 }
 
 export interface InitialCardDataSchema {
