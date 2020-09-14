@@ -1,22 +1,7 @@
 import ServerError from 'server/serverError';
 import youtube from 'youtube/youtube';
 import cardInfo from '../../cardUtils/cardInfo';
-
-const getCardType = (url: string): string => {
-  if (
-    url.includes('youtube.com')
-    || url.includes('youtu.be')
-    || url.includes('youtube-nocookie.com')
-  ) {
-    return 'Youtube';
-  }
-
-  if (url.endsWith('.jpg') || url.endsWith('.png')) {
-    return 'Image';
-  }
-
-  throw Error('Cannot detect a valid card type');
-};
+import { getCardType } from '../../cardUtils/cardUtils';
 
 export default async (parent, args, { passport, prisma, pubsub }) => {
   try {

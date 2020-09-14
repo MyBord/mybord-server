@@ -1,6 +1,8 @@
 import youtube from 'youtube/youtube';
 import { category, type } from 'schema/card/cardUtils/cardEnums';
-import { CardType, InitialCardDataSchema } from './cardTypes';
+import { CardData, CardType, InitialCardDataSchema } from './cardTypes';
+
+// ----- CARD TYPE ----- //
 
 export const getCardType = (url: string): CardType => {
   if (
@@ -18,15 +20,25 @@ export const getCardType = (url: string): CardType => {
   throw Error('Cannot detect a valid card type');
 };
 
-export const getInitialImageData = (url: string): InitialCardDataSchema => ({
-  cardData: {
-    imageCardData: {
-      imageUrl: url,
-    },
+// ----- IMAGE DATA ---- //
+
+const getImageData = (url: string): CardData => ({
+  imageCardData: {
+    imageUrl: url,
   },
-  category: category.image,
-  url,
 });
+
+// ----- INITIAL DATA ----- //
+
+export const getInitialImageData = (url: string): InitialCardDataSchema => {
+  const imageData = getImageData(url);
+
+  return {
+    cardData: { ...imageData },
+    category: category.image,
+    url,
+  };
+};
 
 export const getInitialYoutubeData = async (url: string): Promise<InitialCardDataSchema> => {
   const youtubeVideoData = await youtube.getYoutubeVideoData(url);
@@ -40,3 +52,5 @@ export const getInitialYoutubeData = async (url: string): Promise<InitialCardDat
     url,
   };
 };
+
+// ----- CREATE CARD ----- //
