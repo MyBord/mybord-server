@@ -291,6 +291,7 @@ input CardSubscriptionWhereInput {
 }
 
 enum CardType {
+  Image
   Youtube
 }
 

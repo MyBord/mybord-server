@@ -1,10 +1,12 @@
 # ----- ENUMS ----- #
 
 enum CardCategory {
+  Image
   Video
 }
 
 enum CardType {
+  Image
   Youtube
 }
 
