@@ -1,6 +1,11 @@
 import youtube from 'youtube/youtube';
 import { category, type } from 'schema/card/cardUtils/cardEnums';
-import { CardData, CardType, InitialCardDataSchema } from './cardTypes';
+import {
+  CardCreateArgs,
+  CardType,
+  ImageData,
+  InitialCardDataSchema,
+} from './cardTypes';
 
 // ----- CARD TYPE ----- //
 
@@ -22,10 +27,8 @@ export const getCardType = (url: string): CardType => {
 
 // ----- IMAGE DATA ---- //
 
-const getImageData = (url: string): CardData => ({
-  imageCardData: {
-    imageUrl: url,
-  },
+const getImageData = (url: string): ImageData => ({
+  imageUrl: url,
 });
 
 // ----- INITIAL DATA ----- //
@@ -34,7 +37,9 @@ export const getInitialImageData = (url: string): InitialCardDataSchema => {
   const imageData = getImageData(url);
 
   return {
-    cardData: { ...imageData },
+    cardData: {
+      imageCardData: { ...imageData },
+    },
     category: category.image,
     url,
   };
@@ -54,3 +59,27 @@ export const getInitialYoutubeData = async (url: string): Promise<InitialCardDat
 };
 
 // ----- CREATE CARD ----- //
+
+export const getUserCardCreateArgs = async (url: string): Promise<CardCreateArgs> => {
+  const cardType = getCardType(url);
+
+  if (cardType === type.image) {
+    const imageData = getImageData(url);
+    return {
+      imageCardData: {
+        create: { ...imageData },
+      },
+    };
+  }
+
+  if (cardType === type.youtube) {
+    const youtubeVideoData = await youtube.getYoutubeVideoData(url);
+    return {
+      youtubeCardData: {
+        create: { ...youtubeVideoData },
+      },
+    };
+  }
+
+  throw Error('Cannot detect a valid card type');
+};
