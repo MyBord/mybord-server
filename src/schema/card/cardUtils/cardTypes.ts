@@ -33,6 +33,15 @@ export interface InitialCardDataSchema {
 
 // ----- OTHER ----- //
 
+export interface CardCreateArgs {
+  imageCardData?: {
+    create: ImageData;
+  };
+  youtubeCardData?: {
+    create: YoutubeVideoData;
+  };
+}
+
 export interface CardQueryArgs {
   where: {
     isFavorite?: boolean;

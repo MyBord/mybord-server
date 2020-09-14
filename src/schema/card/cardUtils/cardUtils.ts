@@ -1,6 +1,7 @@
 import youtube from 'youtube/youtube';
 import { category, type } from 'schema/card/cardUtils/cardEnums';
 import {
+  CardCreateArgs,
   CardType,
   ImageData,
   InitialCardDataSchema,
@@ -55,4 +56,22 @@ export const getInitialYoutubeData = async (url: string): Promise<InitialCardDat
     title: youtubeVideoData.videoTitle,
     url,
   };
+};
+
+// ----- CREATE CARD ----- //
+
+export const getUserCardCreateArgs = async (url: string): Promise<CardCreateArgs> => {
+  const cardType = getCardType(url);
+
+  if (cardType === type.youtube) {
+    const youtubeVideoData = await youtube.getYoutubeVideoData(url);
+
+    return {
+      youtubeCardData: {
+        create: { ...youtubeVideoData },
+      },
+    };
+  }
+
+  throw new Error('invalid card type');
 };

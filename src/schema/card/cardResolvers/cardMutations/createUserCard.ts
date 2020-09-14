@@ -1,7 +1,6 @@
 import ServerError from 'server/serverError';
-import youtube from 'youtube/youtube';
 import cardInfo from '../../cardUtils/cardInfo';
-import { getCardType } from '../../cardUtils/cardUtils';
+import { getCardType, getUserCardCreateArgs } from '../../cardUtils/cardUtils';
 
 export default async (parent, args, { passport, prisma, pubsub }) => {
   try {
@@ -16,20 +15,8 @@ export default async (parent, args, { passport, prisma, pubsub }) => {
     const type = getCardType(url);
 
     const userId = passport.getUserId();
-    let createArgs: object;
 
-    if (type === 'Youtube') {
-      const youtubeVideoData = await youtube.getYoutubeVideoData(url);
-      createArgs = {
-        youtubeCardData: {
-          create: {
-            ...youtubeVideoData,
-          },
-        },
-      };
-    } else {
-      throw new Error('invalid card type');
-    }
+    const createArgs = await getUserCardCreateArgs(url);
 
     const finalArgs = {
       ...args,
