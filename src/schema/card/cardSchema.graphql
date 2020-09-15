@@ -14,6 +14,7 @@ type InitialCardData {
   cardData: CardData!
   category: CardCategory!
   title: String
+  type: CardType!
   url: String!
 }
 

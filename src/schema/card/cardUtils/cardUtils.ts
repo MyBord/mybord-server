@@ -41,6 +41,7 @@ export const getInitialImageData = (url: string): InitialCardDataSchema => {
       imageCardData: { ...imageData },
     },
     category: category.image,
+    type: type.image,
     url,
   };
 };
@@ -54,6 +55,7 @@ export const getInitialYoutubeData = async (url: string): Promise<InitialCardDat
     },
     category: category.video,
     title: youtubeVideoData.videoTitle,
+    type: type.youtube,
     url,
   };
 };
