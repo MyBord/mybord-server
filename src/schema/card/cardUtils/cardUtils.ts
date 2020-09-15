@@ -63,6 +63,16 @@ export const getInitialYoutubeData = async (url: string): Promise<InitialCardDat
 export const getUserCardCreateArgs = async (url: string): Promise<CardCreateArgs> => {
   const cardType = getCardType(url);
 
+  if (cardType === type.image) {
+    const imageData = getImageData(url);
+
+    return {
+      imageCardData: {
+        create: { ...imageData },
+      },
+    };
+  }
+
   if (cardType === type.youtube) {
     const youtubeVideoData = await youtube.getYoutubeVideoData(url);
 
