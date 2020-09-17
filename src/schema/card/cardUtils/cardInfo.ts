@@ -7,6 +7,9 @@ export default `
   title
   type
   cardData{
+    imageCardData{
+      imageUrl
+    }
     youtubeCardData{
       channelThumbnail
       channelTitle
