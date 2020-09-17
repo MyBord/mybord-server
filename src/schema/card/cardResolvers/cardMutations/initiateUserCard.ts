@@ -1,4 +1,3 @@
-import axios from 'axios';
 import ServerError from 'server/serverError';
 import { type } from 'schema/card/cardUtils/cardEnums';
 import { getCardType, getInitialImageData, getInitialYoutubeData } from '../../cardUtils/cardUtils';
