@@ -1,3 +1,4 @@
+import axios from 'axios';
 import youtube from 'youtube/youtube';
 import { category, type } from 'schema/card/cardUtils/cardEnums';
 import {
@@ -9,7 +10,7 @@ import {
 
 // ----- CARD TYPE ----- //
 
-export const getCardType = (url: string): CardType => {
+export const getCardType = async (url: string): Promise<CardType> => {
   if (
     url.includes('youtube.com')
     || url.includes('youtu.be')
@@ -18,7 +19,10 @@ export const getCardType = (url: string): CardType => {
     return type.youtube;
   }
 
-  if (url.endsWith('.jpeg') || url.endsWith('.jpg') || url.endsWith('.png')) {
+  const response = await axios.head(url);
+  const contentType = console.log(response.headers['content-type']);
+
+  if (['image/jpeg', 'image/png', 'image/gif'].includes(contentType)) {
     return type.image;
   }
 

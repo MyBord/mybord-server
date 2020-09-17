@@ -1,3 +1,4 @@
+import axios from 'axios';
 import ServerError from 'server/serverError';
 import { type } from 'schema/card/cardUtils/cardEnums';
 import { getCardType, getInitialImageData, getInitialYoutubeData } from '../../cardUtils/cardUtils';
@@ -5,7 +6,8 @@ import { getCardType, getInitialImageData, getInitialYoutubeData } from '../../c
 export default async (parent, args) => {
   try {
     const { url } = args.data;
-    const cardType = getCardType(args.data.url);
+
+    const cardType = await getCardType(args.data.url);
 
     if (cardType === type.image) {
       return getInitialImageData(args.data.url);

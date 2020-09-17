@@ -12,7 +12,7 @@ export default async (parent, args, { passport, prisma, pubsub }) => {
       url,
     } = args.data;
 
-    const type = getCardType(url);
+    const type = await getCardType(url);
 
     const userId = passport.getUserId();
 
