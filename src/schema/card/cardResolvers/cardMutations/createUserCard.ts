@@ -12,11 +12,11 @@ export default async (parent, args, { passport, prisma, pubsub }) => {
       url,
     } = args.data;
 
-    const type = getCardType(url);
+    const cardType = await getCardType(url);
 
     const userId = passport.getUserId();
 
-    const createArgs = await getUserCardCreateArgs(url);
+    const createArgs = await getUserCardCreateArgs(cardType, url);
 
     const finalArgs = {
       ...args,
@@ -28,7 +28,7 @@ export default async (parent, args, { passport, prisma, pubsub }) => {
         isFavorite,
         isToDo,
         title,
-        type,
+        type: cardType,
         user: {
           connect: {
             id: userId,
