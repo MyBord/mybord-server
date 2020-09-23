@@ -4,6 +4,7 @@ import { category, type } from 'schema/card/cardUtils/cardEnums';
 import {
   CardCreateArgs,
   CardType,
+  GifData,
   ImageData,
   InitialCardDataSchema,
 } from './cardTypes';
@@ -22,12 +23,22 @@ export const getCardType = async (url: string): Promise<CardType> => {
   const response = await axios.head(url);
   const contentType = response.headers['content-type'];
 
-  if (['image/jpeg', 'image/png', 'image/gif'].includes(contentType)) {
+  if (contentType === 'image/gif') {
+    return type.gif;
+  }
+
+  if (['image/jpeg', 'image/png'].includes(contentType)) {
     return type.image;
   }
 
   throw Error('Cannot detect a valid card type');
 };
+
+// ----- GIF DATA ----- //
+
+const getGifData = (url: string): GifData => ({
+  gifUrl: url,
+});
 
 // ----- IMAGE DATA ----- //
 
@@ -36,6 +47,19 @@ const getImageData = (url: string): ImageData => ({
 });
 
 // ----- INITIAL DATA ----- //
+
+export const getInitialGifData = (url: string): InitialCardDataSchema => {
+  const gifData = getGifData(url);
+
+  return {
+    cardData: {
+      gifCardData: { ...gifData },
+    },
+    category: category.gif,
+    type: type.gif,
+    url,
+  };
+};
 
 export const getInitialImageData = (url: string): InitialCardDataSchema => {
   const imageData = getImageData(url);
@@ -70,6 +94,16 @@ export const getUserCardCreateArgs = async (
   cardType: CardType,
   url: string,
 ): Promise<CardCreateArgs> => {
+  if (cardType === type.gif) {
+    const gifData = getGifData(url);
+
+    return {
+      gifCardData: {
+        create: { ...gifData },
+      },
+    };
+  }
+
   if (cardType === type.image) {
     const imageData = getImageData(url);
 

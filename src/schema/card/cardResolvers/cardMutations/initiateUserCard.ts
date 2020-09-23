@@ -1,12 +1,21 @@
 import ServerError from 'server/serverError';
 import { type } from 'schema/card/cardUtils/cardEnums';
-import { getCardType, getInitialImageData, getInitialYoutubeData } from '../../cardUtils/cardUtils';
+import {
+  getCardType,
+  getInitialGifData,
+  getInitialImageData,
+  getInitialYoutubeData,
+} from '../../cardUtils/cardUtils';
 
 export default async (parent, args) => {
   try {
     const { url } = args.data;
 
     const cardType = await getCardType(args.data.url);
+
+    if (cardType === type.gif) {
+      return getInitialGifData(args.data.url);
+    }
 
     if (cardType === type.image) {
       return getInitialImageData(args.data.url);

@@ -7,6 +7,9 @@ export default `
   title
   type
   cardData{
+    gifCardData{
+      gifUrl
+    }
     imageCardData{
       imageUrl
     }
