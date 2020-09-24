@@ -6,6 +6,10 @@ type AggregateCardData {
   count: Int!
 }
 
+type AggregateGifCardData {
+  count: Int!
+}
+
 type AggregateImageCardData {
   count: Int!
 }
@@ -36,6 +40,7 @@ type Card {
 }
 
 enum CardCategory {
+  Gif
   Image
   Video
 }
@@ -74,6 +79,7 @@ input CardCreateWithoutUserInput {
 
 type CardData {
   id: ID!
+  gifCardData: GifCardData
   imageCardData: ImageCardData
   youtubeCardData: YoutubeCardData
 }
@@ -86,6 +92,7 @@ type CardDataConnection {
 
 input CardDataCreateInput {
   id: ID
+  gifCardData: GifCardDataCreateOneInput
   imageCardData: ImageCardDataCreateOneInput
   youtubeCardData: YoutubeCardDataCreateOneInput
 }
@@ -128,11 +135,13 @@ input CardDataSubscriptionWhereInput {
 }
 
 input CardDataUpdateDataInput {
+  gifCardData: GifCardDataUpdateOneInput
   imageCardData: ImageCardDataUpdateOneInput
   youtubeCardData: YoutubeCardDataUpdateOneInput
 }
 
 input CardDataUpdateInput {
+  gifCardData: GifCardDataUpdateOneInput
   imageCardData: ImageCardDataUpdateOneInput
   youtubeCardData: YoutubeCardDataUpdateOneInput
 }
@@ -164,6 +173,7 @@ input CardDataWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  gifCardData: GifCardDataWhereInput
   imageCardData: ImageCardDataWhereInput
   youtubeCardData: YoutubeCardDataWhereInput
   AND: [CardDataWhereInput!]
@@ -291,6 +301,7 @@ input CardSubscriptionWhereInput {
 }
 
 enum CardType {
+  Gif
   Image
   Youtube
 }
@@ -428,6 +439,126 @@ input CardWhereUniqueInput {
 
 scalar DateTime
 
+type GifCardData {
+  id: ID!
+  gifUrl: String!
+}
+
+type GifCardDataConnection {
+  pageInfo: PageInfo!
+  edges: [GifCardDataEdge]!
+  aggregate: AggregateGifCardData!
+}
+
+input GifCardDataCreateInput {
+  id: ID
+  gifUrl: String!
+}
+
+input GifCardDataCreateOneInput {
+  create: GifCardDataCreateInput
+  connect: GifCardDataWhereUniqueInput
+}
+
+type GifCardDataEdge {
+  node: GifCardData!
+  cursor: String!
+}
+
+enum GifCardDataOrderByInput {
+  id_ASC
+  id_DESC
+  gifUrl_ASC
+  gifUrl_DESC
+}
+
+type GifCardDataPreviousValues {
+  id: ID!
+  gifUrl: String!
+}
+
+type GifCardDataSubscriptionPayload {
+  mutation: MutationType!
+  node: GifCardData
+  updatedFields: [String!]
+  previousValues: GifCardDataPreviousValues
+}
+
+input GifCardDataSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: GifCardDataWhereInput
+  AND: [GifCardDataSubscriptionWhereInput!]
+  OR: [GifCardDataSubscriptionWhereInput!]
+  NOT: [GifCardDataSubscriptionWhereInput!]
+}
+
+input GifCardDataUpdateDataInput {
+  gifUrl: String
+}
+
+input GifCardDataUpdateInput {
+  gifUrl: String
+}
+
+input GifCardDataUpdateManyMutationInput {
+  gifUrl: String
+}
+
+input GifCardDataUpdateOneInput {
+  create: GifCardDataCreateInput
+  update: GifCardDataUpdateDataInput
+  upsert: GifCardDataUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: GifCardDataWhereUniqueInput
+}
+
+input GifCardDataUpsertNestedInput {
+  update: GifCardDataUpdateDataInput!
+  create: GifCardDataCreateInput!
+}
+
+input GifCardDataWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  gifUrl: String
+  gifUrl_not: String
+  gifUrl_in: [String!]
+  gifUrl_not_in: [String!]
+  gifUrl_lt: String
+  gifUrl_lte: String
+  gifUrl_gt: String
+  gifUrl_gte: String
+  gifUrl_contains: String
+  gifUrl_not_contains: String
+  gifUrl_starts_with: String
+  gifUrl_not_starts_with: String
+  gifUrl_ends_with: String
+  gifUrl_not_ends_with: String
+  AND: [GifCardDataWhereInput!]
+  OR: [GifCardDataWhereInput!]
+  NOT: [GifCardDataWhereInput!]
+}
+
+input GifCardDataWhereUniqueInput {
+  id: ID
+}
+
 type ImageCardData {
   id: ID!
   imageUrl: String!
@@ -562,6 +693,12 @@ type Mutation {
   upsertCardData(where: CardDataWhereUniqueInput!, create: CardDataCreateInput!, update: CardDataUpdateInput!): CardData!
   deleteCardData(where: CardDataWhereUniqueInput!): CardData
   deleteManyCardDatas(where: CardDataWhereInput): BatchPayload!
+  createGifCardData(data: GifCardDataCreateInput!): GifCardData!
+  updateGifCardData(data: GifCardDataUpdateInput!, where: GifCardDataWhereUniqueInput!): GifCardData
+  updateManyGifCardDatas(data: GifCardDataUpdateManyMutationInput!, where: GifCardDataWhereInput): BatchPayload!
+  upsertGifCardData(where: GifCardDataWhereUniqueInput!, create: GifCardDataCreateInput!, update: GifCardDataUpdateInput!): GifCardData!
+  deleteGifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
+  deleteManyGifCardDatas(where: GifCardDataWhereInput): BatchPayload!
   createImageCardData(data: ImageCardDataCreateInput!): ImageCardData!
   updateImageCardData(data: ImageCardDataUpdateInput!, where: ImageCardDataWhereUniqueInput!): ImageCardData
   updateManyImageCardDatas(data: ImageCardDataUpdateManyMutationInput!, where: ImageCardDataWhereInput): BatchPayload!
@@ -606,6 +743,9 @@ type Query {
   cardData(where: CardDataWhereUniqueInput!): CardData
   cardDatas(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CardData]!
   cardDatasConnection(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardDataConnection!
+  gifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
+  gifCardDatas(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GifCardData]!
+  gifCardDatasConnection(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GifCardDataConnection!
   imageCardData(where: ImageCardDataWhereUniqueInput!): ImageCardData
   imageCardDatas(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ImageCardData]!
   imageCardDatasConnection(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageCardDataConnection!
@@ -621,6 +761,7 @@ type Query {
 type Subscription {
   card(where: CardSubscriptionWhereInput): CardSubscriptionPayload
   cardData(where: CardDataSubscriptionWhereInput): CardDataSubscriptionPayload
+  gifCardData(where: GifCardDataSubscriptionWhereInput): GifCardDataSubscriptionPayload
   imageCardData(where: ImageCardDataSubscriptionWhereInput): ImageCardDataSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   youtubeCardData(where: YoutubeCardDataSubscriptionWhereInput): YoutubeCardDataSubscriptionPayload

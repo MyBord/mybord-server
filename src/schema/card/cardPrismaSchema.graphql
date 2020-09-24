@@ -1,11 +1,13 @@
 # ----- ENUMS ----- #
 
 enum CardCategory {
+  Gif
   Image
   Video
 }
 
 enum CardType {
+  Gif
   Image
   Youtube
 }
@@ -14,8 +16,14 @@ enum CardType {
 
 type CardData {
   id: ID! @id
+  gifCardData: GifCardData
   imageCardData: ImageCardData
   youtubeCardData: YoutubeCardData
+}
+
+type GifCardData {
+  id: ID! @id
+  gifUrl: String!
 }
 
 type ImageCardData {

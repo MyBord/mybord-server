@@ -2,11 +2,12 @@ import { YoutubeVideoData } from 'types/youtubeTypes';
 
 // ----- CARD SCHEMA ----- //
 
-export type CardCategory = 'Image' | 'Video';
+export type CardCategory = 'Gif' | 'Image' | 'Video';
 
-export type CardType = 'Image' | 'Youtube';
+export type CardType = 'Gif' | 'Image' | 'Youtube';
 
 export interface CardData {
+  gifCardData?: GifData;
   imageCardData?: ImageData;
   youtubeCardData?: YoutubeVideoData;
 }
@@ -18,6 +19,10 @@ export interface CardSchema {
   isToDo: boolean;
   title: string;
   type: CardType;
+}
+
+export interface GifData {
+  gifUrl: string;
 }
 
 export interface ImageData {
@@ -35,6 +40,9 @@ export interface InitialCardDataSchema {
 // ----- OTHER ----- //
 
 export interface CardCreateArgs {
+  gifCardData?: {
+    create: GifData;
+  };
   imageCardData?: {
     create: ImageData;
   };
