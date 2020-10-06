@@ -1,9 +1,9 @@
-import isAuthenticated from './isAuthenticated';
+import getCurrentUser from './getCurrentUser';
 import logoutUser from './logoutUser';
 import users from './users';
 
 export default {
-  isAuthenticated,
+  getCurrentUser,
   logoutUser,
   users,
 };
