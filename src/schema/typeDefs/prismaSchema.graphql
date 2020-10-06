@@ -774,6 +774,7 @@ type User {
   cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
   email: String!
   name: String
+  username: String!
   password: String!
 }
 
@@ -788,6 +789,7 @@ input UserCreateInput {
   cards: CardCreateManyWithoutUserInput
   email: String!
   name: String
+  username: String!
   password: String!
 }
 
@@ -800,6 +802,7 @@ input UserCreateWithoutCardsInput {
   id: ID
   email: String!
   name: String
+  username: String!
   password: String!
 }
 
@@ -819,6 +822,8 @@ enum UserOrderByInput {
   email_DESC
   name_ASC
   name_DESC
+  username_ASC
+  username_DESC
   password_ASC
   password_DESC
 }
@@ -829,6 +834,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   email: String!
   name: String
+  username: String!
   password: String!
 }
 
@@ -854,12 +860,14 @@ input UserUpdateInput {
   cards: CardUpdateManyWithoutUserInput
   email: String
   name: String
+  username: String
   password: String
 }
 
 input UserUpdateManyMutationInput {
   email: String
   name: String
+  username: String
   password: String
 }
 
@@ -873,6 +881,7 @@ input UserUpdateOneRequiredWithoutCardsInput {
 input UserUpdateWithoutCardsDataInput {
   email: String
   name: String
+  username: String
   password: String
 }
 
@@ -943,6 +952,20 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]

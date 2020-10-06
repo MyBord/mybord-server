@@ -15,6 +15,8 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* restrict usernames to only have certain characters
+* login with email or username
 * update how we detect images via url
   - https://github.com/wzbg/is-image-url/blob/master/index.js
 * allow graphql endpoing to be exposed again
