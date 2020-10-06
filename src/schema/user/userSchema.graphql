@@ -5,6 +5,15 @@ input LoginUserInput {
   password: String!
 }
 
+# ----- TYPES ----- #
+
+type CurrentUser {
+  id: String!
+  email: String!
+  isAuthenticated: Boolean!
+  username: String!
+}
+
 # ----- MUTATION ----- #
 
 extend type Mutation {
@@ -14,6 +23,6 @@ extend type Mutation {
 # ----- QUERY ----- #
 
 extend type Query {
-  isAuthenticated: Boolean
+  getCurrentUser: CurrentUser!
   logoutUser: Boolean
 }
