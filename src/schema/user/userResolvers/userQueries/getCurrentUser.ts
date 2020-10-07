@@ -1,21 +1,31 @@
 export default async (parent, args, { passport, prisma }) => {
   const isAuthenticated = passport.isAuthenticated();
-  const currentUserId = passport.getUserId();
 
-  const queryArgs = {
-    where: {
-      id: currentUserId,
-    },
-  };
+  if (isAuthenticated) {
+    const currentUserId = passport.getUserId();
 
-  const currentUser = await prisma.query.user(queryArgs, '{ id, email, username }');
+    const queryArgs = {
+      where: {
+        id: currentUserId,
+      },
+    };
 
-  const { id, email, username } = currentUser;
+    const currentUser = await prisma.query.user(queryArgs, '{ id, email, username }');
+
+    const { id, email, username } = currentUser;
+
+    return {
+      id,
+      email,
+      isAuthenticated,
+      username,
+    };
+  }
 
   return {
-    id,
-    email,
+    id: undefined,
+    email: undefined,
     isAuthenticated,
-    username,
+    username: undefined,
   };
 };
