@@ -23,6 +23,7 @@ This document is used to outline current project management priorities.
 * prod-server should not allow any cors
 * prod client should use local path
 * internal server error for new user trying to login but doesn't exist?
+  - unhandled promise rejection when ltrying to login for user that does not exist
 * have session be remembered by user
 * change secrets
 * Google API
