@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[69],{1006:function(n,e,o){"use strict";o.r(e);var c=o(0),r=o(95);e.default=function(n){var e=n.children,o=n.color,t=n.commonStyles;return c.createElement("div",{className:[r.typography,r[o],t].join(" ")},e)}}}]);
+//# sourceMappingURL=69.bundle.js.map
