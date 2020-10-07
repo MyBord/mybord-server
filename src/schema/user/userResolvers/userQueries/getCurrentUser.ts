@@ -10,12 +10,11 @@ export default async (parent, args, { passport, prisma }) => {
       },
     };
 
-    const currentUser = await prisma.query.user(queryArgs, '{ id, email, username }');
+    const currentUser = await prisma.query.user(queryArgs, '{ email, username }');
 
-    const { id, email, username } = currentUser;
+    const { email, username } = currentUser;
 
     return {
-      id,
       email,
       isAuthenticated,
       username,
@@ -23,7 +22,6 @@ export default async (parent, args, { passport, prisma }) => {
   }
 
   return {
-    id: undefined,
     email: undefined,
     isAuthenticated,
     username: undefined,

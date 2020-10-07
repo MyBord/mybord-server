@@ -8,7 +8,6 @@ input LoginUserInput {
 # ----- TYPES ----- #
 
 type CurrentUser {
-  id: String
   email: String
   isAuthenticated: Boolean!
   username: String
