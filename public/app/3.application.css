@@ -76,9 +76,9 @@
 }
 .ant-btn:hover,
 .ant-btn:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: #fff;
-  border-color: #28c2fa;
+  border-color: #47b6ff;
 }
 .ant-btn:hover > a:only-child,
 .ant-btn:focus > a:only-child {
@@ -96,9 +96,9 @@
 }
 .ant-btn:active,
 .ant-btn.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: #fff;
-  border-color: #0085c7;
+  border-color: #0f7bd9;
 }
 .ant-btn:active > a:only-child,
 .ant-btn.active > a:only-child {
@@ -190,8 +190,8 @@
 }
 .ant-btn-primary {
   color: #fff;
-  background-color: #00A6ED;
-  border-color: #00A6ED;
+  background-color: #1F9EFF;
+  border-color: #1F9EFF;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 }
@@ -210,8 +210,8 @@
 .ant-btn-primary:hover,
 .ant-btn-primary:focus {
   color: #fff;
-  background-color: #28c2fa;
-  border-color: #28c2fa;
+  background-color: #47b6ff;
+  border-color: #47b6ff;
 }
 .ant-btn-primary:hover > a:only-child,
 .ant-btn-primary:focus > a:only-child {
@@ -230,8 +230,8 @@
 .ant-btn-primary:active,
 .ant-btn-primary.active {
   color: #fff;
-  background-color: #0085c7;
-  border-color: #0085c7;
+  background-color: #0f7bd9;
+  border-color: #0f7bd9;
 }
 .ant-btn-primary:active > a:only-child,
 .ant-btn-primary.active > a:only-child {
@@ -309,21 +309,21 @@
   content: '';
 }
 .ant-btn-group .ant-btn-primary:not(:first-child):not(:last-child) {
-  border-right-color: #28c2fa;
-  border-left-color: #28c2fa;
+  border-right-color: #47b6ff;
+  border-left-color: #47b6ff;
 }
 .ant-btn-group .ant-btn-primary:not(:first-child):not(:last-child):disabled {
   border-color: #d9d9d9;
 }
 .ant-btn-group .ant-btn-primary:first-child:not(:last-child) {
-  border-right-color: #28c2fa;
+  border-right-color: #47b6ff;
 }
 .ant-btn-group .ant-btn-primary:first-child:not(:last-child)[disabled] {
   border-right-color: #d9d9d9;
 }
 .ant-btn-group .ant-btn-primary:last-child:not(:first-child),
 .ant-btn-group .ant-btn-primary + .ant-btn-primary {
-  border-left-color: #28c2fa;
+  border-left-color: #47b6ff;
 }
 .ant-btn-group .ant-btn-primary:last-child:not(:first-child)[disabled],
 .ant-btn-group .ant-btn-primary + .ant-btn-primary[disabled] {
@@ -348,9 +348,9 @@
 }
 .ant-btn-ghost:hover,
 .ant-btn-ghost:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: transparent;
-  border-color: #28c2fa;
+  border-color: #47b6ff;
 }
 .ant-btn-ghost:hover > a:only-child,
 .ant-btn-ghost:focus > a:only-child {
@@ -368,9 +368,9 @@
 }
 .ant-btn-ghost:active,
 .ant-btn-ghost.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: transparent;
-  border-color: #0085c7;
+  border-color: #0f7bd9;
 }
 .ant-btn-ghost:active > a:only-child,
 .ant-btn-ghost.active > a:only-child {
@@ -467,9 +467,9 @@
 }
 .ant-btn-dashed:hover,
 .ant-btn-dashed:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: #fff;
-  border-color: #28c2fa;
+  border-color: #47b6ff;
 }
 .ant-btn-dashed:hover > a:only-child,
 .ant-btn-dashed:focus > a:only-child {
@@ -487,9 +487,9 @@
 }
 .ant-btn-dashed:active,
 .ant-btn-dashed.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: #fff;
-  border-color: #0085c7;
+  border-color: #0f7bd9;
 }
 .ant-btn-dashed:active > a:only-child,
 .ant-btn-dashed.active > a:only-child {
@@ -687,7 +687,7 @@
   content: '';
 }
 .ant-btn-link {
-  color: #00A6ED;
+  color: #1F9EFF;
   background-color: transparent;
   border-color: transparent;
   box-shadow: none;
@@ -706,9 +706,9 @@
 }
 .ant-btn-link:hover,
 .ant-btn-link:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: transparent;
-  border-color: #28c2fa;
+  border-color: #47b6ff;
 }
 .ant-btn-link:hover > a:only-child,
 .ant-btn-link:focus > a:only-child {
@@ -726,9 +726,9 @@
 }
 .ant-btn-link:active,
 .ant-btn-link.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: transparent;
-  border-color: #0085c7;
+  border-color: #0f7bd9;
 }
 .ant-btn-link:active > a:only-child,
 .ant-btn-link.active > a:only-child {
@@ -1115,9 +1115,9 @@
   border-color: #fff;
 }
 .ant-btn-background-ghost.ant-btn-primary {
-  color: #00A6ED;
+  color: #1F9EFF;
   background-color: transparent;
-  border-color: #00A6ED;
+  border-color: #1F9EFF;
   text-shadow: none;
 }
 .ant-btn-background-ghost.ant-btn-primary > a:only-child {
@@ -1134,9 +1134,9 @@
 }
 .ant-btn-background-ghost.ant-btn-primary:hover,
 .ant-btn-background-ghost.ant-btn-primary:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: transparent;
-  border-color: #28c2fa;
+  border-color: #47b6ff;
 }
 .ant-btn-background-ghost.ant-btn-primary:hover > a:only-child,
 .ant-btn-background-ghost.ant-btn-primary:focus > a:only-child {
@@ -1154,9 +1154,9 @@
 }
 .ant-btn-background-ghost.ant-btn-primary:active,
 .ant-btn-background-ghost.ant-btn-primary.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: transparent;
-  border-color: #0085c7;
+  border-color: #0f7bd9;
 }
 .ant-btn-background-ghost.ant-btn-primary:active > a:only-child,
 .ant-btn-background-ghost.ant-btn-primary.active > a:only-child {
@@ -1353,7 +1353,7 @@
   content: '';
 }
 .ant-btn-background-ghost.ant-btn-link {
-  color: #00A6ED;
+  color: #1F9EFF;
   background-color: transparent;
   border-color: transparent;
   text-shadow: none;
@@ -1373,7 +1373,7 @@
 }
 .ant-btn-background-ghost.ant-btn-link:hover,
 .ant-btn-background-ghost.ant-btn-link:focus {
-  color: #28c2fa;
+  color: #47b6ff;
   background-color: transparent;
   border-color: transparent;
 }
@@ -1393,7 +1393,7 @@
 }
 .ant-btn-background-ghost.ant-btn-link:active,
 .ant-btn-background-ghost.ant-btn-link.active {
-  color: #0085c7;
+  color: #0f7bd9;
   background-color: transparent;
   border-color: transparent;
 }
