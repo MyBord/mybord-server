@@ -17,9 +17,8 @@ This document is used to outline current project management priorities.
 
 * restrict usernames to only have certain characters
 * login with email or username
-* update how we detect images via url
-  - https://github.com/wzbg/is-image-url/blob/master/index.js
-* allow graphql endpoing to be exposed again
+* allow graphql endpoint to be exposed again
+  - graphql playground and endpoint cannot be accessed for outside users
 * update express session options such that cookies must be sent over same site
 * prod-server should not allow any cors
 * prod client should use local path
