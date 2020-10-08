@@ -5,6 +5,7 @@ import { PubSub } from 'graphql-subscriptions';
 import buildPassportContext from 'middleware/passport/buildPassportContext';
 import resolvers from 'schema/rootResolvers/rootResolvers';
 import typeDefs from 'schema/typeDefs/typeDefs';
+import serverPlaygroundSettings from './serverPlaygroundSettings';
 
 // creates new apollo server
 const initializeServer = (
@@ -20,11 +21,7 @@ const initializeServer = (
       prisma,
       pubsub,
     }),
-    playground: {
-      settings: {
-        'request.credentials': 'same-origin',
-      },
-    },
+    playground: serverPlaygroundSettings,
     resolvers,
     typeDefs,
   });
