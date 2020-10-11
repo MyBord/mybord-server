@@ -15,6 +15,11 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* create separate errors for signing up when there already is an existing email account vs an
+ existing username
+throw new Error('The username can only letters (a-z), numbers (0-9), dashes, underscores and'
++ ' periods (-_.)');
+ 
 * restrict usernames to only have certain characters
 * login with email or username
 * internal server error for new user trying to login but doesn't exist?
