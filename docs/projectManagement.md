@@ -28,7 +28,6 @@ This document is used to outline current project management priorities.
 * change secrets
 * Google API
   * reset gapi key?
-  * restrict gapi key to certain ip addresses?
 * lock down graphql playground from prod heroku url  
 * make sure a user has to be logged in to use the initiateUserCard Api
 
