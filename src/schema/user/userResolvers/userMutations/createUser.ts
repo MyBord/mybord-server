@@ -3,13 +3,16 @@ import { hashPassword, restrictUserData, validateUsername } from '../../userUtil
 
 export default async (parent, args, { passport, prisma }, info) => {
   try {
-    validateUsername(args.data.username);
-    const password = await hashPassword(args.data.password);
+    const { password, username } = args.data;
+
+    await validateUsername(prisma, username);
+
+    const hashedPassword = await hashPassword(password);
     const finalArgs = {
       ...args,
       data: {
         ...args.data,
-        password,
+        password: hashedPassword,
       },
     };
 
@@ -22,8 +25,11 @@ export default async (parent, args, { passport, prisma }, info) => {
     if (error.message === 'invalid username') {
       throw new ServerError({ message: error.message, status: 400 });
     }
+    if (error.message === 'duplicate username') {
+      throw new ServerError({ message: error.message, status: 400 });
+    }
     if (error.message.includes('unique constraint')) {
-      throw new ServerError({ message: 'duplicate user', status: 400 });
+      throw new ServerError({ message: 'duplicate email', status: 400 });
     }
     if (error.message === 'weak password') {
       throw new ServerError({ message: error.message, status: 400 });

@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { Prisma } from 'prisma-binding';
 import { User } from './userTypes';
 
 export const restrictUserData = (user): User => ({
@@ -31,7 +32,17 @@ export const hashPassword = (password: string): Promise<string> => {
   return bcrypt.hash(password, 10);
 };
 
-export const validateUsername = (username: string): void => {
+export const validateUsername = async (prisma: Prisma, username: string): Promise<void> => {
+  const usersArgs = {
+    where: { username },
+  };
+
+  const users = await prisma.query.users(usersArgs, '{ username }');
+
+  if (users.length > 0) {
+    throw new Error('duplicate username');
+  }
+
   const regex = RegExp(/^[\w\d_.-]+$/g);
 
   if (!regex.test(username)) {
