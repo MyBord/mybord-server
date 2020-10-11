@@ -17,26 +17,15 @@ This document is used to outline current project management priorities.
 
 * restrict usernames to only have certain characters
 * login with email or username
-* allow graphql endpoint to be exposed again
-  - graphql playground and endpoint cannot be accessed for outside users
-* update express session options such that cookies must be sent over same site
-* prod-server should not allow any cors
-* prod client should use local path
 * internal server error for new user trying to login but doesn't exist?
   - unhandled promise rejection when ltrying to login for user that does not exist
 * have session be remembered by user
-* change secrets
-* Google API
-  * reset gapi key?
-* lock down graphql playground from prod heroku url  
-* make sure a user has to be logged in to use the initiateUserCard Api
 
 Production Deployment:
 
-* prevent url from heroku from modifying DB
-* Get domain running on mybord.io ?
+* change secrets
+* Google API: reset gapi key
 * Get production db running with backup
-* Make sure it is always spinning on heroku
 * make backups of github repos
 * figure out migrations
 * document heroku server instance sizes and memory management
