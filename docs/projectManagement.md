@@ -26,7 +26,6 @@ Production Deployment:
 * change secrets
 * Google API: reset gapi key
 * Get production db running with backup
-* make backups of github repos
 * figure out migrations
 * document heroku server instance sizes and memory management
   * https://devcenter.heroku.com/articles/node-memory-use
