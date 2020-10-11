@@ -845,18 +845,18 @@ form .ant-input-group-wrapper {
   border-color: #d9d9d9;
 }
 .has-error .ant-transfer-list-search:not([disabled]):hover {
-  border-color: #47b6ff;
+  border-color: #28c2fa;
   border-right-width: 1px !important;
 }
 .has-error .ant-transfer-list-search:not([disabled]):focus {
-  border-color: #47b6ff;
+  border-color: #28c2fa;
   border-right-width: 1px !important;
   outline: 0;
-  box-shadow: 0 0 0 2px rgba(31, 158, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 166, 237, 0.2);
 }
 .is-validating.has-feedback .ant-form-item-children-icon {
   display: inline-block;
-  color: #1F9EFF;
+  color: #00A6ED;
 }
 .ant-advanced-search-form .ant-form-item {
   margin-bottom: 1.25rem;

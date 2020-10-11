@@ -42,10 +42,10 @@
   border-right-width: 1px !important;
 }
 .ant-input:focus {
-  border-color: #47b6ff;
+  border-color: #28c2fa;
   border-right-width: 1px !important;
   outline: 0;
-  box-shadow: 0 0 0 2px rgba(31, 158, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 166, 237, 0.2);
 }
 .ant-input-disabled {
   color: rgba(0, 0, 0, 0.25);
@@ -167,7 +167,7 @@ textarea.ant-input {
 }
 .ant-input-group-addon .ant-select-open .ant-select-selection,
 .ant-input-group-addon .ant-select-focused .ant-select-selection {
-  color: #1F9EFF;
+  color: #00A6ED;
 }
 .ant-input-group-addon > i:only-child::after {
   position: absolute;
@@ -1101,14 +1101,14 @@ form .ant-input-group-wrapper {
   border-right-width: 1px !important;
 }
 .has-error .ant-transfer-list-search:not([disabled]):focus {
-  border-color: #47b6ff;
+  border-color: #28c2fa;
   border-right-width: 1px !important;
   outline: 0;
-  box-shadow: 0 0 0 2px rgba(31, 158, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 166, 237, 0.2);
 }
 .is-validating.has-feedback .ant-form-item-children-icon {
   display: inline-block;
-  color: #1F9EFF;
+  color: #00A6ED;
 }
 .ant-advanced-search-form .ant-form-item {
   margin-bottom: 0.75rem;
@@ -1245,7 +1245,7 @@ form .ant-input-group-wrapper {
   font-family: 'Poppins', Arial, serif;
 }
 .ant-input:focus {
-  border-color: #1F9EFF;
+  border-color: #00A6ED;
 }
 .has-error .ant-input:focus {
   border-color: #E41245;
@@ -1257,7 +1257,7 @@ form .ant-input-group-wrapper {
   border-color: #d9d9d9;
 }
 .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled).ant-input:focus {
-  border-color: #1F9EFF;
+  border-color: #00A6ED;
 }
 
 

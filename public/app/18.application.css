@@ -222,13 +222,13 @@
   border: none;
 }
 .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
-  background-color: #1F9EFF;
+  background-color: #00A6ED;
 }
 .ant-checkbox :focus {
   outline: none;
 }
 .ant-checkbox-inner {
-  border-color: #1F9EFF !important;
+  border-color: #00A6ED !important;
 }
 .ant-checkbox-wrapper span:nth-child(2) {
   color: #565E5F;
