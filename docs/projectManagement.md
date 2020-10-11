@@ -15,10 +15,6 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
-* create separate errors for signing up when there already is an existing email account vs an
- existing username
- 
-* restrict usernames to only have certain characters
 * login with email or username
 * internal server error for new user trying to login but doesn't exist?
   - unhandled promise rejection when ltrying to login for user that does not exist
