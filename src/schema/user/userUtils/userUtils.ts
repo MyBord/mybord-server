@@ -21,7 +21,7 @@ const testPasswordStrength = (password): void => {
   const isPasswordStrong = hasNumber && hasSpecialCharacters && hasUpperCase && isLongEnough;
 
   if (!isPasswordStrong) {
-    throw new Error('password is weak');
+    throw new Error('weak password');
   }
 };
 
@@ -29,4 +29,12 @@ export const hashPassword = (password: string): Promise<string> => {
   testPasswordStrength(password);
 
   return bcrypt.hash(password, 10);
+};
+
+export const validateUsername = (username: string): void => {
+  const regex = RegExp(/^[\w\d_.-]+$/g);
+
+  if (!regex.test(username)) {
+    throw new Error('invalid username');
+  }
 };

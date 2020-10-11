@@ -1,6 +1,5 @@
 import ServerError from 'server/serverError';
-import { hashPassword, restrictUserData } from '../../userUtils/userUtils';
-import validateUsername from '../../userUtils/validateUsername';
+import { hashPassword, restrictUserData, validateUsername } from '../../userUtils/userUtils';
 
 export default async (parent, args, { passport, prisma }, info) => {
   try {
@@ -26,7 +25,7 @@ export default async (parent, args, { passport, prisma }, info) => {
     if (error.message.includes('unique constraint')) {
       throw new ServerError({ message: 'duplicate user', status: 400 });
     }
-    if (error.message === 'password is weak') {
+    if (error.message === 'weak password') {
       throw new ServerError({ message: error.message, status: 400 });
     }
     throw new ServerError(error);
