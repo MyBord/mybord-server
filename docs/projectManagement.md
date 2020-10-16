@@ -19,7 +19,6 @@ This document is used to outline current project management priorities.
 * login with email or username
 * internal server error for new user trying to login but doesn't exist?
   - unhandled promise rejection when ltrying to login for user that does not exist
-* have session be remembered by user
 
 Production Deployment:
 
@@ -31,6 +30,7 @@ Production Deployment:
 
 ### C. Medium
 
+* have session be remembered by user
 * add build version to index page  
   *  https://devcenter.heroku.com/changelog-items/630 
 * add `build-public:prod` command to yarn start
