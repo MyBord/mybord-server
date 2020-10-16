@@ -15,6 +15,7 @@ This document is used to outline current project management priorities.
 
 ### B. High - MVP
 
+* why is logging in taking so long
 * login with email or username
 * internal server error for new user trying to login but doesn't exist?
   - unhandled promise rejection when ltrying to login for user that does not exist
@@ -23,7 +24,6 @@ This document is used to outline current project management priorities.
 Production Deployment:
 
 * change secrets
-* Google API: reset gapi key
 * Get production db running with backup
 * figure out migrations
 * document heroku server instance sizes and memory management
