@@ -9,8 +9,6 @@ export default async (parent, args, { passport, prisma }, info) => {
     };
 
     await prisma.mutation.deleteUser(deleteUserArgs, info);
-
-    return true;
   } catch (error) {
     throw new Error(error);
   }

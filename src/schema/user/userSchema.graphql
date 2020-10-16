@@ -16,7 +16,7 @@ type CurrentUser {
 # ----- MUTATION ----- #
 
 extend type Mutation {
-  deleteCurrentUser: Boolean
+  deleteCurrentUser: User
   loginUser(data: LoginUserInput): User!
 }
 
