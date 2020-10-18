@@ -29,6 +29,5 @@ Further documentation can be found below:
   * [Architecture](https://github.com/jimmy-e/mybord-server/tree/master/docs/architecture.md)
   * [Build Process](https://github.com/jimmy-e/mybord-server/tree/master/docs/build.md)
   * [Deployment](https://github.com/jimmy-e/mybord-server/blob/master/docs/deployment.md)
-  * [Project Management](https://github.com/jimmy-e/mybord-server/tree/master/docs/projectManagement.md)
   * [Running Locally](https://github.com/jimmy-e/mybord-server/tree/master/docs/runningLocally.md)
   * [Third Party APIS & Tooling](https://github.com/jimmy-e/mybord-server/tree/master/docs/thirdParty.md)
