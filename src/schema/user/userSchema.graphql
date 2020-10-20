@@ -1,7 +1,7 @@
 # ----- INPUTS ----- #
 
 input LoginUserInput {
-  email: String!
+  emailOrUsername: String!
   password: String!
 }
 

@@ -13,8 +13,8 @@ class LocalStrategy extends Strategy {
 
   public name: string;
 
-  public authenticate(req: Request, options: { email: string; password: string }): void {
-    const { email, password } = options;
+  public authenticate(req: Request, options: { emailOrUsername: string; password: string }): void {
+    const { emailOrUsername, password } = options;
 
     const done: Done = (error: Error, user: object, info?: Info) => {
       if (error) {
@@ -29,7 +29,7 @@ class LocalStrategy extends Strategy {
       return this.success(user, info);
     };
 
-    this.verify(email, password, done);
+    this.verify(emailOrUsername, password, done);
   }
 }
 
