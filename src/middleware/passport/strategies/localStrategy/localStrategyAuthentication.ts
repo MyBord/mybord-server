@@ -3,21 +3,36 @@ import { Done } from 'types/passportTypes';
 import { Prisma } from 'prisma-binding';
 
 export default async (
-  email: string,
+  emailOrUsername: string,
   password: string,
   done: Done,
   prisma: Prisma,
 ) => {
-  const user = await prisma.query.user({
-    where: { email },
-  });
+  try {
+    const users = await prisma.query.users({
+      where: {
+        OR: [
+          { email: emailOrUsername },
+          { username: emailOrUsername },
+        ],
+      },
+    });
 
-  let doesPasswordMatch;
-  if (user) {
-    doesPasswordMatch = await bcrypt.compare(password, user.password);
+    if (users.length !== 1) {
+      throw new Error('Unable to retrieve user account');
+    }
+
+    let doesPasswordMatch;
+    const user = users[0];
+
+    if (user) {
+      doesPasswordMatch = await bcrypt.compare(password, user.password);
+    }
+
+    const error = (!user || !doesPasswordMatch) ? new Error('Unable to login') : null;
+
+    done(error, user);
+  } catch (error) {
+    throw new Error(error);
   }
-
-  const error = (!user || !doesPasswordMatch) ? new Error('Unable to login') : null;
-
-  done(error, user);
 };

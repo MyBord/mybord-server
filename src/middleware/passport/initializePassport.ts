@@ -7,8 +7,8 @@ const initializePassport = (prisma: Prisma): void => {
   passport.use(
     // Adds local passport strategy so that users can authenticate with their local db
     // credentials.
-    new LocalStrategy((email, password, done) => (
-      localStrategyAuthentication(email, password, done, prisma)
+    new LocalStrategy((emailOrUsername, password, done) => (
+      localStrategyAuthentication(emailOrUsername, password, done, prisma)
     )),
   );
 
