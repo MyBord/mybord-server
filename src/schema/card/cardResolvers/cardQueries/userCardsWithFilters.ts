@@ -15,7 +15,7 @@ export default async (parent, args, { passport, prisma, pubsub }, info) => {
 
   const filters: Filters = {};
 
-  if (categories.length > 0) {
+  if (categories && categories.length > 0) {
     finalArgs.where.category_in = categories;
     filters.categories = categories;
   }
