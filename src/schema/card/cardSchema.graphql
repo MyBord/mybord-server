@@ -1,6 +1,7 @@
 # ----- TYPES ----- #
 
 type Filters {
+  categories: [CardCategory]
   isFavorite: Boolean
   isToDo: Boolean
 }
@@ -21,6 +22,7 @@ type InitialCardData {
 # ----- INPUTS ----- #
 
 input CardFilterInput {
+  categories: [CardCategory]
   isFavorite: Boolean
   isToDo: Boolean
 }

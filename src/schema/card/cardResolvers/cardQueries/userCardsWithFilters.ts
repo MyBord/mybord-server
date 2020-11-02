@@ -11,9 +11,15 @@ export default async (parent, args, { passport, prisma, pubsub }, info) => {
     },
   };
 
-  const { isFavorite, isToDo } = args.data;
+  const { categories, isFavorite, isToDo } = args.data;
 
   const filters: Filters = {};
+
+  if (categories.length > 0) {
+    finalArgs.where.category_in = categories;
+    filters.categories = categories;
+  }
+
   if (isFavorite) {
     finalArgs.where.isFavorite = isFavorite;
     filters.isFavorite = isFavorite;
