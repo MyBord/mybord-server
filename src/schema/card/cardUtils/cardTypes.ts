@@ -53,6 +53,7 @@ export interface CardCreateArgs {
 
 export interface CardQueryArgs {
   where: {
+    category_in?: CardCategory[];
     isFavorite?: boolean;
     isToDo?: boolean;
     user?: {
@@ -62,6 +63,7 @@ export interface CardQueryArgs {
 }
 
 export interface Filters {
+  categories?: CardCategory[];
   isFavorite?: boolean;
   isToDo?: boolean;
 }
