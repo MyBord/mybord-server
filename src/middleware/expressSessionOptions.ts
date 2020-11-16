@@ -11,11 +11,12 @@ const sessionOptions: SessionOptions = {
 };
 
 // cookie must be sent via https
-if (process.env.MODE === 'PROD') {
-  sessionOptions.cookie = {
-    sameSite: 'none',
-    secure: true,
-  };
-}
+// NOTE: not sure why this is causing oath problems; will need to investigate :/
+// if (process.env.MODE === 'PROD') {
+//   sessionOptions.cookie = {
+//     sameSite: 'none',
+//     secure: true,
+//   };
+// }
 
 export default sessionOptions;
