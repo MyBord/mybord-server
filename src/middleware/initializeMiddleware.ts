@@ -38,9 +38,9 @@ export default (): Middleware => {
 
   // enforces HTTPS for our production server
   // https://help.heroku.com/J2R1S4T8/can-heroku-force-an-application-to-use-ssl-tls
-  if (process.env.MODE === 'PROD') {
-    expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true }));
-  }
+  // if (process.env.MODE === 'PROD') {
+  //   expressMiddleware.use(enforce.HTTPS({ trustProtoHeader: true }));
+  // }
 
   // returns our middleware
   return {

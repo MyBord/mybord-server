@@ -11,11 +11,11 @@ const sessionOptions: SessionOptions = {
 };
 
 // cookie must be sent via https
-if (process.env.MODE === 'PROD') {
-  sessionOptions.cookie = {
-    sameSite: 'none',
-    secure: true,
-  };
-}
+// if (process.env.MODE === 'PROD') {
+//   sessionOptions.cookie = {
+//     sameSite: 'none',
+//     secure: true,
+//   };
+// }
 
 export default sessionOptions;
