@@ -5,6 +5,12 @@ input LoginUserInput {
   password: String!
 }
 
+input UserSignupInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
 # ----- TYPES ----- #
 
 type CurrentUser {
@@ -25,4 +31,5 @@ extend type Mutation {
 extend type Query {
   getCurrentUser: CurrentUser!
   logoutUser: Boolean
+  validateUserSignup(data: UserSignupInput): Boolean
 }
