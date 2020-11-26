@@ -17,16 +17,14 @@ export default async (parent, args, { prisma }) => {
 
     return true;
   } catch (error) {
-    if (error.message === 'invalid username') {
-      throw new ServerError({ message: error.message, status: 400 });
-    }
-    if (error.message === 'duplicate username') {
-      throw new ServerError({ message: error.message, status: 400 });
-    }
-    if (error.message === 'duplicate email') {
-      throw new ServerError({ message: 'duplicate email', status: 400 });
-    }
-    if (error.message === 'weak password') {
+    if (
+      [
+        'duplicate email',
+        'duplicate username',
+        'invalid username',
+        'weak password',
+      ].includes(error.message)
+    ) {
       throw new ServerError({ message: error.message, status: 400 });
     }
     throw new ServerError(error);
