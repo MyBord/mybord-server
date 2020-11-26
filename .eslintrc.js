@@ -33,6 +33,14 @@ module.exports = {
     }],
     'semi': 'off',
     '@typescript-eslint/semi': ['error'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        ts: 'never',
+      },
+    ],
   },
   settings: {
     'import/extensions': [
@@ -40,6 +48,9 @@ module.exports = {
       '.ts',
     ],
     'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+      },
       webpack: {
         config: 'webpack.common.js',
       }

@@ -2,13 +2,11 @@ import bcrypt from 'bcryptjs';
 import { Prisma } from 'prisma-binding';
 import { User } from './userTypes';
 
-export const restrictUserData = (user): User => ({
-  ...user,
-  email: 'null',
-  password: 'null',
-});
+// ----- PASSWORD UTILS ----- //
 
-const testPasswordStrength = (password): void => {
+export const hashPassword = (password: string): Promise<string> => bcrypt.hash(password, 10);
+
+export const testPasswordStrength = (password): void => {
   const passwordArray = password.split('');
 
   const specialCharacters = ['!', '@', '#', '$', '&', '*', '-'];
@@ -26,10 +24,18 @@ const testPasswordStrength = (password): void => {
   }
 };
 
-export const hashPassword = (password: string): Promise<string> => {
-  testPasswordStrength(password);
+// ----- VALIDATION UTILS ----- //
 
-  return bcrypt.hash(password, 10);
+export const validateEmail = async (prisma: Prisma, email: string): Promise<void> => {
+  const usersArgs = {
+    where: { email },
+  };
+
+  const users = await prisma.query.users(usersArgs, '{ email }');
+
+  if (users.length > 0) {
+    throw new Error('duplicate email');
+  }
 };
 
 export const validateUsername = async (prisma: Prisma, username: string): Promise<void> => {
@@ -49,3 +55,11 @@ export const validateUsername = async (prisma: Prisma, username: string): Promis
     throw new Error('invalid username');
   }
 };
+
+// ----- DATA RESTRICTION UTILS ----- //
+
+export const restrictUserData = (user): User => ({
+  ...user,
+  email: 'null',
+  password: 'null',
+});
