@@ -1,3 +1,11 @@
+# ----- ENUMS ----- #
+
+enum UserStatus {
+  Failure
+  Pending
+  Success
+}
+
 # ----- FINAL SCHEMA ----- #
 
 type User {
@@ -7,7 +15,8 @@ type User {
   cards: [Card!] @relation(name: "CardToUser", onDelete: CASCADE)
   email: String! @unique
   name: String
-  username: String! @unique
   password: String!
+  status: UserStatus!
+  username: String! @unique
 }
 

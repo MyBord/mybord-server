@@ -1,9 +1,9 @@
-import createUser from './createUser';
+import createPendingUser from './createPendingUser';
 import deleteCurrentUser from './deleteCurrentUser';
 import loginUser from './loginUser';
 
 export default {
-  createUser,
+  createPendingUser,
   deleteCurrentUser,
   loginUser,
 };

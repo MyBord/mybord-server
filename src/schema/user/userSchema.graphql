@@ -22,6 +22,7 @@ type CurrentUser {
 # ----- MUTATION ----- #
 
 extend type Mutation {
+  createPendingUser: User!
   deleteCurrentUser: User
   loginUser(data: LoginUserInput): User!
 }

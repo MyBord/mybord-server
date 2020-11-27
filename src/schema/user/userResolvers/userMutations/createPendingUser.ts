@@ -1,7 +1,7 @@
 import ServerError from 'server/serverError';
 import { hashPassword, restrictUserData } from '../../userUtils/userUtils';
 
-export default async (parent, args, { passport, prisma }, info) => {
+export default async (parent, args, { prisma }, info) => {
   try {
     const hashedPassword = await hashPassword(args.data.password);
     const finalArgs = {
@@ -13,8 +13,6 @@ export default async (parent, args, { passport, prisma }, info) => {
     };
 
     const user = await prisma.mutation.createUser(finalArgs, info);
-
-    passport.login({ authenticateOptions: args.data, user });
 
     return restrictUserData(user);
   } catch (error) {
