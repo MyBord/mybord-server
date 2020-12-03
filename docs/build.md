@@ -88,8 +88,14 @@ The following are the yarn commands for our server application:
 * **`build-public:dev`:**
   * Gets the front-end bundle based off the branch specified in dev.env and saves it to the `client`
   folder. For more information, see [here](#ii-public).
-* **`get-schema`:**
-  * Generates graphql schema / typedefs from our prisma ORM.
+* **`get-prisma-token:dev`:**
+  * Generates a prisma jwt token for our dev environment.
+* **`get-prisma-token:local`:**
+  * Generates a prisma jwt token for our local environment.
+* **`get-schema:dev`:**
+  * Generates graphql schema / typedefs from our prisma ORM for our dev environment.
+* **`get-schema: local`:**
+  * Generates graphql schema / typedefs from our prisma ORM for our local environment.
 * **`remove-dist`:**
   * Removes the 'dist/' folder.
 * **`prisma-delete:dev`:**
