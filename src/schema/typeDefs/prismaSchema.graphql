@@ -1,3 +1,6 @@
+# source: http://localhost:4466
+# timestamp: Thu Dec 03 2020 18:35:51 GMT-0500 (Eastern Standard Time)
+
 type AggregateCard {
   count: Int!
 }
@@ -23,10 +26,11 @@ type AggregateYoutubeCardData {
 }
 
 type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
 
-type Card {
+type Card implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -45,20 +49,24 @@ enum CardCategory {
   Video
 }
 
+"""A connection to a list of items."""
 type CardConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [CardEdge]!
   aggregate: AggregateCard!
 }
 
 input CardCreateInput {
   id: ID
-  cardData: CardDataCreateOneInput!
   category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
   title: String!
   type: CardType!
+  cardData: CardDataCreateOneInput!
   user: UserCreateOneWithoutCardsInput!
 }
 
@@ -69,23 +77,27 @@ input CardCreateManyWithoutUserInput {
 
 input CardCreateWithoutUserInput {
   id: ID
-  cardData: CardDataCreateOneInput!
   category: CardCategory!
   isFavorite: Boolean!
   isToDo: Boolean!
   title: String!
   type: CardType!
+  cardData: CardDataCreateOneInput!
 }
 
-type CardData {
+type CardData implements Node {
   id: ID!
   gifCardData: GifCardData
   imageCardData: ImageCardData
   youtubeCardData: YoutubeCardData
 }
 
+"""A connection to a list of items."""
 type CardDataConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [CardDataEdge]!
   aggregate: AggregateCardData!
 }
@@ -102,8 +114,12 @@ input CardDataCreateOneInput {
   connect: CardDataWhereUniqueInput
 }
 
+"""An edge in a connection."""
 type CardDataEdge {
+  """The item at the end of the edge."""
   node: CardData!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -124,14 +140,33 @@ type CardDataSubscriptionPayload {
 }
 
 input CardDataSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardDataSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardDataSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardDataSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: CardDataWhereInput
-  AND: [CardDataSubscriptionWhereInput!]
-  OR: [CardDataSubscriptionWhereInput!]
-  NOT: [CardDataSubscriptionWhereInput!]
 }
 
 input CardDataUpdateDataInput {
@@ -148,9 +183,9 @@ input CardDataUpdateInput {
 
 input CardDataUpdateOneRequiredInput {
   create: CardDataCreateInput
+  connect: CardDataWhereUniqueInput
   update: CardDataUpdateDataInput
   upsert: CardDataUpsertNestedInput
-  connect: CardDataWhereUniqueInput
 }
 
 input CardDataUpsertNestedInput {
@@ -159,34 +194,69 @@ input CardDataUpsertNestedInput {
 }
 
 input CardDataWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardDataWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardDataWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardDataWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   gifCardData: GifCardDataWhereInput
   imageCardData: ImageCardDataWhereInput
   youtubeCardData: YoutubeCardDataWhereInput
-  AND: [CardDataWhereInput!]
-  OR: [CardDataWhereInput!]
-  NOT: [CardDataWhereInput!]
 }
 
 input CardDataWhereUniqueInput {
   id: ID
 }
 
+"""An edge in a connection."""
 type CardEdge {
+  """The item at the end of the edge."""
   node: Card!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -221,65 +291,166 @@ type CardPreviousValues {
 }
 
 input CardScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardScalarWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   createdAt: DateTime
+
+  """All values that are not equal to given value."""
   createdAt_not: DateTime
+
+  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   createdAt_lte: DateTime
+
+  """All values greater than the given value."""
   createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
+
+  """All values that are not equal to given value."""
   updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
   updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   category: CardCategory
+
+  """All values that are not equal to given value."""
   category_not: CardCategory
+
+  """All values that are contained in given list."""
   category_in: [CardCategory!]
+
+  """All values that are not contained in given list."""
   category_not_in: [CardCategory!]
   isFavorite: Boolean
+
+  """All values that are not equal to given value."""
   isFavorite_not: Boolean
   isToDo: Boolean
+
+  """All values that are not equal to given value."""
   isToDo_not: Boolean
   title: String
+
+  """All values that are not equal to given value."""
   title_not: String
+
+  """All values that are contained in given list."""
   title_in: [String!]
+
+  """All values that are not contained in given list."""
   title_not_in: [String!]
+
+  """All values less than the given value."""
   title_lt: String
+
+  """All values less than or equal the given value."""
   title_lte: String
+
+  """All values greater than the given value."""
   title_gt: String
+
+  """All values greater than or equal the given value."""
   title_gte: String
+
+  """All values containing the given string."""
   title_contains: String
+
+  """All values not containing the given string."""
   title_not_contains: String
+
+  """All values starting with the given string."""
   title_starts_with: String
+
+  """All values not starting with the given string."""
   title_not_starts_with: String
+
+  """All values ending with the given string."""
   title_ends_with: String
+
+  """All values not ending with the given string."""
   title_not_ends_with: String
   type: CardType
+
+  """All values that are not equal to given value."""
   type_not: CardType
+
+  """All values that are contained in given list."""
   type_in: [CardType!]
+
+  """All values that are not contained in given list."""
   type_not_in: [CardType!]
-  AND: [CardScalarWhereInput!]
-  OR: [CardScalarWhereInput!]
-  NOT: [CardScalarWhereInput!]
 }
 
 type CardSubscriptionPayload {
@@ -290,14 +461,33 @@ type CardSubscriptionPayload {
 }
 
 input CardSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: CardWhereInput
-  AND: [CardSubscriptionWhereInput!]
-  OR: [CardSubscriptionWhereInput!]
-  NOT: [CardSubscriptionWhereInput!]
 }
 
 enum CardType {
@@ -307,12 +497,12 @@ enum CardType {
 }
 
 input CardUpdateInput {
-  cardData: CardDataUpdateOneRequiredInput
   category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
   title: String
   type: CardType
+  cardData: CardDataUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutCardsInput
 }
 
@@ -334,14 +524,14 @@ input CardUpdateManyMutationInput {
 
 input CardUpdateManyWithoutUserInput {
   create: [CardCreateWithoutUserInput!]
-  delete: [CardWhereUniqueInput!]
   connect: [CardWhereUniqueInput!]
   set: [CardWhereUniqueInput!]
   disconnect: [CardWhereUniqueInput!]
+  delete: [CardWhereUniqueInput!]
   update: [CardUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [CardUpsertWithWhereUniqueWithoutUserInput!]
-  deleteMany: [CardScalarWhereInput!]
   updateMany: [CardUpdateManyWithWhereNestedInput!]
+  deleteMany: [CardScalarWhereInput!]
+  upsert: [CardUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input CardUpdateManyWithWhereNestedInput {
@@ -350,12 +540,12 @@ input CardUpdateManyWithWhereNestedInput {
 }
 
 input CardUpdateWithoutUserDataInput {
-  cardData: CardDataUpdateOneRequiredInput
   category: CardCategory
   isFavorite: Boolean
   isToDo: Boolean
   title: String
   type: CardType
+  cardData: CardDataUpdateOneRequiredInput
 }
 
 input CardUpdateWithWhereUniqueWithoutUserInput {
@@ -370,67 +560,168 @@ input CardUpsertWithWhereUniqueWithoutUserInput {
 }
 
 input CardWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CardWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CardWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CardWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   createdAt: DateTime
+
+  """All values that are not equal to given value."""
   createdAt_not: DateTime
+
+  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   createdAt_lte: DateTime
+
+  """All values greater than the given value."""
   createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
+
+  """All values that are not equal to given value."""
   updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
   updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  cardData: CardDataWhereInput
   category: CardCategory
+
+  """All values that are not equal to given value."""
   category_not: CardCategory
+
+  """All values that are contained in given list."""
   category_in: [CardCategory!]
+
+  """All values that are not contained in given list."""
   category_not_in: [CardCategory!]
   isFavorite: Boolean
+
+  """All values that are not equal to given value."""
   isFavorite_not: Boolean
   isToDo: Boolean
+
+  """All values that are not equal to given value."""
   isToDo_not: Boolean
   title: String
+
+  """All values that are not equal to given value."""
   title_not: String
+
+  """All values that are contained in given list."""
   title_in: [String!]
+
+  """All values that are not contained in given list."""
   title_not_in: [String!]
+
+  """All values less than the given value."""
   title_lt: String
+
+  """All values less than or equal the given value."""
   title_lte: String
+
+  """All values greater than the given value."""
   title_gt: String
+
+  """All values greater than or equal the given value."""
   title_gte: String
+
+  """All values containing the given string."""
   title_contains: String
+
+  """All values not containing the given string."""
   title_not_contains: String
+
+  """All values starting with the given string."""
   title_starts_with: String
+
+  """All values not starting with the given string."""
   title_not_starts_with: String
+
+  """All values ending with the given string."""
   title_ends_with: String
+
+  """All values not ending with the given string."""
   title_not_ends_with: String
   type: CardType
+
+  """All values that are not equal to given value."""
   type_not: CardType
+
+  """All values that are contained in given list."""
   type_in: [CardType!]
+
+  """All values that are not contained in given list."""
   type_not_in: [CardType!]
+  cardData: CardDataWhereInput
   user: UserWhereInput
-  AND: [CardWhereInput!]
-  OR: [CardWhereInput!]
-  NOT: [CardWhereInput!]
 }
 
 input CardWhereUniqueInput {
@@ -439,13 +730,17 @@ input CardWhereUniqueInput {
 
 scalar DateTime
 
-type GifCardData {
+type GifCardData implements Node {
   id: ID!
   gifUrl: String!
 }
 
+"""A connection to a list of items."""
 type GifCardDataConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [GifCardDataEdge]!
   aggregate: AggregateGifCardData!
 }
@@ -460,8 +755,12 @@ input GifCardDataCreateOneInput {
   connect: GifCardDataWhereUniqueInput
 }
 
+"""An edge in a connection."""
 type GifCardDataEdge {
+  """The item at the end of the edge."""
   node: GifCardData!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -485,14 +784,33 @@ type GifCardDataSubscriptionPayload {
 }
 
 input GifCardDataSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GifCardDataSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GifCardDataSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GifCardDataSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: GifCardDataWhereInput
-  AND: [GifCardDataSubscriptionWhereInput!]
-  OR: [GifCardDataSubscriptionWhereInput!]
-  NOT: [GifCardDataSubscriptionWhereInput!]
 }
 
 input GifCardDataUpdateDataInput {
@@ -509,11 +827,11 @@ input GifCardDataUpdateManyMutationInput {
 
 input GifCardDataUpdateOneInput {
   create: GifCardDataCreateInput
+  connect: GifCardDataWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: GifCardDataUpdateDataInput
   upsert: GifCardDataUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: GifCardDataWhereUniqueInput
 }
 
 input GifCardDataUpsertNestedInput {
@@ -522,50 +840,111 @@ input GifCardDataUpsertNestedInput {
 }
 
 input GifCardDataWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GifCardDataWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GifCardDataWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GifCardDataWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   gifUrl: String
+
+  """All values that are not equal to given value."""
   gifUrl_not: String
+
+  """All values that are contained in given list."""
   gifUrl_in: [String!]
+
+  """All values that are not contained in given list."""
   gifUrl_not_in: [String!]
+
+  """All values less than the given value."""
   gifUrl_lt: String
+
+  """All values less than or equal the given value."""
   gifUrl_lte: String
+
+  """All values greater than the given value."""
   gifUrl_gt: String
+
+  """All values greater than or equal the given value."""
   gifUrl_gte: String
+
+  """All values containing the given string."""
   gifUrl_contains: String
+
+  """All values not containing the given string."""
   gifUrl_not_contains: String
+
+  """All values starting with the given string."""
   gifUrl_starts_with: String
+
+  """All values not starting with the given string."""
   gifUrl_not_starts_with: String
+
+  """All values ending with the given string."""
   gifUrl_ends_with: String
+
+  """All values not ending with the given string."""
   gifUrl_not_ends_with: String
-  AND: [GifCardDataWhereInput!]
-  OR: [GifCardDataWhereInput!]
-  NOT: [GifCardDataWhereInput!]
 }
 
 input GifCardDataWhereUniqueInput {
   id: ID
 }
 
-type ImageCardData {
+type ImageCardData implements Node {
   id: ID!
   imageUrl: String!
 }
 
+"""A connection to a list of items."""
 type ImageCardDataConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [ImageCardDataEdge]!
   aggregate: AggregateImageCardData!
 }
@@ -580,8 +959,12 @@ input ImageCardDataCreateOneInput {
   connect: ImageCardDataWhereUniqueInput
 }
 
+"""An edge in a connection."""
 type ImageCardDataEdge {
+  """The item at the end of the edge."""
   node: ImageCardData!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -605,14 +988,33 @@ type ImageCardDataSubscriptionPayload {
 }
 
 input ImageCardDataSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageCardDataSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageCardDataSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageCardDataSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: ImageCardDataWhereInput
-  AND: [ImageCardDataSubscriptionWhereInput!]
-  OR: [ImageCardDataSubscriptionWhereInput!]
-  NOT: [ImageCardDataSubscriptionWhereInput!]
 }
 
 input ImageCardDataUpdateDataInput {
@@ -629,11 +1031,11 @@ input ImageCardDataUpdateManyMutationInput {
 
 input ImageCardDataUpdateOneInput {
   create: ImageCardDataCreateInput
+  connect: ImageCardDataWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: ImageCardDataUpdateDataInput
   upsert: ImageCardDataUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ImageCardDataWhereUniqueInput
 }
 
 input ImageCardDataUpsertNestedInput {
@@ -642,81 +1044,146 @@ input ImageCardDataUpsertNestedInput {
 }
 
 input ImageCardDataWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ImageCardDataWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ImageCardDataWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ImageCardDataWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   imageUrl: String
+
+  """All values that are not equal to given value."""
   imageUrl_not: String
+
+  """All values that are contained in given list."""
   imageUrl_in: [String!]
+
+  """All values that are not contained in given list."""
   imageUrl_not_in: [String!]
+
+  """All values less than the given value."""
   imageUrl_lt: String
+
+  """All values less than or equal the given value."""
   imageUrl_lte: String
+
+  """All values greater than the given value."""
   imageUrl_gt: String
+
+  """All values greater than or equal the given value."""
   imageUrl_gte: String
+
+  """All values containing the given string."""
   imageUrl_contains: String
+
+  """All values not containing the given string."""
   imageUrl_not_contains: String
+
+  """All values starting with the given string."""
   imageUrl_starts_with: String
+
+  """All values not starting with the given string."""
   imageUrl_not_starts_with: String
+
+  """All values ending with the given string."""
   imageUrl_ends_with: String
+
+  """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  AND: [ImageCardDataWhereInput!]
-  OR: [ImageCardDataWhereInput!]
-  NOT: [ImageCardDataWhereInput!]
 }
 
 input ImageCardDataWhereUniqueInput {
   id: ID
 }
 
+"""Raw JSON value"""
+scalar Json
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
 scalar Long
 
 type Mutation {
   createCard(data: CardCreateInput!): Card!
-  updateCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
-  updateManyCards(data: CardUpdateManyMutationInput!, where: CardWhereInput): BatchPayload!
-  upsertCard(where: CardWhereUniqueInput!, create: CardCreateInput!, update: CardUpdateInput!): Card!
-  deleteCard(where: CardWhereUniqueInput!): Card
-  deleteManyCards(where: CardWhereInput): BatchPayload!
-  createCardData(data: CardDataCreateInput!): CardData!
-  updateCardData(data: CardDataUpdateInput!, where: CardDataWhereUniqueInput!): CardData
-  upsertCardData(where: CardDataWhereUniqueInput!, create: CardDataCreateInput!, update: CardDataUpdateInput!): CardData!
-  deleteCardData(where: CardDataWhereUniqueInput!): CardData
-  deleteManyCardDatas(where: CardDataWhereInput): BatchPayload!
-  createGifCardData(data: GifCardDataCreateInput!): GifCardData!
-  updateGifCardData(data: GifCardDataUpdateInput!, where: GifCardDataWhereUniqueInput!): GifCardData
-  updateManyGifCardDatas(data: GifCardDataUpdateManyMutationInput!, where: GifCardDataWhereInput): BatchPayload!
-  upsertGifCardData(where: GifCardDataWhereUniqueInput!, create: GifCardDataCreateInput!, update: GifCardDataUpdateInput!): GifCardData!
-  deleteGifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
-  deleteManyGifCardDatas(where: GifCardDataWhereInput): BatchPayload!
-  createImageCardData(data: ImageCardDataCreateInput!): ImageCardData!
-  updateImageCardData(data: ImageCardDataUpdateInput!, where: ImageCardDataWhereUniqueInput!): ImageCardData
-  updateManyImageCardDatas(data: ImageCardDataUpdateManyMutationInput!, where: ImageCardDataWhereInput): BatchPayload!
-  upsertImageCardData(where: ImageCardDataWhereUniqueInput!, create: ImageCardDataCreateInput!, update: ImageCardDataUpdateInput!): ImageCardData!
-  deleteImageCardData(where: ImageCardDataWhereUniqueInput!): ImageCardData
-  deleteManyImageCardDatas(where: ImageCardDataWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
   createYoutubeCardData(data: YoutubeCardDataCreateInput!): YoutubeCardData!
+  createCardData(data: CardDataCreateInput!): CardData!
+  createGifCardData(data: GifCardDataCreateInput!): GifCardData!
+  createImageCardData(data: ImageCardDataCreateInput!): ImageCardData!
+  updateCard(data: CardUpdateInput!, where: CardWhereUniqueInput!): Card
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateYoutubeCardData(data: YoutubeCardDataUpdateInput!, where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
-  updateManyYoutubeCardDatas(data: YoutubeCardDataUpdateManyMutationInput!, where: YoutubeCardDataWhereInput): BatchPayload!
-  upsertYoutubeCardData(where: YoutubeCardDataWhereUniqueInput!, create: YoutubeCardDataCreateInput!, update: YoutubeCardDataUpdateInput!): YoutubeCardData!
+  updateCardData(data: CardDataUpdateInput!, where: CardDataWhereUniqueInput!): CardData
+  updateGifCardData(data: GifCardDataUpdateInput!, where: GifCardDataWhereUniqueInput!): GifCardData
+  updateImageCardData(data: ImageCardDataUpdateInput!, where: ImageCardDataWhereUniqueInput!): ImageCardData
+  deleteCard(where: CardWhereUniqueInput!): Card
+  deleteUser(where: UserWhereUniqueInput!): User
   deleteYoutubeCardData(where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
+  deleteCardData(where: CardDataWhereUniqueInput!): CardData
+  deleteGifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
+  deleteImageCardData(where: ImageCardDataWhereUniqueInput!): ImageCardData
+  upsertCard(where: CardWhereUniqueInput!, create: CardCreateInput!, update: CardUpdateInput!): Card!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertYoutubeCardData(where: YoutubeCardDataWhereUniqueInput!, create: YoutubeCardDataCreateInput!, update: YoutubeCardDataUpdateInput!): YoutubeCardData!
+  upsertCardData(where: CardDataWhereUniqueInput!, create: CardDataCreateInput!, update: CardDataUpdateInput!): CardData!
+  upsertGifCardData(where: GifCardDataWhereUniqueInput!, create: GifCardDataCreateInput!, update: GifCardDataUpdateInput!): GifCardData!
+  upsertImageCardData(where: ImageCardDataWhereUniqueInput!, create: ImageCardDataCreateInput!, update: ImageCardDataUpdateInput!): ImageCardData!
+  updateManyCards(data: CardUpdateManyMutationInput!, where: CardWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyYoutubeCardDatas(data: YoutubeCardDataUpdateManyMutationInput!, where: YoutubeCardDataWhereInput): BatchPayload!
+  updateManyGifCardDatas(data: GifCardDataUpdateManyMutationInput!, where: GifCardDataWhereInput): BatchPayload!
+  updateManyImageCardDatas(data: ImageCardDataUpdateManyMutationInput!, where: ImageCardDataWhereInput): BatchPayload!
+  deleteManyCards(where: CardWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyYoutubeCardDatas(where: YoutubeCardDataWhereInput): BatchPayload!
+  deleteManyCardDatas(where: CardDataWhereInput): BatchPayload!
+  deleteManyGifCardDatas(where: GifCardDataWhereInput): BatchPayload!
+  deleteManyImageCardDatas(where: ImageCardDataWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -725,49 +1192,68 @@ enum MutationType {
   DELETED
 }
 
+"""An object with an ID"""
 interface Node {
+  """The id of the object."""
   id: ID!
 }
 
+"""Information about pagination in a connection."""
 type PageInfo {
+  """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
   hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
   startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
   endCursor: String
 }
 
+enum PrismaDatabase {
+  default
+}
+
 type Query {
-  card(where: CardWhereUniqueInput!): Card
   cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card]!
-  cardsConnection(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardConnection!
-  cardData(where: CardDataWhereUniqueInput!): CardData
-  cardDatas(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CardData]!
-  cardDatasConnection(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardDataConnection!
-  gifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
-  gifCardDatas(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GifCardData]!
-  gifCardDatasConnection(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GifCardDataConnection!
-  imageCardData(where: ImageCardDataWhereUniqueInput!): ImageCardData
-  imageCardDatas(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ImageCardData]!
-  imageCardDatasConnection(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageCardDataConnection!
-  user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  youtubeCardData(where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
   youtubeCardDatas(where: YoutubeCardDataWhereInput, orderBy: YoutubeCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [YoutubeCardData]!
+  cardDatas(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CardData]!
+  gifCardDatas(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GifCardData]!
+  imageCardDatas(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ImageCardData]!
+  card(where: CardWhereUniqueInput!): Card
+  user(where: UserWhereUniqueInput!): User
+  youtubeCardData(where: YoutubeCardDataWhereUniqueInput!): YoutubeCardData
+  cardData(where: CardDataWhereUniqueInput!): CardData
+  gifCardData(where: GifCardDataWhereUniqueInput!): GifCardData
+  imageCardData(where: ImageCardDataWhereUniqueInput!): ImageCardData
+  cardsConnection(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   youtubeCardDatasConnection(where: YoutubeCardDataWhereInput, orderBy: YoutubeCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): YoutubeCardDataConnection!
-  node(id: ID!): Node
+  cardDatasConnection(where: CardDataWhereInput, orderBy: CardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CardDataConnection!
+  gifCardDatasConnection(where: GifCardDataWhereInput, orderBy: GifCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GifCardDataConnection!
+  imageCardDatasConnection(where: ImageCardDataWhereInput, orderBy: ImageCardDataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageCardDataConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
 }
 
 type Subscription {
   card(where: CardSubscriptionWhereInput): CardSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  youtubeCardData(where: YoutubeCardDataSubscriptionWhereInput): YoutubeCardDataSubscriptionPayload
   cardData(where: CardDataSubscriptionWhereInput): CardDataSubscriptionPayload
   gifCardData(where: GifCardDataSubscriptionWhereInput): GifCardDataSubscriptionPayload
   imageCardData(where: ImageCardDataSubscriptionWhereInput): ImageCardDataSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  youtubeCardData(where: YoutubeCardDataSubscriptionWhereInput): YoutubeCardDataSubscriptionPayload
 }
 
-type User {
+type User implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -778,19 +1264,23 @@ type User {
   password: String!
 }
 
+"""A connection to a list of items."""
 type UserConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
 
 input UserCreateInput {
   id: ID
-  cards: CardCreateManyWithoutUserInput
   email: String!
   name: String
   username: String!
   password: String!
+  cards: CardCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutCardsInput {
@@ -806,8 +1296,12 @@ input UserCreateWithoutCardsInput {
   password: String!
 }
 
+"""An edge in a connection."""
 type UserEdge {
+  """The item at the end of the edge."""
   node: User!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -846,22 +1340,41 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateInput {
-  cards: CardUpdateManyWithoutUserInput
   email: String
   name: String
   username: String
   password: String
+  cards: CardUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -873,9 +1386,9 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateOneRequiredWithoutCardsInput {
   create: UserCreateWithoutCardsInput
+  connect: UserWhereUniqueInput
   update: UserUpdateWithoutCardsDataInput
   upsert: UserUpsertWithoutCardsInput
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutCardsDataInput {
@@ -891,98 +1404,261 @@ input UserUpsertWithoutCardsInput {
 }
 
 input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   createdAt: DateTime
+
+  """All values that are not equal to given value."""
   createdAt_not: DateTime
+
+  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   createdAt_lte: DateTime
+
+  """All values greater than the given value."""
   createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
+
+  """All values that are not equal to given value."""
   updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
   updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
   updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  username: String
+
+  """All values that are not equal to given value."""
+  username_not: String
+
+  """All values that are contained in given list."""
+  username_in: [String!]
+
+  """All values that are not contained in given list."""
+  username_not_in: [String!]
+
+  """All values less than the given value."""
+  username_lt: String
+
+  """All values less than or equal the given value."""
+  username_lte: String
+
+  """All values greater than the given value."""
+  username_gt: String
+
+  """All values greater than or equal the given value."""
+  username_gte: String
+
+  """All values containing the given string."""
+  username_contains: String
+
+  """All values not containing the given string."""
+  username_not_contains: String
+
+  """All values starting with the given string."""
+  username_starts_with: String
+
+  """All values not starting with the given string."""
+  username_not_starts_with: String
+
+  """All values ending with the given string."""
+  username_ends_with: String
+
+  """All values not ending with the given string."""
+  username_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
   cards_every: CardWhereInput
   cards_some: CardWhereInput
   cards_none: CardWhereInput
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  username: String
-  username_not: String
-  username_in: [String!]
-  username_not_in: [String!]
-  username_lt: String
-  username_lte: String
-  username_gt: String
-  username_gte: String
-  username_contains: String
-  username_not_contains: String
-  username_starts_with: String
-  username_not_starts_with: String
-  username_ends_with: String
-  username_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
@@ -991,7 +1667,7 @@ input UserWhereUniqueInput {
   username: String
 }
 
-type YoutubeCardData {
+type YoutubeCardData implements Node {
   id: ID!
   channelThumbnail: String!
   channelTitle: String!
@@ -1004,8 +1680,12 @@ type YoutubeCardData {
   views: String!
 }
 
+"""A connection to a list of items."""
 type YoutubeCardDataConnection {
+  """Information to aid in pagination."""
   pageInfo: PageInfo!
+
+  """A list of edges."""
   edges: [YoutubeCardDataEdge]!
   aggregate: AggregateYoutubeCardData!
 }
@@ -1028,8 +1708,12 @@ input YoutubeCardDataCreateOneInput {
   connect: YoutubeCardDataWhereUniqueInput
 }
 
+"""An edge in a connection."""
 type YoutubeCardDataEdge {
+  """The item at the end of the edge."""
   node: YoutubeCardData!
+
+  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1077,14 +1761,33 @@ type YoutubeCardDataSubscriptionPayload {
 }
 
 input YoutubeCardDataSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [YoutubeCardDataSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [YoutubeCardDataSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [YoutubeCardDataSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: YoutubeCardDataWhereInput
-  AND: [YoutubeCardDataSubscriptionWhereInput!]
-  OR: [YoutubeCardDataSubscriptionWhereInput!]
-  NOT: [YoutubeCardDataSubscriptionWhereInput!]
 }
 
 input YoutubeCardDataUpdateDataInput {
@@ -1125,11 +1828,11 @@ input YoutubeCardDataUpdateManyMutationInput {
 
 input YoutubeCardDataUpdateOneInput {
   create: YoutubeCardDataCreateInput
+  connect: YoutubeCardDataWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: YoutubeCardDataUpdateDataInput
   upsert: YoutubeCardDataUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: YoutubeCardDataWhereUniqueInput
 }
 
 input YoutubeCardDataUpsertNestedInput {
@@ -1138,149 +1841,414 @@ input YoutubeCardDataUpsertNestedInput {
 }
 
 input YoutubeCardDataWhereInput {
+  """Logical AND on all given filters."""
+  AND: [YoutubeCardDataWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [YoutubeCardDataWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [YoutubeCardDataWhereInput!]
   id: ID
+
+  """All values that are not equal to given value."""
   id_not: ID
+
+  """All values that are contained in given list."""
   id_in: [ID!]
+
+  """All values that are not contained in given list."""
   id_not_in: [ID!]
+
+  """All values less than the given value."""
   id_lt: ID
+
+  """All values less than or equal the given value."""
   id_lte: ID
+
+  """All values greater than the given value."""
   id_gt: ID
+
+  """All values greater than or equal the given value."""
   id_gte: ID
+
+  """All values containing the given string."""
   id_contains: ID
+
+  """All values not containing the given string."""
   id_not_contains: ID
+
+  """All values starting with the given string."""
   id_starts_with: ID
+
+  """All values not starting with the given string."""
   id_not_starts_with: ID
+
+  """All values ending with the given string."""
   id_ends_with: ID
+
+  """All values not ending with the given string."""
   id_not_ends_with: ID
   channelThumbnail: String
+
+  """All values that are not equal to given value."""
   channelThumbnail_not: String
+
+  """All values that are contained in given list."""
   channelThumbnail_in: [String!]
+
+  """All values that are not contained in given list."""
   channelThumbnail_not_in: [String!]
+
+  """All values less than the given value."""
   channelThumbnail_lt: String
+
+  """All values less than or equal the given value."""
   channelThumbnail_lte: String
+
+  """All values greater than the given value."""
   channelThumbnail_gt: String
+
+  """All values greater than or equal the given value."""
   channelThumbnail_gte: String
+
+  """All values containing the given string."""
   channelThumbnail_contains: String
+
+  """All values not containing the given string."""
   channelThumbnail_not_contains: String
+
+  """All values starting with the given string."""
   channelThumbnail_starts_with: String
+
+  """All values not starting with the given string."""
   channelThumbnail_not_starts_with: String
+
+  """All values ending with the given string."""
   channelThumbnail_ends_with: String
+
+  """All values not ending with the given string."""
   channelThumbnail_not_ends_with: String
   channelTitle: String
+
+  """All values that are not equal to given value."""
   channelTitle_not: String
+
+  """All values that are contained in given list."""
   channelTitle_in: [String!]
+
+  """All values that are not contained in given list."""
   channelTitle_not_in: [String!]
+
+  """All values less than the given value."""
   channelTitle_lt: String
+
+  """All values less than or equal the given value."""
   channelTitle_lte: String
+
+  """All values greater than the given value."""
   channelTitle_gt: String
+
+  """All values greater than or equal the given value."""
   channelTitle_gte: String
+
+  """All values containing the given string."""
   channelTitle_contains: String
+
+  """All values not containing the given string."""
   channelTitle_not_contains: String
+
+  """All values starting with the given string."""
   channelTitle_starts_with: String
+
+  """All values not starting with the given string."""
   channelTitle_not_starts_with: String
+
+  """All values ending with the given string."""
   channelTitle_ends_with: String
+
+  """All values not ending with the given string."""
   channelTitle_not_ends_with: String
   duration: String
+
+  """All values that are not equal to given value."""
   duration_not: String
+
+  """All values that are contained in given list."""
   duration_in: [String!]
+
+  """All values that are not contained in given list."""
   duration_not_in: [String!]
+
+  """All values less than the given value."""
   duration_lt: String
+
+  """All values less than or equal the given value."""
   duration_lte: String
+
+  """All values greater than the given value."""
   duration_gt: String
+
+  """All values greater than or equal the given value."""
   duration_gte: String
+
+  """All values containing the given string."""
   duration_contains: String
+
+  """All values not containing the given string."""
   duration_not_contains: String
+
+  """All values starting with the given string."""
   duration_starts_with: String
+
+  """All values not starting with the given string."""
   duration_not_starts_with: String
+
+  """All values ending with the given string."""
   duration_ends_with: String
+
+  """All values not ending with the given string."""
   duration_not_ends_with: String
   likes: String
+
+  """All values that are not equal to given value."""
   likes_not: String
+
+  """All values that are contained in given list."""
   likes_in: [String!]
+
+  """All values that are not contained in given list."""
   likes_not_in: [String!]
+
+  """All values less than the given value."""
   likes_lt: String
+
+  """All values less than or equal the given value."""
   likes_lte: String
+
+  """All values greater than the given value."""
   likes_gt: String
+
+  """All values greater than or equal the given value."""
   likes_gte: String
+
+  """All values containing the given string."""
   likes_contains: String
+
+  """All values not containing the given string."""
   likes_not_contains: String
+
+  """All values starting with the given string."""
   likes_starts_with: String
+
+  """All values not starting with the given string."""
   likes_not_starts_with: String
+
+  """All values ending with the given string."""
   likes_ends_with: String
+
+  """All values not ending with the given string."""
   likes_not_ends_with: String
   publishedAt: String
+
+  """All values that are not equal to given value."""
   publishedAt_not: String
+
+  """All values that are contained in given list."""
   publishedAt_in: [String!]
+
+  """All values that are not contained in given list."""
   publishedAt_not_in: [String!]
+
+  """All values less than the given value."""
   publishedAt_lt: String
+
+  """All values less than or equal the given value."""
   publishedAt_lte: String
+
+  """All values greater than the given value."""
   publishedAt_gt: String
+
+  """All values greater than or equal the given value."""
   publishedAt_gte: String
+
+  """All values containing the given string."""
   publishedAt_contains: String
+
+  """All values not containing the given string."""
   publishedAt_not_contains: String
+
+  """All values starting with the given string."""
   publishedAt_starts_with: String
+
+  """All values not starting with the given string."""
   publishedAt_not_starts_with: String
+
+  """All values ending with the given string."""
   publishedAt_ends_with: String
+
+  """All values not ending with the given string."""
   publishedAt_not_ends_with: String
   videoId: String
+
+  """All values that are not equal to given value."""
   videoId_not: String
+
+  """All values that are contained in given list."""
   videoId_in: [String!]
+
+  """All values that are not contained in given list."""
   videoId_not_in: [String!]
+
+  """All values less than the given value."""
   videoId_lt: String
+
+  """All values less than or equal the given value."""
   videoId_lte: String
+
+  """All values greater than the given value."""
   videoId_gt: String
+
+  """All values greater than or equal the given value."""
   videoId_gte: String
+
+  """All values containing the given string."""
   videoId_contains: String
+
+  """All values not containing the given string."""
   videoId_not_contains: String
+
+  """All values starting with the given string."""
   videoId_starts_with: String
+
+  """All values not starting with the given string."""
   videoId_not_starts_with: String
+
+  """All values ending with the given string."""
   videoId_ends_with: String
+
+  """All values not ending with the given string."""
   videoId_not_ends_with: String
   videoThumbnail: String
+
+  """All values that are not equal to given value."""
   videoThumbnail_not: String
+
+  """All values that are contained in given list."""
   videoThumbnail_in: [String!]
+
+  """All values that are not contained in given list."""
   videoThumbnail_not_in: [String!]
+
+  """All values less than the given value."""
   videoThumbnail_lt: String
+
+  """All values less than or equal the given value."""
   videoThumbnail_lte: String
+
+  """All values greater than the given value."""
   videoThumbnail_gt: String
+
+  """All values greater than or equal the given value."""
   videoThumbnail_gte: String
+
+  """All values containing the given string."""
   videoThumbnail_contains: String
+
+  """All values not containing the given string."""
   videoThumbnail_not_contains: String
+
+  """All values starting with the given string."""
   videoThumbnail_starts_with: String
+
+  """All values not starting with the given string."""
   videoThumbnail_not_starts_with: String
+
+  """All values ending with the given string."""
   videoThumbnail_ends_with: String
+
+  """All values not ending with the given string."""
   videoThumbnail_not_ends_with: String
   videoTitle: String
+
+  """All values that are not equal to given value."""
   videoTitle_not: String
+
+  """All values that are contained in given list."""
   videoTitle_in: [String!]
+
+  """All values that are not contained in given list."""
   videoTitle_not_in: [String!]
+
+  """All values less than the given value."""
   videoTitle_lt: String
+
+  """All values less than or equal the given value."""
   videoTitle_lte: String
+
+  """All values greater than the given value."""
   videoTitle_gt: String
+
+  """All values greater than or equal the given value."""
   videoTitle_gte: String
+
+  """All values containing the given string."""
   videoTitle_contains: String
+
+  """All values not containing the given string."""
   videoTitle_not_contains: String
+
+  """All values starting with the given string."""
   videoTitle_starts_with: String
+
+  """All values not starting with the given string."""
   videoTitle_not_starts_with: String
+
+  """All values ending with the given string."""
   videoTitle_ends_with: String
+
+  """All values not ending with the given string."""
   videoTitle_not_ends_with: String
   views: String
+
+  """All values that are not equal to given value."""
   views_not: String
+
+  """All values that are contained in given list."""
   views_in: [String!]
+
+  """All values that are not contained in given list."""
   views_not_in: [String!]
+
+  """All values less than the given value."""
   views_lt: String
+
+  """All values less than or equal the given value."""
   views_lte: String
+
+  """All values greater than the given value."""
   views_gt: String
+
+  """All values greater than or equal the given value."""
   views_gte: String
+
+  """All values containing the given string."""
   views_contains: String
+
+  """All values not containing the given string."""
   views_not_contains: String
+
+  """All values starting with the given string."""
   views_starts_with: String
+
+  """All values not starting with the given string."""
   views_not_starts_with: String
+
+  """All values ending with the given string."""
   views_ends_with: String
+
+  """All values not ending with the given string."""
   views_not_ends_with: String
-  AND: [YoutubeCardDataWhereInput!]
-  OR: [YoutubeCardDataWhereInput!]
-  NOT: [YoutubeCardDataWhereInput!]
 }
 
 input YoutubeCardDataWhereUniqueInput {
